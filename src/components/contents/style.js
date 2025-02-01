@@ -12,7 +12,7 @@ export const PBuiWrap = styled.div`
     bottom: 0;
     left: 0;
     width: 80%;
-    margin: 0px 150px;
+    margin: 0px 150px 63px;
 `;
 
 export const ItemWrap = styled.div`
@@ -20,9 +20,21 @@ export const ItemWrap = styled.div`
     max-width: 394px;
     height: 367px;
     background-color: var(--gray-800);
-    border-radius: 7px;
+    border-radius: 8px;
     overflow: hidden;
     margin: 0 auto;
+`;
+
+export const SDrop = styled.div`
+    width: 130px;
+    height: 48px;
+    border: 1px solid var(--primary-base);
+    border-radius: 7px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 30px;
+    gap: 10px;
 `;
 
 export const ItemImg = styled.img`
@@ -37,6 +49,11 @@ export const PlayImg = styled.img`
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+`;
+
+export const LikeImg = styled.img`
+    width: 34px;
+    height: 29px;
 `;
 
 export const FlexNone = styled.div`
@@ -72,6 +89,12 @@ export const FlexCol = styled.div`
     gap: ${(props) => props.gap};
 `;
 
+export const FlexColUl = styled.ul`
+    display: flex;
+    flex-direction: column;
+    gap: ${(props) => props.gap};
+`;
+
 export const MqBadge = styled.div`
     border-radius: 4px;
     border: 1px solid var(--primary-base);
@@ -89,12 +112,22 @@ export const Span = styled.span`
     font-size: 12px;
 `;
 
+export const SpanInfoDim = styled.span`
+    font-size: 24px;
+    color: var(--gray-600);
+`;
+
+export const SpanInfo = styled.span`
+    font-size: 24px;
+    color: var(--white);
+`;
+
 export const H2 = styled.h2`
     font-size: 40px;
     font-weight: 700;
 `;
 
-export const H4 = styled.h4`
+export const H3 = styled.h3`
     font-size: 28px;
     font-weight: 800;
 `;
