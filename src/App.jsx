@@ -1,11 +1,11 @@
-import Test from './pages/Test';
+import ContentDetail from './pages/contents/ContentDetail';
 import GlobalStyle from './styled/GlobalStyle';
 
 function App() {
     return (
         <>
             <GlobalStyle />
-            <Test />
+            <ContentDetail />
         </>
     );
 }

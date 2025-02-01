@@ -1,2 +1,34 @@
 // 비슷한 콘텐츠
 // 영화, 시리즈 콘텐츠 공통
+import { FlexBadgeWrap, FlexCenter, FlexSB, ItemImg, ItemWrap, MqBadge, P, PlayImg, Span } from './style';
+
+const ReItem = () => {
+    return (
+        <>
+            <ItemWrap>
+                <FlexCenter>
+                    <ItemImg src='/contentdetail/sample/20191108.99001114353127601.jpg' alt='sample1' />
+                    <button>
+                        <PlayImg src='/contentdetail/ui/carousel_action_atomic.png' alt='sample1' />
+                    </button>
+                </FlexCenter>
+                <FlexBadgeWrap>
+                    <FlexSB gap='5px'>
+                        <img src='/contentdetail/contentrate/전체관람가 관람등급 1.png' alt='rateAll' />
+                        <MqBadge>HD</MqBadge>
+                        <Span>2024</Span>
+                    </FlexSB>
+                    <button>
+                        <img src='public/contentdetail/ui/heart.png' alt='likeActive' />
+                    </button>
+                </FlexBadgeWrap>
+                <P>
+                    프로 바둑기사의 꿈을 접은 장그래는 인턴사원이 되어 입사 동기 영이에게 의존하며 험난한 직장 생활을
+                    시작한다.
+                </P>
+            </ItemWrap>
+        </>
+    );
+};
+
+export default ReItem;
