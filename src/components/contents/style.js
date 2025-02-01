@@ -35,6 +35,7 @@ export const SDrop = styled.div`
     align-items: center;
     padding: 0 30px;
     gap: 10px;
+    margin-right: 150px;
 `;
 
 export const ItemImg = styled.img`
@@ -135,6 +136,18 @@ export const H3 = styled.h3`
 export const P = styled.p`
     padding: 7px 20px 0px;
     font-size: 13px;
+    font-weight: 400;
+    text-align: start;
+`;
+
+export const P28 = styled.p`
+    font-size: 28px;
+    font-weight: 400;
+    text-align: start;
+`;
+
+export const P20 = styled.p`
+    font-size: 20px;
     font-weight: 400;
     text-align: start;
 `;
