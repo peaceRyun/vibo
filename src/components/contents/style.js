@@ -64,6 +64,7 @@ export const CRatingImg = styled.img`
 
 export const FlexNone = styled.div`
     display: flex;
+    align-items: center;
     gap: ${(props) => props.gap};
 `;
 
@@ -103,17 +104,18 @@ export const FlexColUl = styled.ul`
     gap: ${(props) => props.gap};
 `;
 
-export const MqBadge = styled.div`
-    border-radius: 4px;
+export const Badge = styled.div`
+    border-radius: ${(props) => props.br};
     border: 1px solid var(--primary-base);
     color: var(--primary-base);
     background-color: var(--gray-900);
-    padding: 3.5px 5px;
+    padding: ${(props) => props.p};
     height: 18px;
     display: flex;
     justify-content: center;
     align-items: center;
     font-weight: 400;
+    font-size: ${(props) => props.fontSize};
 `;
 
 export const Span = styled.span`

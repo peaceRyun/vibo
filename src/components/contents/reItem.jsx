@@ -1,6 +1,6 @@
 // 비슷한 콘텐츠
 // 영화, 시리즈 콘텐츠 공통
-import { FlexBadgeWrap, FlexCenter, FlexSB, ItemImg, ItemWrap, MqBadge, P, PlayImg, Span } from './style';
+import { Badge, FlexBadgeWrap, FlexCenter, FlexSB, ItemImg, ItemWrap, P, PlayImg, Span } from './style';
 
 const ReItem = () => {
     return (
@@ -15,11 +15,13 @@ const ReItem = () => {
                 <FlexBadgeWrap>
                     <FlexSB gap='5px'>
                         <img src='/contentdetail/contentrate/전체관람가 관람등급 1.png' alt='rateAll' />
-                        <MqBadge>HD</MqBadge>
+                        <Badge br='4px' p='3.5px 5px' fontSize='12px'>
+                            HD
+                        </Badge>
                         <Span>2024</Span>
                     </FlexSB>
                     <button>
-                        <img src='public/contentdetail/ui/heart.png' alt='likeActive' />
+                        <img src='/contentdetail/ui/heart.png' alt='likeActive' />
                     </button>
                 </FlexBadgeWrap>
                 <P>
