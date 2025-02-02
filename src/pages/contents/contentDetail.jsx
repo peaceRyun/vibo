@@ -24,7 +24,7 @@ const ContentDetail = () => {
                     </FlexCol>
                     <EpList />
                     <ReList />
-                    <FlexCol gap='15px'>
+                    <FlexCol gap='15px' mb='100px'>
                         <H3>옥씨부인전 상세 정보</H3>
                         <FlexColUl gap='5px'>
                             <li>

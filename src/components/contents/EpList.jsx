@@ -1,6 +1,6 @@
 import ToggleSwitch from '../../ui/toggle/Toggle';
 import EpItem from './EpItem';
-import { FlexCol, FlexSB, H3, P20, P28, SDrop } from './style';
+import { CRatingImg, FlexCol, FlexSB, H3, P20, P28, SDrop } from './style';
 
 const EpList = () => {
     return (
@@ -9,11 +9,15 @@ const EpList = () => {
                 <FlexCol>
                     <H3>에피소드</H3>
                     <FlexSB gap='20px'>
-                        <FlexSB gap='5px'>
+                        <FlexSB gap='10px'>
                             <P28>시즌 10:</P28>
-                            <img src='/contentdetail/contentrate/전체관람가 관람등급 1.png' alt='ContentRate' />
-                            <img src='/contentdetail/contentrate/전체관람가 관람등급 1.png' alt='ContentRate' />
-                            <img src='/contentdetail/contentrate/전체관람가 관람등급 1.png' alt='ContentRate' />
+                            <CRatingImg
+                                src='/contentdetail/contentrate/전체관람가 관람등급 1.png'
+                                alt='전체관람가 관람등급'
+                            />
+                            <CRatingImg src='/contentdetail/contentrate/내용정보-대사.png' alt='내용정보-대사' />
+                            <CRatingImg src='/contentdetail/contentrate/내용정보-선정성.png' alt='내용정보-선정성' />
+                            <CRatingImg src='/contentdetail/contentrate/내용정보-주제.png' alt='내용정보-주제' />
                         </FlexSB>
                         <FlexSB gap='15px'>
                             <P20>연속 재생</P20> <ToggleSwitch isRound={true} />

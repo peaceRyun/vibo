@@ -57,6 +57,11 @@ export const LikeImg = styled.img`
     height: 29px;
 `;
 
+export const CRatingImg = styled.img`
+    width: 34px;
+    height: 34px;
+`;
+
 export const FlexNone = styled.div`
     display: flex;
     gap: ${(props) => props.gap};
@@ -88,6 +93,8 @@ export const FlexCol = styled.div`
     display: flex;
     flex-direction: column;
     gap: ${(props) => props.gap};
+    margin-top: ${(props) => `${props.mt}`};
+    margin-bottom: ${(props) => `${props.mb}`};
 `;
 
 export const FlexColUl = styled.ul`
