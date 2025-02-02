@@ -7,9 +7,10 @@ const Button = ({
     width = '8.375rem',
     height = '3.1875rem',
     play,
+    onClick,
 }) => {
     return (
-        <ButtonB type={type} fontSize={fontSize} width={width} height={height} play={play}>
+        <ButtonB type={type} fontSize={fontSize} width={width} height={height} play={play} onClick={onClick}>
             {children}
         </ButtonB>
     );

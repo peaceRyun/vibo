@@ -98,6 +98,12 @@ export const FlexCol = styled.div`
     margin-bottom: ${(props) => `${props.mb}`};
 `;
 
+export const FlexEnd = styled.div`
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+`;
+
 export const FlexColUl = styled.ul`
     display: flex;
     flex-direction: column;
@@ -164,4 +170,25 @@ export const P20 = styled.p`
 export const BarDemo = styled.div`
     height: 5px;
     background-color: var(--primary-base);
+`;
+
+export const ModalOverlay = styled.div`
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+`;
+
+export const ModalContent = styled.div`
+    background-color: var(--gray-900);
+    padding: var(--spacing-6) var(--spacing-9);
+    border-radius: 8px;
+    width: 500px;
+    border: 2px solid var(--primary-base);
 `;
