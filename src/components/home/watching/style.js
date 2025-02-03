@@ -44,6 +44,7 @@ export const CardInfo = styled.div`
     white-space: normal;
     word-wrap: break-word;
     overflow-wrap: anywhere;
+    text-align: left;
 
     @media (max-width: 64rem) {
         padding: ${(props) => props.mobilePadding || '0.75rem 1rem'};

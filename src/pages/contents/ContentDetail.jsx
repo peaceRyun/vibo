@@ -10,13 +10,13 @@ const ContentDetail = () => {
     return (
         <>
             <Container>
-                <FlexCol gap='30px'>
+                <FlexCol gap="30px">
                     <PlayBanner />
                     <section>
-                        <FlexCol gap='15px'>
+                        <FlexCol gap="15px">
                             <span>2024년</span>
                             <div>
-                                <img src='/contentdetail/contentrate/전체관람가 관람등급 1.png' alt='rateAll' />
+                                <img src="/contentdetail/contentrate/전체관람가 관람등급 1.png" alt="rateAll" />
                             </div>
                             <span>13화</span>
                             <p>
