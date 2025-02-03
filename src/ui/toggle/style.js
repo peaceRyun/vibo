@@ -33,7 +33,7 @@ export const Slider = styled.span`
         bottom: 4px;
         background-color: black;
         transition: 0.4s;
-        border-radius: ${(props) => (props.isRound ? '50%' : '0')};
+        border-radius: ${(props) => (props.$isRound ? '50%' : '0')};
     }
 
     ${SwitchInput}:checked + & {

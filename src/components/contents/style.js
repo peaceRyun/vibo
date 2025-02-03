@@ -4,6 +4,7 @@ export const PBWrap = styled.div`
     margin-top: 100px;
     height: 600px;
     background-image: url('/contentdetail/sample/Slide 16_9 - 2.png');
+    background-repeat: no-repeat;
     position: relative;
 `;
 
