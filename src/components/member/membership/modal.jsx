@@ -1,12 +1,11 @@
-import React from 'react';
 import { CloseButton, ConfirmButton, ModalBackground, ModalContainer, SubscriptionBox } from './style';
 
-const Modal = ({ onclose, onConfirm }) => {
+const Modal = ({ onClose, onConfirm }) => {
   return (
     <>
       <ModalBackground>
         <ModalContainer>
-          <CloseButton onClick={onclose}>&times;</CloseButton>
+          <CloseButton onClick={onClose}>&times;</CloseButton>
           <h2>광고형 스탠다드 이용권의 결제 내역을 확인해주세요.</h2>
           <p>정기 결제 주기를 확인해 주세요.</p>
           <SubscriptionBox>

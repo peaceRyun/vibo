@@ -2,7 +2,8 @@
 import { useState } from 'react';
 import { Container } from '../../common/style';
 import { FeatureList, MembershipBanner, PaymentButton, Plan, PlanWrapper, SubscriptionContainer } from './style';
-import { Modal } from '../../components/member/membership/Modal';
+import Modal from '../../components/member/membership/modal';
+``;
 
 const Membership = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -72,9 +73,20 @@ const Membership = () => {
             </FeatureList>
           </PlanWrapper>
         </SubscriptionContainer>
+        {/* 결제하기 버튼 (모달 열기) */}
+        <PaymentButton onClick={() => setIsModalOpen(true)}>결제하기</PaymentButton>
 
-        <PaymentButton onClick={() => setIsModalOpen}>결제하기</PaymentButton>
+        {/* 모달 표시 */}
         {isModalOpen && <Modal onClose={() => setIsModalOpen(false)} />}
+        {/* <PaymentButton>결제하기</PaymentButton>
+        <Modal /> */}
+        {/* <PaymentButton onClick={() => setIsModalOpen(true)}>결제하기</PaymentButton>
+        {isModalOpen && (
+          <Modal
+            onClose={() => setIsModalOpen(false)}
+            onConfirm={() => setIsModalOpen(false)} // 확인 버튼 누르면 모달 닫기
+          />
+        )} */}
       </section>
     </>
   );
