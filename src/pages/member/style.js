@@ -76,6 +76,9 @@ export const Plan = styled.div`
   border-radius: 10px;
   text-align: center;
   width: 100%;
+  background: ${({ isFilled }) => (isFilled ? 'cyan' : 'transparent')}; // 클릭하면 cyan 유지
+  color: ${({ isFilled }) => (isFilled ? 'black' : 'inherit')}; // 클릭 시 글자색 변경
+  transition: background 0.3s ease, color 0.3s ease;
   &:hover {
     background: cyan;
     color: black;

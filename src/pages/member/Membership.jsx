@@ -7,6 +7,7 @@ import Modal from '../../components/member/membership/modal';
 
 const Membership = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedPlan, setSelectedPlan] = useState(null);
   return (
     <>
       <Container />
@@ -35,7 +36,11 @@ const Membership = () => {
             </ul>
           </div>
           <PlanWrapper>
-            <Plan className="basic">
+            <Plan
+              className="basic"
+              isFilled={selectedPlan === 'basic'}
+              onClick={() => setSelectedPlan(selectedPlan === 'basic' ? null : 'basic')}
+            >
               <h2>베이직</h2>
             </Plan>
             <FeatureList>
@@ -49,7 +54,7 @@ const Membership = () => {
 
           <PlanWrapper>
             <Plan className="standard">
-              <h2>스탠다드</h2>
+              <h2 onClick={() => setIsFilled(!isFilled)}>스탠다드</h2>
             </Plan>
             <FeatureList>
               <li>5,500원</li>
@@ -62,7 +67,7 @@ const Membership = () => {
 
           <PlanWrapper>
             <Plan className="premium">
-              <h2>프리미엄</h2>
+              <h2 onClick={() => setIsFilled(!isFilled)}>프리미엄</h2>
             </Plan>
             <FeatureList>
               <li>9,900원</li>
