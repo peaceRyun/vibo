@@ -7,10 +7,10 @@ const PlayBanner = () => {
             <section>
                 <PBWrap>
                     <PBuiWrap>
-                        <FlexCol gap='30px'>
+                        <FlexCol $gap='30px'>
                             <H2>옥씨부인전</H2>
                             <BarDemo />
-                            <FlexNone gap='26px'>
+                            <FlexNone $gap='26px'>
                                 <Button play>재생</Button>
                                 <button>
                                     <LikeImg src='public/contentdetail/ui/heart.png' alt='likeActive' />

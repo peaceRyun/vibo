@@ -9,8 +9,8 @@ const EpList = () => {
                 <FlexSB>
                     <FlexCol>
                         <H3>에피소드</H3>
-                        <FlexSB gap='20px'>
-                            <FlexSB gap='10px'>
+                        <FlexSB $gap='20px'>
+                            <FlexSB $gap='10px'>
                                 <P28>시즌 10:</P28>
                                 <CRatingImg
                                     src='/contentdetail/contentrate/전체관람가 관람등급 1.png'
@@ -23,7 +23,7 @@ const EpList = () => {
                                 />
                                 <CRatingImg src='/contentdetail/contentrate/내용정보-주제.png' alt='내용정보-주제' />
                             </FlexSB>
-                            <FlexSB gap='15px'>
+                            <FlexSB $gap='15px'>
                                 <P20>연속 재생</P20> <ToggleSwitch isRound={true} />
                             </FlexSB>
                         </FlexSB>

@@ -1,6 +1,6 @@
 import Button from '../../ui/button/Button';
 import ReviewForm from './ReviewForm';
-import { FlexCenter, FlexCol, FlexNone, FlexSB, H3, ModalContent, ModalOverlay, P } from './style';
+import { FlexCenter, FlexCol, FlexNone, H3, ModalContent, ModalOverlay, P } from './style';
 
 const ReviewModal = ({ isOpen, onClose }) => {
     if (!isOpen) return null;
@@ -12,22 +12,22 @@ const ReviewModal = ({ isOpen, onClose }) => {
     return (
         <ModalOverlay onClick={onClose}>
             <ModalContent onClick={handleContentClick}>
-                <FlexCol gap='20px'>
+                <FlexCol $gap='20px'>
                     <H3 fontSize='19px' fontWeight='700'>
                         00 콘텐츠 리뷰
                     </H3>
                     <P fontSize='17px' padding='0px'>
                         이 콘텐츠에 대해서 얼마나 만족하셨나요?
                     </P>
-                    <FlexNone gap='40px'>
+                    <FlexNone $gap='40px'>
                         <img
                             src='/contentdetail/sample/20191108.99001114353127601.jpg'
                             alt='콘텐츠 썸네일'
                             style={{ width: '200px', height: '100px' }}
                         />
-                        <FlexCol gap='15px'>
+                        <FlexCol $gap='15px'>
                             <h4>옥씨부인전</h4>
-                            <FlexNone gap='5px'>
+                            <FlexNone $gap='5px'>
                                 <img src='/contentdetail/ui/StarActive.png' alt='별' />
                                 <img src='/contentdetail/ui/StarActive.png' alt='별' />
                                 <img src='/contentdetail/ui/StarActive.png' alt='별' />
@@ -36,7 +36,7 @@ const ReviewModal = ({ isOpen, onClose }) => {
                         </FlexCol>
                     </FlexNone>
                     <ReviewForm />
-                    <FlexCenter gap='60px'>
+                    <FlexCenter $gap='60px'>
                         <Button
                             width='99px'
                             height='34px'

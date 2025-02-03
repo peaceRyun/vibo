@@ -65,7 +65,7 @@ export const CRatingImg = styled.img`
 export const FlexNone = styled.div`
     display: flex;
     align-items: center;
-    gap: ${(props) => props.gap};
+    gap: ${(props) => props.$gap};
     padding: ${(props) => (props.padding ? props.padding : '')};
 `;
 
@@ -74,14 +74,14 @@ export const FlexCenter = styled.div`
     justify-content: center;
     align-items: center;
     position: relative;
-    gap: ${(props) => props.gap};
+    gap: ${(props) => props.$gap};
 `;
 
 export const FlexSB = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: ${(props) => props.gap};
+    gap: ${(props) => props.$gap};
 `;
 
 export const FlexBadgeWrap = styled.div`
@@ -89,15 +89,15 @@ export const FlexBadgeWrap = styled.div`
     justify-content: space-between;
     align-items: center;
     padding: 15px 20px;
-    gap: ${(props) => props.gap};
+    gap: ${(props) => props.$gap};
 `;
 
 export const FlexCol = styled.div`
     display: flex;
     flex-direction: column;
-    gap: ${(props) => props.gap};
-    margin-top: ${(props) => `${props.mt}`};
-    margin-bottom: ${(props) => `${props.mb}`};
+    gap: ${(props) => props.$gap};
+    margin-top: ${(props) => `${props.$mt}`};
+    margin-bottom: ${(props) => `${props.$mb}`};
 `;
 
 export const FlexEnd = styled.div`
@@ -109,15 +109,15 @@ export const FlexEnd = styled.div`
 export const FlexColUl = styled.ul`
     display: flex;
     flex-direction: column;
-    gap: ${(props) => props.gap};
+    gap: ${(props) => props.$gap};
 `;
 
 export const Badge = styled.div`
-    border-radius: ${(props) => props.br};
+    border-radius: ${(props) => props.$br};
     border: 1px solid var(--primary-base);
     color: var(--primary-base);
     background-color: var(--gray-900);
-    padding: ${(props) => props.p};
+    padding: ${(props) => props.$padding};
     height: 18px;
     display: flex;
     justify-content: center;

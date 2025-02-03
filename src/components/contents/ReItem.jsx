@@ -13,9 +13,9 @@ const ReItem = () => {
                     </button>
                 </FlexCenter>
                 <FlexBadgeWrap>
-                    <FlexSB gap='5px'>
+                    <FlexSB $gap='5px'>
                         <img src='/contentdetail/contentrate/전체관람가 관람등급 1.png' alt='rateAll' />
-                        <Badge br='4px' p='3.5px 5px' fontSize='12px'>
+                        <Badge $br='4px' $padding='3.5px 5px' fontSize='12px'>
                             HD
                         </Badge>
                         <Span>2024</Span>

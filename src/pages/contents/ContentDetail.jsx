@@ -1,4 +1,5 @@
-import { Container } from '../../common/style';
+// import { Container } from '../../common/style';
+import { Inner } from '../../common/style';
 import EpList from '../../components/contents/EpList';
 import PlayBanner from '../../components/contents/PlayBanner';
 import ReList from '../../components/contents/ReList';
@@ -9,11 +10,11 @@ import { FlexCol, FlexColUl, H3, SpanInfo, SpanInfoDim } from '../../components/
 const ContentDetail = () => {
     return (
         <>
-            <Container>
-                <FlexCol gap='30px'>
+            <Inner>
+                <FlexCol $gap='30px'>
                     <PlayBanner />
                     <section>
-                        <FlexCol gap='15px'>
+                        <FlexCol $gap='15px'>
                             <span>2024년</span>
                             <div>
                                 <img src='/contentdetail/contentrate/전체관람가 관람등급 1.png' alt='rateAll' />
@@ -29,9 +30,9 @@ const ContentDetail = () => {
                     <ReList />
                     <ReviewList />
                     <section>
-                        <FlexCol gap='15px' mb='100px'>
+                        <FlexCol $gap='15px' $mb='100px'>
                             <H3>옥씨부인전 상세 정보</H3>
-                            <FlexColUl gap='5px'>
+                            <FlexColUl $gap='5px'>
                                 <li>
                                     <SpanInfoDim>크리에이터: </SpanInfoDim>
                                     <SpanInfo>진혁, 박지숙</SpanInfo>
@@ -56,7 +57,7 @@ const ContentDetail = () => {
                         </FlexCol>
                     </section>
                 </FlexCol>
-            </Container>
+            </Inner>
         </>
     );
 };
