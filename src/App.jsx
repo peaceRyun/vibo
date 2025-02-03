@@ -1,17 +1,13 @@
-// import ContentList from './pages/contents/ContentList';
-// import ContentDetail from './pages/contents/ContentDetail';
-import LiveSwiper from './components/home/liveSwiper/LiveSwiper';
+import WatchingItem from './components/home/watching/WatchingItem';
 import GlobalStyle from './styled/GlobalStyle';
-
 function App() {
     return (
         <>
             <GlobalStyle />
-            <LiveSwiper />
+            <WatchingItem />
             {/* <ContentDetail /> */}
             {/* <ContentList /> */}
         </>
     );
 }
-
 export default App;
