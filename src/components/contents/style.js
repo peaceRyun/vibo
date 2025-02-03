@@ -66,6 +66,7 @@ export const FlexNone = styled.div`
     display: flex;
     align-items: center;
     gap: ${(props) => props.gap};
+    padding: ${(props) => (props.padding ? props.padding : '')};
 `;
 
 export const FlexCenter = styled.div`
@@ -73,6 +74,7 @@ export const FlexCenter = styled.div`
     justify-content: center;
     align-items: center;
     position: relative;
+    gap: ${(props) => props.gap};
 `;
 
 export const FlexSB = styled.div`
@@ -141,16 +143,17 @@ export const SpanInfo = styled.span`
 export const H2 = styled.h2`
     font-size: 40px;
     font-weight: 700;
+    line-height: 100%;
 `;
 
 export const H3 = styled.h3`
-    font-size: 28px;
-    font-weight: 800;
+    font-size: ${(props) => (props.fontSize ? props.fontSize : '28px')};
+    font-weight: ${(props) => (props.fontWeight ? props.fontWeight : '800')};
 `;
 
 export const P = styled.p`
-    padding: 7px 20px 0px;
-    font-size: 13px;
+    padding: ${(props) => (props.padding ? props.padding : '7px 20px 0px')};
+    font-size: ${(props) => (props.fontSize ? props.fontSize : '13px')};
     font-weight: 400;
     text-align: start;
 `;
@@ -188,7 +191,37 @@ export const ModalOverlay = styled.div`
 export const ModalContent = styled.div`
     background-color: var(--gray-900);
     padding: var(--spacing-6) var(--spacing-9);
-    border-radius: 8px;
-    width: 500px;
+    border-radius: 10px;
+    width: 518px;
+    height: 441px;
     border: 2px solid var(--primary-base);
+`;
+
+export const LoadMoreBtnWrapper = styled.div`
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+`;
+
+export const LoadMoreBtn = styled.button`
+    background: #1d1d1d;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    z-index: 2;
+`;
+
+export const Line = styled.div`
+    width: 100%;
+    height: 1px;
+    background: var(--secondary-300);
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1;
 `;

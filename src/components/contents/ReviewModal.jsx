@@ -1,6 +1,6 @@
 import Button from '../../ui/button/Button';
 import ReviewForm from './ReviewForm';
-import { FlexCol, FlexNone, FlexSB, H3, ModalContent, ModalOverlay } from './style';
+import { FlexCenter, FlexCol, FlexNone, FlexSB, H3, ModalContent, ModalOverlay, P } from './style';
 
 const ReviewModal = ({ isOpen, onClose }) => {
     if (!isOpen) return null;
@@ -13,16 +13,19 @@ const ReviewModal = ({ isOpen, onClose }) => {
         <ModalOverlay onClick={onClose}>
             <ModalContent onClick={handleContentClick}>
                 <FlexCol gap='20px'>
-                    <H3>00 콘텐츠 리뷰</H3>
-                    <p>이 콘텐츠에 대해서 얼마나 만족하셨나요?</p>
-                    <hr />
-                    <FlexNone gap='20px'>
+                    <H3 fontSize='19px' fontWeight='700'>
+                        00 콘텐츠 리뷰
+                    </H3>
+                    <P fontSize='17px' padding='0px'>
+                        이 콘텐츠에 대해서 얼마나 만족하셨나요?
+                    </P>
+                    <FlexNone gap='40px'>
                         <img
                             src='/contentdetail/sample/20191108.99001114353127601.jpg'
                             alt='콘텐츠 썸네일'
                             style={{ width: '200px', height: '100px' }}
                         />
-                        <FlexCol gap='10px'>
+                        <FlexCol gap='15px'>
                             <h4>옥씨부인전</h4>
                             <FlexNone gap='5px'>
                                 <img src='/contentdetail/ui/StarActive.png' alt='별' />
@@ -33,12 +36,21 @@ const ReviewModal = ({ isOpen, onClose }) => {
                         </FlexCol>
                     </FlexNone>
                     <ReviewForm />
-                    <FlexSB>
-                        <Button onClick={onClose}>등록</Button>
-                        <Button onClick={onClose} type='disabled'>
+                    <FlexCenter gap='60px'>
+                        <Button
+                            width='99px'
+                            height='34px'
+                            fontSize='12px'
+                            fontWeight='400'
+                            onClick={onClose}
+                            type='disabled'
+                        >
                             취소
                         </Button>
-                    </FlexSB>
+                        <Button width='99px' height='34px' fontSize='12px' onClick={onClose}>
+                            확인
+                        </Button>
+                    </FlexCenter>
                 </FlexCol>
             </ModalContent>
         </ModalOverlay>

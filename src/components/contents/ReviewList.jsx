@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import Button from '../../ui/button/Button';
+import Button, { ButtonBlank } from '../../ui/button/Button';
 import ReviewItem from './ReviewItem';
-import { Badge, FlexCol, FlexColUl, FlexNone, H3 } from './style';
+import { Badge, FlexCol, FlexColUl, FlexNone, H3, Line, LoadMoreBtn, LoadMoreBtnWrapper } from './style';
 import ReviewModal from './ReviewModal';
 
 // 입력 받은 댓글 영역
@@ -33,13 +33,21 @@ const ReviewList = () => {
                     <FlexNone gap='15px'>
                         <img src='/contentdetail/sample/SampleProfile.png' alt='샘플프로필' />
                         <span style={{ fontSize: '17px' }}>홍길동</span>
-                        <Button onClick={handleOpenModal}>등록</Button>
+                        <ButtonBlank review width='173px' height='46px' onClick={handleOpenModal}>
+                            리뷰 작성하기
+                        </ButtonBlank>
                     </FlexNone>
                     <FlexColUl gap='50px'>
                         {sample.map((item, index) => (
                             <ReviewItem key={index} />
                         ))}
                     </FlexColUl>
+                    <LoadMoreBtnWrapper>
+                        <Line />
+                        <LoadMoreBtn>
+                            <img src='/contentdetail/ui/loadMoreBtnIcon.png' alt='더보기아이콘' />
+                        </LoadMoreBtn>
+                    </LoadMoreBtnWrapper>
                 </FlexCol>
                 <ReviewModal isOpen={openModal} onClose={handleCloseModal} />
             </section>

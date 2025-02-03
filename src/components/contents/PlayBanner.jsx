@@ -7,7 +7,7 @@ const PlayBanner = () => {
             <section>
                 <PBWrap>
                     <PBuiWrap>
-                        <FlexCol gap='20px'>
+                        <FlexCol gap='30px'>
                             <H2>옥씨부인전</H2>
                             <BarDemo />
                             <FlexNone gap='26px'>

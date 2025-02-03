@@ -7,7 +7,7 @@ import { Pagination } from 'swiper/modules';
 const ReList = () => {
     return (
         <>
-            <section>
+            <section style={{ marginTop: '30px' }}>
                 <FlexCol gap='40px'>
                     <H3>비슷한 콘텐츠</H3>
                     <Swiper

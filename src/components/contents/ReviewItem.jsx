@@ -15,6 +15,7 @@ const ReviewItem = () => {
                             <img src='/contentdetail/ui/StarActive.png' alt='별' />
                         </FlexNone>
                     </FlexNone>
+                    <p>댓글 내용</p>
                 </FlexCol>
             </FlexNone>
         </li>
