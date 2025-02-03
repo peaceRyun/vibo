@@ -410,7 +410,7 @@ const GlobalStyle = createGlobalStyle`
   .swiper-slide {
     text-align: center;
     font-size: 18px;
-    background: #fff;
+    background: var(--gray-900);
     display: flex;
     justify-content: center;
     align-items: center;
