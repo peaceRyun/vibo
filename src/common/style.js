@@ -7,3 +7,9 @@ export const Container = styled.div`
         padding: 0 50px;
     }
 `;
+
+export const Inner = styled.div`
+    @media (min-width: 1025px) {
+        max-width: 1820px;
+    }
+`;
