@@ -4,7 +4,7 @@ const ToggleSwitch = ({ isRound }) => {
     return (
         <SwitchContainer>
             <SwitchInput type='checkbox' />
-            <Slider isRound={isRound} />
+            <Slider $isRound={isRound} />
         </SwitchContainer>
     );
 };

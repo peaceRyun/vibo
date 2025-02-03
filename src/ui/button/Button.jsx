@@ -13,12 +13,12 @@ const Button = ({
 }) => {
     return (
         <ButtonB
-            type={type}
-            fontSize={fontSize}
-            fontWeight={fontWeight}
-            width={width}
-            height={height}
-            play={play}
+            $type={type}
+            $fontSize={fontSize}
+            $fontWeight={fontWeight}
+            $width={width}
+            $height={height}
+            $play={String(play)}
             onClick={onClick}
         >
             {children}
@@ -36,8 +36,8 @@ export const ButtonBlank = ({
     review,
 }) => {
     return (
-        <ButtonA type={type} fontSize={fontSize} width={width} height={height} onClick={onClick} review={review}>
-            <img src='/contentdetail/ui/reviewIcon.png' alt='리뷰 아이콘' />
+        <ButtonA $type={type} $fontSize={fontSize} $width={width} $height={height} onClick={onClick}>
+            {review && <img src='/contentdetail/ui/reviewIcon.png' alt='리뷰 아이콘' />}
             {children}
             <FaAngleRight />
         </ButtonA>

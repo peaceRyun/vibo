@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
 export const ButtonA = styled.button`
-    width: ${(props) => props.width};
-    height: ${(props) => props.height};
+    width: ${(props) => props.$width};
+    height: ${(props) => props.$height};
     border-radius: 5px;
     border: 1px solid var(--primary-base);
     background-color: transparent;
@@ -17,16 +17,16 @@ export const ButtonA = styled.button`
 `;
 
 export const ButtonB = styled.button`
-    width: ${(props) => props.width};
-    height: ${(props) => props.height};
+    width: ${(props) => props.$width};
+    height: ${(props) => props.$height};
     border-radius: 5px;
-    background-color: ${(props) => (props.type === 'disabled' ? 'var(--gray-200)' : 'var(--primary-base)')};
-    color: ${(props) => (props.type === 'disabled' ? 'var(--gray-500)' : 'var(--black)')};
-    font-size: ${(props) => props.fontSize};
-    font-weight: ${(props) => props.fontWeight};
+    background-color: ${(props) => (props.$type === 'disabled' ? 'var(--gray-200)' : 'var(--primary-base)')};
+    color: ${(props) => (props.$type === 'disabled' ? 'var(--gray-500)' : 'var(--black)')};
+    font-size: ${(props) => props.$fontSize};
+    font-weight: ${(props) => props.$fontWeight};
     padding: 17px 23px;
     ${(props) =>
-        props.play &&
+        props.$play &&
         `
         &::before {
             content: ' ';

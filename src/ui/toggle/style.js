@@ -22,7 +22,7 @@ export const Slider = styled.span`
     bottom: 0;
     background-color: #ccc;
     transition: 0.4s;
-    border-radius: ${(props) => (props.isRound ? '34px' : '0')};
+    border-radius: ${(props) => (props.$isRound ? '34px' : '0')};
 
     &:before {
         position: absolute;
