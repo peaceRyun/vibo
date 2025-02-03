@@ -1,18 +1,14 @@
 // 멤버쉽(패스) 구매 페이지
+import { useState } from 'react';
 import { Container } from '../../common/style';
-import {
-  FeatureList,
-  MembershipBanner,
-  PaymentButton,
-  Plan,
-  PlanRow,
-  PlanWrapper,
-  SubscriptionContainer,
-} from './style';
+import { FeatureList, MembershipBanner, PaymentButton, Plan, PlanWrapper, SubscriptionContainer } from './style';
+import { Modal } from '../../components/member/membership/Modal';
 
 const Membership = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
   return (
     <>
+      <Container />
       {/* 메인 배너 */}
       <MembershipBanner>
         <img src="/member/member_banner.PNG" alt="membershipbanner" />
@@ -77,7 +73,8 @@ const Membership = () => {
           </PlanWrapper>
         </SubscriptionContainer>
 
-        <PaymentButton>결제하기</PaymentButton>
+        <PaymentButton onClick={() => setIsModalOpen}>결제하기</PaymentButton>
+        {isModalOpen && <Modal onClose={() => setIsModalOpen(false)} />}
       </section>
     </>
   );
