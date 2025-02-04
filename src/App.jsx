@@ -8,7 +8,8 @@
 // import RateList from './components/home/rating/RateList';
 // import WeeklyItem from './components/home/weekly/WeeklyItem';
 // import WeeklyList from './components/home/weekly/WeeklyList';
-import GenreNav from './components/home/genreNav/GenreNav';
+// import GenreNav from './components/home/genreNav/GenreNav';
+import Only1 from './components/home/viboOnly/only1/Only1';
 import GlobalStyle from './styled/GlobalStyle';
 
 function App() {
@@ -26,7 +27,8 @@ function App() {
             {/* <RateList /> */}
             {/* <WeeklyItem /> */}
             {/* <WeeklyList /> */}
-            <GenreNav />
+            {/* <GenreNav /> */}
+            <Only1 />
         </>
     );
 }
