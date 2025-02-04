@@ -7,7 +7,8 @@
 // import CommonList from './components/home/common/CommonList';
 // import RateList from './components/home/rating/RateList';
 // import WeeklyItem from './components/home/weekly/WeeklyItem';
-import WeeklyList from './components/home/weekly/WeeklyList';
+// import WeeklyList from './components/home/weekly/WeeklyList';
+import GenreNav from './components/home/genreNav/GenreNav';
 import GlobalStyle from './styled/GlobalStyle';
 
 function App() {
@@ -24,7 +25,8 @@ function App() {
             {/* <RateItem /> */}
             {/* <RateList /> */}
             {/* <WeeklyItem /> */}
-            <WeeklyList />
+            {/* <WeeklyList /> */}
+            <GenreNav />
         </>
     );
 }
