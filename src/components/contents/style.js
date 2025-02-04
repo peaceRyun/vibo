@@ -64,6 +64,15 @@ export const CRatingImg = styled.img`
     height: 34px;
 `;
 
+export const Flex = styled.div`
+    display: flex;
+    align-items: ${(props) => props.$alignItems};
+    justify-content: ${(props) => props.$justifyContent};
+    gap: ${(props) => props.$gap};
+    padding: ${(props) => (props.padding ? props.padding : '')};
+    position: ${(props) => props.$position};
+`;
+
 export const FlexNone = styled.div`
     display: flex;
     align-items: center;
