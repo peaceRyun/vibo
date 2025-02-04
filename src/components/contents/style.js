@@ -74,12 +74,30 @@ export const Flex = styled.div`
     position: ${(props) => props.$position};
 `;
 
-export const FlexNone = styled.div`
+export const FlexCol = styled.div`
     display: flex;
-    align-items: center;
+    flex-direction: column;
     gap: ${(props) => props.$gap};
-    padding: ${(props) => (props.padding ? props.padding : '')};
+    margin-top: ${(props) => `${props.$mt}`};
+    margin-bottom: ${(props) => `${props.$mb}`};
+    width: ${(props) => props.$width || 'auto'};
+    position: relative;
+    z-index: 1;
 `;
+
+// export const FlexSB = styled.div`
+//     display: flex;
+//     justify-content: space-between;
+//     align-items: center;
+//     gap: ${(props) => props.$gap};
+// `;
+
+// export const FlexNone = styled.div`
+//     display: flex;
+//     align-items: center;
+//     gap: ${(props) => props.$gap};
+//     padding: ${(props) => (props.padding ? props.padding : '')};
+// `;
 
 export const FlexCenter = styled.div`
     display: flex;
@@ -89,28 +107,12 @@ export const FlexCenter = styled.div`
     gap: ${(props) => props.$gap};
 `;
 
-export const FlexSB = styled.div`
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: ${(props) => props.$gap};
-`;
-
 export const FlexBadgeWrap = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 15px 20px;
     gap: ${(props) => props.$gap};
-`;
-
-export const FlexCol = styled.div`
-    display: flex;
-    flex-direction: column;
-    gap: ${(props) => props.$gap};
-    margin-top: ${(props) => `${props.$mt}`};
-    margin-bottom: ${(props) => `${props.$mb}`};
-    width: ${(props) => props.$width || 'auto'};
 `;
 
 export const FlexEnd = styled.div`

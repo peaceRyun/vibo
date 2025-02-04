@@ -18,8 +18,9 @@ const ReList = () => {
                         }}
                         modules={[Pagination]}
                         className='mySwiper'
+                        style={{ overflow: 'visible' }}
                     >
-                        <SwiperSlide>
+                        <SwiperSlide style={{ overflow: 'visible' }}>
                             <ReItem />
                         </SwiperSlide>
                         <SwiperSlide>
