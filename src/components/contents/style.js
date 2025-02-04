@@ -66,10 +66,11 @@ export const CRatingImg = styled.img`
 
 export const Flex = styled.div`
     display: flex;
+    flex-direction: ${(props) => props.$flexDirection};
     align-items: ${(props) => props.$alignItems};
     justify-content: ${(props) => props.$justifyContent};
     gap: ${(props) => props.$gap};
-    padding: ${(props) => (props.padding ? props.padding : '')};
+    padding: ${(props) => (props.$padding ? props.$padding : '')};
     position: ${(props) => props.$position};
 `;
 

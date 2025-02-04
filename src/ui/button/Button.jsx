@@ -18,7 +18,7 @@ const Button = ({
             $fontWeight={fontWeight}
             $width={width}
             $height={height}
-            $play={String(play)}
+            $play={play}
             onClick={onClick}
         >
             {children}
