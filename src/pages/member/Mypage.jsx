@@ -67,7 +67,7 @@ const Mypage = () => {
           {activeTab === '시청내역' && <WatchingContent />}
           {activeTab === '구매내역' && <BuyingZzimContent />}
           {activeTab === '찜' && <BuyingZzimContent />}
-          {activeTab === '나의 리뷰' && <BuyingZzimContent />}
+          {activeTab === '나의 리뷰' && <ReviewItems />}
         </ContentWrapper>
         {/* <TabMenu>
           {['시청내역', '구매내역', '찜', '나의 리뷰'].map((tab) => (
@@ -87,6 +87,7 @@ import styled from 'styled-components';
 import WatchingContent from '../../components/member/watch/WatchingContent';
 import BuyingZzimContent from '../../components/member/buyzzim/BuyingZzimContent';
 import { useState } from 'react';
+import ReviewItems from '../../components/member/review/ReviewItems';
 // 전체 컨테이너
 export const ProfileContainer = styled.div`
   padding: 50px;
