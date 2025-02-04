@@ -29,7 +29,10 @@ const Mypage = () => {
           <ProfileImage src={userProfileImage} />
           {/* <ProfileImage /> */}
           <UserInfo>
-            <UserName>바이보 님</UserName>
+            <UserName>
+              <strong>바이보</strong>
+              <p>님</p>
+            </UserName>
             <button>✏️ 프로필 전환</button>
           </UserInfo>
         </ProfileHeader>
@@ -58,35 +61,12 @@ const Mypage = () => {
             </TabItem>
           ))}
         </TabMenu>
-        {/* <TabMenu>
-          <TabItem>시청내역</TabItem>
-          <TabItem>구매내역</TabItem>
-          <TabItem>찜</TabItem>
-          <TabItem>나의 리뷰</TabItem>
-        </TabMenu> */}
-
-        <ContentSection>
-          <h3>시청하신 콘텐츠가 없습니다.</h3>
-          <p>다양한 콘텐츠를 시청해보세요.</p>
-          <p>고객님의 취향에 맞추어 추천을 해드릴까요?</p>
-
-          {/* 추천 영화 카드 */}
-          <RecommendedMovies>
-            {movies.map((movie, index) => (
-              <MovieCard key={index} style={{ backgroundImage: `url(${movie.src})` }} />
-            ))}
-          </RecommendedMovies>
-          {/* <RecommendedMovies>
-            <MovieCard />
-            <MovieCard />
-            <MovieCard />
-            <MovieCard />
-          </RecommendedMovies> */}
-        </ContentSection>
+        {/* 시청내역 */}
+        <WatchingContent />
+        {/* 구매내역 */}
+        {/* 찜한내역 */}
+        {/* 나의 리뷰 */}
       </ProfileContainer>
-      {/* <ProfileEdit />
-      <ProfileSwitch /> */}
-      {/* <ProfileInfoEdit /> */}
     </div>
   );
 };
@@ -94,6 +74,7 @@ const Mypage = () => {
 export default Mypage;
 
 import styled from 'styled-components';
+import WatchingContent from '../../components/member/watch/WatchingContent';
 // 전체 컨테이너
 export const ProfileContainer = styled.div`
   padding: 50px;
@@ -142,10 +123,15 @@ export const UserInfo = styled.div`
 // 유저 이름 분리?
 export const UserName = styled.h2`
   display: flex;
-  font-size: 22px;
   font-weight: bold;
   align-items: center;
   gap: 10px;
+  strong {
+    font-size: 48px;
+  }
+  p {
+    font-size: 32px;
+  }
 `;
 
 export const PassContainer = styled.div`
@@ -183,7 +169,7 @@ export const PassCard2 = styled.div`
 // 탭 메뉴
 export const TabMenu = styled.div`
   display: flex;
-  gap: 20px;
+  gap: 60px;
   margin-top: 100px;
 
   border-bottom: 2px solid #444;
@@ -212,41 +198,5 @@ export const TabItem = styled.div`
 
   &:hover::after {
     width: 100%;
-  }
-`;
-
-// 시청내역 & 콘텐츠 추천 임시로
-export const ContentSection = styled.div`
-  text-align: left;
-  margin-top: 20px;
-  padding: 25px 0;
-  h3 {
-    font-size: 33px;
-    padding-bottom: 25px;
-  }
-  p {
-    font-size: 23px;
-  }
-`;
-
-// 영화 추천 이미지 컨테이너 임시로
-const RecommendedMovies = styled.div`
-  display: flex;
-  gap: 15px;
-  justify-content: center;
-  margin-top: 30px;
-`;
-
-const MovieCard = styled.div`
-  width: 18.75rem;
-  height: 380px;
-  background-size: cover;
-  background-position: center;
-  border-radius: 8px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-  transition: transform 0.3s ease;
-
-  &:hover {
-    transform: scale(1.05);
   }
 `;
