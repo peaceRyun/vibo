@@ -1,2 +1,11 @@
-// 일반 콘텐츠 스와이퍼(장르별)
-// 메인 홈, 영화, 시리즈 홈에만 있는 스와이퍼
+import { CommonItemContainer, CommonImg } from './style';
+
+const CommonItem = () => {
+    return (
+        <CommonItemContainer>
+            <CommonImg src="/contentdetail/sample/commonSample.png" alt="환승연애" />
+        </CommonItemContainer>
+    );
+};
+
+export default CommonItem;
