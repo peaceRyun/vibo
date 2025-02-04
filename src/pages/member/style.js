@@ -147,3 +147,103 @@ export const PlanRow = styled.div`
   align-items: flex-start; */
   /* width: 100%; */
 `;
+
+// -------------------------- 회원정보 변경 페이지 스타일
+
+// 전체 컨테이너
+// 전체 컨테이너 (화면 중앙 정렬)
+export const ProfileContainer = styled.div`
+  padding: 3.125rem;
+`;
+
+export const InfoTitle = styled.h1`
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 60px;
+`;
+
+export const FormGroup = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+`;
+
+export const Label = styled.label`
+  font-size: 16px;
+  width: 150px; /* 라벨 고정 너비 */
+  text-align: left;
+  color: #bbb;
+`;
+
+export const InputContainer = styled.div`
+  flex: 1;
+`;
+
+export const Input = styled.input`
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #444;
+  border-radius: 5px;
+  background: #222;
+  color: white;
+`;
+
+export const Select = styled.select`
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #444;
+  border-radius: 5px;
+  background: #222;
+  color: white;
+`;
+
+export const FlexGroup = styled.div`
+  display: flex;
+  gap: 10px;
+`;
+
+export const ButtonGroup = styled.div`
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 60px;
+`;
+
+export const Button = styled.button`
+  width: 150px;
+  padding: 12px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  background: ${(props) => (props.cancel ? '#444' : '#68F5EB')};
+  color: black;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+
+  &:hover {
+    opacity: 0.8;
+  }
+`;
+
+export const InformationBox = styled.div`
+  width: 100%;
+  height: 200px;
+  background: #444;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 16px;
+  color: white;
+`;
+
+export const DeleteAccountText = styled.p`
+  text-align: left;
+  padding: 0 150px;
+  color: gray;
+  font-size: 12px;
+  margin-top: 20px;
+`;
