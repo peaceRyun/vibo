@@ -6,7 +6,9 @@ import ProfileSwitch from './ProfileSwitch';
 import ProfileInfoEdit from './ProfileInfoEdit';
 
 const Mypage = () => {
-  const [activeTab, setActiveTab] = React.useState('시청내역');
+  // const [activeTab, setActiveTab] = React.useState('시청내역');
+
+  const [activeTab, setActiveTab] = useState('시청내역');
 
   const movies = [
     { src: '/member/mypage_01.webp' },
@@ -53,7 +55,7 @@ const Mypage = () => {
         <PassCard2>
           <strong>패스를 구매하시면 VIBO Original, 실시간 인기콘텐츠와 다양한 영화를 시청하실 수 있어요!</strong>
         </PassCard2>
-
+        {/* 탭 메뉴 */}
         <TabMenu>
           {['시청내역', '구매내역', '찜', '나의 리뷰'].map((tab) => (
             <TabItem key={tab} active={activeTab === tab} onClick={() => setActiveTab(tab)}>
@@ -61,11 +63,19 @@ const Mypage = () => {
             </TabItem>
           ))}
         </TabMenu>
-        {/* 시청내역 */}
-        <WatchingContent />
-        {/* 구매내역 */}
-        {/* 찜한내역 */}
-        {/* 나의 리뷰 */}
+        <ContentWrapper>
+          {activeTab === '시청내역' && <WatchingContent />}
+          {activeTab === '구매내역' && <BuyingZzimContent />}
+          {activeTab === '찜' && <BuyingZzimContent />}
+          {activeTab === '나의 리뷰' && <BuyingZzimContent />}
+        </ContentWrapper>
+        {/* <TabMenu>
+          {['시청내역', '구매내역', '찜', '나의 리뷰'].map((tab) => (
+            <TabItem key={tab} active={activeTab === tab} onClick={() => setActiveTab(tab)}>
+              {tab}
+            </TabItem>
+          ))}
+        </TabMenu> */}
       </ProfileContainer>
     </div>
   );
@@ -75,17 +85,11 @@ export default Mypage;
 
 import styled from 'styled-components';
 import WatchingContent from '../../components/member/watch/WatchingContent';
+import BuyingZzimContent from '../../components/member/buyzzim/BuyingZzimContent';
+import { useState } from 'react';
 // 전체 컨테이너
 export const ProfileContainer = styled.div`
   padding: 50px;
-  /* width: 70%;
-  max-width: 1000px;
-  margin: 50px auto;
-  padding: 40px;
-  background: #000;
-  color: white;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(255, 255, 255, 0.1); */
 `;
 
 // 프로필 정보 컨테이너
@@ -165,18 +169,17 @@ export const PassCard2 = styled.div`
   width: 825px;
   height: 6.875rem;
 `;
-
-// 탭 메뉴
-export const TabMenu = styled.div`
+// 탭 메뉴 스타일
+const TabMenu = styled.div`
   display: flex;
   gap: 60px;
-  margin-top: 100px;
-
+  gap: 60px;
+  margin-top: 90px;
   border-bottom: 2px solid #444;
   padding-bottom: 10px;
 `;
 
-export const TabItem = styled.div`
+const TabItem = styled.div`
   font-size: 16px;
   font-weight: bold;
   cursor: pointer;
@@ -188,9 +191,9 @@ export const TabItem = styled.div`
   &::after {
     content: '';
     position: absolute;
-    bottom: -3px;
+    bottom: 0;
     left: 0;
-    width: ${(props) => (props.active ? '100%' : '0')}; /* 활성화된 탭만 100% */
+    width: ${(props) => (props.active ? '100%' : '0')};
     height: 3px;
     background-color: #68f5eb;
     transition: width 0.3s ease;
@@ -200,3 +203,45 @@ export const TabItem = styled.div`
     width: 100%;
   }
 `;
+
+// 콘텐츠 영역 스타일
+const ContentWrapper = styled.div`
+  /* padding: 20px;
+  background: #111;
+  border-radius: 10px;
+  margin-top: 20px; */
+`;
+// // 탭 메뉴
+// export const TabMenu = styled.div`
+//   display: flex;
+//   gap: 60px;
+//   margin-top: 100px;
+
+//   border-bottom: 2px solid #444;
+//   padding-bottom: 10px;
+// `;
+
+// export const TabItem = styled.div`
+//   font-size: 16px;
+//   font-weight: bold;
+//   cursor: pointer;
+//   padding-bottom: 5px;
+//   color: ${(props) => (props.active ? '#68F5EB' : 'white')};
+//   position: relative;
+//   margin-bottom: 20px;
+
+//   &::after {
+//     content: '';
+//     position: absolute;
+//     bottom: -3px;
+//     left: 0;
+//     width: ${(props) => (props.active ? '100%' : '0')}; /* 활성화된 탭만 100% */
+//     height: 3px;
+//     background-color: #68f5eb;
+//     transition: width 0.3s ease;
+//   }
+
+//   &:hover::after {
+//     width: 100%;
+//   }
+// `;
