@@ -7,7 +7,7 @@ import { CardContainer, CardImage, CardInfo, CardTitle, CardBcName } from './sty
 const LiveItem = () => {
     return (
         <CardContainer>
-            <CardImage src="/contentdetail/sample/LiveSample.png" alt="KCC 프로농구 tvN" />
+            <CardImage src="/mainhome/sample/LiveSample.png" alt="KCC 프로농구 tvN" />
             <CardInfo>
                 <CardTitle>KCC 프로농구</CardTitle>
                 <CardBcName>tvN</CardBcName>

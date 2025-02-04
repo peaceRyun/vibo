@@ -5,7 +5,7 @@ import { CardContainer, CardImage, CardInfo, CardTitle, CardEpisode } from './st
 const WatchingItem = () => {
     return (
         <CardContainer>
-            <CardImage src="/contentdetail/sample/WatchingSample.png" alt="신서유기 레전드 정주행" />
+            <CardImage src="/mainhome/sample/WatchingSample.png" alt="신서유기 레전드 정주행" />
             <CardInfo>
                 <CardTitle>신서유기 레전드 정주행</CardTitle>
                 <CardEpisode>3화</CardEpisode>

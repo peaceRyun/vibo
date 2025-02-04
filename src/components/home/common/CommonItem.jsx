@@ -3,7 +3,7 @@ import { CommonItemContainer, CommonImg } from './style';
 const CommonItem = () => {
     return (
         <CommonItemContainer>
-            <CommonImg src="/contentdetail/sample/commonSample.png" alt="환승연애" />
+            <CommonImg src="/mainhome/sample/commonSample.png" alt="환승연애" />
         </CommonItemContainer>
     );
 };
