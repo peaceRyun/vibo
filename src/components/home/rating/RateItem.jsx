@@ -1,3 +1,10 @@
-// 순위 매겨져 있는 콘텐츠 스와이퍼
-// 메인홈에만 있는 스와이퍼
-// 보류
+import { RateItemContainer, RateItemImg } from './style';
+
+const RateItem = () => {
+    return (
+        <RateItemContainer>
+            <RateItemImg src="/mainhome/sample/RateSample.png" alt="순위 아이템" />
+        </RateItemContainer>
+    );
+};
+export default RateItem;

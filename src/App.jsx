@@ -4,7 +4,8 @@
 // import WatchingList from './components/home/watching/WatchingList';
 // import AdBanner from './components/home/adBanner/AdBanner';
 // import CommonItem from './components/home/common/CommonItem';
-import CommonList from './components/home/common/CommonList';
+// import CommonList from './components/home/common/CommonList';
+import RateList from './components/home/rating/RateList';
 import GlobalStyle from './styled/GlobalStyle';
 
 function App() {
@@ -17,7 +18,9 @@ function App() {
             {/* <WatchingList /> */}
             {/* <AdBanner /> */}
             {/* <CommonItem /> */}
-            <CommonList />
+            {/* <CommonList /> */}
+            {/* <RateItem /> */}
+            <RateList />
         </>
     );
 }
