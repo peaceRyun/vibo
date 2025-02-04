@@ -5,6 +5,7 @@ export const PBWrap = styled.div`
     height: 600px;
     background-image: url('/contentdetail/sample/Slide 16_9 - 2.png');
     background-repeat: no-repeat;
+    background-size: cover;
     position: relative;
 `;
 
@@ -99,6 +100,7 @@ export const FlexCol = styled.div`
     gap: ${(props) => props.$gap};
     margin-top: ${(props) => `${props.$mt}`};
     margin-bottom: ${(props) => `${props.$mb}`};
+    width: ${(props) => props.$width || 'auto'};
 `;
 
 export const FlexEnd = styled.div`

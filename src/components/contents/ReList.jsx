@@ -8,7 +8,7 @@ const ReList = () => {
     return (
         <>
             <section style={{ marginTop: '30px' }}>
-                <FlexCol $gap='40px'>
+                <FlexCol $gap='40px' $width='1920px'>
                     <H3>비슷한 콘텐츠</H3>
                     <Swiper
                         slidesPerView={5.5}
