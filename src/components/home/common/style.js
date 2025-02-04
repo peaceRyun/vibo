@@ -5,7 +5,7 @@ export const CommonItemContainer = styled.div`
     height: 27.0625rem;
     border-radius: 0.5rem;
     overflow: hidden;
-    background-color: #fff;
+    position: relative;
 `;
 
 export const CommonImg = styled.img`

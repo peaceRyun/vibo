@@ -5,7 +5,9 @@
 // import AdBanner from './components/home/adBanner/AdBanner';
 // import CommonItem from './components/home/common/CommonItem';
 // import CommonList from './components/home/common/CommonList';
-import RateList from './components/home/rating/RateList';
+// import RateList from './components/home/rating/RateList';
+// import WeeklyItem from './components/home/weekly/WeeklyItem';
+import WeeklyList from './components/home/weekly/WeeklyList';
 import GlobalStyle from './styled/GlobalStyle';
 
 function App() {
@@ -20,7 +22,9 @@ function App() {
             {/* <CommonItem /> */}
             {/* <CommonList /> */}
             {/* <RateItem /> */}
-            <RateList />
+            {/* <RateList /> */}
+            {/* <WeeklyItem /> */}
+            <WeeklyList />
         </>
     );
 }
