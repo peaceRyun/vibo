@@ -4,10 +4,10 @@ export const MembershipBanner = styled.div`
   position: relative;
   text-align: center;
   color: white;
-  height: 300px;
+  height: 21.875rem;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   overflow: hidden;
 
   img {
@@ -23,6 +23,8 @@ export const MembershipBanner = styled.div`
   .banner-content {
     position: relative;
     z-index: 1;
+    text-align: left;
+    padding: 0 20px;
 
     h1 {
       font-size: 60px;
@@ -31,6 +33,7 @@ export const MembershipBanner = styled.div`
 
     p {
       font-size: 40px;
+      font-weight: 300;
     }
   }
 `;
@@ -49,6 +52,18 @@ export const SubscriptionContainer = styled.div`
     /* border-top: 1px solid gray; */
     text-align: left;
   }
+
+  .title {
+    padding: 40px 20px;
+  }
+  h2 {
+    font-size: 32px;
+    font-weight: 800;
+  }
+  p {
+    font-size: 20px;
+    margin-top: 20px;
+  }
 `;
 
 export const PlanWrapper = styled.div`
@@ -56,26 +71,27 @@ export const PlanWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   flex: 1;
-  padding: 0 10px;
+  padding: 40px 20px;
   position: relative;
 
   &:not(:last-child)::after {
     content: '';
     position: absolute;
-    top: 0;
+    top: 2.5rem;
     right: 0;
-    width: 2px;
-    height: 100%;
+    width: 1px;
+    height: 90%;
+
     background: gray;
   }
 `;
 
 export const Plan = styled.div`
   border: 1px solid cyan;
-  padding: 20px;
+  /* padding: 20px; */
   border-radius: 10px;
-  text-align: center;
-  width: 100%;
+  width: 18.75rem;
+  height: 140px;
   background: ${({ isFilled }) => (isFilled ? 'cyan' : 'transparent')}; // 클릭하면 cyan 유지
   color: ${({ isFilled }) => (isFilled ? 'black' : 'inherit')}; // 클릭 시 글자색 변경
   transition: background 0.3s ease, color 0.3s ease;
@@ -83,32 +99,46 @@ export const Plan = styled.div`
     background: cyan;
     color: black;
   }
-`;
-
-export const FeatureList = styled.ul`
-  font-size: 20px;
-  margin-top: 3.75rem;
-  list-style: none;
-  padding: 0;
-  width: 100%;
-  li {
-    padding: 10px 0;
-    /* border-top: 1px solid gray; */
+  h2 {
+    padding: 50px;
     text-align: center;
   }
 `;
 
+export const FeatureList = styled.ul`
+  font-size: 20px;
+  margin-top: 3.125rem;
+  list-style: none;
+  padding: 3.75rem
+  width: 100%;
+  &:hover {
+    li {
+    font-weight: 800;
+    color: cyan;
+  }}
+  li{
+    adding: 10px 0;
+    /* border-top: 1px solid gray; */
+    text-align: center;
+    color: gray;
+    font-weight: 300;
+  }
+  
+`;
+
 export const PaymentButton = styled.button`
   display: block;
-  width: 200px;
-  margin: 20px auto;
-  padding: 10px;
+  width: 240px;
+  height: 60px;
+  margin: 60px auto;
+  padding: 0px;
   background: cyan;
   color: black;
-  font-size: 16px;
+  font-size: 24px;
+  font-weight: 700;
   border: none;
   border-radius: 5px;
-  cursor: pointer;
+  /* cursor: pointer; */
 `;
 
 export const PlanRow = styled.div`

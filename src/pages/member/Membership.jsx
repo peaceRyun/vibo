@@ -21,7 +21,7 @@ const Membership = () => {
       </MembershipBanner>
       <section>
         <SubscriptionContainer>
-          <div>
+          <div className="title">
             <h2>이용권 구독</h2>
             <p>
               전체 이용권 정보를 보시려면 <br /> 하단 [모든 이용권 보기] 버튼을 선택하세요.
@@ -35,6 +35,7 @@ const Membership = () => {
               <li>VIBO PLUS 이용권</li>
             </ul>
           </div>
+
           <PlanWrapper>
             <Plan
               className="basic"
@@ -53,8 +54,12 @@ const Membership = () => {
           </PlanWrapper>
 
           <PlanWrapper>
-            <Plan className="standard">
-              <h2 onClick={() => setIsFilled(!isFilled)}>스탠다드</h2>
+            <Plan
+              className="standard"
+              isFilled={selectedPlan === 'standard'}
+              onClick={() => setSelectedPlan(selectedPlan === 'standard' ? null : 'standard')}
+            >
+              <h2>스탠다드</h2>
             </Plan>
             <FeatureList>
               <li>5,500원</li>
@@ -66,8 +71,12 @@ const Membership = () => {
           </PlanWrapper>
 
           <PlanWrapper>
-            <Plan className="premium">
-              <h2 onClick={() => setIsFilled(!isFilled)}>프리미엄</h2>
+            <Plan
+              className="premium"
+              isFilled={selectedPlan === 'premium'}
+              onClick={() => setSelectedPlan(selectedPlan === 'premium' ? null : 'premium')}
+            >
+              <h2>프리미엄</h2>
             </Plan>
             <FeatureList>
               <li>9,900원</li>
