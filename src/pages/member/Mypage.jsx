@@ -7,13 +7,27 @@ import ProfileInfoEdit from './ProfileInfoEdit';
 
 const Mypage = () => {
   const [activeTab, setActiveTab] = React.useState('시청내역');
+
+  const movies = [
+    { src: '/member/mypage_01.webp' },
+    { src: '/member/mypage_02.webp' },
+    { src: '/member/mypage_03.webp' },
+    { src: '/member/mypage_04.webp' },
+  ];
+
+  const userProfileImage = '/contentdetail/sample/SampleProfile.png';
   return (
     <div>
       <Container />
       <ProfileContainer>
         {/* 프로필 정보 */}
+        {/* {Profiles.map((Profile, index) => (
+          <ProfileImage key={index} style={{ backgroundImage: `url(${Profile.src})` }} />
+        ))} */}
+
         <ProfileHeader>
-          <ProfileImage />
+          <ProfileImage src={userProfileImage} />
+          {/* <ProfileImage /> */}
           <UserInfo>
             <UserName>바이보 님</UserName>
             <button>✏️ 프로필 전환</button>
@@ -32,11 +46,10 @@ const Mypage = () => {
             </div>
           </PassCard>
         </PassContainer>
-        <PassCard>
-          <div className="PassTitle3">
-            <strong>패스를 구매하시면 VIBO Original, 실시간 인기콘텐츠와 다양한 영화를 시청하실 수 있어요!</strong>
-          </div>
-        </PassCard>
+
+        <PassCard2>
+          <strong>패스를 구매하시면 VIBO Original, 실시간 인기콘텐츠와 다양한 영화를 시청하실 수 있어요!</strong>
+        </PassCard2>
 
         <TabMenu>
           {['시청내역', '구매내역', '찜', '나의 리뷰'].map((tab) => (
@@ -54,15 +67,21 @@ const Mypage = () => {
 
         <ContentSection>
           <h3>시청하신 콘텐츠가 없습니다.</h3>
-          <EmptyText>다양한 콘텐츠를 시청해보세요.</EmptyText>
+          <p>다양한 콘텐츠를 시청해보세요.</p>
+          <p>고객님의 취향에 맞추어 추천을 해드릴까요?</p>
 
           {/* 추천 영화 카드 */}
           <RecommendedMovies>
-            <MovieCard />
-            <MovieCard />
-            <MovieCard />
-            <MovieCard />
+            {movies.map((movie, index) => (
+              <MovieCard key={index} style={{ backgroundImage: `url(${movie.src})` }} />
+            ))}
           </RecommendedMovies>
+          {/* <RecommendedMovies>
+            <MovieCard />
+            <MovieCard />
+            <MovieCard />
+            <MovieCard />
+          </RecommendedMovies> */}
         </ContentSection>
       </ProfileContainer>
       {/* <ProfileEdit />
@@ -101,7 +120,10 @@ export const ProfileImage = styled.div`
   width: 80px;
   height: 80px;
   border-radius: 50%;
-  background: gray;
+  background-size: cover;
+  background-position: center;
+  background-image: url(${(props) => props.src || '/images/default-profile.jpg'});
+  border: 2px solid #68f5eb;
 `;
 
 // 유저 정보
@@ -138,6 +160,9 @@ export const PassCard = styled.div`
   padding: 15px;
   border-radius: 8px;
   margin-bottom: 20px;
+  gap: 2.875rem;
+  /* width: 48.25rem;
+  height: 6.875rem; */
   .PassTitle {
     width: 26.625rem;
     height: 6.25rem;
@@ -145,17 +170,22 @@ export const PassCard = styled.div`
   .PassTitle2 {
     width: 18.75rem;
   }
-  .PassTitle3 {
-    width: 48.25rem;
-    height: 6.875rem;
-  }
+`;
+export const PassCard2 = styled.div`
+  background: #222;
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  width: 825px;
+  height: 6.875rem;
 `;
 
 // 탭 메뉴
 export const TabMenu = styled.div`
   display: flex;
   gap: 20px;
-  margin: 20px 0;
+  margin-top: 100px;
+
   border-bottom: 2px solid #444;
   padding-bottom: 10px;
 `;
@@ -167,6 +197,7 @@ export const TabItem = styled.div`
   padding-bottom: 5px;
   color: ${(props) => (props.active ? '#68F5EB' : 'white')};
   position: relative;
+  margin-bottom: 20px;
 
   &::after {
     content: '';
@@ -186,27 +217,36 @@ export const TabItem = styled.div`
 
 // 시청내역 & 콘텐츠 추천 임시로
 export const ContentSection = styled.div`
-  text-align: center;
-  margin-top: 40px;
-`;
-
-export const EmptyText = styled.p`
-  color: #bbb;
-  font-size: 16px;
-  margin-top: 10px;
+  text-align: left;
+  margin-top: 20px;
+  padding: 25px 0;
+  h3 {
+    font-size: 33px;
+    padding-bottom: 25px;
+  }
+  p {
+    font-size: 23px;
+  }
 `;
 
 // 영화 추천 이미지 컨테이너 임시로
-export const RecommendedMovies = styled.div`
+const RecommendedMovies = styled.div`
   display: flex;
   gap: 15px;
   justify-content: center;
   margin-top: 30px;
 `;
 
-export const MovieCard = styled.div`
-  width: 120px;
-  height: 160px;
-  background: gray;
+const MovieCard = styled.div`
+  width: 18.75rem;
+  height: 380px;
+  background-size: cover;
+  background-position: center;
   border-radius: 8px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease;
+
+  &:hover {
+    transform: scale(1.05);
+  }
 `;
