@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import Button from '../../ui/button/Button';
+import { ButtonBlank } from '../../ui/button/Button';
 import ReviewItem from './ReviewItem';
-import { Badge, FlexCol, FlexColUl, FlexNone, H3 } from './style';
+import { Badge, Flex, FlexCol, FlexColUl, H3, Line, LoadMoreBtn, LoadMoreBtnWrapper } from './style';
 import ReviewModal from './ReviewModal';
 
 // 입력 받은 댓글 영역
@@ -14,7 +14,6 @@ const ReviewList = () => {
     });
     const handleOpenModal = () => {
         setOpenModal(true);
-        console.log(openModal);
     };
 
     const handleCloseModal = () => {
@@ -23,23 +22,31 @@ const ReviewList = () => {
     return (
         <>
             <section>
-                <FlexCol gap='20px'>
-                    <FlexNone gap='15px'>
+                <FlexCol $gap='20px'>
+                    <Flex $gap='15px' $alignItems='center'>
                         <H3>사용자 평</H3>
-                        <Badge br='20px' p='5px 8px' fontSize='14px'>
+                        <Badge $br='20px' $padding='5px 8px' fontSize='14px'>
                             5
                         </Badge>
-                    </FlexNone>
-                    <FlexNone gap='15px'>
+                    </Flex>
+                    <Flex $gap='15px' $alignItems='center'>
                         <img src='/contentdetail/sample/SampleProfile.png' alt='샘플프로필' />
                         <span style={{ fontSize: '17px' }}>홍길동</span>
-                        <Button onClick={handleOpenModal}>등록</Button>
-                    </FlexNone>
-                    <FlexColUl gap='50px'>
+                        <ButtonBlank review width='173px' height='46px' onClick={handleOpenModal}>
+                            리뷰 작성하기
+                        </ButtonBlank>
+                    </Flex>
+                    <FlexColUl $gap='50px'>
                         {sample.map((item, index) => (
                             <ReviewItem key={index} />
                         ))}
                     </FlexColUl>
+                    <LoadMoreBtnWrapper>
+                        <Line />
+                        <LoadMoreBtn>
+                            <img src='/contentdetail/ui/loadMoreBtnIcon.png' alt='더보기아이콘' />
+                        </LoadMoreBtn>
+                    </LoadMoreBtnWrapper>
                 </FlexCol>
                 <ReviewModal isOpen={openModal} onClose={handleCloseModal} />
             </section>

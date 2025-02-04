@@ -1,16 +1,16 @@
 import ToggleSwitch from '../../ui/toggle/Toggle';
 import EpItem from './EpItem';
-import { CRatingImg, FlexCol, FlexSB, H3, P20, P28, SDrop } from './style';
+import { CRatingImg, Flex, FlexCol, H3, P20, P28, SDrop } from './style';
 
 const EpList = () => {
     return (
         <>
             <section>
-                <FlexSB>
+                <Flex $justifyContent='space-between' $alignItems='center'>
                     <FlexCol>
                         <H3>에피소드</H3>
-                        <FlexSB gap='20px'>
-                            <FlexSB gap='10px'>
+                        <Flex $justifyContent='space-between' $alignItems='center' $gap='20px'>
+                            <Flex $gap='10px' $justifyContent='space-between' $alignItems='center'>
                                 <P28>시즌 10:</P28>
                                 <CRatingImg
                                     src='/contentdetail/contentrate/전체관람가 관람등급 1.png'
@@ -22,11 +22,11 @@ const EpList = () => {
                                     alt='내용정보-선정성'
                                 />
                                 <CRatingImg src='/contentdetail/contentrate/내용정보-주제.png' alt='내용정보-주제' />
-                            </FlexSB>
-                            <FlexSB gap='15px'>
+                            </Flex>
+                            <Flex $justifyContent='space-between' $alignItems='center' $gap='15px'>
                                 <P20>연속 재생</P20> <ToggleSwitch isRound={true} />
-                            </FlexSB>
-                        </FlexSB>
+                            </Flex>
+                        </Flex>
                     </FlexCol>
                     <SDrop>
                         시즌 1
@@ -34,7 +34,7 @@ const EpList = () => {
                             <img src='/contentdetail/ui/live area.png' alt='dropdownIcon' />
                         </button>
                     </SDrop>
-                </FlexSB>
+                </Flex>
                 <EpItem />
             </section>
         </>

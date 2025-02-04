@@ -4,6 +4,8 @@ export const PBWrap = styled.div`
     margin-top: 100px;
     height: 600px;
     background-image: url('/contentdetail/sample/Slide 16_9 - 2.png');
+    background-repeat: no-repeat;
+    background-size: cover;
     position: relative;
 `;
 
@@ -62,24 +64,47 @@ export const CRatingImg = styled.img`
     height: 34px;
 `;
 
-export const FlexNone = styled.div`
+export const Flex = styled.div`
     display: flex;
-    align-items: center;
-    gap: ${(props) => props.gap};
+    flex-direction: ${(props) => props.$flexDirection};
+    align-items: ${(props) => props.$alignItems};
+    justify-content: ${(props) => props.$justifyContent};
+    gap: ${(props) => props.$gap};
+    padding: ${(props) => (props.$padding ? props.$padding : '')};
+    position: ${(props) => props.$position};
 `;
+
+export const FlexCol = styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: ${(props) => props.$gap};
+    margin-top: ${(props) => `${props.$mt}`};
+    margin-bottom: ${(props) => `${props.$mb}`};
+    width: ${(props) => props.$width || 'auto'};
+    position: relative;
+    z-index: 1;
+`;
+
+// export const FlexSB = styled.div`
+//     display: flex;
+//     justify-content: space-between;
+//     align-items: center;
+//     gap: ${(props) => props.$gap};
+// `;
+
+// export const FlexNone = styled.div`
+//     display: flex;
+//     align-items: center;
+//     gap: ${(props) => props.$gap};
+//     padding: ${(props) => (props.padding ? props.padding : '')};
+// `;
 
 export const FlexCenter = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
     position: relative;
-`;
-
-export const FlexSB = styled.div`
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: ${(props) => props.gap};
+    gap: ${(props) => props.$gap};
 `;
 
 export const FlexBadgeWrap = styled.div`
@@ -87,15 +112,7 @@ export const FlexBadgeWrap = styled.div`
     justify-content: space-between;
     align-items: center;
     padding: 15px 20px;
-    gap: ${(props) => props.gap};
-`;
-
-export const FlexCol = styled.div`
-    display: flex;
-    flex-direction: column;
-    gap: ${(props) => props.gap};
-    margin-top: ${(props) => `${props.mt}`};
-    margin-bottom: ${(props) => `${props.mb}`};
+    gap: ${(props) => props.$gap};
 `;
 
 export const FlexEnd = styled.div`
@@ -107,15 +124,15 @@ export const FlexEnd = styled.div`
 export const FlexColUl = styled.ul`
     display: flex;
     flex-direction: column;
-    gap: ${(props) => props.gap};
+    gap: ${(props) => props.$gap};
 `;
 
 export const Badge = styled.div`
-    border-radius: ${(props) => props.br};
+    border-radius: ${(props) => props.$br};
     border: 1px solid var(--primary-base);
     color: var(--primary-base);
     background-color: var(--gray-900);
-    padding: ${(props) => props.p};
+    padding: ${(props) => props.$padding};
     height: 18px;
     display: flex;
     justify-content: center;
@@ -141,16 +158,17 @@ export const SpanInfo = styled.span`
 export const H2 = styled.h2`
     font-size: 40px;
     font-weight: 700;
+    line-height: 100%;
 `;
 
 export const H3 = styled.h3`
-    font-size: 28px;
-    font-weight: 800;
+    font-size: ${(props) => (props.fontSize ? props.fontSize : '28px')};
+    font-weight: ${(props) => (props.fontWeight ? props.fontWeight : '800')};
 `;
 
 export const P = styled.p`
-    padding: 7px 20px 0px;
-    font-size: 13px;
+    padding: ${(props) => (props.padding ? props.padding : '7px 20px 0px')};
+    font-size: ${(props) => (props.fontSize ? props.fontSize : '13px')};
     font-weight: 400;
     text-align: start;
 `;
@@ -188,7 +206,37 @@ export const ModalOverlay = styled.div`
 export const ModalContent = styled.div`
     background-color: var(--gray-900);
     padding: var(--spacing-6) var(--spacing-9);
-    border-radius: 8px;
-    width: 500px;
+    border-radius: 10px;
+    width: 518px;
+    height: 441px;
     border: 2px solid var(--primary-base);
+`;
+
+export const LoadMoreBtnWrapper = styled.div`
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+`;
+
+export const LoadMoreBtn = styled.button`
+    background: #1d1d1d;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    z-index: 2;
+`;
+
+export const Line = styled.div`
+    width: 100%;
+    height: 1px;
+    background: var(--secondary-300);
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1;
 `;
