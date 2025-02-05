@@ -2,16 +2,17 @@ import styled from 'styled-components';
 
 export const ContentGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-  gap: 15px;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 40px;
   padding: 20px;
   justify-content: center;
-  max-width: 1200px;
+  max-width: 1700px;
   margin: auto;
 `;
 
 export const ContentCard = styled.div`
-  width: 100%;
+  width: 250px;
+  height: 415px;
   aspect-ratio: 9 / 14;
   background-size: cover;
   background-position: center;
@@ -28,23 +29,24 @@ export const ContentCard = styled.div`
 export const CategoryFilter = styled.div`
   display: flex;
   gap: 15px;
-  margin-bottom: 20px;
-  justify-content: center;
+  margin: 20px 0;
+  /* margin-bottom: 20px; */
+  justify-content: left;
 `;
 
 export const CategoryButton = styled.button`
-  background: ${(props) => (props.active ? '#68F5EB' : '#222')};
+  background: ${(props) => (props.active ? '#009C8C' : '#222')};
   color: ${(props) => (props.active ? '#000' : '#fff')};
   border: none;
   padding: 10px 20px;
   border-radius: 20px;
   cursor: pointer;
-  font-size: 14px;
+  font-size: var(--label-medium-size);
   font-weight: bold;
   transition: background 0.3s ease;
 
   &:hover {
-    background: #68f5eb;
+    background: var(--secondary-base);
     color: black;
   }
 `;
