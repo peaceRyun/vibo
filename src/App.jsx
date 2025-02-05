@@ -1,18 +1,17 @@
-// import ContentList from './pages/contents/ContentList';
-import ContentDetail from './pages/contents/ContentDetail';
-import Membership from './pages/member/Membership';
-import Mypage from './pages/member/Mypage';
-import ProfileInfoEdit from './pages/member/ProfileInfoEdit';
+import TestChoi from './pages/test/TestChoi';
+import TestJung from './pages/test/TestJung';
+import TestKwon from './pages/test/TestKwon';
+import TestLee from './pages/test/TestLee';
 import GlobalStyle from './styled/GlobalStyle';
 
 function App() {
     return (
         <>
             <GlobalStyle />
-
-            <Membership />
-            {/* <Mypage /> */}
-            {/* <ProfileInfoEdit /> */}
+            <TestLee />
+            <TestKwon />
+            <TestChoi />
+            <TestJung />
         </>
     );
 }
