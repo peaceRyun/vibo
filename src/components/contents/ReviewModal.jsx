@@ -16,7 +16,7 @@ const ReviewModal = ({ isOpen, onClose }) => {
                     <H3 fontSize='19px' fontWeight='700'>
                         00 콘텐츠 리뷰
                     </H3>
-                    <P fontSize='17px' $padding='0px'>
+                    <P $fontSize='17px' $padding='0px'>
                         이 콘텐츠에 대해서 얼마나 만족하셨나요?
                     </P>
                     <Flex $gap='40px' $alignItems='center'>
@@ -36,7 +36,7 @@ const ReviewModal = ({ isOpen, onClose }) => {
                         </Flex>
                     </Flex>
                     <ReviewForm />
-                    <Flex $justifyCenter='center' $alignItems='center' $position='relative' $gap='60px'>
+                    <Flex $justifyContent='center' $alignItems='center' $position='relative' $gap='60px'>
                         <Button
                             width='99px'
                             height='34px'
