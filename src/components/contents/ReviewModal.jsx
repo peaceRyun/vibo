@@ -1,6 +1,6 @@
 import Button from '../../ui/button/Button';
 import ReviewForm from './ReviewForm';
-import { Flex, FlexCenter, FlexCol, H3, ModalContent, ModalOverlay, P } from './style';
+import { Flex, H3, ModalContent, ModalOverlay, P } from './style';
 
 const ReviewModal = ({ isOpen, onClose }) => {
     if (!isOpen) return null;
@@ -12,7 +12,7 @@ const ReviewModal = ({ isOpen, onClose }) => {
     return (
         <ModalOverlay onClick={onClose}>
             <ModalContent onClick={handleContentClick}>
-                <FlexCol $gap='20px'>
+                <Flex $flexDirection='column' $position='relative' $gap='20px'>
                     <H3 fontSize='19px' fontWeight='700'>
                         00 콘텐츠 리뷰
                     </H3>
@@ -25,7 +25,7 @@ const ReviewModal = ({ isOpen, onClose }) => {
                             alt='콘텐츠 썸네일'
                             style={{ width: '200px', height: '100px' }}
                         />
-                        <FlexCol $gap='15px'>
+                        <Flex $flexDirection='column' $position='relative' $gap='15px'>
                             <h4>옥씨부인전</h4>
                             <Flex $gap='5px' $alignItems='center'>
                                 <img src='/contentdetail/ui/StarActive.png' alt='별' />
@@ -33,10 +33,10 @@ const ReviewModal = ({ isOpen, onClose }) => {
                                 <img src='/contentdetail/ui/StarActive.png' alt='별' />
                                 <img src='/contentdetail/ui/StarActive.png' alt='별' />
                             </Flex>
-                        </FlexCol>
+                        </Flex>
                     </Flex>
                     <ReviewForm />
-                    <FlexCenter $gap='60px'>
+                    <Flex $justifyCenter='center' $alignItems='center' $position='relative' $gap='60px'>
                         <Button
                             width='99px'
                             height='34px'
@@ -50,8 +50,8 @@ const ReviewModal = ({ isOpen, onClose }) => {
                         <Button width='99px' height='34px' fontSize='12px' onClick={onClose}>
                             확인
                         </Button>
-                    </FlexCenter>
-                </FlexCol>
+                    </Flex>
+                </Flex>
             </ModalContent>
         </ModalOverlay>
     );

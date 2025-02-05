@@ -1,13 +1,13 @@
 import ToggleSwitch from '../../ui/toggle/Toggle';
 import EpItem from './EpItem';
-import { CRatingImg, Flex, FlexCol, H3, P20, P28, SDrop } from './style';
+import { CRatingImg, Flex, H3, P20, P28, SDrop } from './style';
 
 const EpList = () => {
     return (
         <>
             <section>
                 <Flex $justifyContent='space-between' $alignItems='center'>
-                    <FlexCol>
+                    <Flex $flexDirection='column' $position='relative'>
                         <H3>에피소드</H3>
                         <Flex $justifyContent='space-between' $alignItems='center' $gap='20px'>
                             <Flex $gap='10px' $justifyContent='space-between' $alignItems='center'>
@@ -27,7 +27,7 @@ const EpList = () => {
                                 <P20>연속 재생</P20> <ToggleSwitch isRound={true} />
                             </Flex>
                         </Flex>
-                    </FlexCol>
+                    </Flex>
                     <SDrop>
                         시즌 1
                         <button>

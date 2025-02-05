@@ -1,5 +1,5 @@
 import Button from '../../ui/button/Button';
-import { BarDemo, Flex, FlexCol, H2, LikeImg, PBuiWrap, PBWrap } from './style';
+import { BarDemo, Flex, H2, LikeImg, PBuiWrap, PBWrap } from './style';
 
 const PlayBanner = () => {
     return (
@@ -7,7 +7,7 @@ const PlayBanner = () => {
             <section>
                 <PBWrap>
                     <PBuiWrap>
-                        <FlexCol $gap='30px'>
+                        <Flex $gap='30px' $flexDirection='column' $position='relative'>
                             <H2>옥씨부인전</H2>
                             <BarDemo />
                             <Flex $gap='26px' $alignItems='center'>
@@ -16,7 +16,7 @@ const PlayBanner = () => {
                                     <LikeImg src='public/contentdetail/ui/heart.png' alt='likeActive' />
                                 </button>
                             </Flex>
-                        </FlexCol>
+                        </Flex>
                     </PBuiWrap>
                 </PBWrap>
             </section>
