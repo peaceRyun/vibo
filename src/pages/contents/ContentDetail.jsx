@@ -1,10 +1,8 @@
-// import { Container } from '../../common/style';
-import { Inner } from '../../common/style';
 import EpList from '../../components/contents/EpList';
 import PlayBanner from '../../components/contents/PlayBanner';
 import ReList from '../../components/contents/ReList';
 import ReviewList from '../../components/contents/ReviewList';
-import { Flex, FlexUl, H3, SpanInfo, SpanInfoDim } from '../../components/contents/style';
+import { Flex, FlexUl, H3, Inner, SpanInfo, SpanInfoDim } from '../../components/contents/style';
 
 // 콘텐츠 상세
 const ContentDetail = () => {
@@ -14,7 +12,7 @@ const ContentDetail = () => {
                 <Flex $flexDirection='column' $position='relative' $gap='30px'>
                     <PlayBanner />
                     <section>
-                        <Flex $flexDirection='column' $position='relative' $gap='15px'>
+                        <Flex $flexDirection='column' $position='relative' $gap='15px' $padding='30px 0 30px'>
                             <span>2024년</span>
                             <div>
                                 <img src='/contentdetail/contentrate/전체관람가 관람등급 1.png' alt='rateAll' />
@@ -30,7 +28,7 @@ const ContentDetail = () => {
                     <ReList />
                     <ReviewList />
                     <section>
-                        <Flex $flexDirection='column' $position='relative' $gap='15px' $mb='100px'>
+                        <Flex $flexDirection='column' $position='relative' $gap='15px' $mb='100px' $padding='0 0 100px'>
                             <H3>옥씨부인전 상세 정보</H3>
                             <FlexUl $flexDirection='column' $gap='5px'>
                                 <li>
