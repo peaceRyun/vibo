@@ -1,6 +1,6 @@
 import ToggleSwitch from '../../ui/toggle/Toggle';
 import EpItem from './EpItem';
-import { CRatingImg, Flex, H3, P20, P28, SDrop } from './style';
+import { CRatingImg, EpListBgi, Flex, FlexUl, H3, P20, P28, SDrop } from './style';
 
 const EpList = () => {
     return (
@@ -47,9 +47,23 @@ const EpList = () => {
                             </button>
                         </SDrop>
                     </Flex>
-                    <EpItem />
-                    <EpItem />
-                    <EpItem />
+
+                    <div style={{ position: 'relative' }}>
+                        <FlexUl $flexDirection='column'>
+                            <EpItem />
+                            <EpItem />
+                            <EpItem />
+                            <EpItem />
+                        </FlexUl>
+                        <EpListBgi
+                            src='/contentdetail/sample/EpList배경이미지.png'
+                            alt='에피배경이미지'
+                            $position='absolute'
+                            $top='0'
+                            $right='0'
+                            $zIndex='-1'
+                        />
+                    </div>
                 </Flex>
             </section>
         </>

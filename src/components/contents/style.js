@@ -16,11 +16,30 @@ export const Inner = styled.div`
 
 export const PBWrap = styled.div`
     margin-top: 100px;
-    height: 600px;
-    background-image: url('/contentdetail/sample/Slide 16_9 - 2.png');
-    background-repeat: no-repeat;
-    background-size: cover;
+    max-width: 1820px;
+    width: 100%;
     position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    height: 600px;
+    overflow: hidden;
+`;
+
+// 16:9 비율을 유지하기 위한 새로운 wrapper 컴포넌트
+export const VideoWrapper = styled.div`
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%; /* 16:9 비율 */
+    height: 0;
+`;
+
+export const StyledIframe = styled.iframe`
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
 `;
 
 export const PBuiWrap = styled.div`
@@ -119,6 +138,7 @@ export const Span = styled.span`
     font-weight: ${(props) => props.$fontWeight};
     font-size: ${(props) => (props.$fontSize ? props.$fontSize : '12px')};
     padding: ${(props) => props.$padding};
+    white-space: ${(props) => props.$whiteSpace};
 `;
 
 export const SpanInfoDim = styled.span`
@@ -143,8 +163,8 @@ export const H3 = styled.h3`
 `;
 
 export const H4 = styled.h4`
-    font-size: ${(props) => (props.fontSize ? props.fontSize : '28px')};
-    font-weight: ${(props) => (props.fontWeight ? props.fontWeight : '800')};
+    font-size: ${(props) => (props.$fontSize ? props.$fontSize : '28px')};
+    font-weight: ${(props) => (props.$fontWeight ? props.$fontWeight : '800')};
 `;
 
 export const P = styled.p`
@@ -224,4 +244,14 @@ export const Line = styled.div`
 export const EpItemContImg = styled.img`
     width: ${(props) => props.$width};
     height: ${(props) => props.$height};
+`;
+
+export const EpListBgi = styled.img`
+    width: ${(props) => props.$width};
+    height: ${(props) => props.$height};
+    position: ${(props) => props.$position};
+    top: ${(props) => props.$top};
+    right: ${(props) => props.$right};
+    transform: ${(props) => props.$transform};
+    z-index: ${(props) => props.$zIndex};
 `;
