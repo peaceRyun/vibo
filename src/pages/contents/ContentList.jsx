@@ -1,4 +1,4 @@
-import { Container } from '../../common/style';
+import { Container } from '../../components/contents/style';
 import Card from '../../ui/card/Card';
 import { GridContainer, Grid, H2 } from './style';
 

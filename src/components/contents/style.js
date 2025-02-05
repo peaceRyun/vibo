@@ -1,5 +1,19 @@
 import styled from 'styled-components';
 
+export const Container = styled.div`
+    position: relative;
+    padding: 0 var(--spacing-5);
+    @media (min-width: 1025px) {
+        padding: 0 50px;
+    }
+`;
+export const Inner = styled.div`
+    margin: 0 auto;
+    @media (min-width: 1025px) {
+        max-width: 1820px;
+    }
+`;
+
 export const PBWrap = styled.div`
     margin-top: 100px;
     height: 600px;
@@ -73,6 +87,7 @@ export const Flex = styled.div`
     padding: ${(props) => (props.$padding ? props.$padding : '')};
     position: ${(props) => props.$position};
     width: ${(props) => props.$width || 'auto'};
+    border-top: ${(props) => props.$borderTop};
 `;
 
 export const FlexUl = styled.ul`
@@ -101,7 +116,9 @@ export const Badge = styled.div`
 `;
 
 export const Span = styled.span`
-    font-size: 12px;
+    font-weight: ${(props) => props.$fontWeight};
+    font-size: ${(props) => (props.$fontSize ? props.$fontSize : '12px')};
+    padding: ${(props) => props.$padding};
 `;
 
 export const SpanInfoDim = styled.span`
@@ -125,10 +142,15 @@ export const H3 = styled.h3`
     font-weight: ${(props) => (props.fontWeight ? props.fontWeight : '800')};
 `;
 
+export const H4 = styled.h4`
+    font-size: ${(props) => (props.fontSize ? props.fontSize : '28px')};
+    font-weight: ${(props) => (props.fontWeight ? props.fontWeight : '800')};
+`;
+
 export const P = styled.p`
-    padding: ${(props) => (props.padding ? props.padding : '7px 20px 0px')};
-    font-size: ${(props) => (props.fontSize ? props.fontSize : '13px')};
-    font-weight: 400;
+    padding: ${(props) => (props.$padding ? props.$padding : '7px 20px 0px')};
+    font-size: ${(props) => (props.$fontSize ? props.$fontSize : '13px')};
+    font-weight: ${(props) => (props.$fontWeight ? props.$fontWeight : '400')};
     text-align: start;
 `;
 
@@ -198,4 +220,8 @@ export const Line = styled.div`
     top: 50%;
     transform: translateY(-50%);
     z-index: 1;
+`;
+export const EpItemContImg = styled.img`
+    width: ${(props) => props.$width};
+    height: ${(props) => props.$height};
 `;
