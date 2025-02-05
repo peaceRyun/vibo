@@ -6,15 +6,15 @@ import ProfileInfoEdit from './pages/member/ProfileInfoEdit';
 import GlobalStyle from './styled/GlobalStyle';
 
 function App() {
-  return (
-    <>
-      <GlobalStyle />
+    return (
+        <>
+            <GlobalStyle />
 
-      <Membership />
-      {/* <Mypage /> */}
-      {/* <ProfileInfoEdit /> */}
-    </>
-  );
+            <Membership />
+            {/* <Mypage /> */}
+            {/* <ProfileInfoEdit /> */}
+        </>
+    );
 }
 
 export default App;
