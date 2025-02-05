@@ -18,8 +18,9 @@ const MainHome = () => {
       <Container />
       <MainContainer>
         <WatchingList />
-        <WeeklyList />
         <LiveList />
+        <WeeklyList />
+
         <RateList />
         <GenreNav />
         <AdBanner />
