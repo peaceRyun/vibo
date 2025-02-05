@@ -44,7 +44,7 @@ const Modal = ({ onClose }) => {
                   월간{' '}
                   <span
                     style={{
-                      background: 'cyan',
+                      background: ' var(--primary-base)',
                       color: 'black',
                       padding: '5px 5px',
                       borderRadius: '3px',
@@ -59,7 +59,7 @@ const Modal = ({ onClose }) => {
               <p>
                 월 5,500원
                 <br />
-                <span style={{ color: 'gray', fontSize: '12px' }}>지금 가입하면 50% 할인</span>
+                <span style={{ color: '--gray-700', fontSize: '12px' }}>지금 가입하면 50% 할인</span>
               </p>
             </SubscriptionBox>
 
@@ -102,20 +102,24 @@ const Modal = ({ onClose }) => {
               <PaymentButton>결제방법4</PaymentButton>
             </PaymentOptions>
             <CheckBox>
-              <div>
-                <input type="checkbox" id="agree" />
-                <label htmlFor="agree"> 동의사항 내용 1</label>
+              <div className="CheckBox1">
+                <div>
+                  <input type="checkbox" id="agree" />
+                  <label htmlFor="agree"> 동의사항 내용 1</label>
+                </div>
+                <div>
+                  <input type="checkbox" id="agree" />
+                  <label htmlFor="agree"> 동의사항 내용 2</label>
+                </div>
               </div>
-              <div>
+
+              <div className="CheckBox2">
                 <input type="checkbox" id="agree" />
-                <label htmlFor="agree"> 동의사항 내용 1</label>
-              </div>
-              <div>
-                <input type="checkbox" id="agree" />
-                <label htmlFor="agree"> 동의사항 내용 1</label>
+                <label htmlFor="agree"> 동의사항 내용 3</label>
               </div>
             </CheckBox>
-            <ConfirmButton onClick={onClose}>닫기</ConfirmButton>
+            {/* 
+            <ConfirmButton onClick={onClose}>닫기</ConfirmButton> */}
           </>
         )}
       </ModalContainer>

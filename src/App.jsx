@@ -9,8 +9,8 @@ function App() {
     <>
       <GlobalStyle />
 
-      {/* <Membership /> */}
-      <Mypage />
+      <Membership />
+      {/* <Mypage /> */}
     </>
   );
 }

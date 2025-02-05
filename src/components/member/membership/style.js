@@ -18,11 +18,11 @@ export const ModalContainer = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: space-evenly;
-  background: black;
+  background: var(--black);
   padding: 50px;
-  border: 2px solid cyan;
+  border: 2px solid var(--primary-base);
   border-radius: 10px;
-  color: white;
+  color: var(--white);
   width: 600px;
   height: 600px;
   text-align: center;
@@ -31,15 +31,15 @@ export const ModalContainer = styled.div`
   .subtitle {
     h2 {
       font-size: 30px;
+      font-weight: 700;
     }
     p {
       font-size: 16px;
-      color: gray;
-      padding: 10px;
+      color: var(--gray-700);
+      margin-top: 10px;
     }
   }
 `;
-``;
 
 export const CloseButton = styled.button`
   position: absolute;
@@ -48,8 +48,8 @@ export const CloseButton = styled.button`
   width: 40px;
   height: 40px;
   border-radius: 8px;
-  background: cyan;
-  color: black;
+  background: var(--primary-base);
+  color: var(--black);
   font-size: 40px;
 `;
 
@@ -59,7 +59,7 @@ export const SubscriptionBox = styled.div`
   align-items: center;
   background: #222;
   padding: 20px;
-  border: 1px solid cyan;
+  border: 1px solid var(--primary-base);
   border-radius: 5px;
   margin: 60px 25px;
   width: 450px;
@@ -77,11 +77,11 @@ export const SubscriptionBox = styled.div`
 export const ConfirmButton = styled.button`
   width: 260px;
   height: 50px;
-  background: cyan;
+  background: var(--primary-base);
   color: black;
   padding: 10px;
-  font-size: 20px;
-  font-weight: 700;
+  font-size: 24px;
+  font-weight: 800;
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -91,27 +91,29 @@ export const ConfirmButton = styled.button`
 export const PaymentOptions = styled.div`
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 15px;
   justify-content: center;
   margin-top: 10px;
+  font-size: 17px;
+  font-weight: 800;
 `;
 
 export const PaymentButton = styled.button`
-  flex: 1 1 calc(50% - 10px); /* 2개씩 배치 */
+  flex: 1 1 calc(50% - 10px);
   padding: 10px;
-  background: gray;
+  background: var(--gray-600);
   border: none;
   border-radius: 5px;
-  color: white;
+  color: var(--white);
   cursor: pointer;
   &:hover {
-    background: cyan;
-    color: black;
+    background: var(--primary-base);
+    color: var(--black);
   }
 `;
 export const PlanContainer = styled.div`
   background: #222;
-  color: white;
+  color: var(--white);
   padding: 20px;
   border-radius: 10px;
   width: 400px;
@@ -132,7 +134,7 @@ export const InfoRow = styled.div`
 `;
 
 export const Label = styled.p`
-  color: #bbb;
+  color: var(--gray-500);
   font-size: 14px;
 `;
 
@@ -147,5 +149,18 @@ export const HighlightValue = styled.p`
 `;
 
 export const CheckBox = styled.div`
+  display: flex;
+  align-items: flex-start;
+  /* width: 30.625rem; */
+  gap: 150px;
+  /* padding: 0px 0; */
+`;
+
+export const CheckBox1 = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
+
+export const CheckBox2 = styled.div`
   display: flex;
 `;

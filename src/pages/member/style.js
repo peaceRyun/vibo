@@ -87,7 +87,7 @@ export const PlanWrapper = styled.div`
 `;
 
 export const Plan = styled.div`
-  border: 1px solid cyan;
+  border: 1px solid var(--primary-base);
   /* padding: 20px; */
   border-radius: 10px;
   width: 18.75rem;
@@ -96,7 +96,7 @@ export const Plan = styled.div`
   color: ${({ isFilled }) => (isFilled ? 'black' : 'inherit')}; // 클릭 시 글자색 변경
   transition: background 0.3s ease, color 0.3s ease;
   &:hover {
-    background: cyan;
+    background: var(--primary-base);
     color: black;
   }
   h2 {
@@ -114,10 +114,10 @@ export const FeatureList = styled.ul`
   &:hover {
     li {
     font-weight: 800;
-    color: cyan;
+    color: var(--primary-base);
   }}
   li{
-    adding: 10px 0;
+    padding: 10px 0;
     /* border-top: 1px solid gray; */
     text-align: center;
     color: gray;
@@ -132,7 +132,7 @@ export const PaymentButton = styled.button`
   height: 60px;
   margin: 60px auto;
   padding: 0px;
-  background: cyan;
+  background: var(--primary-base);
   color: black;
   font-size: 24px;
   font-weight: 700;
@@ -186,7 +186,7 @@ export const Input = styled.input`
   border: 1px solid #444;
   border-radius: 5px;
   background: #222;
-  color: white;
+  color: var(--white);
 `;
 
 export const Select = styled.select`
@@ -195,7 +195,7 @@ export const Select = styled.select`
   border: 1px solid #444;
   border-radius: 5px;
   background: #222;
-  color: white;
+  color: var(--white);
 `;
 
 export const FlexGroup = styled.div`
@@ -237,7 +237,7 @@ export const InformationBox = styled.div`
   border-radius: 10px;
   cursor: pointer;
   font-size: 16px;
-  color: white;
+  color: var(--white);
 `;
 
 export const DeleteAccountText = styled.p`
