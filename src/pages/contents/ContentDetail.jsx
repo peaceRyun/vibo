@@ -1,19 +1,18 @@
-import { Container } from '../../common/style';
 import EpList from '../../components/contents/EpList';
 import PlayBanner from '../../components/contents/PlayBanner';
 import ReList from '../../components/contents/ReList';
 import ReviewList from '../../components/contents/ReviewList';
-import { FlexCol, FlexColUl, H3, SpanInfo, SpanInfoDim } from '../../components/contents/style';
+import { Flex, FlexUl, H3, Inner, SpanInfo, SpanInfoDim } from '../../components/contents/style';
 
 // 콘텐츠 상세
 const ContentDetail = () => {
     return (
         <>
-            <Container>
-                <FlexCol gap='30px'>
+            <Inner>
+                <Flex $flexDirection='column' $position='relative' $gap='30px'>
                     <PlayBanner />
                     <section>
-                        <FlexCol gap='15px'>
+                        <Flex $flexDirection='column' $position='relative' $gap='15px' $padding='30px 0 30px'>
                             <span>2024년</span>
                             <div>
                                 <img src='/contentdetail/contentrate/전체관람가 관람등급 1.png' alt='rateAll' />
@@ -23,15 +22,15 @@ const ContentDetail = () => {
                                 태영(임지연)이 구덕이가 틀림없다고 확신하는 소혜(하율리)는 청수현 여기저기를 들쑤시고
                                 다닌다. 정체가 탄로 날 위기에 처한 태영...
                             </p>
-                        </FlexCol>
+                        </Flex>
                     </section>
                     <EpList />
                     <ReList />
                     <ReviewList />
                     <section>
-                        <FlexCol gap='15px' mb='100px'>
+                        <Flex $flexDirection='column' $position='relative' $gap='15px' $mb='100px' $padding='0 0 100px'>
                             <H3>옥씨부인전 상세 정보</H3>
-                            <FlexColUl gap='5px'>
+                            <FlexUl $flexDirection='column' $gap='5px'>
                                 <li>
                                     <SpanInfoDim>크리에이터: </SpanInfoDim>
                                     <SpanInfo>진혁, 박지숙</SpanInfo>
@@ -52,11 +51,11 @@ const ContentDetail = () => {
                                     <SpanInfoDim>관람등급: </SpanInfoDim>
                                     <SpanInfo>15세이상 관람가</SpanInfo>
                                 </li>
-                            </FlexColUl>
-                        </FlexCol>
+                            </FlexUl>
+                        </Flex>
                     </section>
-                </FlexCol>
-            </Container>
+                </Flex>
+            </Inner>
         </>
     );
 };

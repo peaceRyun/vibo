@@ -1,8 +1,7 @@
 import styled from 'styled-components';
 
 export const GridContainer = styled.div`
-    margin: 100px 0;
-    padding: 20px;
+    margin: 80px 0;
 `;
 
 export const Grid = styled.div`
@@ -20,10 +19,10 @@ export const Grid = styled.div`
     }
 `;
 
-export const H2 = styled.h2`
+export const Title = styled.div`
     grid-column: span 2;
     color: var(--white);
-    font-size: var(--display-medium-size);
+    font-size: clamp(40px, 3.65vw, 70px);
     font-weight: 900;
     margin: 0;
 `;
