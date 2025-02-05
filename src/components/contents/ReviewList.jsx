@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { ButtonBlank } from '../../ui/button/Button';
 import ReviewItem from './ReviewItem';
-import { Badge, Flex, FlexCol, FlexColUl, H3, Line, LoadMoreBtn, LoadMoreBtnWrapper } from './style';
+import { Badge, Flex, FlexUl, H3, Line, LoadMoreBtn, LoadMoreBtnWrapper } from './style';
 import ReviewModal from './ReviewModal';
 
 // 입력 받은 댓글 영역
@@ -22,7 +22,7 @@ const ReviewList = () => {
     return (
         <>
             <section>
-                <FlexCol $gap='20px'>
+                <Flex $flexDirection='column' $position='relative' $gap='20px'>
                     <Flex $gap='15px' $alignItems='center'>
                         <H3>사용자 평</H3>
                         <Badge $br='20px' $padding='5px 8px' fontSize='14px'>
@@ -36,18 +36,18 @@ const ReviewList = () => {
                             리뷰 작성하기
                         </ButtonBlank>
                     </Flex>
-                    <FlexColUl $gap='50px'>
+                    <FlexUl $flexDirection='column' $gap='50px'>
                         {sample.map((item, index) => (
                             <ReviewItem key={index} />
                         ))}
-                    </FlexColUl>
+                    </FlexUl>
                     <LoadMoreBtnWrapper>
                         <Line />
                         <LoadMoreBtn>
                             <img src='/contentdetail/ui/loadMoreBtnIcon.png' alt='더보기아이콘' />
                         </LoadMoreBtn>
                     </LoadMoreBtnWrapper>
-                </FlexCol>
+                </Flex>
                 <ReviewModal isOpen={openModal} onClose={handleCloseModal} />
             </section>
         </>
