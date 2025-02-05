@@ -5,7 +5,7 @@ export const ReviewListContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 20px;
-  padding: 20px;
+  padding: 60px;
   max-width: 900px;
   margin: auto;
 `;
@@ -15,21 +15,21 @@ export const ReviewCard = styled.div`
   display: flex;
   align-items: flex-start;
   gap: 15px;
-  background: #111;
+  background: var(--gray-800);
   padding: 15px;
   border-radius: 10px;
   border: 1px solid #68f5eb;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 `;
 
 // 영화 포스터
 export const MoviePoster = styled.div`
-  width: 80px;
-  height: 110px;
+  width: 127px;
+  height: 183px;
   background-size: cover;
   background-position: center;
   border-radius: 10px;
   flex-shrink: 0;
+  box-shadow: 15px 10px 10px rgba(0, 0, 0, 0.5);
 `;
 
 // 리뷰 내용 영역
@@ -37,6 +37,13 @@ export const ReviewContent = styled.div`
   flex: 1;
   display: flex;
   flex-direction: column;
+  height: 11.4375rem;
+  gap: 20px;
+  padding: 20px;
+  .reviwText {
+    display: flex;
+    justify-content: space-between;
+  }
 `;
 
 // 유저 정보 + 날짜
@@ -48,19 +55,26 @@ export const UserInfo = styled.div`
 `;
 
 export const UserName = styled.span`
-  background: #068fff;
-  color: white;
-  padding: 5px 10px;
-  border-radius: 15px;
-  font-size: 14px;
+  background: var(--black);
+  padding: 2px 0;
+  border-radius: 4px;
+  border: 1px solid var(--primary-base);
+  width: 81px;
+  height: 29px;
+  font-size: var(--label-small-size);
+  color: var(--primary-base);
+  text-align: center;
 `;
 
 export const ReviewDate = styled.span`
-  background: #222;
-  color: #bbb;
-  padding: 5px 10px;
-  border-radius: 15px;
-  font-size: 14px;
+  background: var(--black);
+
+  text-align: center;
+  padding: 2px 0;
+  border-radius: 4px;
+  border: 1px solid var(--primary-base);
+  height: 29px;
+  width: 130px;
 `;
 
 // 리뷰 텍스트
@@ -69,6 +83,11 @@ export const ReviewText = styled.p`
   font-size: 14px;
   line-height: 1.5;
   margin-bottom: 5px;
+  background: var(--black);
+  padding: 15px;
+  border-radius: 10px;
+  border: 1px solid var(--primary-base);
+  height: 6rem;
 `;
 
 // 별점 컨테이너
