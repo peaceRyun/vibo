@@ -22,7 +22,7 @@ const ReviewList = () => {
     return (
         <>
             <section>
-                <Flex $flexDirection='column' $position='relative' $gap='20px'>
+                <Flex $flexDirection='column' $position='relative' $gap='20px' $padding='0 0 30px'>
                     <Flex $gap='15px' $alignItems='center'>
                         <H3>사용자 평</H3>
                         <Badge $br='20px' $padding='5px 8px' fontSize='14px'>
