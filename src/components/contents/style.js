@@ -1,12 +1,51 @@
 import styled from 'styled-components';
 
+export const Container = styled.div`
+    position: relative;
+    padding: 0 var(--spacing-5);
+    @media (min-width: 1025px) {
+        padding: 0 50px;
+    }
+`;
+export const Inner = styled.div`
+    margin: 0 auto;
+    @media (max-width: 599px) {
+        max-width: calc(390px - var(--spacing-8));
+    }
+    @media (min-width: 600px) {
+        max-width: calc(var(--breakpoint-tablet) - var(--spacing-8));
+    }
+    @media (min-width: 1025px) {
+        max-width: calc(var(--breakpoint-desktop) - 100px);
+    }
+`;
+
 export const PBWrap = styled.div`
     margin-top: 100px;
-    height: 600px;
-    background-image: url('/contentdetail/sample/Slide 16_9 - 2.png');
-    background-repeat: no-repeat;
-    background-size: cover;
+    max-width: 1820px;
+    width: 100%;
     position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    height: 600px;
+    overflow: hidden;
+`;
+
+// 16:9 비율을 유지하기 위한 새로운 wrapper 컴포넌트
+export const VideoWrapper = styled.div`
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%; /* 16:9 비율 */
+    height: 0;
+`;
+
+export const StyledIframe = styled.iframe`
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
 `;
 
 export const PBuiWrap = styled.div`
@@ -73,6 +112,7 @@ export const Flex = styled.div`
     padding: ${(props) => (props.$padding ? props.$padding : '')};
     position: ${(props) => props.$position};
     width: ${(props) => props.$width || 'auto'};
+    border-top: ${(props) => props.$borderTop};
 `;
 
 export const FlexUl = styled.ul`
@@ -101,7 +141,10 @@ export const Badge = styled.div`
 `;
 
 export const Span = styled.span`
-    font-size: 12px;
+    font-weight: ${(props) => props.$fontWeight};
+    font-size: ${(props) => (props.$fontSize ? props.$fontSize : '12px')};
+    padding: ${(props) => props.$padding};
+    white-space: ${(props) => props.$whiteSpace};
 `;
 
 export const SpanInfoDim = styled.span`
@@ -125,10 +168,15 @@ export const H3 = styled.h3`
     font-weight: ${(props) => (props.fontWeight ? props.fontWeight : '800')};
 `;
 
+export const H4 = styled.h4`
+    font-size: ${(props) => (props.$fontSize ? props.$fontSize : '28px')};
+    font-weight: ${(props) => (props.$fontWeight ? props.$fontWeight : '800')};
+`;
+
 export const P = styled.p`
-    padding: ${(props) => (props.padding ? props.padding : '7px 20px 0px')};
-    font-size: ${(props) => (props.fontSize ? props.fontSize : '13px')};
-    font-weight: 400;
+    padding: ${(props) => (props.$padding ? props.$padding : '7px 20px 0px')};
+    font-size: ${(props) => (props.$fontSize ? props.$fontSize : '13px')};
+    font-weight: ${(props) => (props.$fontWeight ? props.$fontWeight : '400')};
     text-align: start;
 `;
 
@@ -198,4 +246,18 @@ export const Line = styled.div`
     top: 50%;
     transform: translateY(-50%);
     z-index: 1;
+`;
+export const EpItemContImg = styled.img`
+    width: ${(props) => props.$width};
+    height: ${(props) => props.$height};
+`;
+
+export const EpListBgi = styled.img`
+    width: ${(props) => props.$width};
+    height: ${(props) => props.$height};
+    position: ${(props) => props.$position};
+    top: ${(props) => props.$top};
+    right: ${(props) => props.$right};
+    transform: ${(props) => props.$transform};
+    z-index: ${(props) => props.$zIndex};
 `;

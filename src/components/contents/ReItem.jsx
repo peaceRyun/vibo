@@ -18,7 +18,7 @@ const ReItem = () => {
                         <Badge $br='4px' $padding='3.5px 5px' fontSize='12px'>
                             HD
                         </Badge>
-                        <Span>2024</Span>
+                        <Span fontSize='28px'>2024</Span>
                     </Flex>
                     <button>
                         <img src='/contentdetail/ui/heart.png' alt='likeActive' />
