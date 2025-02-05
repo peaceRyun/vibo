@@ -22,38 +22,37 @@ const Mypage = () => {
     <div>
       <Container />
       <ProfileContainer>
-        {/* 프로필 정보 */}
-        {/* {Profiles.map((Profile, index) => (
-          <ProfileImage key={index} style={{ backgroundImage: `url(${Profile.src})` }} />
-        ))} */}
-
         <ProfileHeader>
           <ProfileImage src={userProfileImage} />
           {/* <ProfileImage /> */}
           <UserInfo>
             <UserName>
               <strong>바이보</strong>
-              <p>님</p>
+              <p>님</p> ✏️
             </UserName>
-            <button>✏️ 프로필 전환</button>
+            <button>프로필 전환</button>
           </UserInfo>
         </ProfileHeader>
         <PassContainer>
           <PassCard>
             <div className="PassTitle">
-              <strong>ViBo 패스</strong>
+              <strong>ViBo</strong>
+              <span> 패스</span>
+              <p>사용 중인 패스가 없습니다.</p>
             </div>
-            <p>사용 중인 패스가 있습니다.</p>
           </PassCard>
           <PassCard>
             <div className="PassTitle2">
-              <strong>패스 구매하기</strong>
+              <strong>패스 구매하기 ▶ </strong>
             </div>
           </PassCard>
         </PassContainer>
 
         <PassCard2>
-          <strong>패스를 구매하시면 VIBO Original, 실시간 인기콘텐츠와 다양한 영화를 시청하실 수 있어요!</strong>
+          <h3>
+            패스를 구매하시면 <strong>ViBo Original</strong> 그리고 <br />
+            <strong>실시간 인기콘텐츠와 다양한 영화를</strong> 시청하실 수 있어요!
+          </h3>
         </PassCard2>
         {/* 탭 메뉴 */}
         <TabMenu>
@@ -93,7 +92,6 @@ export const ProfileContainer = styled.div`
   padding: 50px;
 `;
 
-// 프로필 정보 컨테이너
 export const ProfileHeader = styled.div`
   display: flex;
   align-items: center;
@@ -101,7 +99,6 @@ export const ProfileHeader = styled.div`
   margin-bottom: 30px;
 `;
 
-// 프로필 이미지
 export const ProfileImage = styled.div`
   width: 80px;
   height: 80px;
@@ -112,20 +109,21 @@ export const ProfileImage = styled.div`
   border: 2px solid #68f5eb;
 `;
 
-// 유저 정보
 export const UserInfo = styled.div`
   flex: 1;
   display: flex;
   gap: 40px;
+  align-items: center;
   button {
     color: white;
     padding: 10px;
-    background-color: gray;
-    border-radius: 10px;
+    background: var(--gray-800);
+    border-radius: 5px;
+    width: 6.25rem;
+    height: 2.1875rem;
   }
 `;
 
-// 유저 이름 분리?
 export const UserName = styled.h2`
   display: flex;
   font-weight: bold;
@@ -145,32 +143,52 @@ export const PassContainer = styled.div`
   gap: 40px;
 `;
 
-// 패스 정보 컨테이너 ?? 더 추가??
 export const PassCard = styled.div`
-  background: #222;
+  background: var(--gray-800);
   padding: 15px;
   border-radius: 8px;
   margin-bottom: 20px;
   gap: 2.875rem;
-  /* width: 48.25rem;
-  height: 6.875rem; */
+  /* width: 48.25rem; */
+  height: 6.875rem;
   .PassTitle {
     width: 26.625rem;
     height: 6.25rem;
+    padding: 15px;
+    strong {
+      font-size: var(--title-medium-size);
+      font-weight: var(--title-xlarge-weightt);
+      color: var(--primary-base);
+    }
+    span {
+      font-size: var(--title-medium-size);
+    }
+    p {
+      font-size: var(--detail-large-weight);
+      font-weight: 300;
+    }
   }
   .PassTitle2 {
+    font-size: var(--title-medium-size);
     width: 18.75rem;
+    text-align: center;
+    padding: 25px;
   }
 `;
 export const PassCard2 = styled.div`
-  background: #222;
-  padding: 15px;
+  font-size: var(--title-medium-size);
+  background: var(--gray-800);
+  padding: 25px 20px;
   border-radius: 8px;
   margin-bottom: 20px;
   width: 825px;
   height: 6.875rem;
+  text-align: left;
+  strong {
+    color: var(--primary-base);
+  }
 `;
-// 탭 메뉴 스타일
+
 const TabMenu = styled.div`
   display: flex;
   gap: 60px;
