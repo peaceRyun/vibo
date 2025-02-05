@@ -68,7 +68,8 @@ export const UserName = styled.span`
 
 export const ReviewDate = styled.span`
   background: var(--black);
-
+  font-size: var(--label-small-size);
+  color: var(--primary-base);
   text-align: center;
   padding: 2px 0;
   border-radius: 4px;
