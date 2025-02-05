@@ -10,6 +10,7 @@ import AdBanner from '../../../components/home/adBanner/AdBanner';
 import CommonList from '../../../components/home/common/CommonList';
 import Only1 from '../../../components/home/viboOnly/only1/Only1';
 import Only2 from '../../../components/home/viboOnly/only2/Only2';
+import MenuButton from '../../../components/home/menubutton/MenuButton';
 import { MainContainer, ViboOnly } from './style';
 
 const MainHome = () => {
@@ -20,7 +21,6 @@ const MainHome = () => {
         <WatchingList />
         <LiveList />
         <WeeklyList />
-
         <RateList />
         <GenreNav />
         <AdBanner />
@@ -31,6 +31,7 @@ const MainHome = () => {
           <Only1 />
           <Only2 />
         </ViboOnly>
+        <MenuButton />
       </MainContainer>
     </div>
   );
