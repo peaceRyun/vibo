@@ -3,10 +3,12 @@
 import {
   Button,
   ButtonGroup,
+  ChecksWrap,
   DeleteAccountText,
   FlexGroup,
   FormGroup,
   InformationBox,
+  InformationText,
   InfoTitle,
   Input,
   InputContainer,
@@ -73,10 +75,40 @@ const ProfileInfoEdit = () => {
 
           {/* 프로필 이미지 업로드 */}
           <FormGroup>
-            <Label>개인정보</Label>
+            <InformationBox>
+              <InformationText>
+                <h3>개인정보 수집 및 마케팅 수신 동의</h3>
+                <p>
+                  수신동의를 하시면 티빙에서 제공하는 다양한 프로모션과 이벤트/신규 콘텐츠 등의 정보를 만나실 수
+                  있습니다.
+                </p>
+              </InformationText>
+
+              <ChecksWrap>
+                <input type="checkbox" id="info" />
+                <label htmlFor="agree">[선택] 개인정보 수집 및 이용 동의</label>
+
+                <p>맞춤형 광고 설정 활성화</p>
+
+                <input type="checkbox" id="info2" />
+                <label htmlFor="agree">[선택]마케팅 정보 수신 동의</label>
+                <div>
+                  <p>푸시 알림</p>
+                  <p>이메일</p>
+                  <p>SMS</p>
+                </div>
+              </ChecksWrap>
+
+              <div>
+                <h3>개인정보 제3자 제공 동의</h3>
+                <input type="checkbox" id="info" />
+                <label htmlFor="agree"> [선택] CJ 옴니서비스 이용을 위한 개인정보 제 3자 제공 동의 </label>
+              </div>
+            </InformationBox>
+            {/* <Label>개인정보</Label>
             <InputContainer>
               <InformationBox>약관 내용 확인</InformationBox>
-            </InputContainer>
+            </InputContainer> */}
           </FormGroup>
 
           {/* 회원탈퇴 및 계정 삭제 */}

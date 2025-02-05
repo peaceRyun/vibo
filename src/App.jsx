@@ -2,6 +2,7 @@
 import ContentDetail from './pages/contents/ContentDetail';
 import Membership from './pages/member/Membership';
 import Mypage from './pages/member/Mypage';
+import ProfileInfoEdit from './pages/member/ProfileInfoEdit';
 import GlobalStyle from './styled/GlobalStyle';
 
 function App() {
@@ -11,6 +12,7 @@ function App() {
 
       <Membership />
       {/* <Mypage /> */}
+      {/* <ProfileInfoEdit /> */}
     </>
   );
 }

@@ -6,8 +6,6 @@ import ProfileSwitch from './ProfileSwitch';
 import ProfileInfoEdit from './ProfileInfoEdit';
 
 const Mypage = () => {
-  // const [activeTab, setActiveTab] = React.useState('시청내역');
-
   const [activeTab, setActiveTab] = useState('시청내역');
 
   const movies = [
@@ -68,13 +66,6 @@ const Mypage = () => {
           {activeTab === '찜' && <BuyingZzimContent />}
           {activeTab === '나의 리뷰' && <ReviewItems />}
         </ContentWrapper>
-        {/* <TabMenu>
-          {['시청내역', '구매내역', '찜', '나의 리뷰'].map((tab) => (
-            <TabItem key={tab} active={activeTab === tab} onClick={() => setActiveTab(tab)}>
-              {tab}
-            </TabItem>
-          ))}
-        </TabMenu> */}
       </ProfileContainer>
     </div>
   );
@@ -100,8 +91,8 @@ export const ProfileHeader = styled.div`
 `;
 
 export const ProfileImage = styled.div`
-  width: 80px;
-  height: 80px;
+  width: 5rem;
+  height: 5rem;
   border-radius: 50%;
   background-size: cover;
   background-position: center;
@@ -115,7 +106,7 @@ export const UserInfo = styled.div`
   gap: 40px;
   align-items: center;
   button {
-    color: white;
+    color: var(--white);
     padding: 10px;
     background: var(--gray-800);
     border-radius: 5px;
@@ -181,7 +172,7 @@ export const PassCard2 = styled.div`
   padding: 25px 20px;
   border-radius: 8px;
   margin-bottom: 20px;
-  width: 825px;
+  width: 51.5625rem;
   height: 6.875rem;
   text-align: left;
   strong {

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const MembershipBanner = styled.div`
   position: relative;
   text-align: center;
-  color: white;
+  color: var(--white);
   height: 21.875rem;
   display: flex;
   align-items: center;
@@ -27,13 +27,13 @@ export const MembershipBanner = styled.div`
     padding: 0 20px;
 
     h1 {
-      font-size: 60px;
-      font-weight: bold;
+      font-size: var(--title-xxlarge-size);
+      font-weight: var(--title-xlarge-weight);
     }
 
     p {
-      font-size: 40px;
-      font-weight: 300;
+      font-size: var(--heading-medium-size);
+      font-weight: var(--label-large-weight);
     }
   }
 `;
@@ -44,10 +44,10 @@ export const SubscriptionContainer = styled.div`
   align-items: flex-start;
   margin-top: 20px;
   .list {
-    margin-top: 3.75rem;
+    margin-top: 60px;
   }
   li {
-    font-size: 20px;
+    font-size: var(--label-large-size);
     padding: 10px 0;
     /* border-top: 1px solid gray; */
     text-align: left;
@@ -57,11 +57,11 @@ export const SubscriptionContainer = styled.div`
     padding: 40px 20px;
   }
   h2 {
-    font-size: 32px;
-    font-weight: 800;
+    font-size: var(--title-xlarge-size);
+    font-weight: var(--title-xlarge-weight);
   }
   p {
-    font-size: 20px;
+    font-size: var(--title-medium-size);
     margin-top: 20px;
   }
 `;
@@ -79,9 +79,8 @@ export const PlanWrapper = styled.div`
     position: absolute;
     top: 2.5rem;
     right: 0;
-    width: 1px;
+    width: 0.0625rem;
     height: 90%;
-
     background: gray;
   }
 `;
@@ -92,12 +91,12 @@ export const Plan = styled.div`
   border-radius: 10px;
   width: 18.75rem;
   height: 140px;
-  background: ${({ isFilled }) => (isFilled ? 'cyan' : 'transparent')}; // 클릭하면 cyan 유지
-  color: ${({ isFilled }) => (isFilled ? 'black' : 'inherit')}; // 클릭 시 글자색 변경
+  background: ${({ isFilled }) => (isFilled ? '#07FFE6' : 'transparent')};
+  color: ${({ isFilled }) => (isFilled ? 'black' : 'inherit')};
   transition: background 0.3s ease, color 0.3s ease;
   &:hover {
     background: var(--primary-base);
-    color: black;
+    color: var(--black);
   }
   h2 {
     padding: 50px;
@@ -109,21 +108,21 @@ export const FeatureList = styled.ul`
   font-size: 20px;
   margin-top: 3.125rem;
   list-style: none;
-  padding: 3.75rem
+
   width: 100%;
   &:hover {
     li {
-    font-weight: 800;
-    color: var(--primary-base);
-  }}
-  li{
+      font-weight: 800;
+      color: var(--primary-base);
+    }
+  }
+  li {
     padding: 10px 0;
     /* border-top: 1px solid gray; */
     text-align: center;
     color: gray;
     font-weight: 300;
   }
-  
 `;
 
 export const PaymentButton = styled.button`
@@ -153,7 +152,7 @@ export const PlanRow = styled.div`
 // 전체 컨테이너
 // 전체 컨테이너 (화면 중앙 정렬)
 export const ProfileContainer = styled.div`
-  padding: 3.125rem;
+  margin: 100px 300px;
 `;
 
 export const InfoTitle = styled.h1`
@@ -228,7 +227,7 @@ export const Button = styled.button`
 `;
 
 export const InformationBox = styled.div`
-  width: 100%;
+  /* width: 100%;
   height: 200px;
   background: #444;
   display: flex;
@@ -237,7 +236,18 @@ export const InformationBox = styled.div`
   border-radius: 10px;
   cursor: pointer;
   font-size: 16px;
-  color: var(--white);
+  color: var(--white); */
+`;
+
+export const InformationText = styled.div`
+  padding-top: 3.35rem;
+  margin-bottom: 3.35rem;
+  h3 {
+    font-size: 1.67rem;
+  }
+  p {
+    font-size: 1.25rem;
+  }
 `;
 
 export const DeleteAccountText = styled.p`
@@ -246,4 +256,12 @@ export const DeleteAccountText = styled.p`
   color: gray;
   font-size: 12px;
   margin-top: 20px;
+`;
+
+export const ChecksWrap = styled.div`
+  input {
+    border-color: #ff1744;
+    background-color: #ff1744;
+    border-radius: 100%;
+  }
 `;
