@@ -1,6 +1,6 @@
 import { Container } from '../../components/contents/style';
 import Card from '../../ui/card/Card';
-import { GridContainer, Grid, H2 } from './style';
+import { GridContainer, Grid, Title } from './style';
 
 const ContentList = () => {
     const shows = Array(11).fill({
@@ -12,7 +12,10 @@ const ContentList = () => {
         <Container>
             <GridContainer>
                 <Grid>
-                    <H2>xx님이 좋아할만한 예능</H2>
+                    <Title>
+                        <div className='firstS'>xx님이</div>
+                        <div className='secondS'>좋아할만한 예능</div>
+                    </Title>
                     {shows.map((show, index) => (
                         <Card key={index} title={show.title} image={show.image} />
                     ))}
