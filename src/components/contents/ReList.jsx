@@ -1,14 +1,14 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
-import ReItem from './reItem';
-import { FlexCol, H3 } from './style';
+import ReItem from './ReItem';
+import { Flex, H3 } from './style';
 import { Pagination } from 'swiper/modules';
 
 const ReList = () => {
     return (
         <>
             <section>
-                <FlexCol gap='40px'>
+                <Flex $flexDirection='column' $position='relative' $gap='40px' $padding='30px 0 60px'>
                     <H3>비슷한 콘텐츠</H3>
                     <Swiper
                         slidesPerView={5.5}
@@ -18,8 +18,9 @@ const ReList = () => {
                         }}
                         modules={[Pagination]}
                         className='mySwiper'
+                        style={{ overflow: 'visible' }}
                     >
-                        <SwiperSlide>
+                        <SwiperSlide style={{ overflow: 'visible' }}>
                             <ReItem />
                         </SwiperSlide>
                         <SwiperSlide>
@@ -38,7 +39,7 @@ const ReList = () => {
                             <ReItem />
                         </SwiperSlide>
                     </Swiper>
-                </FlexCol>
+                </Flex>
             </section>
         </>
     );
