@@ -1,4 +1,4 @@
-import { Container } from '../../components/contents/style';
+import { Inner } from '../../components/contents/style';
 import Card from '../../ui/card/Card';
 import { GridContainer, Grid, Title } from './style';
 
@@ -9,7 +9,7 @@ const ContentList = () => {
     });
 
     return (
-        <Container>
+        <Inner>
             <GridContainer>
                 <Grid>
                     <Title>
@@ -21,7 +21,7 @@ const ContentList = () => {
                     ))}
                 </Grid>
             </GridContainer>
-        </Container>
+        </Inner>
     );
 };
 

@@ -1,8 +1,7 @@
 import styled from 'styled-components';
 
 export const GridContainer = styled.div`
-    margin: 100px 0;
-    padding: 20px;
+    margin: 80px 0;
 `;
 
 export const Grid = styled.div`
