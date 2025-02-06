@@ -2,12 +2,12 @@ import React from 'react';
 import { SearchContainer, SearchIcon, ProfileLogo } from './style';
 import { FiSearch } from 'react-icons/fi';
 
-const Search = () => {
+const Search = ({ onSearchClick }) => {
     return (
-        <SearchContainer>
+        <SearchContainer onClick={onSearchClick}>
             <ProfileLogo src="/common/header/profileLogo.png" alt="프로필 로고" />
             <SearchIcon>
-                <FiSearch size={28} />
+                <FiSearch size={30} />
             </SearchIcon>
         </SearchContainer>
     );
