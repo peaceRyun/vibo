@@ -8,10 +8,11 @@ import GenreNav from '../../../components/home/genreNav/GenreNav';
 import WeeklyList from '../../../components/home/weekly/WeeklyList';
 import AdBanner from '../../../components/home/adBanner/AdBanner';
 import CommonList from '../../../components/home/common/CommonList';
-import Only1 from '../../../components/home/viboOnly/only1/Only1';
-import Only2 from '../../../components/home/viboOnly/only2/Only2';
+// import Only1 from '../../../components/home/viboOnly/only1/Only1';
+// import Only2 from '../../../components/home/viboOnly/only2/Only2';
 // import MenuButton from '../../../components/home/menubutton/MenuButton';
-import { MainContainer, ViboOnly } from './style';
+import { MainContainer } from './style';
+import ViboOnly from '../../../components/home/viboOnly/ViboOnly';
 // import { Container } from '../../../components/home/viboOnly/only1/style';
 
 const MainHome = () => {
@@ -28,10 +29,7 @@ const MainHome = () => {
         <CommonList />
         <CommonList />
         <CommonList />
-        <ViboOnly>
-          <Only1 />
-          <Only2 />
-        </ViboOnly>
+        <ViboOnly />
         {/* <MenuButton /> */}
       </MainContainer>
     </div>

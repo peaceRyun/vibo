@@ -6,6 +6,7 @@ function TestJung() {
     <>
       <GlobalStyle />
       <MainHome />
+
       {/* <Membership /> */}
       {/* <Mypage /> */}
       {/* <ProfileInfoEdit /> */}
