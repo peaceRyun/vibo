@@ -26,6 +26,12 @@ export const Logo = styled.h1`
     margin: 0;
 `;
 
+export const RightContainer = styled.div`
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+`;
+
 export const NavContainer = styled.nav`
     display: flex;
     gap: 3.5rem;
@@ -54,12 +60,34 @@ export const SearchContainer = styled.div`
     cursor: pointer;
 `;
 
+export const ProfileLogoContainer = styled.img`
+    width: 2.5rem;
+    height: 2.5rem;
+    object-fit: cover;
+    cursor: pointer;
+`;
+
 export const ProfileLogo = styled.img`
     width: 2.5rem;
     height: 2.5rem;
     display: block;
     object-fit: cover;
     margin-right: 1.75rem;
+    cursor: pointer;
+`;
+
+export const SearchIconContainer = styled.div`
+    width: 1.875rem;
+    height: 1.875rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    cursor: pointer;
+
+    &:hover {
+        color: #1ee0b6;
+    }
 `;
 
 export const SearchIcon = styled.div`
@@ -69,6 +97,7 @@ export const SearchIcon = styled.div`
     align-items: center;
     justify-content: center;
     color: #fff;
+    cursor: pointer;
 `;
 
 export const DropdownContainer = styled.div`
@@ -200,4 +229,50 @@ export const ActionText = styled.span`
     &:hover {
         color: #1ee0b6;
     }
+`;
+
+export const ProfileDropdownContainer = styled.div`
+    position: absolute;
+    top: 5rem;
+    right: 2rem;
+    background-color: #191919;
+    color: white;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+
+    ul {
+        list-style: none;
+        padding: 0;
+        margin: 0 0 1rem 0;
+    }
+`;
+
+export const DropdownItem = styled.li`
+    display: flex;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    gap: 0.5rem;
+    transition: background 0.3s;
+
+    &:hover {
+        background-color: #07ffe6;
+        color: #191919;
+    }
+
+    svg {
+        color: #07ffe6;
+    }
+`;
+
+export const UserIconContainer = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    background-color: #2e2e2e;
 `;
