@@ -55,16 +55,16 @@ export const SearchContainer = styled.div`
 `;
 
 export const ProfileLogo = styled.img`
-    width: 40px;
-    height: 40px;
+    width: 2.5rem;
+    height: 2.5rem;
     display: block;
     object-fit: cover;
     margin-right: 1.75rem;
 `;
 
 export const SearchIcon = styled.div`
-    width: 30px;
-    height: 30px;
+    width: 1.875rem;
+    height: 1.875rem;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -73,11 +73,11 @@ export const SearchIcon = styled.div`
 
 export const DropdownContainer = styled.div`
     position: absolute;
-    top: 5rem; /* 헤더 아래로 적절히 띄움 */
+    top: 5rem;
     left: 50%;
-    transform: translateX(-50%); /* 가로 중앙 정렬 */
+    transform: translateX(-50%);
     width: 100%;
-    height: 790px;
+    height: 49.375rem;
     background-color: #191919;
     padding: 5rem 9.5rem 8.125rem 11.375rem;
     color: #fff;
@@ -89,13 +89,15 @@ export const DropdownContainer = styled.div`
         display: grid;
         grid-template-columns: 2fr 1fr;
         gap: 2rem;
+        padding-top: 4.375rem;
 
         .left-section {
             display: flex;
             flex-direction: column;
 
             h3 {
-                font-size: 1.2rem;
+                font-size: 1.063rem;
+                font-weight: 800;
                 margin-bottom: 1rem;
             }
 
@@ -104,17 +106,22 @@ export const DropdownContainer = styled.div`
                 padding: 0;
 
                 li {
-                    font-size: 1rem;
+                    font-size: 0.938rem;
                     line-height: 1.5rem;
-                    color: #07ffe6;
+                    color: #939598;
                     margin-bottom: 0.5rem;
+                }
+
+                .rank-number {
+                    color: #07ffe6;
+                    margin-right: 0.5rem;
                 }
             }
 
             small {
                 display: block;
                 margin-top: 1rem;
-                font-size: 0.875rem;
+                font-size: 0.938rem;
                 color: #ccc;
             }
         }
@@ -123,37 +130,44 @@ export const DropdownContainer = styled.div`
             display: flex;
             flex-direction: column;
             gap: 2rem;
+        }
 
-            .section {
-                h3 {
-                    font-size: 1.2rem;
-                    margin-bottom: 1rem;
-                }
+        .right-section .section:last-child {
+            margin-top: 11.875rem;
+        }
 
-                p {
-                    font-size: 0.95rem;
-                    color: #ccc;
-                }
+        .section {
+            h3 {
+                font-size: 1.063rem;
+                font-weight: 800;
+                margin-bottom: 1rem;
+                line-height: 1.5;
+                color: #ffffff;
+            }
 
-                .keywords {
-                    display: flex;
-                    gap: 1rem;
-                    flex-wrap: wrap;
+            p {
+                font-size: 0.95rem;
+                color: #ccc;
+            }
 
-                    span {
-                        background-color: #191919;
-                        border: 1px solid #07ffe6;
-                        padding: 0.5rem 1rem;
-                        border-radius: 20px;
-                        font-size: 0.875rem;
-                        color: #07ffe6;
-                        cursor: pointer;
-                        transition: background-color 0.3s;
+            .keywords {
+                display: flex;
+                gap: 1rem;
+                flex-wrap: wrap;
 
-                        &:hover {
-                            background-color: #07ffe6;
-                            color: #191919;
-                        }
+                span {
+                    background-color: #191919;
+                    border: 1px solid #07ffe6;
+                    padding: 0.5rem 1rem;
+                    border-radius: 1.25rem;
+                    font-size: 0.75rem;
+                    color: #fff;
+                    cursor: pointer;
+                    transition: background-color 0.3s;
+
+                    &:hover {
+                        background-color: #07ffe6;
+                        color: #191919;
                     }
                 }
             }
@@ -167,11 +181,23 @@ export const SearchInput = styled.input`
     font-size: 1.063rem;
     background-color: #191919;
     border: none;
-    border-bottom: 3px solid #1ee0b6;
+    border-bottom: 0.1875rem solid #1ee0b6;
     color: #fff;
     outline: none;
 
     &::placeholder {
         color: #57585a;
+    }
+`;
+
+export const ActionText = styled.span`
+    font-size: 0.875rem;
+    font-weight: bold;
+    color: #7e7e7e;
+    cursor: pointer;
+    transition: color 0.3s ease;
+
+    &:hover {
+        color: #1ee0b6;
     }
 `;
