@@ -61,7 +61,7 @@ const UploadNotice = styled.div`
   border-radius: 2rem;
   font-size: 0.875rem;
   font-weight: 500;
-  border: 1px solid #1ee0b6;
+  border: 1px solid #009c8c;
   white-space: nowrap;
 `;
 const WeeklySwiper = styled(Swiper)`
