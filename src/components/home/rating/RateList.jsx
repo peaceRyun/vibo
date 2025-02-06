@@ -14,6 +14,16 @@ const RateList = () => {
     '/mainhome/weeklyitem_03.webp',
     '/mainhome/weeklyitem_04.webp',
     '/mainhome/weeklyitem_05.webp',
+    '/mainhome/weeklyitem_01.webp',
+    '/mainhome/weeklyitem_02.webp',
+    '/mainhome/weeklyitem_03.webp',
+    '/mainhome/weeklyitem_04.webp',
+    '/mainhome/weeklyitem_05.webp',
+    '/mainhome/weeklyitem_01.webp',
+    '/mainhome/weeklyitem_02.webp',
+    '/mainhome/weeklyitem_03.webp',
+    '/mainhome/weeklyitem_04.webp',
+    '/mainhome/weeklyitem_05.webp',
   ];
 
   return (
@@ -26,7 +36,7 @@ const RateList = () => {
       <RateSwiper
         spaceBetween={50}
         pagination={{ clickable: true }}
-        slidesPerView={5}
+        slidesPerView={4}
         modules={[Pagination]}
         onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)} // 슬라이드 변경 시 인덱스 업데이트
         // centeredSlides={true}
@@ -50,6 +60,7 @@ const Section = styled.section`
   align-items: center;
   position: relative;
   gap: 20px;
+  margin-top: 100px;
 `;
 
 const RateInfo = styled.div`
