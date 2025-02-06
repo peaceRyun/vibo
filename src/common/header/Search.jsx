@@ -7,7 +7,7 @@ const Search = () => {
         <SearchContainer>
             <ProfileLogo src="/common/header/profileLogo.png" alt="프로필 로고" />
             <SearchIcon>
-                <FiSearch size={20} />
+                <FiSearch size={28} />
             </SearchIcon>
         </SearchContainer>
     );
