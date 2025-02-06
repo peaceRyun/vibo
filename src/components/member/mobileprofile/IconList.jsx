@@ -1,31 +1,52 @@
+import IconItem from './IconItem';
 import IconSwiper from './IconSwiper';
-import { Flex, H2 } from './style';
+import ModalHeader from './ModalHeader';
+import { Flex, H3, ModalBackdrop, ModalContainer } from './style';
 
 const IconList = () => {
     return (
         <>
-            <div
-                style={{
-                    position: 'absolute',
-                    top: '50%',
-                    left: '50%',
-                    transform: 'translate(-50%, -50%)',
-                    zIndex: '2',
-                    width: '70rem',
-                    height: '61.25rem',
-                    padding: '75px',
-                    backgroundColor: 'black',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    textAlign: 'center',
-                    gap: '30px',
-                }}
-            >
-                <H2>이미지 선택</H2>
+            <ModalBackdrop />
+            <ModalContainer>
+                {/* <div style={{ position: 'absolute', top: '0', right: '0', padding: '20px 20px 0 0' }}>
+                    <IoMdClose size='60px' />
+                </div>
+                <H2>이미지 선택</H2> */}
+                <ModalHeader />
                 <Flex $flexDirection='column'>
-                    <IconSwiper />
+                    <Flex $flexDirection='column'>
+                        <H3>기본 이미지</H3>
+                        <IconSwiper />
+                    </Flex>
+                    <Flex $flexDirection='column'>
+                        <H3>모던 이미지</H3>
+                        <Flex $gap='10px'>
+                            <IconItem />
+                            <IconItem />
+                            <IconItem />
+                            <IconItem />
+                        </Flex>
+                    </Flex>
+                    <Flex $flexDirection='column'>
+                        <H3>코믹 이미지</H3>
+                        <Flex $gap='10px'>
+                            <IconItem />
+                            <IconItem />
+                            <IconItem />
+                            <IconItem />
+                        </Flex>
+                    </Flex>
+                    <Flex $flexDirection='column'>
+                        <H3>코믹 이미지</H3>
+                        <Flex $gap='10px'>
+                            <IconItem />
+                            <IconItem />
+                            <IconItem />
+                            <IconItem />
+                        </Flex>
+                    </Flex>
                 </Flex>
-            </div>
+            </ModalContainer>
         </>
     );
 };

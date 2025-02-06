@@ -1,8 +1,50 @@
 import styled from 'styled-components';
 
+export const ModalContainer = styled.div`
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    width: 70rem;
+    height: 100vh;
+    max-height: 61.25rem;
+    padding: 0 75px 75px;
+    background-color: black;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    gap: 40px;
+    overflow-y: auto;
+
+    &::-webkit-scrollbar {
+        width: 8px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: #888;
+        border-radius: 4px;
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+        background: #555;
+    }
+`;
+
 export const H2 = styled.h2`
     font-weight: 700;
     font-size: var(--heading-medium-size);
+    text-align: center;
+`;
+
+export const H3 = styled.h3`
+    font-weight: 700;
+    font-size: 30px;
+    text-align: left;
 `;
 
 export const P = styled.p`
@@ -32,6 +74,7 @@ export const Flex = styled.div`
     justify-content: ${(props) => props.$justifyContent};
     gap: ${(props) => props.$gap};
     padding: ${(props) => (props.$padding ? props.$padding : '')};
+    margin: ${(props) => (props.$margin ? props.$margin : '')};
     position: ${(props) => props.$position};
     width: ${(props) => props.$width || 'auto'};
     border-top: ${(props) => props.$borderTop};
@@ -91,4 +134,14 @@ export const NickNameInput = styled.input`
     height: 4.167rem;
     font-weight: 600;
     font-size: var(--title-medium-size);
+`;
+
+export const ModalBackdrop = styled.div`
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1;
 `;
