@@ -18,7 +18,6 @@ import ViboOnly from '../../../components/home/viboOnly/ViboOnly';
 const MainHome = () => {
   return (
     <div>
-      {/* <Container /> */}
       <MainContainer>
         <WatchingList />
         <LiveList />
@@ -30,7 +29,6 @@ const MainHome = () => {
         <CommonList />
         <CommonList />
         <ViboOnly />
-        {/* <MenuButton /> */}
       </MainContainer>
     </div>
   );

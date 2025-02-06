@@ -1,9 +1,11 @@
 import React from 'react';
 import { GenreNavContainer } from '../../../pages/home/test/test';
+import { MainContainer } from '../../../pages/home/main/style';
+import { ButtonContainer } from './GenreButton';
 
 const GenreButton = () => {
   return (
-    <div>
+    <ButtonContainer>
       {/* 장르별 콘텐츠 */}
       <section>
         <h2>장르별 콘텐츠</h2>
@@ -13,7 +15,7 @@ const GenreButton = () => {
           ))}
         </GenreNavContainer>
       </section>
-    </div>
+    </ButtonContainer>
   );
 };
 
