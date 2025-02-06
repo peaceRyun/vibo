@@ -1,3 +1,4 @@
+// 검색창 드롭다운
 import React, { useState } from 'react';
 import { DropdownContainer, SearchInput, ActionText } from './style';
 

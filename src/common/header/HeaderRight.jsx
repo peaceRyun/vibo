@@ -1,3 +1,4 @@
+// 헤더 오른쪽 영역 프로필, 검색버튼
 import React from 'react';
 import SearchIcon from './SearchIcon';
 import ProfileLogo from './ProfileLogo';

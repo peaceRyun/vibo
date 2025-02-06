@@ -1,3 +1,4 @@
+// 프로필 드롭다운 / 디자인 시안이 없어서 그냥 만들었습니다.
 import React from 'react';
 import { ProfileDropdownContainer, DropdownItem, UserIconContainer } from './style';
 import { FaUserCircle } from 'react-icons/fa'; // 유저 아이콘
