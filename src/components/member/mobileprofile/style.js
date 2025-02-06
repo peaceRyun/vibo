@@ -47,7 +47,7 @@ export const ProfileImgWrap = styled.div`
 export const ProfileImg = styled.img`
     width: ${(props) => props.$width || 'auto'};
     height: ${(props) => props.$height || 'auto'};
-    filter: brightness(50%);
+    filter: ${(props) => props.$filter && 'brightness(50%)'};
 `;
 
 export const DimmedWrap = styled.div`
@@ -62,7 +62,7 @@ export const DimmedWrap = styled.div`
     align-items: center;
 `;
 
-export const ButtonEdit = styled.button`
+export const ButtonDark = styled.button`
     border: ${(props) => props.$border};
     border-radius: ${(props) => props.$borderRadius};
     padding: ${(props) => props.$padding};
@@ -70,7 +70,7 @@ export const ButtonEdit = styled.button`
     width: ${(props) => props.$width};
 `;
 
-export const ButtonComplete = styled.button`
+export const ButtonLight = styled.button`
     border: ${(props) => props.$border};
     border-radius: ${(props) => props.$borderRadius};
     background-color: ${(props) => props.$backgroundColor};
@@ -78,4 +78,17 @@ export const ButtonComplete = styled.button`
     color: ${(props) => props.$color};
     width: ${(props) => props.$width};
     font-weight: 800;
+`;
+
+export const NickNameInput = styled.input`
+    background-color: var(--gray-500);
+    border: none;
+    border-radius: 5px;
+    outline: none;
+    padding: 20px;
+    margin: 0;
+    width: 32.167rem;
+    height: 4.167rem;
+    font-weight: 600;
+    font-size: var(--title-medium-size);
 `;

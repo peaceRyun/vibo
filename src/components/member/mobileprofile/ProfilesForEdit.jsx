@@ -1,4 +1,4 @@
-import { ButtonComplete, DimmedWrap, EditForm, Flex, H2, P, PageWrap, ProfileImg, ProfileImgWrap } from './style';
+import { ButtonLight, DimmedWrap, EditForm, Flex, H2, P, PageWrap, ProfileImg, ProfileImgWrap } from './style';
 import { FaPen } from 'react-icons/fa';
 
 const ProfilesForEdit = () => {
@@ -12,22 +12,25 @@ const ProfilesForEdit = () => {
                             <P $color='var(--gray-500)'>편집할 프로필을 선택해주세요</P>
                         </Flex>
                         <Flex $gap='20px' $flexDirection='column' $alignItems='center'>
-                            <ProfileImgWrap $border='4px solid var(--white)' $borderRadius='5px'>
+                            <ProfileImgWrap>
                                 <ProfileImg
                                     $width='200px'
                                     $height='200px'
                                     src='/contentdetail/sample프아.png'
                                     alt='샘플프아'
+                                    $filter
                                 />
                                 <DimmedWrap>
-                                    <FaPen size='40px' />
+                                    <button>
+                                        <FaPen size='40px' color='white' />
+                                    </button>
                                 </DimmedWrap>
                             </ProfileImgWrap>
                             <P $fontSize='17px' $color='var(--gray-500)'>
                                 닉네임1
                             </P>
                         </Flex>
-                        <ButtonComplete
+                        <ButtonLight
                             $padding='1.675rem'
                             $border='1px solid var(--gray-500)'
                             $borderRadius='5px'
@@ -36,7 +39,7 @@ const ProfilesForEdit = () => {
                             $backgroundColor='var(--gray-300)'
                         >
                             완료
-                        </ButtonComplete>
+                        </ButtonLight>
                     </Flex>
                 </EditForm>
             </PageWrap>

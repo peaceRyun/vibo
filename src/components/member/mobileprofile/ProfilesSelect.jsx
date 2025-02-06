@@ -1,4 +1,4 @@
-import { ButtonEdit, EditForm, Flex, H2, P, PageWrap, ProfileImg, ProfileImgWrap } from './style';
+import { ButtonDark, EditForm, Flex, H2, P, PageWrap, ProfileImg, ProfileImgWrap } from './style';
 
 const ProfilesSelect = () => {
     return (
@@ -23,7 +23,7 @@ const ProfilesSelect = () => {
                                 닉네임1
                             </P>
                         </Flex>
-                        <ButtonEdit
+                        <ButtonDark
                             $padding='1.675rem'
                             $border='1px solid var(--gray-500)'
                             $borderRadius='5px'
@@ -31,7 +31,7 @@ const ProfilesSelect = () => {
                             $width='15.5rem'
                         >
                             프로필 편집
-                        </ButtonEdit>
+                        </ButtonDark>
                     </Flex>
                 </EditForm>
             </PageWrap>
