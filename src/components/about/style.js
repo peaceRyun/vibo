@@ -132,17 +132,45 @@ export const OriginalWrapper = styled.div`
   }
 `;
 
-export const AboutPswiper = styled.div`
-  swiper-slide {
-    text-align: center;
-    font-size: 18px;
-    background: #fff;
-    height: calc((100% - 30px) / 2) !important;
+export const AboutPswiperWrapper = styled.div`
+  width: 100%;
+  background: #000;
+  padding: 20px 0;
+  overflow: hidden;
+
+  .slider-container {
+    position: relative;
+    width: 100%;
+    height: 300px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+  }
+
+  .slide-track {
+    display: flex;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: transform 0.02s linear;
+  }
+
+  .slide {
+    width: 474px;
+    height: 281px;
+    margin: 10px;
+    background: #111;
+    border-radius: 10px;
+    overflow: hidden;
     display: flex;
     justify-content: center;
     align-items: center;
   }
 
-  
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
   }
 `;
