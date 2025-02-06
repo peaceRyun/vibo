@@ -20,6 +20,7 @@ export const Underline = styled.div`
   height: 3px; /* 밑줄 두께 */
   background: white; /* 밑줄 색상 */
   margin-top: 30px; /* H2와의 간격 */
+  align-self: center;
 `;
 
 export const ButtonContainer = styled.div`

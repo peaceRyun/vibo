@@ -14,11 +14,13 @@ import CommonList from '../../../components/home/common/CommonList';
 import { MainContainer } from './style';
 import ViboOnly from '../../../components/home/viboOnly/ViboOnly';
 import MenuSection from '../../../components/home/menubutton/MenuSection';
+import MainBanner from '../../../components/home/mainBanner/MainBanner';
 // import { Container } from '../../../components/home/viboOnly/only1/style';
 
 const MainHome = () => {
   return (
     <div>
+      <MainBanner />
       <WatchingList />
       <LiveList />
 
