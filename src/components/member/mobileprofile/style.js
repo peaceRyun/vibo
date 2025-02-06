@@ -41,11 +41,25 @@ export const ProfileImgWrap = styled.div`
     overflow: hidden;
     border: ${(props) => props.$border};
     border-radius: ${(props) => props.$borderRadius};
+    position: relative;
 `;
 
 export const ProfileImg = styled.img`
     width: ${(props) => props.$width || 'auto'};
     height: ${(props) => props.$height || 'auto'};
+    filter: brightness(50%);
+`;
+
+export const DimmedWrap = styled.div`
+    height: 100%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 `;
 
 export const ButtonEdit = styled.button`
@@ -54,4 +68,14 @@ export const ButtonEdit = styled.button`
     padding: ${(props) => props.$padding};
     color: ${(props) => props.$color};
     width: ${(props) => props.$width};
+`;
+
+export const ButtonComplete = styled.button`
+    border: ${(props) => props.$border};
+    border-radius: ${(props) => props.$borderRadius};
+    background-color: ${(props) => props.$backgroundColor};
+    padding: ${(props) => props.$padding};
+    color: ${(props) => props.$color};
+    width: ${(props) => props.$width};
+    font-weight: 800;
 `;
