@@ -1,3 +1,4 @@
+import MenuSection from '../../components/home/menubutton/MenuSection';
 import GlobalStyle from '../../styled/GlobalStyle';
 import MainHome from '../home/main/MainHome';
 

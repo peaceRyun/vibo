@@ -13,15 +13,17 @@ import CommonList from '../../../components/home/common/CommonList';
 // import MenuButton from '../../../components/home/menubutton/MenuButton';
 import { MainContainer } from './style';
 import ViboOnly from '../../../components/home/viboOnly/ViboOnly';
+import MenuSection from '../../../components/home/menubutton/MenuSection';
 // import { Container } from '../../../components/home/viboOnly/only1/style';
 
 const MainHome = () => {
   return (
     <div>
+      <WatchingList />
+      <LiveList />
+
+      <WeeklyList />
       <MainContainer>
-        <WatchingList />
-        <LiveList />
-        <WeeklyList />
         <RateList />
         <GenreNav />
         <AdBanner />
@@ -30,6 +32,7 @@ const MainHome = () => {
         <CommonList />
         <ViboOnly />
       </MainContainer>
+      <MenuSection />
     </div>
   );
 };
