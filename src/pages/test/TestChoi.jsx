@@ -1,5 +1,11 @@
+import AboutP from '../about/AboutP';
+
 const TestChoi = () => {
-    return <></>;
+  return (
+    <>
+      <AboutP />
+    </>
+  );
 };
 
 export default TestChoi;
