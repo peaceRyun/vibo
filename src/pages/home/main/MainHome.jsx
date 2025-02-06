@@ -1,6 +1,6 @@
 // 메인 홈
 import React from 'react';
-import { Container } from '../../../common/style';
+// import { Container } from '../../../common/style';
 import LiveList from '../../../components/home/live/LiveList';
 import RateList from '../../../components/home/rating/RateList';
 import WatchingList from '../../../components/home/watching/WatchingList';
@@ -12,11 +12,12 @@ import Only1 from '../../../components/home/viboOnly/only1/Only1';
 import Only2 from '../../../components/home/viboOnly/only2/Only2';
 // import MenuButton from '../../../components/home/menubutton/MenuButton';
 import { MainContainer, ViboOnly } from './style';
+// import { Container } from '../../../components/home/viboOnly/only1/style';
 
 const MainHome = () => {
   return (
     <div>
-      <Container />
+      {/* <Container /> */}
       <MainContainer>
         <WatchingList />
         <LiveList />
