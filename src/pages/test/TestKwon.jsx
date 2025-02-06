@@ -1,5 +1,11 @@
+import ProfileEdit from '../member/ProfileEdit';
+
 const TestKwon = () => {
-    return <></>;
+    return (
+        <>
+            <ProfileEdit />
+        </>
+    );
 };
 
 export default TestKwon;
