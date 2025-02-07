@@ -23,11 +23,11 @@ const CloseButton = styled.div`
     padding: 20px 20px 0 0;
 `;
 
-const ModalHeader = () => {
+const ModalHeader = ({ handleModalOpen }) => {
     return (
         <HeaderContainer>
             <H2>이미지 선택</H2>
-            <CloseButton>
+            <CloseButton onClick={handleModalOpen}>
                 <IoMdClose size='60px' />
             </CloseButton>
         </HeaderContainer>

@@ -15,10 +15,17 @@ import {
 import { FaPen } from 'react-icons/fa';
 
 const ProfileForEdit = () => {
+    const [modalOpen, setModalOpen] = useState(false);
+
+    const handleModalOpen = (e) => {
+        e.preventDefault();
+        setModalOpen(!modalOpen);
+    };
+
     return (
         <>
             <PageWrap>
-                <IconList />
+                {modalOpen && <IconList handleModalOpen={handleModalOpen} />}
                 <EditForm>
                     <Flex $flexDirection='column' $alignItems='center' $gap='60px' $padding='90px'>
                         <Flex $flexDirection='column' $alignItems='center' $gap='10px'>
@@ -34,7 +41,7 @@ const ProfileForEdit = () => {
                                     $filter
                                 />
                                 <DimmedWrap>
-                                    <button>
+                                    <button onClick={handleModalOpen}>
                                         <FaPen size='40px' color='white' />
                                     </button>
                                 </DimmedWrap>

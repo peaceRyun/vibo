@@ -3,7 +3,7 @@ import IconSwiper from './IconSwiper';
 import ModalHeader from './ModalHeader';
 import { Flex, H3, ModalBackdrop, ModalContainer } from './style';
 
-const IconList = () => {
+const IconList = ({ handleModalOpen }) => {
     return (
         <>
             <ModalBackdrop />
@@ -12,7 +12,7 @@ const IconList = () => {
                     <IoMdClose size='60px' />
                 </div>
                 <H2>이미지 선택</H2> */}
-                <ModalHeader />
+                <ModalHeader handleModalOpen={handleModalOpen} />
                 <Flex $flexDirection='column' $gap='30px'>
                     <Flex $flexDirection='column'>
                         <H3>기본 이미지</H3>
