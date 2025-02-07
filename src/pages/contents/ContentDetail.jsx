@@ -9,7 +9,7 @@ const ContentDetail = () => {
     return (
         <>
             <Inner>
-                <Flex $flexDirection='column' $position='relative' $gap='30px'>
+                <Flex $flexDirection='column' $position='relative' $gap='30px' $padding='0 50px'>
                     <PlayBanner />
                     <section>
                         <Flex $flexDirection='column' $position='relative' $gap='15px' $padding='30px 0 30px'>
