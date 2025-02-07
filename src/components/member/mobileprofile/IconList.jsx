@@ -13,14 +13,14 @@ const IconList = () => {
                 </div>
                 <H2>이미지 선택</H2> */}
                 <ModalHeader />
-                <Flex $flexDirection='column'>
+                <Flex $flexDirection='column' $gap='30px'>
                     <Flex $flexDirection='column'>
                         <H3>기본 이미지</H3>
                         <IconSwiper />
                     </Flex>
                     <Flex $flexDirection='column'>
                         <H3>모던 이미지</H3>
-                        <Flex $gap='10px'>
+                        <Flex $gap='20px'>
                             <IconItem />
                             <IconItem />
                             <IconItem />
