@@ -1,5 +1,11 @@
+import Header from '../../common/header';
+
 const TestLee = () => {
-    return <> </>;
+    return (
+        <>
+            <Header />
+        </>
+    );
 };
 
 export default TestLee;
