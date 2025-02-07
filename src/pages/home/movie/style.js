@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const MoreButton = styled.button`
   display: flex;
-  background-color: var(--primary-base);
+  background-color: var(--primary-600);
   color: black;
   font-size: 24px;
   padding: 17px 32px;
@@ -14,7 +14,7 @@ export const MoreButton = styled.button`
   font-weight: bold;
 
   &:hover {
-    background-color: var(--primary-600);
+    background-color: var(--primary-base);
   }
 `;
 

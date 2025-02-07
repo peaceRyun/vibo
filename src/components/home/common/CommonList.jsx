@@ -64,7 +64,7 @@ const CommonTitle = styled.h3`
 `;
 
 const MoreBtn = styled.button`
-  background-color: #00c8b3;
+  background-color: var(--primary-600);
   color: black;
   font-size: 24px;
   padding: 17px 32px;
@@ -76,7 +76,7 @@ const MoreBtn = styled.button`
   font-weight: bold;
 
   &:hover {
-    background-color: #00a692;
+    background-color: var(--primary-base);
   }
 `;
 
