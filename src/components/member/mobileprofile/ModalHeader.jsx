@@ -19,7 +19,7 @@ const CloseButton = styled.div`
     cursor: pointer;
     position: absolute;
     top: 0;
-    right: 0;
+    right: -75px;
     padding: 20px 20px 0 0;
 `;
 
