@@ -5,12 +5,12 @@ export const Section = styled.div`
   text-align: center;
   margin-top: 60px;
   padding: 40px 40px;
-  max-width: 1820px;
 `;
 
 export const Title = styled.h2`
-  color: white;
+  color: var(--white);
   font-size: 40px;
+  font-weight: 800;
   margin-bottom: 70px;
   display: inline-block;
 `;

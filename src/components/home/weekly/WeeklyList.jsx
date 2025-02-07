@@ -16,7 +16,7 @@ const WeeklyList = () => {
         <UploadNotice>업로드 공지</UploadNotice>
         <DaySelect activeDay={activeDay} setActiveDay={setActiveDay} />
       </WeeklyInfo>
-      <WeeklySwiper spaceBetween={50} pagination={{ clickable: true }} slidesPerView={6} modules={[Pagination]}>
+      <WeeklySwiper spaceBetween={50} pagination={{ clickable: true }} slidesPerView={6}>
         {[...Array(10)].map((_, index) => (
           <SwiperSlide key={index}>
             <WeeklyItem activeDay={activeDay} />

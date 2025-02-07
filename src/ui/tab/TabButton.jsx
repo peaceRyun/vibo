@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
+// import React { useState } from 'react';
 import { TabButtonStyled, TabContainer } from './style';
 
 const TabButton = ({ tabs }) => {

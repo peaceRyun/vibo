@@ -8,9 +8,9 @@ function TestJung() {
   return (
     <>
       <GlobalStyle />
-      {/* <MainHome /> */}
+      <MainHome />
       {/* <MovieHome /> */}
-      <SeriesHome />
+      {/* <SeriesHome /> */}
       {/* <Membership /> */}
       {/* <Mypage /> */}
       {/* <ProfileInfoEdit /> */}

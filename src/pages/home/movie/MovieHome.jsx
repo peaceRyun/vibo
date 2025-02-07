@@ -9,15 +9,16 @@ import CommonList from '../../../components/home/common/CommonList';
 
 import { MoreButton, Section } from './style';
 import TabButton from '../../../ui/tab/TabButton';
+import PopularList from '../../../components/home/popularlank/PopularList';
 
 const MovieHome = () => {
   const movieTabs = ['국내영화', '미국영화', '영국영화', '일본영화', '대만영화'];
   return (
     <div>
       <MainBanner />
-      <TabButton tabs={movieTabs} />
-      <section>순위</section>
       <MainContainer>
+        <TabButton tabs={movieTabs} />
+        <PopularList />
         <CommonList />
         <CommonList />
         <GenreNav />

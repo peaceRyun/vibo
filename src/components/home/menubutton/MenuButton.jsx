@@ -26,6 +26,7 @@ const Button = styled.div`
   font-weight: bold;
   cursor: pointer;
   transition: all 0.3s ease-in-out;
-  background: ${(props) => (props.isHovered ? 'linear-gradient(to bottom, #06DBBF, black)' : '#333')};
-  color: ${(props) => (props.isHovered ? 'white' : '#888')};
+  background: ${(props) =>
+    props.isHovered ? 'linear-gradient(to bottom, var( --primary-base), var(--black))' : '#333'};
+  color: ${(props) => (props.isHovered ? 'var(--white)' : 'var(--gray-700)')};
 `;

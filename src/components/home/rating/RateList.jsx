@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import styled from 'styled-components';
-import { Pagination } from 'swiper/modules';
+
 import RateItem from './RateItem';
 
 const RateList = () => {
@@ -57,18 +57,20 @@ export default RateList;
 
 const Section = styled.section`
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   position: relative;
-  gap: 20px;
-  margin-top: 100px;
+  /* gap: 20px; */
+  /* margin-top: 100px; */
 `;
 
 const RateInfo = styled.div`
   flex: 1;
   display: flex;
+
   flex-direction: column;
   justify-content: space-between;
   height: 443px;
+  width: 443px;
 `;
 
 const RateTitle = styled.h3`
@@ -83,12 +85,16 @@ const RateTitle = styled.h3`
 const RateSwiper = styled(Swiper)`
   flex: 3;
   height: 535.62px;
+  margin-bottom: 40px;
+
+  display: flex;
+  align-items: center; /* Swiper 자체 중앙 정렬 */
 
   .swiper-slide {
     width: 300px !important;
     height: 443px;
     display: flex;
-    justify-content: center;
+    justify-content: center; /* 내부 이미지 중앙 정렬 */
     align-items: center;
     overflow: hidden;
     border-radius: 8px;

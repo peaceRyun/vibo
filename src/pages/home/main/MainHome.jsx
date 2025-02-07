@@ -21,11 +21,12 @@ const MainHome = () => {
   return (
     <div>
       <MainBanner />
-      <WatchingList />
-      <LiveList />
-
-      <WeeklyList />
       <MainContainer>
+        <WatchingList />
+        <LiveList />
+
+        <WeeklyList />
+
         <RateList />
         <GenreNav />
         <AdBanner />

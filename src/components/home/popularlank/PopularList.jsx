@@ -1,6 +1,6 @@
 import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation } from 'swiper/modules'; // ✅ Navigation import 추가!
+
 import 'swiper/css';
 // import 'swiper/css/navigation';
 import PopularItem from './PopularItem';
@@ -28,7 +28,6 @@ const PopularList = () => {
           </PopularTitle>
         </PopularInfo>
         <Swiper spaceBetween={20} slidesPerView={4}>
-          {/* navigation modules={[Navigation]} */}
           {popularDramas.map((drama, index) => (
             <SwiperSlide key={drama.id}>
               <PopularItem rank={index + 1} image={drama.image} title={drama.title} />

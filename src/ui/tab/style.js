@@ -5,9 +5,9 @@ export const TabContainer = styled.div`
   justify-content: center;
   gap: 40px;
   /* background-color: black; */
-  padding: 20px;
-  margin-top: 40px;
-  margin-bottom: 40px;
+  /* padding: 20px; */
+  /* margin-top: 40px;
+  margin-bottom: 40px; */
 `;
 
 export const TabButtonStyled = styled.button`

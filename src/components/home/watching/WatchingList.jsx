@@ -10,10 +10,9 @@ const WatchingList = () => {
     <MainContainer>
       <LiveContainer>
         <LiveTitle>실시간 인기 LIVE</LiveTitle>
-        <LiveSwiper slidesPerView={3.8} spaceBetween={16} pagination={{ clickable: true }} modules={[Pagination]}>
+        <LiveSwiper slidesPerView={4.2} spaceBetween={16} pagination={{ clickable: true }}>
           {[...Array(5)].map((_, index) => (
-            <SwiperSlide key={index}>
-              {/* style={{ overflow: 'visible' }} */}
+            <SwiperSlide key={index} style={{ overflow: 'visible' }}>
               <WatchingItem />
             </SwiperSlide>
           ))}
@@ -28,7 +27,7 @@ export default WatchingList;
 // Styled Components
 const LiveContainer = styled.section`
   width: 100%;
-  max-width: 1820px;
+  /* max-width: 1820px; */
   margin: 0 auto;
 `;
 

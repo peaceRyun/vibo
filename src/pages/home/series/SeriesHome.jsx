@@ -17,7 +17,6 @@ const SeriesHome = () => {
       <MainContainer>
         <TabButton tabs={seriesTabs} />
         <PopularList />
-        <RateList />
 
         <CommonList />
         <CommonList />

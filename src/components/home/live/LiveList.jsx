@@ -10,9 +10,10 @@ const LiveList = () => {
     <MainContainer>
       <Section>
         <StyledTitle>실시간 인기 LIVE</StyledTitle>
-        <StyledSwiper slidesPerView={3.8} spaceBetween={16} pagination={{ clickable: true }} modules={[Pagination]}>
+        <StyledSwiper slidesPerView={4.2} spaceBetween={16} pagination={{ clickable: true }}>
+          {/* pagination={{ clickable: true }} modules={[Pagination]} */}
           {[...Array(5)].map((_, index) => (
-            <SwiperSlide key={index}>
+            <SwiperSlide key={index} style={{ overflow: 'visible' }}>
               <LiveItem />
             </SwiperSlide>
           ))}

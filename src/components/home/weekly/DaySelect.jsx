@@ -25,7 +25,7 @@ const DayContainer = styled.div`
   border: 1px solid #a8a9ad; */
   display: flex;
   justify-content: center;
-  gap: 10px;
+  gap: 15px;
   padding: 10px;
 `;
 
