@@ -16,7 +16,8 @@ export const CommonList = () => {
         </CommonTitle>
         <MoreBtn>더보기</MoreBtn>
       </CommonInfo>
-      <CommonSwiper spaceBetween={20} pagination={{ clickable: true }} modules={[Pagination]}>
+      <CommonSwiper spaceBetween={20} pagination={{ clickable: true }}>
+        {/* modules={[Pagination]} */}
         {[...Array(10)].map((_, index) => (
           <SwiperSlide key={index}>
             <CommonItem />

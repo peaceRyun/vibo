@@ -23,7 +23,7 @@ export const PopularSection = styled.div`
   align-items: center;
   position: relative;
   max-width: 1820px;
-  padding: 0 20px;
+  /* padding: 0 20px; */
   gap: 20px;
   margin-top: 100px;
 `;

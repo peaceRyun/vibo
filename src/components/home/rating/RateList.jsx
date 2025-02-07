@@ -37,7 +37,7 @@ const RateList = () => {
         spaceBetween={50}
         pagination={{ clickable: true }}
         slidesPerView={4}
-        modules={[Pagination]}
+        // modules={[Pagination]}
         onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)} // 슬라이드 변경 시 인덱스 업데이트
         // centeredSlides={true}
         // loop={true}

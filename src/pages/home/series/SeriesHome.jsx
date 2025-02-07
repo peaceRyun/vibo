@@ -14,10 +14,11 @@ const SeriesHome = () => {
   return (
     <div>
       <MainBanner />
-      <TabButton tabs={seriesTabs} />
-      <PopularList />
-      <RateList />
       <MainContainer>
+        <TabButton tabs={seriesTabs} />
+        <PopularList />
+        <RateList />
+
         <CommonList />
         <CommonList />
         <GenreNav />
