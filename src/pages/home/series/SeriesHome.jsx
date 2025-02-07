@@ -15,7 +15,7 @@ const SeriesHome = () => {
     <div>
       <MainBanner />
       <TabButton tabs={seriesTabs} />
-      {/* <PopularList /> */}
+      <PopularList />
       <RateList />
       <MainContainer>
         <CommonList />

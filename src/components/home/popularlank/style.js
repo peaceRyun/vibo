@@ -1,7 +1,6 @@
 import styled from 'styled-components';
-import Swiper from 'swiper';
 
-export const ListWrapper = styled(Swiper)`
+export const ListWrapper = styled.div`
   flex: 3;
   height: 535.62px;
   /* overflow: visible !important; */
@@ -15,6 +14,14 @@ export const ListWrapper = styled(Swiper)`
     border-radius: 8px;
     transition: all 0.3s ease;
   }
+`;
+
+export const PopularSection = styled.div`
+  display: flex;
+  align-items: center;
+  position: relative;
+  gap: 20px;
+  margin-top: 100px;
 `;
 // ---------------------------------아이템 스타일링
 export const ItemWrapper = styled.div`
