@@ -2,17 +2,20 @@
 import React from 'react';
 import MainBanner from '../../../components/home/mainBanner/MainBanner';
 import { MainContainer } from '../main/style';
-import RateList from '../../../components/home/rating/RateList';
+
 import GenreNav from '../../../components/home/genreNav/GenreNav';
-import AdBanner from '../../../components/home/adBanner/AdBanner';
+
 import CommonList from '../../../components/home/common/CommonList';
-import Button from '../../../ui/button/Button';
+
 import { MoreButton, Section } from './style';
+import TabButton from '../../../ui/tab/TabButton';
 
 const MovieHome = () => {
+  const movieTabs = ['국내영화', '미국영화', '영국영화', '일본영화', '대만영화'];
   return (
     <div>
       <MainBanner />
+      <TabButton tabs={movieTabs} />
       <section>순위</section>
       <MainContainer>
         <CommonList />
