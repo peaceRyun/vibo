@@ -1,11 +1,14 @@
 // import ProfileEdit from '../member/ProfileEdit';
-import ProfileInfoEdit from '../member/ProfileInfoEdit';
+// import ProfileInfoEdit from '../member/ProfileInfoEdit';
+
+import Membership from '../member/Membership';
 
 const TestKwon = () => {
     return (
         <>
             {/* <ProfileEdit /> */}
-            <ProfileInfoEdit />
+            {/* <ProfileInfoEdit /> */}
+            <Membership />
         </>
     );
 };

@@ -1,5 +1,13 @@
 import styled from 'styled-components';
 
+export const Container = styled.div`
+    position: relative;
+    padding: 0 var(--spacing-5);
+    @media (min-width: 1025px) {
+        padding: 0 50px;
+    }
+`;
+
 export const MembershipBanner = styled.div`
     position: relative;
     text-align: center;
@@ -22,7 +30,6 @@ export const MembershipBanner = styled.div`
 
     .banner-content {
         position: relative;
-        z-index: 1;
         text-align: left;
         padding: 0 20px;
 
