@@ -1,10 +1,11 @@
-import { RateItemContainer, RateItemImg } from './style';
+import { RankNumber, RateItemContainer, RateItemImg } from './style';
 
-const RateItem = () => {
-    return (
-        <RateItemContainer>
-            <RateItemImg src="/mainhome/sample/RateSample.png" alt="순위 아이템" />
-        </RateItemContainer>
-    );
+const RateItem = ({ image, rank, isFirst }) => {
+  return (
+    <RateItemContainer isFirst={isFirst}>
+      <RankNumber isFirst={isFirst}>{rank}</RankNumber>
+      <RateItemImg src={image} alt={`순위 ${rank}`} />
+    </RateItemContainer>
+  );
 };
 export default RateItem;

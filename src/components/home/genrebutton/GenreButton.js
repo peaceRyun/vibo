@@ -16,3 +16,13 @@ export const GenreButton = styled.button`
     color: black;
   }
 `;
+
+export const ButtonContainer = styled.div`
+  max-width: 1820px;
+  width: 100%;
+  margin: 0 auto; /* ✅ 가운데 정렬 */
+  padding: 0 20px; /* ✅ 좌우 패딩 추가 */
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+`;
