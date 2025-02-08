@@ -25,6 +25,7 @@ export const ButtonB = styled.button`
     font-size: ${(props) => props.$fontSize};
     font-weight: ${(props) => props.$fontWeight};
     padding: 17px 23px;
+    white-space: nowrap;
     ${(props) =>
         props.$play &&
         `

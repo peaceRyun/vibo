@@ -5,14 +5,15 @@ import TestLee from './pages/test/TestLee';
 import GlobalStyle from './styled/GlobalStyle';
 
 function App() {
-  return (
-    <>
-      <GlobalStyle />
-      <TestLee />`{/* <TestKwon />` */}
-      <TestChoi />
-      <TestJung />
-    </>
-  );
+    return (
+        <>
+            <GlobalStyle />
+            <TestLee />
+            <TestKwon />`
+            <TestChoi />
+            <TestJung />
+        </>
+    );
 }
 
 export default App;

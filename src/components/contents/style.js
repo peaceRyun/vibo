@@ -203,7 +203,7 @@ export const P20 = styled.p`
 
 export const BarDemo = styled.div`
     height: 5px;
-    background-color: var(--primary-base);
+    background-color: var(--secondary-400);
 `;
 
 export const ModalOverlay = styled.div`
