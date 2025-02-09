@@ -313,17 +313,18 @@ export const StyledInput = styled.input`
   font-family: NanumSquare Neo;
   font-weight: 600;
   padding: 22px 16px;
-  border: 1px solid #e6f5f4;
+ border: 1px solid ${({ error }) => (error ? '#eb003b' : '#bcbdc0')};
   background-color: #191919;
   border-radius: 8px !important;
   font-size: 17px;
   width: 420px;
   height: 56px;
+   transition: border-color 0.2s ease-in-out;
   &[type='password'] {
     font-family: 'NanumSquare Neo' !important;
     font-weight: 600 !important;
     padding: 22px 16px !important;
-    border: 1px solid #e6f5f4 !important;
+    border: 1px solid ${({ error }) => (error ? '#eb003b' : '#bcbdc0')}; !important;
     border-radius: 8px !important;
     font-size: 17px !important;
     width: 420px !important;
@@ -332,6 +333,11 @@ export const StyledInput = styled.input`
     color: white;
     &::placeholder {
     color: #BCBDC0;
+    
+  }
+    &:focus {
+    border: 1px solid ${({ error }) => (error ? '#eb003b' : '#07ffe6')};
+    outline: none;
     
 `;
 
@@ -348,6 +354,8 @@ export const StyledButton = styled.button`
   cursor: pointer;
   font-size: 16px;
   margin-top: 10px;
+  display: flex;
+  align-items: center;
 
   &:hover {
     background-color: #06dbbf;
@@ -397,5 +405,106 @@ export const StyledLinks = styled.div`
 
   span {
     color: #888;
+  }
+`;
+
+// ---------------------회원가입 페이지 스타일
+
+export const RegisterContainer = styled.div`
+  display: flex;
+  gap: 40px;
+  width: 100%;
+  max-width: 610px;
+  height: auto;
+  margin: 100px auto;
+  padding: 50px;
+  border-radius: 8px;
+  background-color: #191919;
+  display: flex;
+  flex-direction: column;
+
+  .title {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    font-weight: 900;
+    font-size: 32px;
+    color: #07ffe6;
+  }
+
+  .form {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    align-items: center;
+    .Register {
+      display: flex;
+      flex-direction: column;
+      gap: 45px;
+      width: 100%;
+      max-width: 610px;
+    }
+  }
+`;
+
+export const Title = styled.h2`
+  font-weight: 900;
+  font-size: 32px;
+  color: #07ffe6;
+`;
+
+export const ErrorText = styled.p`
+  color: #eb003b;
+  font-size: 12px;
+  position: absolute;
+  bottom: -20px; /* 인풋 아래 고정 */
+  left: 40px;
+  margin: 0;
+`;
+
+export const InputGroup = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  min-height: 60px;
+  position: relative;
+  .textarea {
+    width: 100%;
+    max-width: 420px;
+    min-height: 183px;
+    color: #a8a9ab;
+    background-color: #3e3e3f;
+    border: 0;
+  }
+`;
+
+export const StyledInputWrapper = styled.div`
+  position: relative;
+  width: 100%;
+  max-width: 420px;
+`;
+
+export const InputButton = styled.button`
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: #07ffe6;
+  color: black;
+  font-weight: 700;
+  font-size: 14px;
+  padding: 6px 10px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #06dbbf;
+  }
+  &:active {
+    background-color: #04998a;
   }
 `;
