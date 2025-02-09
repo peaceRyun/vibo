@@ -8,8 +8,8 @@ const TestChoi = () => {
     <>
       <GlobalStyle />
       {/* <AboutP /> */}
-      {/* <Login /> */}
-      <Register />
+      <Login />
+      {/* <Register /> */}
     </>
   );
 };
