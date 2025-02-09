@@ -96,6 +96,7 @@ export const PaymentOptions = styled.div`
     margin-top: 10px;
     font-size: 17px;
     font-weight: 800;
+    width: 400px;
 `;
 
 export const PaymentButton = styled.button`
@@ -148,22 +149,22 @@ export const HighlightValue = styled.p`
     font-weight: bold;
 `;
 
-export const CheckBox = styled.div`
-    display: flex;
-    align-items: flex-start;
-    /* width: 30.625rem; */
-    gap: 150px;
-    /* padding: 0px 0; */
-`;
+// export const CheckBox = styled.div`
+//     display: flex;
+//     align-items: flex-start;
+//     /* width: 30.625rem; */
+//     gap: 150px;
+//     /* padding: 0px 0; */
+// `;
 
-export const CheckBox1 = styled.div`
-    display: flex;
-    flex-direction: row;
-`;
+// export const CheckBox1 = styled.div`
+//     display: flex;
+//     flex-direction: row;
+// `;
 
-export const CheckBox2 = styled.div`
-    display: flex;
-`;
+// export const CheckBox2 = styled.div`
+//     display: flex;
+// `;
 
 // 권윤구
 export const ChecksWrap = styled.div`
@@ -181,6 +182,15 @@ export const Flex = styled.div`
     padding: ${(props) => (props.$padding ? props.$padding : '')};
     position: ${(props) => props.$position};
     width: ${(props) => props.$width || 'auto'};
+    height: ${(props) => props.$height || 'auto'};
     border-top: ${(props) => props.$borderTop};
     color: ${(props) => props.$color};
+
+    &.checkbox1,
+    &.checkbox2 {
+        flex: 1;
+        input {
+            appearance: none;
+        }
+    }
 `;
