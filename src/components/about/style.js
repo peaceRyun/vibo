@@ -137,6 +137,8 @@ export const AboutPswiperWrapper = styled.div`
   background: #000;
   padding: 20px 0;
   overflow: hidden;
+  position: absolute;
+  top: 300px;
 
   .slider-container {
     position: relative;
@@ -172,5 +174,44 @@ export const AboutPswiperWrapper = styled.div`
     height: 100%;
     object-fit: cover;
     border-radius: 10px;
+  }
+`;
+export const ContentContainer = styled.div`
+  position: relative;
+  text-align: center;
+  color: white;
+  height: 1000px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  .title {
+    position: absolute;
+    top: 70px;
+    h2 {
+      font-family: NanumSquare Neo;
+      font-size: 40px;
+      font-weight: 800;
+      line-height: 100px;
+      text-align: center;
+      letter-spacing: 0.01em;
+    }
+    p {
+      font-family: NanumSquare Neo;
+      font-weight: 800;
+      font-size: 20px;
+      color: var(--gray-500);
+    }
+  }
+
+  button {
+    position: absolute;
+    bottom: 0;
+    background-color: var(--primary-base);
+    width: 239px;
+    height: 51px;
+    font-weight: 800;
+    font-size: 24px;
+    border-radius: 50px;
   }
 `;
