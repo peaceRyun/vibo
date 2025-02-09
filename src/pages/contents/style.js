@@ -26,3 +26,11 @@ export const Title = styled.div`
     font-weight: 900;
     margin: 0;
 `;
+
+export const BadgeBlank = styled.div`
+    border: 1px solid var(--primary-base);
+    border-radius: 5px;
+    font-size: 13px;
+    font-weight: 700;
+    padding: 2px 4px;
+`;

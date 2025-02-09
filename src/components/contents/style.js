@@ -122,6 +122,8 @@ export const Flex = styled.div`
     position: ${(props) => props.$position};
     width: ${(props) => props.$width || 'auto'};
     border-top: ${(props) => props.$borderTop};
+    white-space: ${(props) => props.$whiteSpace};
+    font-size: ${(props) => props.$fontSize};
 `;
 
 export const FlexUl = styled.ul`
