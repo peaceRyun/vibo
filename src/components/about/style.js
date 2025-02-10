@@ -4,67 +4,142 @@ export const AboutBanner = styled.div`
   position: relative;
   color: white;
   width: 100%;
-  heith: 300px;
+  height: 500px;
+  overflow: hidden;
+
   .banner-container {
     width: 100%;
-    height: 500px;
+    height: 100%;
+    position: relative;
+
     img {
       width: 100%;
       height: 100%;
       object-fit: cover;
+      position: absolute;
+      top: 0;
+      left: 0;
       z-index: -1;
+    }
+
+    .dimmed {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 20%, rgba(0, 0, 0, 0.5) 50%, rgba(0, 0, 0, 0) 100%);
+      z-index: 0;
     }
   }
 
   .banner-content {
     position: absolute;
-    top: 20%;
-    left: 20%;
-    z-index: 1;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     text-align: center;
-    height: 300px;
-    overflow: hidden;
+    width: 100%;
+    max-width: 800px;
+    z-index: 1;
 
     h1 {
       display: flex;
-      align-items: center;
       justify-content: center;
+      align-items: center;
+      gap: 8px;
+      font-size: 64px;
+      font-weight: 900;
+      white-space: nowrap;
+
       .default {
-        font-family: NanumSquare Neo;
+        color: #fff;
         font-weight: 700;
-        font-size: 80px;
       }
-      .special {
-        font-family: NanumSquare Neo;
-        font-weight: 900;
-        font-size: 100px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
+
+      // .special {
+      //   color: #07ffe6;
+      // }
     }
+
     h2 {
       display: flex;
-      align-items: center;
       justify-content: center;
+      align-items: center;
+      gap: 8px;
+      font-size: 60px;
+      font-weight: 700;
+
       .default {
-        font-family: NanumSquare Neo;
-        font-weight: 700;
-        font-size: 80px;
+        color: #fff;
       }
+
       .vibo {
-        font-family: NanumSquare Neo;
+        color: #07ffe6;
         font-weight: 900;
-        font-size: 100px;
-        color: var(--primary-base);
+        font-size: 64px;
       }
-      p {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-weight: 800;
+    }
+    p {
+      display: flex;
+      flex-direction: column;
+
+      .description1 {
+        font-size: 24px;
+        font-weight: 700;
+        margin-top: 12px;
+        color: #d1d2d4;
+      }
+      .description2 {
+        font-size: 18px;
+        font-weight: 600;
+
+        color: #d1d2d4;
+      }
+    }
+
+    .start-button {
+      margin-top: 40px;
+      padding: 16px 108px;
+      font-size: 18px;
+      font-weight: 800;
+      color: black;
+      background-color: #07ffe6;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+
+      &:hover {
+        background-color: #05c6bb;
+      }
+    }
+  }
+
+  @media (max-width: 1024px) {
+    .banner-content {
+      h1 {
+        font-size: 40px;
+      }
+      h2 {
+        font-size: 30px;
+      }
+      .description {
+        font-size: 16px;
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    .banner-content {
+      h1 {
+        font-size: 30px;
+      }
+      h2 {
+        font-size: 24px;
+      }
+      .description {
         font-size: 14px;
-        color: var(--gray-500);
       }
     }
   }
@@ -80,18 +155,25 @@ export const OriginalContainer = styled.div`
   justify-content: center;
   overflow: hidden;
 
+  .text-wrapper {
+    max-width: 1200px;
+    text-align: center;
+    padding: 0 20px;
+  }
+
   h2 {
     font-family: NanumSquare Neo;
-    font-size: 40px;
+    font-size: 60px;
     font-weight: 800;
     line-height: 100px;
     text-align: center;
     letter-spacing: 0.01em;
   }
+
   p {
     font-family: NanumSquare Neo;
     font-weight: 800;
-    font-size: 20px;
+    font-size: 30px;
     color: var(--gray-500);
   }
 `;
@@ -100,38 +182,86 @@ export const OriginalWrapper = styled.div`
   position: relative;
   text-align: left;
   color: white;
-  .card {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding: 50px 0;
+
+  .content-container {
     display: flex;
-    gap: 50px;
-    .card01 {
-      width: 700px;
-      display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    max-width: 1440px;
+    width: 100%;
+  }
+
+  .text-side {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 50%;
+    gap: 140px;
+  }
+
+  h1 {
+    font-family: NanumSquare Neo;
+    font-size: 80px;
+    font-weight: 900;
+    line-height: 1.2;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+  }
+
+  .gradient-text {
+    background: linear-gradient(to top, #07ffe6 0%, #ffffff 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .big-card {
+    width: 100%;
+    max-width: 500px;
+    min-width: 300px;
+    border-radius: 10px;
+  }
+
+  .image-side {
+    display: flex;
+    flex-direction: row;
+    gap: 40px;
+    // width: 50%;
+  }
+
+  .small-card {
+    width: 100%;
+    height: 100%;
+    min-width: 200px;
+    border-radius: 10px;
+  }
+
+  @media (max-width: 1024px) {
+    .content-container {
       flex-direction: column;
-      flex-wrap: nowrap;
-      align-items: flex-stsart;
-      h1 {
-        text-align: left;
-        font-family: NanumSquare Neo;
-        font-size: 80px;
-        font-weight: 900;
-        line-height: 130%;
-      }
+      align-items: center;
     }
-    .card02 {
-      img {
-        width: 353.14px;
-        height: 569.44px;
-      }
+
+    .text-side {
+      align-items: center;
+      width: 100%;
     }
-    .card03 {
-      img {
-        width: 353.14px;
-        height: 569.44px;
-      }
+
+    .image-side {
+      flex-direction: row;
+      justify-content: center;
+      width: 100%;
+    }
+
+    .big-card,
+    .small-card {
+      max-width: 600px;
     }
   }
 `;
-
 export const AboutPswiperWrapper = styled.div`
   width: 100%;
   background: #000;
@@ -180,7 +310,7 @@ export const ContentContainer = styled.div`
   position: relative;
   text-align: center;
   color: white;
-  height: 1000px;
+  height: 1100px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -190,7 +320,7 @@ export const ContentContainer = styled.div`
     top: 70px;
     h2 {
       font-family: NanumSquare Neo;
-      font-size: 40px;
+      font-size: 60px;
       font-weight: 800;
       line-height: 100px;
       text-align: center;
@@ -198,8 +328,8 @@ export const ContentContainer = styled.div`
     }
     p {
       font-family: NanumSquare Neo;
-      font-weight: 800;
-      font-size: 20px;
+      font-weight: 700;
+      font-size: 30px;
       color: var(--gray-500);
     }
   }
