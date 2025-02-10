@@ -1,4 +1,5 @@
 import ToggleSwitch from '../../ui/toggle/Toggle';
+import SeasonDropdown from './dropdown/SeasonDropDown';
 import EpItem from './EpItem';
 import { CRatingImg, EpListBgi, Flex, FlexUl, H3, P20, P28, SDrop } from './style';
 
@@ -40,12 +41,7 @@ const EpList = () => {
                                 </Flex>
                             </Flex>
                         </Flex>
-                        <SDrop>
-                            시즌 1
-                            <button>
-                                <img src='/contentdetail/ui/live area.png' alt='dropdownIcon' />
-                            </button>
-                        </SDrop>
+                        <SeasonDropdown />
                     </Flex>
 
                     <div style={{ position: 'relative' }}>
