@@ -9,7 +9,7 @@ export const GenreContainer = styled.div`
 `;
 
 export const GenreItem = styled.div`
-  width: 18.75rem; /* 404px */
+  width: 450px; /* 404px */
   height: 11.4375rem; /* 183px */
   display: flex;
   flex-direction: column;

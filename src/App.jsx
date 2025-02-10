@@ -9,6 +9,7 @@ import MovieHome from './pages/home/movie/MovieHome';
 import SeriesHome from './pages/home/series/SeriesHome';
 import Membership from './pages/member/Membership';
 import ProfileInfoEdit from './pages/member/ProfileInfoEdit';
+import LiveHome from './pages/home/live/LiveHome';
 
 const App = () => {
   return (
@@ -21,6 +22,7 @@ const App = () => {
             <Route path="/membership" element={<Membership />} />
             <Route path="/moviehome" element={<MovieHome />} />
             <Route path="/serieshome" element={<SeriesHome />} />
+            <Route path="/livehome" element={<LiveHome />} />
             <Route path="/about" element={<AboutP />} />
             <Route path="/detail">
               <Route index element={<ContentDetail />} />
