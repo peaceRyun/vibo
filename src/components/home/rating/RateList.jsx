@@ -90,16 +90,13 @@ const RateSwiper = styled(Swiper)`
   flex: 3;
   height: 535.62px;
   /* margin-bottom: 40px; */
-
   display: flex;
-  /* align-items: center; Swiper 자체 중앙 정렬 */
 
   .swiper-slide {
     width: 300px !important;
     height: 443px;
     display: flex;
     justify-content: center; /* 내부 이미지 중앙 정렬 */
-    /* align-items: center; */
     overflow: hidden;
     border-radius: 8px;
     transition: all 0.3s ease;

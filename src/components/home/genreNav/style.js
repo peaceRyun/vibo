@@ -3,13 +3,13 @@ import styled from 'styled-components';
 export const GenreContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 3rem 81.6px;
+  gap: 2rem 20px;
   /* 4.063rem 3rem; */
-  /* max-width: 1820px; */
+  max-width: 1820px;
 `;
 
 export const GenreItem = styled.div`
-  width: 25.25rem; /* 404px */
+  width: 18.75rem; /* 404px */
   height: 11.4375rem; /* 183px */
   display: flex;
   flex-direction: column;

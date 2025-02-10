@@ -16,6 +16,7 @@ export const RateItemImg = styled.img`
   position: absolute;
   border-radius: ${({ isFirst }) => (isFirst ? '200px 200px 8px 8px' : '8px')};
   transition: border-radius 0.5s ease-in-out;
+  align-items: center;
 `;
 
 export const RankNumber = styled.div`
