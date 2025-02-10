@@ -274,3 +274,9 @@ export const EpItemsWrap = styled.div`
     // 초기 높이를 auto로 설정
     height: auto;
 `;
+
+export const CloseButton = styled.button`
+    position: absolute;
+    top: 0;
+    right: 0;
+`;

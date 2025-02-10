@@ -1,27 +1,26 @@
 import { SDropdown, SDropdownButton, SDropdownContent, SDropdownItem, SIcon } from './style';
 
-const SeasonDropdown = ({ isOpen, isDropOpen, onToggle, selectedSeason, onSelect }) => {
+const SeasonDropdown = ({ isOpen, onToggle, selectedSeason, onSelect }) => {
     const seasons = ['시즌 1', '시즌 2', '시즌 3', '시즌 4'];
-
-    const handleSelect = (season) => {
-        onSelect(season);
-    };
+    const hasSelection = selectedSeason !== '';
 
     return (
         <SDropdown>
             <SDropdownButton onClick={onToggle}>
-                {isOpen ? selectedSeason : '시즌'}
-                {isOpen ? (
-                    <SIcon src='/contentdetail/ui/live area.png' alt='dropdownIcon' $isDropOpen={isDropOpen} />
+                {hasSelection ? (
+                    <>
+                        {selectedSeason}
+                        <SIcon src='/contentdetail/ui/live area.png' alt='dropdownIcon' $isDropOpen={isOpen} />
+                    </>
                 ) : (
-                    ' 클릭'
+                    '시즌 클릭'
                 )}
             </SDropdownButton>
 
             {isOpen && (
                 <SDropdownContent>
                     {seasons.map((season) => (
-                        <SDropdownItem key={season} onClick={() => handleSelect(season)}>
+                        <SDropdownItem key={season} onClick={() => onSelect(season)}>
                             {season}
                         </SDropdownItem>
                     ))}
