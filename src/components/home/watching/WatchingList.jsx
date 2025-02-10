@@ -1,24 +1,24 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import styled from 'styled-components';
-import { Pagination } from 'swiper/modules';
+// import { Pagination } from 'swiper/modules';
 import WatchingItem from './WatchingItem';
-import { MainContainer } from '../../../pages/home/main/style';
+// import { MainContainer } from '../../../pages/home/main/style';
 
 const WatchingList = () => {
   return (
-    <MainContainer>
-      <LiveContainer>
-        <LiveTitle>실시간 인기 LIVE</LiveTitle>
-        <LiveSwiper slidesPerView={4.2} spaceBetween={16} pagination={{ clickable: true }}>
-          {[...Array(5)].map((_, index) => (
-            <SwiperSlide key={index} style={{ overflow: 'visible' }}>
-              <WatchingItem />
-            </SwiperSlide>
-          ))}
-        </LiveSwiper>
-      </LiveContainer>
-    </MainContainer>
+    // <MainContainer>
+    <LiveContainer>
+      <LiveTitle>실시간 인기 LIVE</LiveTitle>
+      <LiveSwiper slidesPerView={4.2} spaceBetween={16} pagination={{ clickable: true }}>
+        {[...Array(5)].map((_, index) => (
+          <SwiperSlide key={index} style={{ overflow: 'visible' }}>
+            <WatchingItem />
+          </SwiperSlide>
+        ))}
+      </LiveSwiper>
+    </LiveContainer>
+    // </MainContainer>
   );
 };
 
@@ -41,12 +41,12 @@ const LiveTitle = styled.h3`
 const LiveSwiper = styled(Swiper)`
   max-width: 100%;
   padding-bottom: 20px;
-  overflow: hidden;
+  overflow: visible !important;
   /* padding-bottom: 20px;
   overflow: visible; */
   .swiper-slide {
     border-radius: 8px;
     width: auto;
-    padding: 10px;
+    /* padding: 10px; */
   }
 `;

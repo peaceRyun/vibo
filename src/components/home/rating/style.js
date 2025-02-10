@@ -13,14 +13,17 @@ export const RateItemImg = styled.img`
   width: 100%;
   height: 100%;
   object-fit: cover;
+  position: absolute;
   border-radius: ${({ isFirst }) => (isFirst ? '200px 200px 8px 8px' : '8px')};
   transition: border-radius 0.5s ease-in-out;
+  align-items: center;
 `;
 
 export const RankNumber = styled.div`
-  position: absolute;
-  bottom: -80px;
-  left: -25px;
+  position: relative;
+  bottom: -50px;
+  left: -30px;
+  z-index: 10;
   font-size: ${({ isFirst }) => (isFirst ? '300px' : '200px')};
   font-weight: 900;
   color: white;
