@@ -1,11 +1,11 @@
-import AboutP from '../about/AboutP';
+// import AboutP from '../about/AboutP';
 // import Login from '../member/Login';
 // import Register from '../member/Register';
 
 const TestChoi = () => {
   return (
     <>
-      <AboutP />
+      {/* <AboutP /> */}
       {/* <Login /> */}
       {/* <Register /> */}
     </>

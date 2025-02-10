@@ -26,6 +26,9 @@ export const ButtonB = styled.button`
     font-weight: ${(props) => props.$fontWeight};
     padding: 17px 23px;
     white-space: nowrap;
+    &:hover {
+        background-color: var(--primary-600);
+    }
     ${(props) =>
         props.$play &&
         `
