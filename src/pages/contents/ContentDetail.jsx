@@ -14,7 +14,7 @@ const ContentDetail = () => {
                     <PlayBanner />
                     <div style={{ padding: '0 50px' }}>
                         <section>
-                            <Flex $gap='15px' $padding='30px 0 30px'>
+                            <Flex $gap='15px' $padding='30px 0 30px' $justifyContent='space-between'>
                                 <Flex $flexDirection='column' $gap='15px'>
                                     <Flex $gap='15px' $alignItems='center'>
                                         <span>2024년</span>
