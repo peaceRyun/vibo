@@ -270,4 +270,7 @@ export const EpListBgi = styled.img`
 
 export const EpItemsWrap = styled.div`
     position: relative;
+    overflow: hidden;
+    // 초기 높이를 auto로 설정
+    height: auto;
 `;

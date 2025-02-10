@@ -1,35 +1,36 @@
 import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 
-export const useEpisodeAnimation = (isVisible) => {
-    const episodeListRef = useRef(null);
+export const useEpisodeAnimation = (isOpen) => {
+    const elementRef = useRef(null);
 
     useEffect(() => {
-        if (!episodeListRef.current) return;
+        const element = elementRef.current;
 
-        if (isVisible) {
-            gsap.fromTo(
-                episodeListRef.current,
-                {
-                    height: 0,
-                    opacity: 0,
-                },
-                {
-                    height: 'auto',
-                    opacity: 1,
-                    duration: 0.6,
-                    ease: 'power2.out',
-                }
-            );
+        if (!element) return;
+
+        // 초기 실행 시에는 애니메이션 없이 설정
+        if (!element.style.height) {
+            gsap.set(element, {
+                height: 'auto',
+            });
+            return;
+        }
+
+        if (isOpen) {
+            gsap.to(element, {
+                height: 'auto',
+                duration: 0.3,
+                ease: 'power2.out',
+            });
         } else {
-            gsap.to(episodeListRef.current, {
+            gsap.to(element, {
                 height: 0,
-                opacity: 0,
-                duration: 0.4,
-                ease: 'power2.in',
+                duration: 0.3,
+                ease: 'power2.out',
             });
         }
-    }, [isVisible]);
+    }, [isOpen]);
 
-    return episodeListRef;
+    return elementRef;
 };

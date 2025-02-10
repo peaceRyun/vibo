@@ -43,5 +43,5 @@ export const SDropdownItem = styled.div`
 
 export const SIcon = styled.img`
     transition: transform 0.2s ease;
-    transform: ${({ $isOpen }) => ($isOpen ? 'rotate(180deg)' : 'rotate(0)')};
+    transform: ${({ $isDropOpen }) => ($isDropOpen ? 'rotate(180deg)' : 'rotate(0)')};
 `;

@@ -7,18 +7,23 @@ import { useEpisodeAnimation } from '../../hooks/useGsap';
 
 const EpList = () => {
     const [isOpen, setIsOpen] = useState(false);
+    const [isDropOpen, setIsDropOpen] = useState(false);
     const [selectedSeason, setSelectedSeason] = useState('시즌 1');
-
     const episodeListRef = useEpisodeAnimation(isOpen);
 
     const handleToggle = () => {
         setIsOpen(!isOpen);
+        setIsDropOpen(!isDropOpen);
     };
 
     const handleSeasonSelect = (season) => {
         setSelectedSeason(season);
-        setIsOpen(false);
+        setIsOpen(false); // 시즌 선택 시 드롭다운 닫기
+        setIsDropOpen(false); // 드롭다운 아이콘 상태도 변경
     };
+
+    // 시즌 번호만 추출 (예: '시즌 1' -> '1')
+    const seasonNumber = selectedSeason.split(' ')[1];
 
     return (
         <section>
@@ -31,10 +36,9 @@ const EpList = () => {
                 >
                     <Flex $flexDirection='column' $position='relative'>
                         <H3>에피소드</H3>
-
                         <Flex $justifyContent='space-between' $alignItems='center' $gap='20px'>
                             <Flex $gap='10px' $justifyContent='space-between' $alignItems='center'>
-                                <P28>시즌 10:</P28>
+                                <P28>{selectedSeason}:</P28>
                                 <CRatingImg
                                     src='/contentdetail/contentrate/전체관람가 관람등급 1.png'
                                     alt='전체관람가 관람등급'
@@ -54,6 +58,7 @@ const EpList = () => {
                     </Flex>
                     <SeasonDropdown
                         isOpen={isOpen}
+                        isDropOpen={isDropOpen}
                         onToggle={handleToggle}
                         selectedSeason={selectedSeason}
                         onSelect={handleSeasonSelect}
@@ -62,10 +67,9 @@ const EpList = () => {
 
                 <EpItemsWrap ref={episodeListRef}>
                     <FlexUl $flexDirection='column'>
-                        <EpItem />
-                        <EpItem />
-                        <EpItem />
-                        <EpItem />
+                        {[...Array(4)].map((_, index) => (
+                            <EpItem key={index} number={seasonNumber} />
+                        ))}
                     </FlexUl>
                     <EpListBgi
                         src='/contentdetail/sample/EpList배경이미지.png'
