@@ -27,7 +27,7 @@ export const PBWrap = styled.div`
     position: relative;
     margin-left: auto;
     margin-right: auto;
-    height: 600px;
+    height: auto;
     overflow: hidden;
 `;
 
@@ -48,12 +48,21 @@ export const StyledIframe = styled.iframe`
     border: none;
 `;
 
+export const GradientLayer = styled.div`
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    background: linear-gradient(to bottom, transparent 0%, transparent 50%, rgba(25, 25, 25, 0.8) 75%, #191919 100%);
+`;
+
 export const PBuiWrap = styled.div`
     position: absolute;
     bottom: 0;
     left: 0;
-    width: 80%;
-    margin: 0px 150px 63px;
+    width: 90%;
+    margin: 0px 50px 63px;
 `;
 
 export const ItemWrap = styled.div`
@@ -113,6 +122,8 @@ export const Flex = styled.div`
     position: ${(props) => props.$position};
     width: ${(props) => props.$width || 'auto'};
     border-top: ${(props) => props.$borderTop};
+    white-space: ${(props) => props.$whiteSpace};
+    font-size: ${(props) => props.$fontSize};
 `;
 
 export const FlexUl = styled.ul`
@@ -194,7 +205,7 @@ export const P20 = styled.p`
 
 export const BarDemo = styled.div`
     height: 5px;
-    background-color: var(--primary-base);
+    background-color: var(--secondary-400);
 `;
 
 export const ModalOverlay = styled.div`

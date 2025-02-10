@@ -145,3 +145,24 @@ export const ModalBackdrop = styled.div`
     background-color: rgba(0, 0, 0, 0.5);
     z-index: 1;
 `;
+
+export const HeaderContainer = styled.div`
+    position: sticky;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: black;
+    padding: 75px 75px 0px 75px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 3;
+`;
+
+export const CloseButton = styled.div`
+    cursor: pointer;
+    position: absolute;
+    top: 0;
+    right: -75px;
+    padding: 20px 20px 0 0;
+`;

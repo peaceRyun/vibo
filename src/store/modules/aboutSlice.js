@@ -1,13 +1,12 @@
 // import { createSlice } from '@reduxjs/toolkit';
-// import 참조변수 from '../../assets/api/데이터';
 
 // const initialState = {};
 
-// export const xxSlice = createSlice({
+// export const aboutSlice = createSlice({
 //     name: 'xx',
 //     initialState,
 //     reducers: {},
 // });
 
-// export const {} = xxSlice.actions;
-// export default xxSlice.reducer;
+// export const {} = aboutSlice.actions;
+// export default aboutSlice.reducer;

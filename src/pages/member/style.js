@@ -98,8 +98,8 @@ export const Plan = styled.div`
     border-radius: 10px;
     width: 18.75rem;
     height: 140px;
-    background: ${({ isFilled }) => (isFilled ? '#07FFE6' : 'transparent')};
-    color: ${({ isFilled }) => (isFilled ? 'black' : 'inherit')};
+    background: ${({ $isFilled }) => ($isFilled ? '#07FFE6' : 'transparent')};
+    color: ${({ $isFilled }) => ($isFilled ? 'black' : 'inherit')};
     transition: background 0.3s ease, color 0.3s ease;
     &:hover {
         background: var(--primary-base);

@@ -46,7 +46,7 @@ const Membership = () => {
                     <PlanWrapper>
                         <Plan
                             className='basic'
-                            isFilled={selectedPlan === 'basic'}
+                            $isFilled={selectedPlan === 'basic'}
                             onClick={() => setSelectedPlan(selectedPlan === 'basic' ? null : 'basic')}
                         >
                             <h2>베이직</h2>
@@ -63,7 +63,7 @@ const Membership = () => {
                     <PlanWrapper>
                         <Plan
                             className='standard'
-                            isFilled={selectedPlan === 'standard'}
+                            $isFilled={selectedPlan === 'standard'}
                             onClick={() => setSelectedPlan(selectedPlan === 'standard' ? null : 'standard')}
                         >
                             <h2>스탠다드</h2>
@@ -80,7 +80,7 @@ const Membership = () => {
                     <PlanWrapper>
                         <Plan
                             className='premium'
-                            isFilled={selectedPlan === 'premium'}
+                            $isFilled={selectedPlan === 'premium'}
                             onClick={() => setSelectedPlan(selectedPlan === 'premium' ? null : 'premium')}
                         >
                             <h2>프리미엄</h2>
