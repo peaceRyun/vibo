@@ -1,14 +1,12 @@
-import GlobalStyle from '../../styled/GlobalStyle';
-import AboutP from '../about/AboutP';
-import Login from '../member/Login';
-import Register from '../member/Register';
+// import AboutP from '../about/AboutP';
+// import Login from '../member/Login';
+// import Register from '../member/Register';
 
 const TestChoi = () => {
   return (
     <>
-      <GlobalStyle />
       {/* <AboutP /> */}
-      <Login />
+      {/* <Login /> */}
       {/* <Register /> */}
     </>
   );
