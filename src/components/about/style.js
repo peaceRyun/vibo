@@ -215,3 +215,62 @@ export const ContentContainer = styled.div`
     border-radius: 50px;
   }
 `;
+
+export const FAQContainer = styled.div`
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  background-color: #191919;
+  color: white;
+  border-radius: 10px;
+  text-align: center;
+
+  .faq-title {
+    font-size: 28px;
+    font-weight: 900;
+    color: white;
+    margin-bottom: 20px;
+  }
+`;
+
+export const FAQItem = styled.div`
+  background-color: ${({ active }) => (active ? '#07ffe6' : '#3e3e3f')};
+  color: ${({ active }) => (active ? 'black' : 'white')};
+  padding: 16px 20px;
+  margin-bottom: 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 700;
+  font-size: 18px;
+  transition: background 0.3s ease-in-out;
+
+  &:hover {
+    background-color: #07ffe6;
+    color: black;
+  }
+`;
+
+export const Question = styled.div`
+  flex-grow: 1;
+  text-align: left;
+  font-weight: 700;
+`;
+
+export const Icon = styled.span`
+  transition: transform 0.3s ease;
+  transform: ${({ active }) => (active ? 'rotate(180deg)' : 'rotate(0)')};
+`;
+
+export const Answer = styled.div`
+  padding: 10px;
+  font-size: 16px;
+  text-align: left;
+  color: #d1d2d4;
+  background-color: #2a2a2a;
+  border-radius: 4px;
+  margin-top: 10px;
+`;
