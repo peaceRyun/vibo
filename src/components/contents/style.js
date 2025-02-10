@@ -277,6 +277,6 @@ export const EpItemsWrap = styled.div`
 
 export const CloseButton = styled.button`
     position: absolute;
-    top: 0;
-    right: 0;
+    top: 20px;
+    right: 20px;
 `;

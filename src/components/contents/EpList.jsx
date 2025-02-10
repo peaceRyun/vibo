@@ -20,6 +20,12 @@ const EpList = () => {
         setIsDropdownOpen(false);
     };
 
+    const handleClose = () => {
+        // 애니메이션이 완료된 후 상태를 리셋하기 위해 약간의 지연을 줍니다
+        setSelectedSeason('');
+        setIsDropdownOpen(false);
+    };
+
     // 선택된 시즌의 번호만 추출 (예: '시즌 1' -> 1)
     const seasonNumber = selectedSeason ? selectedSeason.split(' ')[1] : '';
 
@@ -85,8 +91,8 @@ const EpList = () => {
                             $right='0'
                             $zIndex='-1'
                         />
-                        <CloseButton onClick={handleToggle}>
-                            <IoClose color='var(--white)' size='20' />
+                        <CloseButton onClick={handleClose}>
+                            <IoClose color='var(--white)' size='40' />
                         </CloseButton>
                     </EpItemsWrap>
                 )}
