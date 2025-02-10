@@ -1,5 +1,6 @@
 // 비슷한 콘텐츠
 // 영화, 시리즈 콘텐츠 공통
+import LikeButton from '../../ui/like/Like';
 import { Badge, Flex, ItemImg, ItemWrap, P, PlayImg, Span } from './style';
 
 const ReItem = () => {
@@ -20,9 +21,7 @@ const ReItem = () => {
                         </Badge>
                         <Span fontSize='28px'>2024</Span>
                     </Flex>
-                    <button>
-                        <img src='/contentdetail/ui/heart.png' alt='likeActive' />
-                    </button>
+                    <LikeButton size='20' />
                 </Flex>
                 <P>
                     프로 바둑기사의 꿈을 접은 장그래는 인턴사원이 되어 입사 동기 영이에게 의존하며 험난한 직장 생활을

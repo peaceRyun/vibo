@@ -2,7 +2,6 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import ReItem from './ReItem';
 import { Flex, H3 } from './style';
-import { Pagination } from 'swiper/modules';
 
 const ReList = () => {
     return (
@@ -16,7 +15,6 @@ const ReList = () => {
                         pagination={{
                             clickable: true,
                         }}
-                        modules={[Pagination]}
                         className='mySwiper'
                         style={{ overflow: 'visible' }}
                     >
