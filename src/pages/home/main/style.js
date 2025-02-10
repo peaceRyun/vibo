@@ -18,6 +18,6 @@ export const MainContainer = styled.div`
   margin: auto; */
 `;
 
-export const ViboOnly = styled.div`
-  display: flex;
-`;
+// export const ViboOnly = styled.div`
+//   display: flex;
+// `;
