@@ -132,17 +132,86 @@ export const OriginalWrapper = styled.div`
   }
 `;
 
-export const AboutPswiper = styled.div`
-  swiper-slide {
-    text-align: center;
-    font-size: 18px;
-    background: #fff;
-    height: calc((100% - 30px) / 2) !important;
+export const AboutPswiperWrapper = styled.div`
+  width: 100%;
+  background: #000;
+  padding: 20px 0;
+  overflow: hidden;
+  position: absolute;
+  top: 300px;
+
+  .slider-container {
+    position: relative;
+    width: 100%;
+    height: 300px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+  }
+
+  .slide-track {
+    display: flex;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: transform 0.02s linear;
+  }
+
+  .slide {
+    width: 474px;
+    height: 281px;
+    margin: 10px;
+    background: #111;
+    border-radius: 10px;
+    overflow: hidden;
     display: flex;
     justify-content: center;
     align-items: center;
   }
 
-  
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+  }
+`;
+export const ContentContainer = styled.div`
+  position: relative;
+  text-align: center;
+  color: white;
+  height: 1000px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  .title {
+    position: absolute;
+    top: 70px;
+    h2 {
+      font-family: NanumSquare Neo;
+      font-size: 40px;
+      font-weight: 800;
+      line-height: 100px;
+      text-align: center;
+      letter-spacing: 0.01em;
+    }
+    p {
+      font-family: NanumSquare Neo;
+      font-weight: 800;
+      font-size: 20px;
+      color: var(--gray-500);
+    }
+  }
+
+  button {
+    position: absolute;
+    bottom: 0;
+    background-color: var(--primary-base);
+    width: 239px;
+    height: 51px;
+    font-weight: 800;
+    font-size: 24px;
+    border-radius: 50px;
   }
 `;
