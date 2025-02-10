@@ -298,3 +298,246 @@ export const FlexUl = styled.ul`
     position: ${(props) => props.$position};
     width: ${(props) => props.$width || 'auto'};
 `;
+
+// -------------------------------로그인 페이지 스타일
+
+export const LoginContainer = styled.div`
+  display: flex;
+  gap: 40px;
+  width: 100%;
+  max-width: 610px;
+  height: 456px;
+  margin: 200px auto;
+  padding: 95px;
+  // border: 1px solid #ccc;
+  border-radius: 8px;
+  // background-color: #f9f9f9;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  .title {
+    width: 192px;
+    font-weight: 900;
+    font-size: 32px;
+    color: #07ffe6;
+  }
+`;
+export const Form = styled.form`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+`;
+
+export const Fieldset = styled.fieldset`
+  border: none;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+`;
+
+export const Legend = styled.legend`
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 10px;
+`;
+
+export const StyledInput = styled.input`
+  font-family: NanumSquare Neo;
+  font-weight: 600;
+  padding: 22px 16px;
+ border: 1px solid ${({ error }) => (error ? '#eb003b' : '#bcbdc0')};
+  background-color: #191919;
+  border-radius: 8px !important;
+  font-size: 17px;
+  width: 420px;
+  height: 56px;
+   transition: border-color 0.2s ease-in-out;
+  &[type='password'] {
+    font-family: 'NanumSquare Neo' !important;
+    font-weight: 600 !important;
+    padding: 22px 16px !important;
+    border: 1px solid ${({ error }) => (error ? '#eb003b' : '#bcbdc0')}; !important;
+    border-radius: 8px !important;
+    font-size: 17px !important;
+    width: 420px !important;
+    height: 56px !important;
+  }
+    color: white;
+    &::placeholder {
+    color: #BCBDC0;
+    
+  }
+    &:focus {
+    border: 1px solid ${({ error }) => (error ? '#eb003b' : '#07ffe6')};
+    outline: none;
+    
+`;
+
+export const StyledButton = styled.button`
+  width: 420px;
+  height: 56px;
+  padding: 12px;
+  background-color: #07ffe6;
+  color: black;
+  font-weight: 700;
+  font-size: 17px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+
+  &:hover {
+    background-color: #06dbbf;
+  }
+  &:active {
+    background-color: #04998a;
+  }
+  &:disabled {
+    background-color: #d1d2d4;
+    cursor: not-allowed;
+  }
+`;
+export const StyledCheckboxContainer = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 8px;
+`;
+
+export const StyledCheckbox = styled.input`
+  width: 24px;
+  height: 24px;
+  border-radius: 4px;
+  accent-color: #06dbbf;
+  font-weight: 600;
+  font-size: 15px;
+  color: #bcbdc0;
+`;
+
+export const StyledLinks = styled.div`
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin-top: 10px;
+
+  a {
+    font-weight: 600;
+    font-size: 15px;
+    color: #bcbdc0;
+    text-decoration: none;
+    font-size: 15px;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  span {
+    color: #888;
+  }
+`;
+
+// ---------------------회원가입 페이지 스타일
+
+export const RegisterContainer = styled.div`
+  display: flex;
+  gap: 40px;
+  width: 100%;
+  max-width: 610px;
+  height: auto;
+  margin: 100px auto;
+  padding: 50px;
+  border-radius: 8px;
+  background-color: #191919;
+  display: flex;
+  flex-direction: column;
+
+  .title {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    font-weight: 900;
+    font-size: 32px;
+    color: #07ffe6;
+  }
+
+  .form {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    align-items: center;
+    .Register {
+      display: flex;
+      flex-direction: column;
+      gap: 45px;
+      width: 100%;
+      max-width: 610px;
+    }
+  }
+`;
+
+export const Title = styled.h2`
+  font-weight: 900;
+  font-size: 32px;
+  color: #07ffe6;
+`;
+
+export const ErrorText = styled.p`
+  color: #eb003b;
+  font-size: 12px;
+  position: absolute;
+  bottom: -20px; /* 인풋 아래 고정 */
+  left: 40px;
+  margin: 0;
+`;
+
+export const InputGroup = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  min-height: 60px;
+  position: relative;
+  .textarea {
+    width: 100%;
+    max-width: 420px;
+    min-height: 183px;
+    color: #a8a9ab;
+    background-color: #3e3e3f;
+    border: 0;
+  }
+`;
+
+export const StyledInputWrapper = styled.div`
+  position: relative;
+  width: 100%;
+  max-width: 420px;
+`;
+
+export const InputButton = styled.button`
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: #07ffe6;
+  color: black;
+  font-weight: 700;
+  font-size: 14px;
+  padding: 6px 10px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #06dbbf;
+  }
+  &:active {
+    background-color: #04998a;
+  }
+`;
