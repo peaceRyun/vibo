@@ -267,3 +267,7 @@ export const EpListBgi = styled.img`
     transform: ${(props) => props.$transform};
     z-index: ${(props) => props.$zIndex};
 `;
+
+export const EpItemsWrap = styled.div`
+    position: relative;
+`;

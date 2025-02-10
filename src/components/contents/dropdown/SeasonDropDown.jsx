@@ -1,25 +1,16 @@
-import React, { useState } from 'react';
 import { SDropdown, SDropdownButton, SDropdownContent, SDropdownItem, SIcon } from './style';
 
-const SeasonDropdown = () => {
-    const [isOpen, setIsOpen] = useState(false);
-    const [selectedSeason, setSelectedSeason] = useState('시즌 1');
-
+const SeasonDropdown = ({ isOpen, onToggle, selectedSeason, onSelect }) => {
     const seasons = ['시즌 1', '시즌 2', '시즌 3', '시즌 4'];
 
-    const toggleDropdown = () => {
-        setIsOpen(!isOpen);
-    };
-
     const handleSelect = (season) => {
-        setSelectedSeason(season);
-        setIsOpen(false);
+        onSelect(season);
     };
 
     return (
         <SDropdown>
-            <SDropdownButton onClick={toggleDropdown}>
-                {selectedSeason}
+            <SDropdownButton onClick={onToggle}>
+                {isOpen ? selectedSeason : '시즌'}
                 <SIcon src='/contentdetail/ui/live area.png' alt='dropdownIcon' $isOpen={isOpen} />
             </SDropdownButton>
 
