@@ -8,7 +8,8 @@ function App() {
   return (
     <>
       <GlobalStyle />
-      <TestLee />`{/* <TestKwon />` */}
+      <TestLee />
+      <TestKwon />
       <TestChoi />
       <TestJung />
     </>
