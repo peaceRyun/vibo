@@ -4,6 +4,7 @@ import 'swiper/css/pagination';
 
 import { AboutPswiperWrapper } from './style';
 import { useEffect, useRef } from 'react';
+import { gsap } from 'gsap';
 
 const images = [
   '/about/about_all01.png',
@@ -22,34 +23,28 @@ const AboutPswiper = () => {
   const bottomTrackRef = useRef(null);
 
   useEffect(() => {
-    const createSlider = (track, direction = 'left', speed = 1) => {
-      let position = 0;
-
-      const animate = () => {
-        if (direction === 'left') {
-          position -= speed;
-          if (Math.abs(position) >= track.scrollWidth / 2) {
-            position = 0;
-          }
-        } else {
-          position += speed;
-          if (position >= track.scrollWidth / 2) {
-            position = 0;
-          }
+    if (topTrackRef.current && bottomTrackRef.current) {
+      gsap.fromTo(
+        topTrackRef.current,
+        { x: 0 },
+        {
+          x: '-50%',
+          duration: 15,
+          repeat: -1,
+          ease: 'linear',
         }
+      );
 
-        track.style.transform = `translateX(${position}px)`;
-        requestAnimationFrame(animate);
-      };
-
-      animate();
-    };
-
-    if (topTrackRef.current) {
-      createSlider(topTrackRef.current, 'left', 1);
-    }
-    if (bottomTrackRef.current) {
-      createSlider(bottomTrackRef.current, 'right', 1);
+      gsap.fromTo(
+        bottomTrackRef.current,
+        { x: '-50%' },
+        {
+          x: '0%',
+          duration: 15,
+          repeat: -1,
+          ease: 'linear',
+        }
+      );
     }
   }, []);
 

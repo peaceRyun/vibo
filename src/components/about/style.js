@@ -218,7 +218,8 @@ export const ContentContainer = styled.div`
 
 export const FAQContainer = styled.div`
   width: 100%;
-  max-width: 800px;
+  max-width: 1700px;
+  height: 107px;
   margin: 0 auto;
   padding: 40px 20px;
   background-color: #191919;
@@ -227,30 +228,36 @@ export const FAQContainer = styled.div`
   text-align: center;
 
   .faq-title {
-    font-size: 28px;
-    font-weight: 900;
+    font-size: 60px;
+    font-weight: 800;
     color: white;
-    margin-bottom: 20px;
+    margin-bottom: 64px;
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+    justify-content: flex-start;
   }
 `;
 
 export const FAQItem = styled.div`
-  background-color: ${({ active }) => (active ? '#07ffe6' : '#3e3e3f')};
-  color: ${({ active }) => (active ? 'black' : 'white')};
-  padding: 16px 20px;
-  margin-bottom: 10px;
+  background-color: ${({ active }) => (active ? '#2a2a2a' : '#3e3e3f')};
+  color: ${({ active }) => (active ? '#07ffe6' : '#D1D2D4')};
+  padding: 30px 40px;
+  margin-bottom: ${({ active }) => (active ? '10px' : '35px')};
   border-radius: 6px;
   cursor: pointer;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-weight: 700;
-  font-size: 18px;
-  transition: background 0.3s ease-in-out;
+  font-weight: 800;
+  font-size: 34px;
+  transition: background 0.3s ease-in-out, margin-bottom 0.3s ease-in-out;
+  width: 100%;
+  max-width: 1500px;
+  height: 95px;
 
   &:hover {
-    background-color: #07ffe6;
-    color: black;
+    color: #07ffe6;
   }
 `;
 
@@ -266,11 +273,21 @@ export const Icon = styled.span`
 `;
 
 export const Answer = styled.div`
-  padding: 10px;
-  font-size: 16px;
+  font-size: 20px;
   text-align: left;
+  padding: 10px 30px;
   color: #d1d2d4;
+`;
+
+export const AnswerWrapper = styled.div`
+  max-width: 1470px;
+  max-height: ${({ active }) => (active ? '100px' : '0')};
+  overflow: hidden;
+  transition: max-height 0.3s ease-in-out;
   background-color: #2a2a2a;
-  border-radius: 4px;
-  margin-top: 10px;
+  border-radius: 6px;
+  margin: ${({ active }) => (active ? '0 0 30px 30px;' : '0')};
+
+  padding: ${({ active }) => (active ? '15px' : '0')};
+  opacity: ${({ active }) => (active ? '1' : '0')};
 `;

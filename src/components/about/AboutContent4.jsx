@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { FAQContainer, FAQItem, Question, Answer, Icon } from './style';
+import { FAQContainer, FAQItem, Question, Answer, AnswerWrapper, Icon } from './style';
 
 const faqs = [
   { question: 'VIBO만의 콘텐츠는 무엇인가요?', answer: 'VIBO에서만 제공하는 오리지널 콘텐츠를 확인하세요.' },
@@ -20,11 +20,15 @@ const AboutContent4 = () => {
     <FAQContainer>
       <h2 className="faq-title">자주 묻는 질문</h2>
       {faqs.map((faq, index) => (
-        <FAQItem key={index} onClick={() => toggleFAQ(index)} active={openIndex === index}>
-          <Question active={openIndex === index}>{faq.question}</Question>
-          <Icon active={openIndex === index}>▼</Icon>
-          {openIndex === index && <Answer>{faq.answer}</Answer>}
-        </FAQItem>
+        <div key={index}>
+          <FAQItem onClick={() => toggleFAQ(index)} active={openIndex === index}>
+            <Question active={openIndex === index}>{faq.question}</Question>
+            <Icon active={openIndex === index}>▼</Icon>
+          </FAQItem>
+          <AnswerWrapper active={openIndex === index}>
+            <Answer>{faq.answer}</Answer>
+          </AnswerWrapper>
+        </div>
       ))}
     </FAQContainer>
   );
