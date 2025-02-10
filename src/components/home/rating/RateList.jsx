@@ -33,6 +33,7 @@ const RateList = () => {
           20대 <br /> 인기 드라마
         </RateTitle>
       </RateInfo>
+
       <RateSwiper
         spaceBetween={50}
         pagination={{ clickable: true }}
@@ -47,6 +48,9 @@ const RateList = () => {
           <SwiperSlide key={index} className={index === activeIndex ? 'main-slide' : ''}>
             <RateItem image={imgSrc} rank={index + 1} isActive={index === activeIndex} />
           </SwiperSlide>
+          // <SwiperSlide key={index} className={index === activeIndex ? 'main-slide' : ''}>
+          //   <RateItem image={imgSrc} rank={index + 1} isActive={index === activeIndex} />
+          // </SwiperSlide>
         ))}
       </RateSwiper>
     </Section>
@@ -85,20 +89,21 @@ const RateTitle = styled.h3`
 const RateSwiper = styled(Swiper)`
   flex: 3;
   height: 535.62px;
-  margin-bottom: 40px;
+  /* margin-bottom: 40px; */
 
   display: flex;
-  align-items: center; /* Swiper 자체 중앙 정렬 */
+  /* align-items: center; Swiper 자체 중앙 정렬 */
 
   .swiper-slide {
     width: 300px !important;
     height: 443px;
     display: flex;
     justify-content: center; /* 내부 이미지 중앙 정렬 */
-    align-items: center;
+    /* align-items: center; */
     overflow: hidden;
     border-radius: 8px;
     transition: all 0.3s ease;
+    position: relative;
   }
 
   .main-slide {
@@ -106,5 +111,7 @@ const RateSwiper = styled(Swiper)`
     height: 535.62px;
     border-radius: 226.5px 226.5px 8px 8px;
     background-color: #000;
+    /* position: relative; */
+    /* overflow: visible; */
   }
 `;

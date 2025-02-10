@@ -3,8 +3,9 @@ import styled from 'styled-components';
 export const GenreContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 4.063rem 3rem;
-  max-width: 1820px;
+  gap: 3rem 81.6px;
+  /* 4.063rem 3rem; */
+  /* max-width: 1820px; */
 `;
 
 export const GenreItem = styled.div`
