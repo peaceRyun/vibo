@@ -11,7 +11,7 @@ import CommonList from '../../../components/home/common/CommonList';
 // import Only1 from '../../../components/home/viboOnly/only1/Only1';
 // import Only2 from '../../../components/home/viboOnly/only2/Only2';
 // import MenuButton from '../../../components/home/menubutton/MenuButton';
-import { MainContainer } from './style';
+import { MainContainer, MainContent } from './style';
 import ViboOnly from '../../../components/home/viboOnly/ViboOnly';
 import MenuSection from '../../../components/home/menubutton/MenuSection';
 import MainBanner from '../../../components/home/mainBanner/MainBanner';
@@ -22,7 +22,7 @@ const liveTitles = [{ id: '1', title: '실시간 인기 LIVE' }];
 
 const MainHome = () => {
   return (
-    <div>
+    <MainContent>
       <MainBanner />
       <MainContainer>
         <WatchingList />
@@ -41,7 +41,7 @@ const MainHome = () => {
         <ViboOnly />
       </MainContainer>
       <MenuSection />
-    </div>
+    </MainContent>
   );
 };
 

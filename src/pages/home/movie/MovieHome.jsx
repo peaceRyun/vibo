@@ -1,7 +1,7 @@
 // 영화 홈
 import React from 'react';
 import MainBanner from '../../../components/home/mainBanner/MainBanner';
-import { MainContainer } from '../main/style';
+import { MainContainer, MainContent } from '../main/style';
 
 import GenreNav from '../../../components/home/genreNav/GenreNav';
 
@@ -14,7 +14,7 @@ import PopularList from '../../../components/home/popularlank/PopularList';
 const MovieHome = () => {
   const movieTabs = ['국내영화', '미국영화', '영국영화', '일본영화', '대만영화'];
   return (
-    <div>
+    <MainContent>
       <MainBanner />
       <MainContainer>
         <TabButton tabs={movieTabs} />
@@ -28,7 +28,7 @@ const MovieHome = () => {
           <MoreButton>더보기</MoreButton>
         </Section>
       </MainContainer>
-    </div>
+    </MainContent>
   );
 };
 

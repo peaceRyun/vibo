@@ -9,6 +9,7 @@ export const MainContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 60px;
+
   /* padding: 50px; */
   /* display: flex;
   flex-direction: column;
@@ -21,3 +22,7 @@ export const MainContainer = styled.div`
 // export const ViboOnly = styled.div`
 //   display: flex;
 // `;
+
+export const MainContent = styled.div`
+  padding-top: 5rem;
+`;
