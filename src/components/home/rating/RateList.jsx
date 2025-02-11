@@ -93,8 +93,8 @@ const RateSwiper = styled(Swiper)`
     width: 100%;
 
     .swiper-slide {
-        width: 300px;
-        height: 443px;
+        width: 352px;
+        height: 487px;
         display: flex;
         justify-content: center;
         align-items: center;
