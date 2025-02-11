@@ -1,12 +1,19 @@
+import { useDispatch } from 'react-redux';
 import EpList from '../../components/contents/EpList';
 import PlayBanner from '../../components/contents/PlayBanner';
 import ReList from '../../components/contents/ReList';
 import ReviewList from '../../components/contents/ReviewList';
 import { Flex, FlexUl, H3, Inner, SpanInfo, SpanInfoDim } from '../../components/contents/style';
 import { BadgeBlank } from './style';
+import { useEffect } from 'react';
+import { getMovie } from '../../store/modules/getThunk';
 
 // 콘텐츠 상세
 const ContentDetail = () => {
+    const dispatch = useDispatch();
+    useEffect(() => {
+        dispatch(getMovie());
+    }, []);
     return (
         <>
             <Inner>

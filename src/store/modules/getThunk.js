@@ -10,7 +10,6 @@ const options = {
 export const getMovie = createAsyncThunk('movie/getMovie', async () => {
     const url = `https://api.themoviedb.org/3/movie/now_playing?`;
     try {
-        // const res = await axios.get(url);
         const res = await axios.get(url, { params: options });
         return res.data.results;
     } catch (error) {
