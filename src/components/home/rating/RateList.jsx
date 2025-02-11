@@ -2,11 +2,10 @@ import React, { useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import styled from 'styled-components';
-
 import RateItem from './RateItem';
 
 const RateList = () => {
-    const [activeIndex, setActiveIndex] = useState(0); // 가장 왼쪽 슬라이드 인덱스 추적
+    const [activeIndex, setActiveIndex] = useState(0);
 
     const images = [
         '/mainhome/weeklyitem_01.webp',
@@ -18,41 +17,29 @@ const RateList = () => {
         '/mainhome/weeklyitem_02.webp',
         '/mainhome/weeklyitem_03.webp',
         '/mainhome/weeklyitem_04.webp',
-        '/mainhome/weeklyitem_05.webp',
-        '/mainhome/weeklyitem_01.webp',
-        '/mainhome/weeklyitem_02.webp',
-        '/mainhome/weeklyitem_03.webp',
-        '/mainhome/weeklyitem_04.webp',
-        '/mainhome/weeklyitem_05.webp',
     ];
 
     return (
         <Section>
-            <RateInfo>
+            <LeftArea>
                 <RateTitle>
                     20대 <br /> 인기 드라마
                 </RateTitle>
-            </RateInfo>
+            </LeftArea>
 
-            <RateSwiper
-                spaceBetween={50}
-                pagination={{ clickable: true }}
-                slidesPerView={4}
-                // modules={[Pagination]}
-                onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)} // 슬라이드 변경 시 인덱스 업데이트
-                // centeredSlides={true}
-                // loop={true}
-            >
-                {/* {[...Array(10)].map((_, index) => ( */}
-                {images.map((imgSrc, index) => (
-                    <SwiperSlide key={index} className={index === activeIndex ? 'main-slide' : ''}>
-                        <RateItem image={imgSrc} rank={index + 1} isActive={index === activeIndex} />
-                    </SwiperSlide>
-                    // <SwiperSlide key={index} className={index === activeIndex ? 'main-slide' : ''}>
-                    //   <RateItem image={imgSrc} rank={index + 1} isActive={index === activeIndex} />
-                    // </SwiperSlide>
-                ))}
-            </RateSwiper>
+            <RightArea>
+                <RateSwiper
+                    spaceBetween={60} /* 슬라이드 간의 간격을 넉넉하게 설정 */
+                    slidesPerView={3.5} /* 메인 슬라이드가 강조되도록 설정 */
+                    onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)}
+                >
+                    {images.map((imgSrc, index) => (
+                        <SwiperSlide key={index}>
+                            <RateItem image={imgSrc} rank={index + 1} isMainSlide={index === activeIndex} />
+                        </SwiperSlide>
+                    ))}
+                </RateSwiper>
+            </RightArea>
         </Section>
     );
 };
@@ -61,20 +48,22 @@ export default RateList;
 
 const Section = styled.section`
     display: flex;
-    align-items: flex-start;
-    position: relative;
-    /* gap: 20px; */
-    /* margin-top: 100px; */
+    flex-direction: row;
+    gap: 40px;
+    height: 100vh;
 `;
 
-const RateInfo = styled.div`
+const LeftArea = styled.div`
     flex: 1;
+    padding-left: 60px; /* 왼쪽 공간 확보 */
     display: flex;
+    align-items: center;
+`;
 
-    flex-direction: column;
-    justify-content: space-between;
-    height: 443px;
-    width: 443px;
+const RightArea = styled.div`
+    padding-left: 85px;
+    flex: 3;
+    overflow: hidden; /* 왼쪽으로 넘치는 슬라이드를 숨김 */
 `;
 
 const RateTitle = styled.h3`
@@ -83,30 +72,13 @@ const RateTitle = styled.h3`
     font-weight: bold;
     line-height: 1.5;
     margin: 0;
-    text-align: left;
 `;
 
 const RateSwiper = styled(Swiper)`
-    flex: 3;
-    height: 535.62px;
-    display: flex;
     width: 100%;
+    overflow: visible;
 
     .swiper-slide {
-        width: 352px;
-        height: 487px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        overflow: hidden;
-        border-radius: 8px;
-        transition: all 0.3s ease;
-    }
-
-    .main-slide {
-        width: 370px !important; /* 강제로 370px로 설정 */
-        height: 535.62px;
-        border-radius: 226.5px 226.5px 8px 8px;
-        background-color: #000;
+        overflow: visible;
     }
 `;
