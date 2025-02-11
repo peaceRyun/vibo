@@ -1,7 +1,12 @@
+import { useNavigate } from 'react-router';
 import { ButtonLight, DimmedWrap, EditForm, Flex, H2, P, PageWrap, ProfileImg, ProfileImgWrap } from './style';
 import { FaPen } from 'react-icons/fa';
 
 const ProfilesForEdit = () => {
+    const navigate = useNavigate();
+    const onGo = () => {
+        navigate('/profileforedit');
+    };
     return (
         <>
             <PageWrap>
@@ -21,7 +26,7 @@ const ProfilesForEdit = () => {
                                     $filter
                                 />
                                 <DimmedWrap>
-                                    <button>
+                                    <button onClick={onGo}>
                                         <FaPen size='40px' color='white' />
                                     </button>
                                 </DimmedWrap>

@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import Nav from './Nav';
 import HeaderRight from './HeaderRight';
 import Dropdown from './Dropdown';
 import ProfileDropdown from './ProfileDropdown';
 import { HeaderContainer, Logo, LeftSection } from './style';
+import { Link } from 'react-router';
 
 const Header = () => {
     const [isSearchOpen, setSearchOpen] = useState(false);
@@ -16,7 +17,9 @@ const Header = () => {
         <div style={{ position: 'relative' }}>
             <HeaderContainer>
                 <LeftSection>
-                    <Logo>VIBO</Logo>
+                    <Link to='/'>
+                        <Logo>VIBO</Logo>
+                    </Link>
                     <Nav />
                 </LeftSection>
 

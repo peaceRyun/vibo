@@ -2,36 +2,29 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import styled from 'styled-components';
 import LiveItem from './LiveItem';
-import { Pagination } from 'swiper/modules';
-import { MainContainer } from '../../../pages/home/main/style';
 
-const LiveList = () => {
+const LiveList = ({ title }) => {
+  // ⬅️ 부모 컴포넌트에서 title을 전달받음
   return (
-    <MainContainer>
-      <Section>
-        <StyledTitle>실시간 인기 LIVE</StyledTitle>
-        <StyledSwiper slidesPerView={4.2} spaceBetween={16} pagination={{ clickable: true }}>
-          {/* pagination={{ clickable: true }} modules={[Pagination]} */}
-          {[...Array(5)].map((_, index) => (
-            <SwiperSlide key={index} style={{ overflow: 'visible' }}>
-              <LiveItem />
-            </SwiperSlide>
-          ))}
-        </StyledSwiper>
-      </Section>
-    </MainContainer>
+    <LiveContainer>
+      <StyledTitle>{title}</StyledTitle> {/* ⬅️ 전달받은 title 사용 */}
+      <StyledSwiper slidesPerView={4.2} spaceBetween={16} pagination={{ clickable: true }}>
+        {[...Array(5)].map((_, index) => (
+          <SwiperSlide key={index} style={{ overflow: 'visible' }}>
+            <LiveItem />
+          </SwiperSlide>
+        ))}
+      </StyledSwiper>
+    </LiveContainer>
   );
 };
 
 export default LiveList;
 
 // Styled Components
-const Section = styled.section``;
-
-const FlexCol = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: ${(props) => props.gap || '20px'};
+const LiveContainer = styled.section`
+  width: 100%;
+  margin: 0 auto;
 `;
 
 const StyledTitle = styled.h3`
@@ -43,10 +36,10 @@ const StyledTitle = styled.h3`
 
 const StyledSwiper = styled(Swiper)`
   padding-bottom: 20px;
+  overflow: visible !important;
 
   .swiper-slide {
     border-radius: 8px;
     width: auto;
-    padding: 10px;
   }
 `;
