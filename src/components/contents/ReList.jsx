@@ -5,12 +5,12 @@ import { Flex, H3 } from './style';
 import { useSelector } from 'react-redux';
 
 const ReList = () => {
-    const { movieData } = useSelector((state) => state.movieR);
+    const { TVseriesData } = useSelector((state) => state.tvSeriesR);
 
-    if (!movieData) {
+    if (!TVseriesData) {
         return <div>loading....</div>;
     }
-    if (movieData.length > 0) {
+    if (TVseriesData.length > 0) {
         return (
             <>
                 <section>
@@ -25,9 +25,9 @@ const ReList = () => {
                             className='mySwiper'
                             style={{ overflow: 'visible' }}
                         >
-                            {movieData.map((movie) => (
-                                <SwiperSlide key={movie.id} style={{ overflow: 'visible' }}>
-                                    <ReItem movie={movie} />
+                            {TVseriesData.map((content) => (
+                                <SwiperSlide key={content.id} style={{ overflow: 'visible' }}>
+                                    <ReItem content={content} />
                                 </SwiperSlide>
                             ))}
                         </Swiper>

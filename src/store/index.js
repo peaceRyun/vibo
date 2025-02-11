@@ -3,8 +3,8 @@ import { configureStore } from '@reduxjs/toolkit';
 // import contentR from './modules/contentSlice';
 // import memberR from './modules/memberSlice';
 import playerR from './modules/playerSlice';
-// import tmR from './modules/tmSlice';
 import movieR from './modules/movieSlice';
+import tvSeriesR from './modules/tvSeriesSlice';
 // import pagenationR from './modules/pagenationSlice';
 
 export const store = configureStore({
@@ -14,7 +14,7 @@ export const store = configureStore({
         // memberR,
         playerR,
         movieR,
-        // tmR,
+        tvSeriesR,
         // pagenationR,
     },
 });

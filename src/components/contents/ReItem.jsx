@@ -3,13 +3,13 @@
 import LikeButton from '../../ui/like/Like';
 import { Badge, Flex, ItemImg, ItemWrap, P, PlayImg, Span } from './style';
 
-const ReItem = ({ movie }) => {
-    const { title, poster_path } = movie;
+const ReItem = ({ content }) => {
+    const { name, poster_path } = content;
     return (
         <>
             <ItemWrap>
                 <Flex $justifyCenter='center' $alignItems='center' $position='relative'>
-                    <ItemImg src={`https://image.tmdb.org/t/p/w500/${poster_path}`} alt={title} />
+                    <ItemImg src={`https://image.tmdb.org/t/p/w500/${poster_path}`} alt={name} />
                     <button>
                         <PlayImg src='/contentdetail/ui/carousel_action_atomic.png' alt='sample1' />
                     </button>
