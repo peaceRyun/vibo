@@ -4,6 +4,7 @@ import { ProfileDropdownContainer, DropdownItem, UserIconContainer } from './sty
 import { FaUserCircle } from 'react-icons/fa'; // 유저 아이콘
 import { AiOutlineEdit } from 'react-icons/ai'; // 연필 아이콘
 import { FiLogOut } from 'react-icons/fi'; // 로그아웃 아이콘
+import { Link } from 'react-router';
 
 const ProfileDropdown = () => {
     return (
@@ -32,14 +33,24 @@ const ProfileDropdown = () => {
 
             {/* 메뉴 항목 */}
             <ul>
-                <DropdownItem>
-                    <AiOutlineEdit size={20} />
-                    마이페이지
-                </DropdownItem>
-                <DropdownItem>
-                    <AiOutlineEdit size={20} />
-                    프로필관리
-                </DropdownItem>
+                <Link to='/mypage'>
+                    <DropdownItem>
+                        <AiOutlineEdit size={20} />
+                        마이페이지
+                    </DropdownItem>
+                </Link>
+                <Link to='/profilesforedit'>
+                    <DropdownItem>
+                        <AiOutlineEdit size={20} />
+                        프로필관리
+                    </DropdownItem>
+                </Link>
+                <Link to='/profileinfoedit'>
+                    <DropdownItem>
+                        <AiOutlineEdit size={20} />
+                        회원정보수정
+                    </DropdownItem>
+                </Link>
                 <DropdownItem>
                     <FiLogOut size={20} />
                     로그아웃

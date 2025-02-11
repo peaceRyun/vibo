@@ -257,7 +257,7 @@ export const DropdownItem = styled.li`
     cursor: pointer;
     gap: 0.5rem;
     transition: background 0.3s;
-
+    color: white;
     &:hover {
         background-color: #07ffe6;
         color: #191919;
