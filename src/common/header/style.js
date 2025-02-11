@@ -106,12 +106,13 @@ export const DropdownContainer = styled.div`
     left: 50%;
     transform: translateX(-50%);
     width: 100%;
-    height: 49.375rem;
+    height: 100vh; /* 화면의 세로 크기 전체를 채우기 */
     background-color: #191919;
     padding: 5rem 9.5rem 8.125rem 11.375rem;
     color: #fff;
     display: flex;
     flex-direction: column;
+    z-index: 9999;
 
     .content-wrapper {
         flex: 1;
