@@ -1,6 +1,11 @@
+import { useNavigate } from 'react-router';
 import { ButtonDark, EditForm, Flex, H2, P, PageWrap, ProfileImg, ProfileImgWrap } from './style';
 
 const ProfilesSelect = () => {
+    const navigate = useNavigate();
+    const onGo = () => {
+        navigate('/profilesforedit');
+    };
     return (
         <>
             <PageWrap>
@@ -29,6 +34,7 @@ const ProfilesSelect = () => {
                             $borderRadius='5px'
                             $color='var(--gray-300)'
                             $width='15.5rem'
+                            onClick={onGo}
                         >
                             프로필 편집
                         </ButtonDark>
