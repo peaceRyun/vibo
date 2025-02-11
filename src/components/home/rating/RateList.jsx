@@ -17,6 +17,17 @@ const RateList = () => {
         '/mainhome/weeklyitem_02.webp',
         '/mainhome/weeklyitem_03.webp',
         '/mainhome/weeklyitem_04.webp',
+        '/mainhome/weeklyitem_05.webp',
+        '/mainhome/weeklyitem_01.webp',
+        '/mainhome/weeklyitem_02.webp',
+        '/mainhome/weeklyitem_03.webp',
+        '/mainhome/weeklyitem_04.webp',
+        '/mainhome/weeklyitem_05.webp',
+        '/mainhome/weeklyitem_01.webp',
+        '/mainhome/weeklyitem_02.webp',
+        '/mainhome/weeklyitem_03.webp',
+        '/mainhome/weeklyitem_04.webp',
+        '/mainhome/weeklyitem_05.webp',
     ];
 
     return (
@@ -50,7 +61,7 @@ const Section = styled.section`
     display: flex;
     flex-direction: row;
     gap: 40px;
-    height: 100vh;
+    height: 85vh;
 `;
 
 const LeftArea = styled.div`

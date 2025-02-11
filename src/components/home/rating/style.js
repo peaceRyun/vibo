@@ -24,14 +24,15 @@ export const SlideImage = styled.img`
 
 export const RankNumber = styled.div`
     position: absolute;
-    bottom: ${({ isMainSlide }) => (isMainSlide ? '-250px' : '-200px')}; /* 숫자가 이미지 하단을 침범하도록 설정 */
-    left: ${({ isMainSlide }) => (isMainSlide ? '-80px' : '-80px')}; /* 숫자의 왼쪽 위치 */
-    font-size: ${({ isMainSlide }) => (isMainSlide ? '350px' : '250px')}; /* 숫자 크기 반영 */
+    bottom: ${({ isMainSlide }) => (isMainSlide ? '-150px' : '-100px')}; /* 숫자가 이미지 하단을 침범하도록 설정 */
+    left: ${({ isMainSlide }) => (isMainSlide ? '82px' : '80px')}; /* 숫자의 왼쪽 위치 */
+    font-size: ${({ isMainSlide }) => (isMainSlide ? '150px' : '100px')}; /* 숫자 크기 반영 */
     font-weight: 900;
+    // font-style: oblique;
     color: #fff;
     z-index: 10;
     transition: all 0.5s ease-in-out;
-    background: linear-gradient(to left, #fff 30%, #c0c0c0 60%, #707070 100%);
+    background: linear-gradient(to left, #fff 30%, #fff 60%, #fff 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 `;
