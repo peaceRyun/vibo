@@ -7,13 +7,12 @@ import playerR from './modules/playerSlice';
 // import pagenationR from './modules/pagenationSlice';
 
 export const store = configureStore({
-  reducer: {
-    // aboutR,
-    contentR,
-    // memberR,
-    playerR,
-
-    // tmR,
-    // pagenationR,
-  },
+    reducer: {
+        // aboutR,
+        contentR,
+        // memberR,
+        playerR,
+        // tmR,
+        // pagenationR,
+    },
 });

@@ -1,28 +1,23 @@
-// 비동기 받는 slice
-
-// import { createSlice } from '@reduxjs/toolkit';
-// import { getxxx } from './getThunk'
-
-// const initialState = {
-// };
-
-// export const 이름Slice = createSlice({
-//     name: '이름',
-//     initialState,
-//     reducers: {},
-//     extraReducers: (builder) => {
-//         builder
-//             .addCase(getxx.pending, (state, action) => {
-
-//             })
-//             .addCase(getxx.fulfilled, (state, action) => {
-
-//             })
-//             .addCase(getxx.rejected, (state, action) => {
-
-//             });
-//     },
-// });
-
-// export const 이름Actions = 이름Slice.actions;
-// export default 이름Slice.reducer;
+import { createSlice } from '@reduxjs/toolkit';
+import { getMovie } from './getThunk';
+const initialState = {
+    movieData: [],
+    loading: true,
+    error: null,
+    currentData: null,
+};
+export const movieSlice = createSlice({
+    name: 'movie',
+    initialState,
+    reducers: {},
+    extraReducers: (builder) => {
+        builder
+            .addCase(getMovie.pending, (state, action) => {})
+            .addCase(getMovie.fulfilled, (state, action) => {
+                state.movieData = action.payload;
+            })
+            .addCase(getMovie.rejected, (state, action) => {});
+    },
+});
+export const movieActions = movieSlice.actions;
+export default movieSlice.reducer;
