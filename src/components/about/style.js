@@ -421,3 +421,47 @@ export const AnswerWrapper = styled.div`
   padding: ${({ active }) => (active ? '15px' : '0')};
   opacity: ${({ active }) => (active ? '1' : '0')};
 `;
+
+export const LastSectionWrapper = styled.div`
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  background-color: #191919;
+  color: white;
+  text-align: center;
+  gap: 20px;
+
+  .logo {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+  }
+
+  h2 {
+    font-size: 24px;
+    font-weight: 700;
+  }
+
+  .login-btn {
+    padding: 8px 20px;
+    background-color: #07ffe6;
+    color: black;
+    font-size: 16px;
+    font-weight: 700;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out;
+
+    &:hover {
+      background-color: #06dbbf;
+    }
+
+    &:active {
+      background-color: #04998a;
+    }
+  }
+`;
