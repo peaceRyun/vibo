@@ -4,20 +4,13 @@ import styled from 'styled-components';
 export const MainContainer = styled.div`
   /* max-width: 1820px; */
   width: 100%;
-  margin: 0 auto; /* ✅ 가운데 정렬 */
-  padding: 0 20px; /* ✅ 좌우 패딩 추가 */
+  margin: 0 auto;
+  padding: 0 20px;
   display: flex;
   flex-direction: column;
   gap: 60px;
-  /* padding: 50px; */
-  /* display: flex;
-  flex-direction: column;
-  gap: 60px;
-  padding: 50px;
-
-  margin: auto; */
 `;
 
-// export const ViboOnly = styled.div`
-//   display: flex;
-// `;
+export const MainContent = styled.div`
+  padding-top: 5rem;
+`;

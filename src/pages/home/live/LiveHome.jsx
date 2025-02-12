@@ -3,6 +3,7 @@ import React from 'react';
 import LiveList from '../../../components/home/live/LiveList';
 
 import { LiveContainer } from './style';
+import { MainContent } from '../main/style';
 
 const liveTitles = [
   { id: '1', title: '실시간 인기 LIVE' },
@@ -14,11 +15,13 @@ const liveTitles = [
 
 const LiveHome = () => {
   return (
-    <LiveContainer>
-      {liveTitles.map((section) => (
-        <LiveList key={section.id} title={section.title} />
-      ))}
-    </LiveContainer>
+    <MainContent>
+      <LiveContainer>
+        {liveTitles.map((section) => (
+          <LiveList key={section.id} title={section.title} />
+        ))}
+      </LiveContainer>
+    </MainContent>
   );
 };
 
