@@ -3,12 +3,14 @@ import IconSwiper from './IconSwiper';
 import ModalHeader from './ModalHeader';
 import { Flex, H3, ModalBackdrop, ModalContainer } from './style';
 
+const imgUrl = 'https://raw.githubusercontent.com/peaceRyun/vibostatic/refs/heads/main/public';
+
 const IconList = ({ handleModalOpen }) => {
     const srcList = [
-        { id: '1', name: '프아V', src: `${import.meta.env.VITE_IMAGE_BASE_URL}/프아V.png` },
-        { id: '2', name: '프아I', src: `${import.meta.env.VITE_IMAGE_BASE_URL}/프아I.png` },
-        { id: '3', name: '프아B', src: `${import.meta.env.VITE_IMAGE_BASE_URL}/프아B.png` },
-        { id: '4', name: '프아O', src: `${import.meta.env.VITE_IMAGE_BASE_URL}/프아O.png` },
+        { id: '1', name: '프아V', src: `${imgUrl}/프아V.png` },
+        { id: '2', name: '프아I', src: `${imgUrl}/프아I.png` },
+        { id: '3', name: '프아B', src: `${imgUrl}/프아B.png` },
+        { id: '4', name: '프아O', src: `${imgUrl}/프아O.png` },
     ];
     return (
         <>
