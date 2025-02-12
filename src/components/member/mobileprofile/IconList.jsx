@@ -4,6 +4,12 @@ import ModalHeader from './ModalHeader';
 import { Flex, H3, ModalBackdrop, ModalContainer } from './style';
 
 const IconList = ({ handleModalOpen }) => {
+    const srcList = [
+        { id: '1', name: '프아V', src: `${import.meta.env.VITE_IMAGE_BASE_URL}/프아V.png` },
+        { id: '2', name: '프아I', src: `${import.meta.env.VITE_IMAGE_BASE_URL}/프아I.png` },
+        { id: '3', name: '프아B', src: `${import.meta.env.VITE_IMAGE_BASE_URL}/프아B.png` },
+        { id: '4', name: '프아O', src: `${import.meta.env.VITE_IMAGE_BASE_URL}/프아O.png` },
+    ];
     return (
         <>
             <ModalBackdrop />
@@ -30,10 +36,9 @@ const IconList = ({ handleModalOpen }) => {
                     <Flex $flexDirection='column'>
                         <H3>코믹 이미지</H3>
                         <Flex $gap='10px'>
-                            <IconItem />
-                            <IconItem />
-                            <IconItem />
-                            <IconItem />
+                            {srcList.map((item) => (
+                                <IconItem key={item.id} src={item.src} />
+                            ))}
                         </Flex>
                     </Flex>
                     <Flex $flexDirection='column'>
