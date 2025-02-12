@@ -23,7 +23,7 @@ const TVoptions = {
     params: {
         include_adult: 'false',
         include_null_first_air_dates: 'false',
-        language: 'en-US',
+        language: 'ko-KR',
         page: '1',
         sort_by: 'popularity.desc',
     },
@@ -36,16 +36,41 @@ const TVoptions = {
 
 export const getTVseries = createAsyncThunk('TVseries/getTVseries', async (_, thunkAPI) => {
     try {
-        const pages = [1, 2, 3, 4, 5]; // 100개의 데이터
-        const requests = pages.map((page) =>
-            axios.get('https://api.themoviedb.org/3/discover/tv', {
+        let allResults = [];
+
+        for (let page = 1; page <= 5; page++) {
+            // 먼저 한국어로 시도
+            const koResponse = await axios.get('https://api.themoviedb.org/3/discover/tv', {
                 ...TVoptions,
                 params: { ...TVoptions.params, page: page.toString() },
-            })
-        );
+            });
 
-        const responses = await Promise.all(requests);
-        const allResults = responses.flatMap((response) => response.data.results);
+            // 각 항목별로 overview 확인 및 영어 데이터 가져오기
+            const pageResults = await Promise.all(
+                koResponse.data.results.map(async (show) => {
+                    // overview가 비어있거나 너무 짧은 경우 영어 데이터 가져오기
+                    if (!show.overview || show.overview.length < 10) {
+                        try {
+                            const enResponse = await axios.get(`https://api.themoviedb.org/3/tv/${show.id}`, {
+                                ...TVoptions,
+                                params: { ...TVoptions.params, language: 'en-US' },
+                            });
+                            return {
+                                ...show,
+                                overview: enResponse.data.overview,
+                                name: show.name || enResponse.data.name, // 제목도 없는 경우 영어 제목 사용
+                            };
+                        } catch {
+                            return show; // 영어 데이터 가져오기 실패시 원본 반환
+                        }
+                    }
+                    return show;
+                })
+            );
+
+            allResults = [...allResults, ...pageResults];
+        }
+
         return allResults;
     } catch (error) {
         return thunkAPI.rejectWithValue(error.message);
