@@ -118,6 +118,7 @@ export const DropdownContainer = styled.div`
   display: flex;
   flex-direction: column;
   z-index: 9999;
+  position: fixed;
 
   .content-wrapper {
     flex: 1;
