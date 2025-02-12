@@ -1,6 +1,5 @@
 // 비슷한 콘텐츠
 // 영화, 시리즈 콘텐츠 공통
-import LikeButton from '../../ui/like/Like';
 import LiLikeButton from '../../ui/lordicon/LiLikeButton';
 import { Badge, Contour, Flex, H4, ItemImg, ItemWrap, P, PlayImg, Span } from './style';
 
@@ -26,7 +25,6 @@ const ReItem = ({ content }) => {
                                 2024
                             </Span>
                         </Flex>
-                        <LikeButton size='27' />
                         <LiLikeButton />
                     </Flex>
                     <H4 $textAlign='left' $fontSize='20px'>
