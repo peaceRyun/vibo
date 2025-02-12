@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { DropdownContainer, SearchInput, ActionText } from './style';
 
-const Dropdown = () => {
+const Dropdown = ({ onClose }) => {
   const [searchTerm, setSearchTerm] = useState('');
 
   return (
