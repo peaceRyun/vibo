@@ -5,10 +5,8 @@ export const ListWrapper = styled.div`
   align-items: center;
   position: relative;
   gap: 5px;
-  /* display: flex;
-  flex: 3;
-  height: 535.62px; */
-  /* overflow: visible !important; */
+
+  max-width: 1860px;
 
   .swiper-slide {
     width: 300px !important;
