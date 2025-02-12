@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Button from '../../ui/button/Button';
 import { Flex, GradientLayer, H2, LikeImg, PBuiWrap, PBWrap, VideoWrapper } from './style';
 import { setPlaying } from '../../store/modules/playerSlice';
-import LikeButton from '../../ui/like/Like';
+import LiLikeButton from '../../ui/lordicon/LiLikeButton';
 
 const PlayBanner = () => {
     const dispatch = useDispatch();
@@ -103,7 +103,7 @@ const PlayBanner = () => {
                             </Button>
                             <button>
                                 {/* <LikeImg src='public/contentdetail/ui/heart.png' alt='likeActive' /> */}
-                                <LikeButton />
+                                <LiLikeButton width='50px' height='50px' />
                             </button>
                         </Flex>
                     </Flex>

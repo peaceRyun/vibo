@@ -1,33 +1,38 @@
 // 비슷한 콘텐츠
 // 영화, 시리즈 콘텐츠 공통
-import LikeButton from '../../ui/like/Like';
-import { Badge, Flex, ItemImg, ItemWrap, P, PlayImg, Span } from './style';
+import LiLikeButton from '../../ui/lordicon/LiLikeButton';
+import { Badge, Contour, Flex, H4, ItemImg, ItemWrap, P, PlayImg, Span } from './style';
 
 const ReItem = ({ content }) => {
-    const { name, poster_path } = content;
+    const { name, backdrop_path, overview } = content;
     return (
         <>
             <ItemWrap>
                 <Flex $justifyCenter='center' $alignItems='center' $position='relative'>
-                    <ItemImg src={`https://image.tmdb.org/t/p/w500/${poster_path}`} alt={name} />
+                    <ItemImg src={`https://image.tmdb.org/t/p/w500/${backdrop_path}`} alt={name} />
                     <button>
                         <PlayImg src='/contentdetail/ui/carousel_action_atomic.png' alt='sample1' />
                     </button>
                 </Flex>
-                <Flex $justifyContent='space-between' $alignItems='center' $padding='15px 20px'>
-                    <Flex $justifyContent='space-between' $alignItems='center' $gap='5px'>
-                        <img src='/contentdetail/contentrate/전체관람가 관람등급 1.png' alt='rateAll' />
-                        <Badge $br='4px' $padding='3.5px 5px' fontSize='12px'>
-                            HD
-                        </Badge>
-                        <Span fontSize='28px'>2024</Span>
+                <Flex $flexDirection='column' $padding='15px 20px 6px' $gap='8px'>
+                    <Flex $justifyContent='space-between' $alignItems='center'>
+                        <Flex $justifyContent='space-between' $alignItems='center' $gap='10px'>
+                            <img src='/contentdetail/contentrate/전체관람가 관람등급 1.png' alt='rateAll' />
+                            <Badge $br='4px' $padding='3.5px 5px' fontSize='12px'>
+                                HD
+                            </Badge>
+                            <Span $fontSize='12px' $padding='0 0 0 0'>
+                                2024
+                            </Span>
+                        </Flex>
+                        <LiLikeButton width='30px' height='30px' />
                     </Flex>
-                    <LikeButton size='20' />
+                    <H4 $textAlign='left' $fontSize='20px'>
+                        {name}
+                    </H4>
+                    <Contour />
                 </Flex>
-                <P>
-                    프로 바둑기사의 꿈을 접은 장그래는 인턴사원이 되어 입사 동기 영이에게 의존하며 험난한 직장 생활을
-                    시작한다.
-                </P>
+                <P $lineClamp='3'>{overview}</P>
             </ItemWrap>
         </>
     );

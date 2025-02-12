@@ -9,6 +9,7 @@ const ReviewForm = () => {
                     borderRadius: '8px',
                     border: '1px solid var(--secondary-200)',
                     padding: '1rem',
+                    color: 'white',
                 }}
                 name=''
                 id=''
