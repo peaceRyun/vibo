@@ -249,6 +249,7 @@ export const ProfileDropdownContainer = styled.div`
   z-index: 1000;
 
   ul {
+    width: 200px;
     list-style: none;
     padding: 0;
     margin: 0 0 1rem 0;
@@ -258,11 +259,12 @@ export const ProfileDropdownContainer = styled.div`
 export const DropdownItem = styled.li`
   display: flex;
   align-items: center;
-  padding: 0.5rem 1rem;
+  padding: 0.5rem;
   cursor: pointer;
   gap: 0.5rem;
   transition: background 0.3s;
   color: white;
+  font-size: 14px;
   &:hover {
     background-color: #07ffe6;
     color: #191919;
@@ -281,4 +283,23 @@ export const UserIconContainer = styled.div`
   height: 2rem;
   border-radius: 50%;
   background-color: #2e2e2e;
+`;
+
+export const BorderLine = styled.div`
+  position: absolute;
+  align-items: center;
+  margin-top: 10px;
+  width: 185px;
+  height: 0px;
+  border: 1px solid #07ffe6;
+`;
+
+export const LogOut = styled.div`
+  display: flex;
+  gap: 8px;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+  font-size: 12px;
 `;
