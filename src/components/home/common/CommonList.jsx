@@ -1,15 +1,33 @@
+import { useState, useEffect } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import styled from 'styled-components';
-import { Pagination } from 'swiper/modules';
+// import { Pagination } from 'swiper/modules'; // 페이지네이션 모듈 주석 처리
 import CommonItem from './CommonItem';
 import { useNavigate } from 'react-router';
 
 export const CommonList = () => {
+    const [activeIndex, setActiveIndex] = useState(null);
+    const [hoveredIndex, setHoveredIndex] = useState(null);
     const navigate = useNavigate();
+
+    useEffect(() => {
+        let timer;
+        if (hoveredIndex !== null) {
+            timer = setTimeout(() => {
+                setActiveIndex(hoveredIndex);
+            }, 500);
+        } else {
+            setActiveIndex(null);
+        }
+
+        return () => clearTimeout(timer);
+    }, [hoveredIndex]);
+
     const onGo = () => {
         navigate('/contentlist');
     };
+
     return (
         <Section>
             <CommonInfo>
@@ -21,10 +39,18 @@ export const CommonList = () => {
                 </CommonTitle>
                 <MoreBtn onClick={onGo}>더보기</MoreBtn>
             </CommonInfo>
-            <CommonSwiper spaceBetween={20} pagination={{ clickable: true }}>
-                {/* modules={[Pagination]} */}
+            <CommonSwiper
+                spaceBetween={20}
+                /* pagination={{ clickable: true }} */
+                onSlideChange={() => setHoveredIndex(null)} // 🚀 슬라이드 넘길 때 효과 제거
+            >
                 {[...Array(10)].map((_, index) => (
-                    <SwiperSlide key={index}>
+                    <SwiperSlide
+                        key={index}
+                        onMouseEnter={() => setHoveredIndex(index)}
+                        onMouseLeave={() => setHoveredIndex(null)}
+                        className={activeIndex === index ? 'active' : ''}
+                    >
                         <CommonItem />
                     </SwiperSlide>
                 ))}
@@ -89,7 +115,7 @@ const MoreBtn = styled.button`
 const CommonSwiper = styled(Swiper)`
     flex: 3;
     height: 443px;
-
+    // overflow: visible;
     .swiper-slide {
         width: 300px !important;
         height: 443px;
@@ -98,5 +124,11 @@ const CommonSwiper = styled(Swiper)`
         align-items: center;
         overflow: hidden;
         border-radius: 8px;
+        transition: opacity 0.3s ease-in-out;
+        opacity: 1; /* 기본 상태 */
+    }
+
+    .swiper-slide.active {
+        opacity: 0; /* 🚀 1초 이상 호버 시 투명도 변경 */
     }
 `;
