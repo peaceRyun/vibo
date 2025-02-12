@@ -7,29 +7,29 @@ import { HeaderContainer, Logo, LeftSection } from './style';
 import { Link } from 'react-router';
 
 const Header = () => {
-    const [isSearchOpen, setSearchOpen] = useState(false);
-    const [isProfileOpen, setProfileOpen] = useState(false);
+  const [isSearchOpen, setSearchOpen] = useState(false);
+  const [isProfileOpen, setProfileOpen] = useState(false);
 
-    const toggleSearchDropdown = () => setSearchOpen((prev) => !prev);
-    const toggleProfileDropdown = () => setProfileOpen((prev) => !prev);
+  const toggleSearchDropdown = () => setSearchOpen((prev) => !prev);
+  const toggleProfileDropdown = () => setProfileOpen((prev) => !prev);
 
-    return (
-        <div style={{ position: 'relative' }}>
-            <HeaderContainer>
-                <LeftSection>
-                    <Link to='/'>
-                        <Logo>VIBO</Logo>
-                    </Link>
-                    <Nav />
-                </LeftSection>
+  return (
+    <div style={{ position: 'relative' }}>
+      <HeaderContainer>
+        <LeftSection>
+          <Link to="/">
+            <Logo>VIBO</Logo>
+          </Link>
+          <Nav />
+        </LeftSection>
 
-                <HeaderRight onSearchClick={toggleSearchDropdown} onProfileClick={toggleProfileDropdown} />
-            </HeaderContainer>
+        <HeaderRight onSearchClick={toggleSearchDropdown} onProfileClick={toggleProfileDropdown} />
+      </HeaderContainer>
 
-            {isSearchOpen && <Dropdown />}
-            {isProfileOpen && <ProfileDropdown />}
-        </div>
-    );
+      {isSearchOpen && <Dropdown />}
+      {isProfileOpen && <ProfileDropdown />}
+    </div>
+  );
 };
 
 export default Header;
