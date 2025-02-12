@@ -12,7 +12,8 @@ const WatchingList = () => {
       <LiveTitle>실시간 인기 LIVE</LiveTitle>
       <LiveSwiper slidesPerView={4.2} spaceBetween={16} pagination={{ clickable: true }}>
         {[...Array(5)].map((_, index) => (
-          <SwiperSlide key={index} style={{ overflow: 'visible' }}>
+          <SwiperSlide key={index}>
+            {/* style={{ overflow: 'visible' }} */}
             <WatchingItem />
           </SwiperSlide>
         ))}
@@ -41,7 +42,7 @@ const LiveTitle = styled.h3`
 const LiveSwiper = styled(Swiper)`
   max-width: 100%;
   padding-bottom: 20px;
-  overflow: visible !important;
+  /* overflow: visible !important; */
   /* padding-bottom: 20px;
   overflow: visible; */
   .swiper-slide {

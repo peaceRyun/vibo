@@ -18,7 +18,7 @@ import MainBanner from '../../../components/home/mainBanner/MainBanner';
 // import { LiveContainer } from '../live/style';
 // import { Container } from '../../../components/home/viboOnly/only1/style';
 
-const liveTitles = [{ id: '1', title: '실시간 인기 LIVE' }];
+const liveTitles = [{ id: '1', title: '시청중인 콘텐츠' }];
 
 const MainHome = () => {
   return (
