@@ -95,8 +95,8 @@ export const ItemImg = styled.img`
 
 export const PlayImg = styled.img`
     position: absolute;
-    width: 45px !important;
-    height: 45px !important;
+    width: 67.5px !important;
+    height: 67.5px !important;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -168,6 +168,12 @@ export const SpanInfo = styled.span`
     color: var(--white);
 `;
 
+export const Contour = styled.div`
+    margin: 5px 0 10px;
+    height: 1px;
+    background-color: var(--secondary-base);
+`;
+
 export const H2 = styled.h2`
     font-size: 40px;
     font-weight: 700;
@@ -182,6 +188,11 @@ export const H3 = styled.h3`
 export const H4 = styled.h4`
     font-size: ${(props) => (props.$fontSize ? props.$fontSize : '28px')};
     font-weight: ${(props) => (props.$fontWeight ? props.$fontWeight : '800')};
+    text-align: ${(props) => props.$textAlign};
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: calc(200px * 0.08); /* 컨테이너 너비의 8% */
 `;
 
 export const P = styled.p`
@@ -189,6 +200,10 @@ export const P = styled.p`
     font-size: ${(props) => (props.$fontSize ? props.$fontSize : '13px')};
     font-weight: ${(props) => (props.$fontWeight ? props.$fontWeight : '400')};
     text-align: start;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: ${(props) => props.$lineClamp}; /* 원하는 줄 수 */
+    overflow: hidden;
 `;
 
 export const P28 = styled.p`
