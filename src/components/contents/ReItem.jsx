@@ -25,7 +25,7 @@ const ReItem = ({ content }) => {
                                 2024
                             </Span>
                         </Flex>
-                        <LiLikeButton />
+                        <LiLikeButton width='30px' height='30px' />
                     </Flex>
                     <H4 $textAlign='left' $fontSize='20px'>
                         {name}

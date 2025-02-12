@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import LiLike from './LILike';
 
-const LiLikeButton = ({ memberId }) => {
+const LiLikeButton = ({ memberId, width, height }) => {
     const [isLiked, setIsLiked] = useState(false);
 
     const handleLike = () => {
@@ -10,7 +10,7 @@ const LiLikeButton = ({ memberId }) => {
         console.log(`Member ${memberId} like status: ${!isLiked}`);
     };
 
-    return <LiLike width='30px' height='30px' colors='primary:#e8308c' isLiked={isLiked} onClick={handleLike} />;
+    return <LiLike width={width} height={height} colors='primary:#e8308c' isLiked={isLiked} onClick={handleLike} />;
 };
 
 export default LiLikeButton;
