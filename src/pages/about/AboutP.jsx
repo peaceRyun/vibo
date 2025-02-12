@@ -18,7 +18,6 @@ const AboutP = () => {
             <AboutContent3 />
           </section>
           <AboutContent4 />
-          <AboutContent5 />
         </AboutWrapper>
       </Inner>
     </>

@@ -5,7 +5,6 @@
 // import ContentDetail from '../contents/ContentDetail';
 
 const TestKwon = () => {
-<<<<<<< HEAD
   return (
     <>
       {/* <ContentDetail /> */}
@@ -14,16 +13,6 @@ const TestKwon = () => {
       {/* <Membership /> */}
     </>
   );
-=======
-    return (
-        <>
-            {/* <ContentDetail /> */}
-            {/* <ProfileEdit /> */}
-            {/* <ProfileInfoEdit /> */}
-            {/* <Membership /> */}
-        </>
-    );
->>>>>>> 38dc5003d88f4beced3194b533bac1867c4a1b62
 };
 
 export default TestKwon;

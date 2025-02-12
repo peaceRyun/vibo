@@ -210,12 +210,13 @@ export const OriginalWrapper = styled.div`
     line-height: 1.2;
     margin-bottom: 20px;
     text-transform: uppercase;
-  }
-
-  .gradient-text {
     background: linear-gradient(to top, #07ffe6 0%, #ffffff 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    display: inline-block;
+  }
+
+  .gradient-text {
   }
 
   .big-card {
@@ -264,7 +265,6 @@ export const OriginalWrapper = styled.div`
 `;
 export const AboutPswiperWrapper = styled.div`
   width: 100%;
-  background: #000;
   padding: 20px 0;
   overflow: hidden;
   position: absolute;
@@ -288,10 +288,10 @@ export const AboutPswiperWrapper = styled.div`
   }
 
   .slide {
-    width: 474px;
-    height: 281px;
-    margin: 10px;
-    background: #111;
+    width: 380px;
+    height: 225px;
+    margin: 45px 30px;
+    // background: #111;
     border-radius: 10px;
     overflow: hidden;
     display: flex;
@@ -348,14 +348,25 @@ export const ContentContainer = styled.div`
 
 export const FAQContainer = styled.div`
   width: 100%;
-  max-width: 1700px;
-  height: 107px;
-  margin: 0 auto;
-  padding: 40px 20px;
+  max-width: 2800px;
+  // height: 107px;
+  margin: 100px auto;
+  padding: 50px calc((100vw - 1360px) / 2);
   background-color: #191919;
   color: white;
   border-radius: 10px;
   text-align: center;
+  background: #000;
+
+  // @media (max-width: 599px) {
+  //   max-width: calc(390px - var(--spacing-8));
+  // }
+  // @media (min-width: 600px) {
+  //   max-width: calc(var(--breakpoint-tablet) - var(--spacing-8));
+  // }
+  // @media (min-width: 1025px) {
+  //   max-width: calc(var(--breakpoint-desktop) - 100px);
+  // }
 
   .faq-title {
     font-size: 60px;
@@ -423,36 +434,39 @@ export const AnswerWrapper = styled.div`
 `;
 
 export const LastSectionWrapper = styled.div`
-  width: 100%;
+  width: 100vw;
   height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: flex-start;
   background-color: #191919;
   color: white;
   text-align: center;
-  gap: 20px;
+  gap: 100px;
+  margin: 100px auto;
 
   .logo {
-    width: 60px;
-    height: 60px;
+    width: 160px;
+    height: 160px;
     object-fit: contain;
+    // margin-top: 100px;
   }
 
   h2 {
-    font-size: 24px;
-    font-weight: 700;
+    font-size: 54px;
+    font-weight: 800;
   }
 
   .login-btn {
-    padding: 8px 20px;
+    // margin-top: 40px;
+    padding: 17px 85px;
     background-color: #07ffe6;
     color: black;
-    font-size: 16px;
-    font-weight: 700;
+    font-size: 24px;
+    font-weight: 800;
     border: none;
-    border-radius: 20px;
+    border-radius: 50px;
     cursor: pointer;
     transition: background 0.3s ease-in-out;
 

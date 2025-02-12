@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { FAQContainer, FAQItem, Question, Answer, AnswerWrapper, Icon } from './style';
+import AboutContent5 from './AboutContent5';
 
 const faqs = [
   { question: 'VIBO만의 콘텐츠는 무엇인가요?', answer: 'VIBO에서만 제공하는 오리지널 콘텐츠를 확인하세요.' },
@@ -17,20 +18,23 @@ const AboutContent4 = () => {
   };
 
   return (
-    <FAQContainer>
-      <h2 className="faq-title">자주 묻는 질문</h2>
-      {faqs.map((faq, index) => (
-        <div key={index}>
-          <FAQItem onClick={() => toggleFAQ(index)} active={openIndex === index}>
-            <Question active={openIndex === index}>{faq.question}</Question>
-            <Icon active={openIndex === index}>▼</Icon>
-          </FAQItem>
-          <AnswerWrapper active={openIndex === index}>
-            <Answer>{faq.answer}</Answer>
-          </AnswerWrapper>
-        </div>
-      ))}
-    </FAQContainer>
+    <>
+      <FAQContainer>
+        <h2 className="faq-title">자주 묻는 질문</h2>
+        {faqs.map((faq, index) => (
+          <div key={index}>
+            <FAQItem onClick={() => toggleFAQ(index)} active={openIndex === index}>
+              <Question active={openIndex === index}>{faq.question}</Question>
+              <Icon active={openIndex === index}>▼</Icon>
+            </FAQItem>
+            <AnswerWrapper active={openIndex === index}>
+              <Answer>{faq.answer}</Answer>
+            </AnswerWrapper>
+          </div>
+        ))}
+      </FAQContainer>
+      <AboutContent5 />
+    </>
   );
 };
 export default AboutContent4;
