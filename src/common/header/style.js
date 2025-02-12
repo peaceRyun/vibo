@@ -247,6 +247,7 @@ export const ProfileDropdownContainer = styled.div`
   border-radius: 0.5rem;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
   z-index: 1000;
+  position: fixed;
 
   ul {
     width: 200px;
