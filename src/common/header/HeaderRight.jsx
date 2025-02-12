@@ -6,27 +6,28 @@ import { RightContainer } from './style';
 import Dropdown from './Dropdown';
 
 import CloseIcon from './CloseIcon';
-import { IoClose } from 'react-icons/io5';
+import ProfileDropdown from './ProfileDropdown';
 
-const HeaderRight = ({ onProfileClick }) => {
+const HeaderRight = () => {
   const [isSearchOpen, setIsSerchOpen] = useState(false);
+  const [isProfileOpen, setIsProfileOpen] = useState(false);
 
   const toggleSearch = () => {
     setIsSerchOpen((prev) => !prev);
   };
 
+  const togglesProfile = () => {
+    setIsProfileOpen((prev) => !prev);
+  };
+
   return (
     <RightContainer>
-      <ProfileLogo onClick={onProfileClick} />
-      {/* <SearchIcon onClick={onSearchClick} /> */}
+      {/* 애도 하위 애들 클릭시 닫히게 해야함 */}
+      {/* <ProfileLogo onClick={onProfileClick} /> */}
+      <ProfileLogo onClick={togglesProfile} />
 
-      {/* <CloseIcon onClick={toggleSearch}>{isSearchOpen ? <CloseIcon /> : <SearchIcon />}</CloseIcon>
+      {isProfileOpen && <ProfileDropdown onClose={() => setIsProfileOpen(false)} />}
 
-      {isSearchOpen && <Dropdown onClose={toggleSearch} />} */}
-
-      {/* <div onClick={toggleSearch}>{isSearchOpen ? <IoClose size={40} /> : <SearchIcon />}</div>
-
-      {isSearchOpen && <Dropdown onClose={toggleSearch} />} */}
       {/* 검색 아이콘 OR 닫기 아이콘 */}
       {isSearchOpen ? <CloseIcon onClick={toggleSearch} /> : <SearchIcon onClick={toggleSearch} />}
 

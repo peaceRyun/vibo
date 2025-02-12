@@ -304,4 +304,10 @@ export const LogOut = styled.div`
   align-items: center;
   margin-top: 10px;
   font-size: 12px;
+  padding: 0.5rem;
+  cursor: pointer;
+  &:hover {
+    background-color: #07ffe6;
+    color: #191919;
+  }
 `;

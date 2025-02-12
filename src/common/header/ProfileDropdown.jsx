@@ -6,11 +6,11 @@ import { AiOutlineEdit } from 'react-icons/ai'; // 연필 아이콘
 import { FiLogOut } from 'react-icons/fi'; // 로그아웃 아이콘
 import { Link } from 'react-router';
 
-const ProfileDropdown = () => {
+const ProfileDropdown = ({ onClose }) => {
   return (
     <ProfileDropdownContainer>
       {/* 사용자 목록 */}
-      <ul>
+      <ul onClick={onClose}>
         <DropdownItem>
           <UserIconContainer>
             <FaUserCircle size={30} />
@@ -33,19 +33,19 @@ const ProfileDropdown = () => {
 
       {/* 메뉴 항목 */}
       <ul>
-        <Link to="/mypage">
+        <Link to="/mypage" onClick={onClose}>
           <DropdownItem>
             <AiOutlineEdit size={30} />
             마이페이지
           </DropdownItem>
         </Link>
-        <Link to="/profilesforedit">
+        <Link to="/profilesforedit" onClick={onClose}>
           <DropdownItem>
             <AiOutlineEdit size={30} />
             프로필관리
           </DropdownItem>
         </Link>
-        <Link to="/profileinfoedit">
+        <Link to="/profileinfoedit" onClick={onClose}>
           <DropdownItem>
             <AiOutlineEdit size={30} />
             회원정보수정
@@ -55,7 +55,7 @@ const ProfileDropdown = () => {
           <BorderLine />
         </DropdownItem>
         {/* <DropdownItem> */}
-        <LogOut>
+        <LogOut onClick={onClose}>
           <FiLogOut size={20} />
           로그아웃
         </LogOut>
