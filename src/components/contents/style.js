@@ -95,8 +95,8 @@ export const ItemImg = styled.img`
 
 export const PlayImg = styled.img`
     position: absolute;
-    width: 45px !important;
-    height: 45px !important;
+    width: 67.5px !important;
+    height: 67.5px !important;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
