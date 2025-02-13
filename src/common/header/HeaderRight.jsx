@@ -1,5 +1,5 @@
 // 헤더 오른쪽 영역 프로필, 검색버튼
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import SearchIcon from './SearchIcon';
 import ProfileLogo from './ProfileLogo';
 import { RightContainer } from './style';
@@ -9,16 +9,29 @@ import CloseIcon from './CloseIcon';
 import ProfileDropdown from './ProfileDropdown';
 
 const HeaderRight = () => {
-  const [isSearchOpen, setIsSerchOpen] = useState(false);
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
+  const searchRef = useRef(null);
+  const profileRef = useRef(null);
 
   const toggleSearch = () => {
-    setIsSerchOpen((prev) => !prev);
+    setIsSearchOpen((prev) => !prev);
   };
 
   const togglesProfile = () => {
     setIsProfileOpen((prev) => !prev);
   };
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (searchRef.current && !searchRef.current.contains(event.target)) {
+        setIsSearchOpen(false);
+      }
+      if (profileRef.current && !profileRef.current.contains(event.target)) {
+        setIsProfileOpen(false);
+      }
+    };
+  });
 
   return (
     <RightContainer>

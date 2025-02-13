@@ -1,9 +1,18 @@
 // 검색창 드롭다운
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { DropdownContainer, SearchInput, ActionText } from './style';
 
 const Dropdown = ({ onClose }) => {
   const [searchTerm, setSearchTerm] = useState('');
+  const dropdownRef = useRef(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        onClose();
+      }
+    };
+  });
 
   return (
     <>
