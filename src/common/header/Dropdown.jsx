@@ -13,21 +13,31 @@ const Dropdown = ({ onClose }) => {
       }
     };
 
+    const handleEscKey = (event) => {
+      if (event.key === 'Escape') {
+        onClose();
+      }
+    };
+
     document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener('keydown', handleClickOutside);
+
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('keydown', handleClickOutside);
     };
   }, [onClose]);
 
   return (
     <>
-      <DropdownContainer ref={dropdownRef}>
+      <DropdownContainer>
         {/* 검색창 */}
         <SearchInput
           type="text"
           placeholder="주요 콘텐츠"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
+          ref={dropdownRef}
         />
 
         {/* 콘텐츠 영역 */}
