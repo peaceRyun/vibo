@@ -12,11 +12,16 @@ const Dropdown = ({ onClose }) => {
         onClose();
       }
     };
-  });
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [onClose]);
 
   return (
     <>
-      <DropdownContainer>
+      <DropdownContainer ref={dropdownRef}>
         {/* 검색창 */}
         <SearchInput
           type="text"
