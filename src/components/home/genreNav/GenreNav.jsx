@@ -16,7 +16,7 @@ const highlightedGenres = ['ACTION', 'MUSICAL', 'FANTASY', 'SF'];
 const GenreNav = () => (
     <GenreContainer>
         {genres.map(({ en, ko }) => (
-            <GenreItem key={en} genre={en} ishighlighted={String(highlightedGenres.includes(en))}>
+            <GenreItem key={en} genre={en} ishighlighted={highlightedGenres.includes(en)}>
                 <span className="en">{en}</span>
                 <span className="ko">{ko}</span>
             </GenreItem>
