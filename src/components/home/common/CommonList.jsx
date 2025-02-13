@@ -45,7 +45,7 @@ export default CommonList;
 
 const Section = styled.section`
   display: flex;
-  align-items: center;
+  /* align-items: center; */
   position: relative;
   gap: 5px;
 `;
@@ -71,7 +71,7 @@ const CommonInfo = styled.div`
 
 const CommonTitle = styled.h3`
   color: white;
-  font-size: 40px;
+  font-size: 32px;
   font-weight: bold;
   line-height: 1.5;
   margin: 0;
@@ -80,13 +80,13 @@ const CommonTitle = styled.h3`
 const MoreBtn = styled.button`
   background-color: var(--primary-600);
   color: black;
-  font-size: 24px;
-  padding: 17px 32px;
+  font-size: 17px;
+  padding: 15px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  width: 134px;
-  height: 51px;
+  width: 155px;
+  height: 40px;
   font-weight: bold;
 
   &:hover {
