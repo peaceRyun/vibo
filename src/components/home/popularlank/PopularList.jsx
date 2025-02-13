@@ -1,3 +1,4 @@
+// 영화, 시리즈 홈페이지에서 순위 슬라이드
 import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 

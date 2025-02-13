@@ -38,42 +38,58 @@ export const getTVseries = createAsyncThunk('TVseries/getTVseries', async (_, th
     try {
         let allResults = [];
 
-        for (let page = 1; page <= 5; page++) {
-            // 먼저 한국어로 시도
+        for (let page = 1; page <= 6; page++) {
             const koResponse = await axios.get('https://api.themoviedb.org/3/discover/tv', {
                 ...TVoptions,
                 params: { ...TVoptions.params, page: page.toString() },
             });
 
-            const pageResults = await Promise.all(
-                koResponse.data.results
-                    .filter((show) => show.backdrop_path !== null) // backdrop_path가 있는 항목만 필터링
-                    .map(async (show) => {
-                        // overview가 비어있거나 너무 짧은 경우 영어 데이터 가져오기
-                        if (!show.overview || show.overview.length < 10) {
-                            try {
-                                const enResponse = await axios.get(`https://api.themoviedb.org/3/tv/${show.id}`, {
-                                    ...TVoptions,
-                                    params: { ...TVoptions.params, language: 'en-US' },
-                                });
-                                return {
-                                    ...show,
-                                    overview: enResponse.data.overview,
-                                    name: show.name || enResponse.data.name,
-                                };
-                            } catch {
-                                return show;
-                            }
-                        }
-                        return show;
-                    })
+            const pageResults = koResponse.data.results.filter(
+                (show) =>
+                    show.backdrop_path !== null && // backdrop_path가 있는 항목만 필터링
+                    show.overview && // overview가 존재하는지 확인
+                    show.overview.length >= 10 // overview가 충분히 긴지 확인
             );
 
             allResults = [...allResults, ...pageResults];
         }
 
-        return allResults;
+        // 결과가 24개를 초과하면 상위 24개만 반환
+        return allResults.length > 24 ? allResults.slice(0, 24) : allResults;
     } catch (error) {
         return thunkAPI.rejectWithValue(error.message);
     }
 });
+
+//Movie유튜브링크 가져오기
+const videoOptions = {
+    params: {
+        language: 'ko-KR',
+    },
+    headers: {
+        accept: 'application/json',
+        Authorization:
+            'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJkZGY2NTIxYzQzYzJlMDNmNTlkMjc2N2YxMDlhYWFhNCIsIm5iZiI6MTczNzUxMDE4NS4yNjIsInN1YiI6IjY3OTA0ZDI5MmQ2MWMzM2U2M2RmZTVlNiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ._QJjWVEDYEcIfVZtQRYG0JSRb22Dit3HopPsNm8AILE',
+    },
+};
+
+export const getMovieVideos = createAsyncThunk(
+    'contentPlayer/getMovieVideos',
+    async (movieId = null, { rejectWithValue }) => {
+        try {
+            // movieId가 없는 경우 기본값 반환
+            if (!movieId) {
+                return 'MkcqlqCfYcg';
+            }
+
+            const response = await axios.get(`https://api.themoviedb.org/3/movie/${movieId}/videos`, videoOptions);
+
+            const videos = response.data.results;
+            const youtubeVideo = videos.find((video) => video.site === 'YouTube' && video.key);
+
+            return youtubeVideo ? youtubeVideo.key : 'MkcqlqCfYcg';
+        } catch (error) {
+            return rejectWithValue(error.message);
+        }
+    }
+);

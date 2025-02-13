@@ -3,23 +3,22 @@ import styled from 'styled-components';
 export const GenreContainer = styled.div`
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 2rem 20px;
-    max-width: 1820px;
+    gap: 1rem 10px;
+    width: 1740px;
 `;
 
 export const GenreItem = styled.div`
-    width: 450px;
-    height: 11.4375rem;
+    width: 27.1875rem;
+    height: 11.4375rem; /* 183px */
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     padding: 1.5rem;
-    border: 2px solid #009c8c;
+    border: 2px solid transparent;
     border-radius: 0.75rem;
     cursor: pointer;
-    transition: border-color 0.3s ease;
-    background-color: ${({ isHighlighted }) => (isHighlighted ? '#009c8c' : 'transparent')};
+    transition: all 0.3s ease;
 
     .en {
         font-size: 2.5rem;

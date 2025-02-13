@@ -1,11 +1,14 @@
 import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import Button from '../../ui/button/Button';
 import { Flex, GradientLayer, H2, LikeImg, PBuiWrap, PBWrap, VideoWrapper } from './style';
-import { setPlaying } from '../../store/modules/playerSlice';
+
 import LiLikeButton from '../../ui/lordicon/LiLikeButton';
+import { setPlaying } from '../../store/modules/playerSlice';
 
 const PlayBanner = () => {
+    const navigate = useNavigate();
     const dispatch = useDispatch();
     const playerState = useSelector((state) => state.playerR) || {
         isPlaying: true,
@@ -66,15 +69,8 @@ const PlayBanner = () => {
         dispatch(setPlaying(event.data === window.YT.PlayerState.PLAYING));
     };
 
-    const togglePlay = () => {
-        if (playerRef.current) {
-            if (isPlaying) {
-                playerRef.current.pauseVideo();
-            } else {
-                playerRef.current.playVideo();
-            }
-            dispatch(setPlaying(!isPlaying));
-        }
+    const handlePlayClick = () => {
+        navigate('/player');
     };
 
     return (
@@ -98,11 +94,10 @@ const PlayBanner = () => {
                     <Flex $gap='30px' $flexDirection='column' $position='relative'>
                         <H2>옥씨부인전</H2>
                         <Flex $gap='26px' $alignItems='center'>
-                            <Button play onClick={togglePlay} color='var(--secondary-400)' fontSize='20px'>
-                                {isPlaying ? '일시정지' : '재생'}
+                            <Button play onClick={handlePlayClick} color='var(--secondary-400)' fontSize='20px'>
+                                재생
                             </Button>
                             <button>
-                                {/* <LikeImg src='public/contentdetail/ui/heart.png' alt='likeActive' /> */}
                                 <LiLikeButton width='50px' height='50px' />
                             </button>
                         </Flex>
