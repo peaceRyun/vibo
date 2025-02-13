@@ -1,1 +1,236 @@
-// 콘텐츠 플레이어
+import { useRef, useEffect, useState, useCallback } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+    PlayerContainer,
+    VideoWrapper,
+    ErrorMessage,
+    IframeContainer,
+    VideoIframe,
+    ControlsOverlay,
+    ProgressBarContainer,
+    ProgressBar,
+    ProgressHandle,
+    ControlsWrapper,
+    ControlsGroup,
+    ControlButton,
+} from './style';
+import { contPlayerActions } from '../../store/modules/contPlayerSlice';
+import { FaPause, FaVolumeHigh, FaVolumeXmark } from 'react-icons/fa6';
+import { IoPlayOutline } from 'react-icons/io5';
+import { FiMaximize, FiMinimize } from 'react-icons/fi';
+import { getMovieVideos } from '../../store/modules/getThunk';
+
+const ContentPlayer = () => {
+    const dispatch = useDispatch();
+    const isPlaying = useSelector((state) => state.contPlayerR.isPlaying);
+    const isMuted = useSelector((state) => state.contPlayerR.isMuted);
+    const isFullscreen = useSelector((state) => state.contPlayerR.isFullscreen);
+    const progress = useSelector((state) => state.contPlayerR.progress);
+    const isError = useSelector((state) => state.contPlayerR.isError);
+    const videoId = useSelector((state) => state.contPlayerR.videoId);
+
+    const containerRef = useRef(null);
+    const iframeRef = useRef(null);
+    const [isDragging, setIsDragging] = useState(false);
+
+    useEffect(() => {
+        const movieId = '693134';
+        dispatch(getMovieVideos(movieId));
+    }, [dispatch]);
+
+    useEffect(() => {
+        let progressInterval;
+        if (isPlaying) {
+            progressInterval = setInterval(() => {
+                iframeRef.current?.contentWindow.postMessage(
+                    '{"event":"command","func":"getCurrentTime","args":""}',
+                    '*'
+                );
+                iframeRef.current?.contentWindow.postMessage('{"event":"command","func":"getDuration","args":""}', '*');
+            }, 1000);
+        }
+
+        const handleMessage = (event) => {
+            try {
+                const data = JSON.parse(event.data);
+                if (data.info && data.info.currentTime && data.info.duration) {
+                    const progressPercent = (data.info.currentTime / data.info.duration) * 100;
+                    dispatch(contPlayerActions.setProgress(progressPercent));
+                }
+            } catch (error) {
+                // JSON 파싱 에러 무시
+            }
+        };
+
+        window.addEventListener('message', handleMessage);
+
+        return () => {
+            if (progressInterval) {
+                clearInterval(progressInterval);
+            }
+            window.removeEventListener('message', handleMessage);
+        };
+    }, [isPlaying, dispatch]);
+
+    const handlePlayToggle = () => {
+        if (iframeRef.current) {
+            try {
+                if (isPlaying) {
+                    iframeRef.current.contentWindow.postMessage(
+                        '{"event":"command","func":"pauseVideo","args":""}',
+                        '*'
+                    );
+                } else {
+                    iframeRef.current.contentWindow.postMessage(
+                        '{"event":"command","func":"playVideo","args":""}',
+                        '*'
+                    );
+                }
+                dispatch(contPlayerActions.togglePlay());
+            } catch (error) {
+                console.error('Error toggling play state:', error);
+            }
+        }
+    };
+
+    const handleMuteToggle = () => {
+        if (iframeRef.current) {
+            try {
+                if (isMuted) {
+                    iframeRef.current.contentWindow.postMessage('{"event":"command","func":"unMute","args":""}', '*');
+                } else {
+                    iframeRef.current.contentWindow.postMessage('{"event":"command","func":"mute","args":""}', '*');
+                }
+                dispatch(contPlayerActions.toggleMute());
+            } catch (error) {
+                console.error('Error toggling mute state:', error);
+            }
+        }
+    };
+
+    const handleFullscreenToggle = () => {
+        if (!document.fullscreenElement) {
+            containerRef.current?.requestFullscreen();
+            dispatch(contPlayerActions.setFullscreen(true));
+        } else {
+            document.exitFullscreen();
+            dispatch(contPlayerActions.setFullscreen(false));
+        }
+    };
+
+    const handleProgressBarClick = (e) => {
+        if (isDragging) return;
+
+        const progressBar = e.currentTarget;
+        const rect = progressBar.getBoundingClientRect();
+        const clickPosition = (e.clientX - rect.left) / rect.width;
+
+        // 진행률을 0-100 사이의 값으로 변환
+        const newProgress = Math.max(0, Math.min(100, clickPosition * 100));
+
+        dispatch(contPlayerActions.setProgress(newProgress));
+
+        if (iframeRef.current) {
+            iframeRef.current.contentWindow.postMessage(
+                JSON.stringify({
+                    event: 'command',
+                    func: 'seekTo',
+                    args: [newProgress, true],
+                }),
+                '*'
+            );
+        }
+    };
+
+    // 드래그 시작
+    const handleDragStart = (e) => {
+        e.preventDefault();
+        setIsDragging(true);
+
+        // 마우스 이동 및 마우스 업 이벤트 리스너 추가
+        document.addEventListener('mousemove', handleDragMove);
+        document.addEventListener('mouseup', handleDragEnd);
+    };
+
+    // 드래그 중
+    const handleDragMove = useCallback(
+        (e) => {
+            if (!isDragging || !iframeRef.current) return;
+
+            const progressBar = document.querySelector('.progress-bar-container');
+            const rect = progressBar.getBoundingClientRect();
+            let position = (e.clientX - rect.left) / rect.width;
+
+            // 0-1 사이의 값으로 제한
+            position = Math.max(0, Math.min(1, position));
+            const newProgress = position * 100;
+
+            dispatch(contPlayerActions.setProgress(newProgress));
+
+            iframeRef.current.contentWindow.postMessage(
+                JSON.stringify({
+                    event: 'command',
+                    func: 'seekTo',
+                    args: [newProgress, true],
+                }),
+                '*'
+            );
+        },
+        [isDragging, dispatch]
+    );
+
+    // 드래그 종료
+    const handleDragEnd = useCallback(() => {
+        setIsDragging(false);
+
+        // 이벤트 리스너 제거
+        document.removeEventListener('mousemove', handleDragMove);
+        document.removeEventListener('mouseup', handleDragEnd);
+    }, [handleDragMove]);
+
+    return (
+        <PlayerContainer ref={containerRef}>
+            <VideoWrapper>
+                {isError ? (
+                    <ErrorMessage>동영상을 불러올 수 없습니다.</ErrorMessage>
+                ) : (
+                    <IframeContainer>
+                        <VideoIframe
+                            ref={iframeRef}
+                            src={`https://www.youtube.com/embed/${videoId}?enablejsapi=1&controls=0&disablekb=1&fs=0&modestbranding=1&rel=0&showinfo=0&iv_load_policy=3&origin=${window.location.origin}&playerapiid=ytplayer`}
+                            title='YouTube video player'
+                            allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
+                            allowFullScreen
+                        />
+                    </IframeContainer>
+                )}
+
+                <ControlsOverlay>
+                    <ProgressBarContainer className='progress-bar-container' onClick={handleProgressBarClick}>
+                        <ProgressBar $progress={progress}>
+                            <ProgressHandle onMouseDown={handleDragStart} />
+                        </ProgressBar>
+                    </ProgressBarContainer>
+
+                    <ControlsWrapper>
+                        <ControlsGroup>
+                            <ControlButton onClick={handlePlayToggle}>
+                                {isPlaying ? <FaPause /> : <IoPlayOutline />}
+                            </ControlButton>
+
+                            <ControlButton onClick={handleMuteToggle}>
+                                {isMuted ? <FaVolumeXmark /> : <FaVolumeHigh />}
+                            </ControlButton>
+                        </ControlsGroup>
+
+                        <ControlButton onClick={handleFullscreenToggle}>
+                            {isFullscreen ? <FiMinimize /> : <FiMaximize />}
+                        </ControlButton>
+                    </ControlsWrapper>
+                </ControlsOverlay>
+            </VideoWrapper>
+        </PlayerContainer>
+    );
+};
+
+export default ContentPlayer;

@@ -17,7 +17,7 @@ const ReList = () => {
                     <Flex $flexDirection='column' $position='relative' $gap='40px' $padding='30px 0 60px'>
                         <H3>비슷한 콘텐츠</H3>
                         <Swiper
-                            slidesPerView={5.5}
+                            slidesPerView={6}
                             spaceBetween={30}
                             pagination={{
                                 clickable: true,
