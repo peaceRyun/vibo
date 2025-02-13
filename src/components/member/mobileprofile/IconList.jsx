@@ -2,16 +2,15 @@ import IconItem from './IconItem';
 import IconSwiper from './IconSwiper';
 import ModalHeader from './ModalHeader';
 import { Flex, H3, ModalBackdrop, ModalContainer } from './style';
-
-const imgUrl = 'https://raw.githubusercontent.com/peaceRyun/vibostatic/refs/heads/main/public';
+import { useDispatch } from 'react-redux';
+import { basicIcons, profileActions } from '../../../store/modules/profileSlice';
 
 const IconList = ({ handleModalOpen }) => {
-    const srcList = [
-        { id: '1', name: '프아V', src: `${imgUrl}/프아V.png` },
-        { id: '2', name: '프아I', src: `${imgUrl}/프아I.png` },
-        { id: '3', name: '프아B', src: `${imgUrl}/프아B.png` },
-        { id: '4', name: '프아O', src: `${imgUrl}/프아O.png` },
-    ];
+    const dispatch = useDispatch();
+    const handleIcon = (selectedItem) => {
+        const theIcon = basicIcons.find((item) => selectedItem.name === item.name);
+        dispatch(profileActions.setIconNow(theIcon));
+    };
     return (
         <>
             <ModalBackdrop />
@@ -38,9 +37,16 @@ const IconList = ({ handleModalOpen }) => {
                     <Flex $flexDirection='column'>
                         <H3>코믹 이미지</H3>
                         <Flex $gap='10px'>
-                            {srcList.map((item) => (
-                                <IconItem key={item.id} src={item.src} />
-                            ))}
+                            {basicIcons
+                                .filter((item) => parseInt(item.id) < 5)
+                                .map((item) => (
+                                    <IconItem
+                                        key={item.id}
+                                        item={item}
+                                        handleIcon={handleIcon}
+                                        handleModalOpen={handleModalOpen}
+                                    />
+                                ))}
                         </Flex>
                     </Flex>
                     <Flex $flexDirection='column'>

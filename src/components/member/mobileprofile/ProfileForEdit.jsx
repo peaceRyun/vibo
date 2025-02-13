@@ -13,9 +13,11 @@ import {
     ButtonDark,
 } from './style';
 import { FaPen } from 'react-icons/fa';
+import { useSelector } from 'react-redux';
 
 const ProfileForEdit = () => {
     const [modalOpen, setModalOpen] = useState(false);
+    const { srcNow } = useSelector((state) => state.profileR);
 
     const handleModalOpen = (e) => {
         e.preventDefault();
@@ -33,13 +35,7 @@ const ProfileForEdit = () => {
                         </Flex>
                         <Flex $gap='40px' $flexDirection='column' $alignItems='center'>
                             <ProfileImgWrap>
-                                <ProfileImg
-                                    $width='200px'
-                                    $height='200px'
-                                    src='/contentdetail/sample프아.png'
-                                    alt='샘플프아'
-                                    $filter
-                                />
+                                <ProfileImg $width='200px' $height='200px' src={srcNow} alt='샘플프아' $filter />
                                 <DimmedWrap>
                                     <button onClick={handleModalOpen}>
                                         <FaPen size='40px' color='white' />
