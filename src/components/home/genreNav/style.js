@@ -15,10 +15,11 @@ export const GenreItem = styled.div`
     justify-content: center;
     align-items: center;
     padding: 1.5rem;
-    border: 2px solid transparent;
+    border: 2px solid #009c8c;
     border-radius: 0.75rem;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: border-color 0.3s ease;
+    background-color: ${({ ishighlighted }) => (ishighlighted ? '#009c8c' : 'transparent')};
 
     .en {
         font-size: 2.5rem;
@@ -31,7 +32,7 @@ export const GenreItem = styled.div`
 
     .ko {
         font-size: 1.5rem;
-        color: ${({ isHighlighted }) => (isHighlighted ? '#005B53' : '#939598')};
+        color: ${({ ishighlighted }) => (ishighlighted ? '#005B53' : '#939598')};
         margin-top: 0.5rem;
     }
 `;

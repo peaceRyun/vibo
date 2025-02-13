@@ -6,7 +6,7 @@ const MenuButton = ({ item }) => {
     const { name, ongo } = item;
     return (
         <Button
-            isHovered={isHovered}
+            $isHovered={isHovered}
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
             onClick={ongo}
@@ -32,6 +32,6 @@ const Button = styled.div`
     cursor: pointer;
     transition: all 0.3s ease-in-out;
     background: ${(props) =>
-        props.isHovered ? 'linear-gradient(to bottom, var( --primary-base), var(--black))' : '#333'};
-    color: ${(props) => (props.isHovered ? 'var(--white)' : 'var(--gray-700)')};
+        props.$isHovered ? 'linear-gradient(to bottom, var( --primary-base), var(--black))' : '#333'};
+    color: ${(props) => (props.$isHovered ? 'var(--white)' : 'var(--gray-700)')};
 `;
