@@ -79,7 +79,9 @@ export const ReviewDate = styled.span`
 `;
 
 // 리뷰 텍스트
-export const ReviewText = styled.p`
+export const ReviewText = styled.div`
+  display: flex;
+  justify-content: space-between;
   color: white;
   font-size: 14px;
   line-height: 1.5;
@@ -89,6 +91,13 @@ export const ReviewText = styled.p`
   border-radius: 10px;
   border: 1px solid var(--primary-base);
   height: 6rem;
+`;
+
+export const ReviewIcon = styled.div`
+  display: flex;
+  align-items: center;
+  margin-bottom: 45px;
+  gap: 8px;
 `;
 
 // 별점 컨테이너
