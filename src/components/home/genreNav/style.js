@@ -7,7 +7,9 @@ export const GenreContainer = styled.div`
     width: 1740px;
 `;
 
-export const GenreItem = styled.div`
+export const GenreItem = styled.div.withConfig({
+    shouldForwardProp: (prop) => prop !== 'ishighlighted',
+})`
     width: 27.1875rem;
     height: 11.4375rem; /* 183px */
     display: flex;
