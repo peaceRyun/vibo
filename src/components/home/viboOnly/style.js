@@ -4,6 +4,8 @@ export const ViboContainer = styled.div`
   display: flex;
   gap: 10px;
   justify-content: space-around;
+  width: 1750px;
+  /* margin-right: 85px; */
 `;
 
 export const Title = styled.div`
