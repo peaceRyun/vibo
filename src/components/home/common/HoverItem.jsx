@@ -13,7 +13,7 @@ const HoverItem = ({ content }) => {
                     <PlayImg src="/contentdetail/ui/carousel_action_atomic.png" alt="play" />
                 </button>
             </Flex>
-            <Flex $flexDirection="column" $padding="15px 20px 6px" $gap="8px">
+            <Flex $flexDirection="column" $padding="35px 20px 6px" $gap="8px">
                 <Flex $justifyContent="space-between" $alignItems="center">
                     <Flex $justifyContent="space-between" $alignItems="center" $gap="10px">
                         <img src="/contentdetail/contentrate/전체관람가 관람등급 1.png" alt="rateAll" />
