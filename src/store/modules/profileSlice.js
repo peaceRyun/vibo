@@ -19,6 +19,7 @@ const initialState = {
     srcNow: '',
     idNow: '',
     nameNow: '',
+    nickname: '바이보',
 };
 
 export const profileSlice = createSlice({
@@ -30,6 +31,10 @@ export const profileSlice = createSlice({
             state.srcNow = profileNow.src;
             state.idNow = profileNow.id;
             state.nameNow = profileNow.name;
+        },
+        add: (state, action) => {
+            const recievednickname = action.payload;
+            state.nickname = recievednickname;
         },
     },
 });

@@ -13,22 +13,38 @@ import {
     ButtonDark,
 } from './style';
 import { FaPen } from 'react-icons/fa';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router';
+import { profileActions } from '../../../store/modules/profileSlice';
 
 const ProfileForEdit = () => {
     const [modalOpen, setModalOpen] = useState(false);
-    const { srcNow } = useSelector((state) => state.profileR);
+    const { nickname, srcNow } = useSelector((state) => state.profileR);
+    const [nick, setNick] = useState(nickname);
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const handleModalOpen = (e) => {
         e.preventDefault();
         setModalOpen(!modalOpen);
     };
 
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        if (!nick) return;
+        dispatch(profileActions.add(nick));
+        navigate(-1);
+    };
+
+    const changeInput = (e) => {
+        setNick(e.target.value);
+    };
+
     return (
         <>
             <PageWrap>
                 {modalOpen && <IconList handleModalOpen={handleModalOpen} />}
-                <EditForm>
+                <EditForm onSubmit={handleSubmit}>
                     <Flex $flexDirection='column' $alignItems='center' $gap='60px' $padding='90px'>
                         <Flex $flexDirection='column' $alignItems='center' $gap='10px'>
                             <H2>프로필 편집</H2>
@@ -42,11 +58,18 @@ const ProfileForEdit = () => {
                                     </button>
                                 </DimmedWrap>
                             </ProfileImgWrap>
-                            <NickNameInput />
+                            <NickNameInput
+                                type='text'
+                                placeholder='본인 닉네임'
+                                name='nickname'
+                                value={nick}
+                                onChange={changeInput}
+                            />
                         </Flex>
 
                         <Flex $gap='15px'>
                             <ButtonLight
+                                type='submit'
                                 $padding='1.675rem'
                                 $border='1px solid var(--gray-500)'
                                 $borderRadius='5px'
@@ -57,6 +80,7 @@ const ProfileForEdit = () => {
                                 확인
                             </ButtonLight>
                             <ButtonDark
+                                type='button'
                                 $padding='1.675rem'
                                 $border='1px solid var(--gray-500)'
                                 $borderRadius='5px'
