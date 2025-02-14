@@ -4,12 +4,16 @@ import { FaPen } from 'react-icons/fa';
 
 const ProfilesForEdit = () => {
     const navigate = useNavigate();
+
     const onGo = () => {
-        navigate('/profileforedit', { state: { from: 'profilesforedit' } });
+        localStorage.setItem('profileEditBackUrl', '/profilesforedit');
+        navigate('/profileforedit');
     };
+
     const onGoComplete = () => {
         navigate('/profileselect');
     };
+
     return (
         <>
             <PageWrap>

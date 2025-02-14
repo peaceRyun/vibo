@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import IconList from './IconList';
 import {
     ButtonLight,
@@ -14,7 +14,7 @@ import {
 } from './style';
 import { FaPen } from 'react-icons/fa';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate, useLocation } from 'react-router';
+import { useNavigate } from 'react-router';
 import { profileActions } from '../../../store/modules/profileSlice';
 
 const ProfileForEdit = () => {
@@ -23,7 +23,6 @@ const ProfileForEdit = () => {
     const [nick, setNick] = useState(nickname);
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const location = useLocation();
 
     const handleModalOpen = (e) => {
         e.preventDefault();
@@ -35,15 +34,13 @@ const ProfileForEdit = () => {
         if (!nick) return;
         dispatch(profileActions.add(nick));
 
-        // Check if we came from ProfilesForEdit
-        const fromProfilesForEdit = location.state?.from === 'profilesforedit';
-
-        // Navigate based on the origin
-        if (fromProfilesForEdit) {
+        const backUrl = localStorage.getItem('profileEditBackUrl');
+        if (backUrl === '/profilesforedit') {
             navigate('/profilesforedit');
         } else {
             navigate('/mypage');
         }
+        localStorage.removeItem('profileEditBackUrl');
     };
 
     const changeInput = (e) => {

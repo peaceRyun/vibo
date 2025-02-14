@@ -20,7 +20,6 @@ const initialState = {
     idNow: '',
     nameNow: '',
     nickname: '바이보',
-    beforeUrl: '',
 };
 
 export const profileSlice = createSlice({
@@ -36,9 +35,6 @@ export const profileSlice = createSlice({
         add: (state, action) => {
             const recievednickname = action.payload;
             state.nickname = recievednickname;
-        },
-        saveUrl: (state, action) => {
-            state.beforeUrl = action.payload;
         },
     },
 });

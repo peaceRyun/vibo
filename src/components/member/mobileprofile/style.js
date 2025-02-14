@@ -87,6 +87,7 @@ export const ProfileImgWrap = styled.div`
     position: relative;
     top: 0;
     transition: all 0.3s ease;
+    cursor: pointer;
     &:hover {
         top: -30px;
     }
