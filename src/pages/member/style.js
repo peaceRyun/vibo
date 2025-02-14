@@ -119,10 +119,6 @@ export const Plan = styled.div`
     padding: 50px;
     text-align: center;
   }
-  /* &:hover {
-    background: var(--primary-base);
-    color: var(--black);
-  } */
 `;
 
 export const FeatureList = styled.ul`
@@ -131,12 +127,6 @@ export const FeatureList = styled.ul`
   list-style: none;
   width: 100%;
 
-  /* &:hover {
-    li {
-      color: var(--primary-base);
-      font-weight: 800;
-    }
-  } */
   li {
     color: ${(props) => (props.$isFilled ? 'var(--primary-base)' : 'white')};
     font-weight: ${(props) => (props.$isFilled ? 'bold' : 'normal')};
