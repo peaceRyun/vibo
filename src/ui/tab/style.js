@@ -18,8 +18,8 @@ export const TabButtonStyled = styled.button`
   border: 2px solid var(--secondary-base);
   font-size: 24px;
   cursor: pointer;
-  color: ${(props) => (props.active ? 'var(--white)' : '#ccc')};
-  background-color: ${(props) => (props.active ? 'var(--secondary-base)' : 'transparent')};
+  color: ${(props) => (props.$active ? 'var(--white)' : '#ccc')};
+  background-color: ${(props) => (props.$active ? 'var(--secondary-base)' : 'transparent')};
 
   &:hover {
     opacity: 0.8;

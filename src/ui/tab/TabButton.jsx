@@ -1,5 +1,5 @@
 import { useState } from 'react';
-// import React { useState } from 'react';
+
 import { TabButtonStyled, TabContainer } from './style';
 
 const TabButton = ({ tabs }) => {
@@ -10,7 +10,7 @@ const TabButton = ({ tabs }) => {
   return (
     <TabContainer>
       {tabs.map((tab) => (
-        <TabButtonStyled key={tab} active={activeTab === tab} onClick={() => setActiveTab(tab)}>
+        <TabButtonStyled key={tab} $active={activeTab === tab} onClick={() => setActiveTab(tab)}>
           {tab}
         </TabButtonStyled>
       ))}
