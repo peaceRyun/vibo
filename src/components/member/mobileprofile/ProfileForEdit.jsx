@@ -14,7 +14,7 @@ import {
 } from './style';
 import { FaPen } from 'react-icons/fa';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router';
+import { useNavigate, useLocation } from 'react-router';
 import { profileActions } from '../../../store/modules/profileSlice';
 
 const ProfileForEdit = () => {
@@ -23,6 +23,7 @@ const ProfileForEdit = () => {
     const [nick, setNick] = useState(nickname);
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const location = useLocation();
 
     const handleModalOpen = (e) => {
         e.preventDefault();
@@ -33,11 +34,24 @@ const ProfileForEdit = () => {
         e.preventDefault();
         if (!nick) return;
         dispatch(profileActions.add(nick));
-        navigate(-1);
+
+        // Check if we came from ProfilesForEdit
+        const fromProfilesForEdit = location.state?.from === 'profilesforedit';
+
+        // Navigate based on the origin
+        if (fromProfilesForEdit) {
+            navigate('/profilesforedit');
+        } else {
+            navigate('/mypage');
+        }
     };
 
     const changeInput = (e) => {
         setNick(e.target.value);
+    };
+
+    const onGo = () => {
+        navigate(-1);
     };
 
     return (
@@ -81,6 +95,7 @@ const ProfileForEdit = () => {
                             </ButtonLight>
                             <ButtonDark
                                 type='button'
+                                onClick={onGo}
                                 $padding='1.675rem'
                                 $border='1px solid var(--gray-500)'
                                 $borderRadius='5px'

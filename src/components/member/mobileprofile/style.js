@@ -85,6 +85,11 @@ export const ProfileImgWrap = styled.div`
     border: ${(props) => props.$border};
     border-radius: ${(props) => props.$borderRadius};
     position: relative;
+    top: 0;
+    transition: all 0.3s ease;
+    &:hover {
+        top: -30px;
+    }
 `;
 
 export const ProfileImg = styled.img`
