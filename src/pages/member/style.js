@@ -82,6 +82,19 @@ export const PlanWrapper = styled.div`
   padding: 40px 20px;
   position: relative;
 
+  .basic {
+    &:hover {
+      background: var(--primary-base);
+      color: var(--black);
+    }
+  }
+  /* .text {
+    li {
+      color: var(--primary-base);
+      font-weight: 800;
+    }
+  } */
+
   &:not(:last-child)::after {
     content: '';
     position: absolute;
@@ -102,34 +115,33 @@ export const Plan = styled.div`
   background: ${({ $isFilled }) => ($isFilled ? '#07FFE6' : 'transparent')};
   color: ${({ $isFilled }) => ($isFilled ? 'black' : 'inherit')};
   transition: background 0.3s ease, color 0.3s ease;
-  &:hover {
-    background: var(--primary-base);
-    color: var(--black);
-  }
   h2 {
     padding: 50px;
     text-align: center;
   }
+  /* &:hover {
+    background: var(--primary-base);
+    color: var(--black);
+  } */
 `;
 
 export const FeatureList = styled.ul`
   font-size: 20px;
   margin-top: 3.125rem;
   list-style: none;
-
   width: 100%;
-  &:hover {
+
+  /* &:hover {
     li {
-      font-weight: 800;
       color: var(--primary-base);
+      font-weight: 800;
     }
-  }
+  } */
   li {
+    color: ${(props) => (props.$isFilled ? 'var(--primary-base)' : 'white')};
+    font-weight: ${(props) => (props.$isFilled ? 'bold' : 'normal')};
     padding: 10px 0;
-    /* border-top: 1px solid gray; */
     text-align: center;
-    color: gray;
-    font-weight: 300;
   }
 `;
 
