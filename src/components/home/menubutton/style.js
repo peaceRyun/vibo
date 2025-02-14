@@ -7,7 +7,7 @@ export const Section = styled.div`
   padding: 40px 40px;
 `;
 
-export const Title = styled.h2`
+export const Title = styled.div`
   color: var(--white);
   font-size: 40px;
   font-weight: 800;

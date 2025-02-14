@@ -1,43 +1,52 @@
+import { useState, useEffect } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import styled from 'styled-components';
-import { Pagination } from 'swiper/modules';
+// import { Pagination } from 'swiper/modules'; // 페이지네이션 모듈 주석 처리
 import CommonItem from './CommonItem';
 import { useNavigate } from 'react-router';
+import { useSelector } from 'react-redux';
 
 export const CommonList = () => {
     const navigate = useNavigate();
     const onGo = () => {
         navigate('/contentlist');
     };
-    return (
-        <Section>
-            <CommonInfo>
-                <CommonTitle>
-                    XX님이 <br />
-                    좋아할만 한 <br />
-                    예능
-                    <VerticalText>TV</VerticalText>
-                </CommonTitle>
-                <MoreBtn onClick={onGo}>더보기</MoreBtn>
-            </CommonInfo>
-            <CommonSwiper spaceBetween={20} pagination={{ clickable: true }}>
-                {/* modules={[Pagination]} */}
-                {[...Array(10)].map((_, index) => (
-                    <SwiperSlide key={index}>
-                        <CommonItem />
-                    </SwiperSlide>
-                ))}
-            </CommonSwiper>
-        </Section>
-    );
+    const { TVseriesData } = useSelector((state) => state.tvSeriesR);
+
+    if (!TVseriesData) {
+        return <div>loading....</div>;
+    }
+    if (TVseriesData.length > 0) {
+        return (
+            <Section>
+                <CommonInfo>
+                    <CommonTitle>
+                        XX님이 <br />
+                        좋아할만 한 <br />
+                        예능
+                        <VerticalText>TV</VerticalText>
+                    </CommonTitle>
+                    <MoreBtn onClick={onGo}>더보기</MoreBtn>
+                </CommonInfo>
+                <CommonSwiper spaceBetween={20} pagination={{ clickable: true }} slidesPerView={5.5}>
+                    {/* modules={[Pagination]} */}
+                    {TVseriesData.map((content) => (
+                        <SwiperSlide key={content.id}>
+                            <CommonItem content={content} />
+                        </SwiperSlide>
+                    ))}
+                </CommonSwiper>
+            </Section>
+        );
+    }
 };
 
 export default CommonList;
 
 const Section = styled.section`
     display: flex;
-    align-items: center;
+    /* align-items: center; */
     position: relative;
     gap: 5px;
 `;
@@ -58,12 +67,12 @@ const CommonInfo = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    height: 443px;
+    /* height: 443px; */
 `;
 
 const CommonTitle = styled.h3`
     color: white;
-    font-size: 40px;
+    font-size: 32px;
     font-weight: bold;
     line-height: 1.5;
     margin: 0;
@@ -72,13 +81,13 @@ const CommonTitle = styled.h3`
 const MoreBtn = styled.button`
     background-color: var(--primary-600);
     color: black;
-    font-size: 24px;
-    padding: 17px 32px;
+    font-size: 17px;
+    padding: 15px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    width: 134px;
-    height: 51px;
+    width: 155px;
+    height: 40px;
     font-weight: bold;
 
     &:hover {
@@ -88,11 +97,11 @@ const MoreBtn = styled.button`
 
 const CommonSwiper = styled(Swiper)`
     flex: 3;
-    height: 443px;
+    /* height: 443px; */
 
     .swiper-slide {
-        width: 300px !important;
-        height: 443px;
+        // width: 300px !important; // 이 줄을 제거하거나 주석 처리합니다
+        /* height: 443px; */
         display: flex;
         justify-content: center;
         align-items: center;

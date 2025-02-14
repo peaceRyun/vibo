@@ -4,7 +4,7 @@ export const ModalContainer = styled.div`
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -25%);
     z-index: 2;
     width: 70rem;
     height: 100vh;
@@ -54,7 +54,7 @@ export const P = styled.p`
 `;
 
 export const PageWrap = styled.div`
-    height: 100vh;
+    height: 75vh;
     position: relative;
 `;
 
@@ -64,7 +64,7 @@ export const EditForm = styled.form`
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -35%);
 `;
 
 export const Flex = styled.div`
@@ -91,6 +91,7 @@ export const ProfileImg = styled.img`
     width: ${(props) => props.$width || 'auto'};
     height: ${(props) => props.$height || 'auto'};
     filter: ${(props) => props.$filter && 'brightness(50%)'};
+    object-fit: contain;
 `;
 
 export const DimmedWrap = styled.div`
@@ -165,4 +166,8 @@ export const CloseButton = styled.div`
     top: 0;
     right: -75px;
     padding: 20px 20px 0 0;
+`;
+
+export const ModalCotent = styled.div`
+    padding-top: 5rem;
 `;

@@ -15,6 +15,7 @@ import Mypage from './pages/member/Mypage';
 import ProfilesSelect from './components/member/mobileprofile/ProfilesSelect';
 import ProfileForEdit from './components/member/mobileprofile/ProfileForEdit';
 import ProfilesForEdit from './components/member/mobileprofile/ProfilesForEdit';
+import ContentPlayer from './pages/contents/ContentPlayer';
 
 const App = () => {
   return (
@@ -22,6 +23,10 @@ const App = () => {
       <BrowserRouter>
         <GlobalStyle />
         <Routes>
+          <Route path="/player">
+            <Route index element={<ContentPlayer />} />
+            {/* <Route path=':name' element={<Project />} /> */}
+          </Route>
           <Route path="/" element={<Layout />}>
             <Route index element={<MainHome />} />
             <Route path="/membership" element={<Membership />} />
@@ -39,6 +44,7 @@ const App = () => {
               <Route index element={<ContentDetail />} />
               {/* <Route path=':name' element={<Project />} /> */}
             </Route>
+
             <Route path="/contentlist">
               <Route index element={<ContentList />} />
               {/* <Route path=':name' element={<Project />} /> */}

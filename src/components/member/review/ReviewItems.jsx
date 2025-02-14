@@ -1,5 +1,6 @@
 // 사용자 리뷰
 
+import { FaPen } from 'react-icons/fa6';
 import {
   DeleteButton,
   MoviePoster,
@@ -7,12 +8,14 @@ import {
   ReviewCard,
   ReviewContent,
   ReviewDate,
+  ReviewIcon,
   ReviewListContainer,
   ReviewText,
   Star,
   UserInfo,
   UserName,
 } from './style';
+import { IoClose } from 'react-icons/io5';
 
 const ReviewItems = () => {
   const reviews = [
@@ -72,14 +75,22 @@ const ReviewItems = () => {
                 <RatingStars>
                   {[...Array(5)].map((_, index) => (
                     <Star key={index} filled={index < review.rating}>
-                      ★
+                      <img src="/contentdetail/ui/StarActive.png" alt="별" />
                     </Star>
                   ))}
                 </RatingStars>
               </div>
-              <ReviewText>{review.text}</ReviewText>
+              <ReviewText>
+                {review.text}
+                <ReviewIcon>
+                  <FaPen size={15} />
+                  <IoClose size={20} />
+                </ReviewIcon>
+              </ReviewText>
             </ReviewContent>
-            <DeleteButton>✖</DeleteButton>
+            <DeleteButton>
+              <IoClose size={30} />
+            </DeleteButton>
           </ReviewCard>
         ))}
       </ReviewListContainer>

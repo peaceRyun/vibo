@@ -21,6 +21,7 @@ export const MoreButton = styled.button`
 // const Section = styled.section`
 
 export const Section = styled.div`
+  width: 1770px;
   display: flex;
   justify-content: center;
   align-items: center;
