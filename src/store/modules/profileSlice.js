@@ -13,10 +13,16 @@ export const basicIcons = [
     { id: '9', name: 'sample5', src: `${imgUrl}/sample5.png` },
     { id: '10', name: 'sample6', src: `${imgUrl}/sample6.png` },
     { id: '11', name: 'sample7', src: `${imgUrl}/sample7.png` },
+    { id: '12', name: 'sample8', src: `${imgUrl}/sample8.png` },
+    { id: '13', name: 'sample9', src: `${imgUrl}/sample9.png` },
+    { id: '14', name: 'sample10', src: `${imgUrl}/sample10.png` },
+    { id: '15', name: 'sample11', src: `${imgUrl}/sample11.png` },
+    { id: '16', name: 'sample12', src: `${imgUrl}/sample12.png` },
+    { id: '17', name: 'sample13', src: `${imgUrl}/sample13.png` },
 ];
 
 const initialState = {
-    srcNow: '',
+    srcNow: `${imgUrl}/profileIconV.png`,
     idNow: '',
     nameNow: '',
     nickname: '바이보',
