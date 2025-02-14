@@ -32,7 +32,7 @@ export const PopularSection = styled.div`
   margin-top: 100px;
 `;
 
-export const PopularTitle = styled.h2`
+export const PopularTitle = styled.div`
   color: white;
   /* width: 23rem; */
   font-size: 40px;
