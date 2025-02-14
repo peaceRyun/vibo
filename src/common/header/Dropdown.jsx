@@ -1,9 +1,32 @@
 // 검색창 드롭다운
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { DropdownContainer, SearchInput, ActionText } from './style';
 
 const Dropdown = ({ onClose }) => {
   const [searchTerm, setSearchTerm] = useState('');
+  const dropdownRef = useRef(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        onClose();
+      }
+    };
+
+    const handleEscKey = (event) => {
+      if (event.key === 'Escape') {
+        onClose();
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener('keydown', handleClickOutside);
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('keydown', handleClickOutside);
+    };
+  }, [onClose]);
 
   return (
     <>
@@ -14,6 +37,7 @@ const Dropdown = ({ onClose }) => {
           placeholder="주요 콘텐츠"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
+          ref={dropdownRef}
         />
 
         {/* 콘텐츠 영역 */}

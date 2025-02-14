@@ -13,6 +13,12 @@ export const HeaderContainer = styled.header`
   left: 0;
   width: 100%;
   z-index: 1000;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0));
+  color: rgb(255, 255, 255);
+  transition: backdrop-filter 0.3s linear, background-color 0.3s linear;
+  backdrop-filter: blur(30px);
+  background-color: rgba(0, 0, 0, 0.7);
+  inset: -1px 0px 0px;
 `;
 
 export const LeftSection = styled.div`
