@@ -2178,9 +2178,19 @@ react-router-dom@^7.1.5:
   dependencies:
     react-router "7.1.5"
 
+<<<<<<< HEAD
+<<<<<<< HEAD
 react-router@7.1.5, react-router@^7.1.5:
   version "7.1.5"
+  resolved "https://registry.yarnpkg.com/react-router/-/react-router-7.1.5.tgz#c9e19d329d9ce2215fdae844ab6b023b911094db"
+=======
+react-router@^7.1.5, react-router@7.1.5:
+=======
+react-router@7.1.5, react-router@^7.1.5:
+>>>>>>> e33a79182f4884821c2b16ba3bf671d6a822e00a
+  version "7.1.5"
   resolved "https://registry.npmjs.org/react-router/-/react-router-7.1.5.tgz"
+>>>>>>> 38dc5003d88f4beced3194b533bac1867c4a1b62
   integrity sha512-8BUF+hZEU4/z/JD201yK6S+UYhsf58bzYIDq2NS1iGpwxSXDu7F+DeGSkIXMFBuHZB21FSiCzEcUb18cQNdRkA==
   dependencies:
     "@types/cookie" "^0.6.0"
@@ -2188,7 +2198,15 @@ react-router@7.1.5, react-router@^7.1.5:
     set-cookie-parser "^2.6.0"
     turbo-stream "2.4.0"
 
+<<<<<<< HEAD
+<<<<<<< HEAD
 react@^18.3.1:
+=======
+react@*, "react@^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0", "react@^16.9.0 || ^17.0.0 || ^18 || ^19", "react@^18.0 || ^19", react@^18.3.1, "react@>= 16.8.0", react@>=18:
+>>>>>>> 38dc5003d88f4beced3194b533bac1867c4a1b62
+=======
+react@^18.3.1:
+>>>>>>> e33a79182f4884821c2b16ba3bf671d6a822e00a
   version "18.3.1"
   resolved "https://registry.npmjs.org/react/-/react-18.3.1.tgz"
   integrity sha512-wS+hAgJShR0KhEvPJArfuPVN1+Hz1t0Y6n5jLrGQbkb4urgPE/0Rve+1kMB1v/oWgHgm4WIcV+i7F2pTVj+2iQ==
