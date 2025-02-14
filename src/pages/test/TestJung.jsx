@@ -5,17 +5,17 @@
 // import SeriesHome from '../home/series/SeriesHome';
 
 function TestJung() {
-    return (
-        <>
-            {/* <GlobalStyle /> */}
-            {/* <MainHome /> */}
-            {/* <MovieHome /> */}
-            {/* <SeriesHome /> */}
-            {/* <Membership /> */}
-            {/* <Mypage /> */}
-            {/* <ProfileInfoEdit /> */}
-        </>
-    );
+  return (
+    <>
+      {/* <GlobalStyle /> */}
+      {/* <MainHome /> */}
+      {/* <MovieHome /> */}
+      {/* <SeriesHome /> */}
+      {/* <Membership /> */}
+      {/* <Mypage /> */}
+      {/* <ProfileInfoEdit /> */}
+    </>
+  );
 }
 
 export default TestJung;

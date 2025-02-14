@@ -24,27 +24,22 @@ const AboutPswiper = () => {
 
   useEffect(() => {
     if (topTrackRef.current && bottomTrackRef.current) {
-      gsap.fromTo(
-        topTrackRef.current,
-        { x: 0 },
-        {
-          x: '-50%',
-          duration: 15,
-          repeat: -1,
-          ease: 'linear',
-        }
-      );
+      gsap.set(topTrackRef.current, { x: 0 });
+      gsap.set(bottomTrackRef.current, { x: '-50%' });
 
-      gsap.fromTo(
-        bottomTrackRef.current,
-        { x: '-50%' },
-        {
-          x: '0%',
-          duration: 15,
-          repeat: -1,
-          ease: 'linear',
-        }
-      );
+      gsap.to(topTrackRef.current, {
+        x: '-50%',
+        duration: 15,
+        repeat: -1,
+        ease: 'linear',
+      });
+
+      gsap.to(bottomTrackRef.current, {
+        x: '0%',
+        duration: 15,
+        repeat: -1,
+        ease: 'linear',
+      });
     }
   }, []);
 
