@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-//영화
+//영화 - 기본 정보 끌어오기
 const options = {
     api_key: 'ddf6521c43c2e03f59d2767f109aaaa4',
     lenguage: 'ko-KR',
@@ -18,54 +18,9 @@ export const getMovie = createAsyncThunk('movie/getMovie', async () => {
     }
 });
 
-//TVseries
-const TVoptions = {
-    params: {
-        include_adult: 'false',
-        include_null_first_air_dates: 'false',
-        language: 'ko-KR',
-        page: '1',
-        sort_by: 'popularity.desc',
-    },
-    headers: {
-        accept: 'application/json',
-        Authorization:
-            'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJkZGY2NTIxYzQzYzJlMDNmNTlkMjc2N2YxMDlhYWFhNCIsIm5iZiI6MTczNzUxMDE4NS4yNjIsInN1YiI6IjY3OTA0ZDI5MmQ2MWMzM2U2M2RmZTVlNiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ._QJjWVEDYEcIfVZtQRYG0JSRb22Dit3HopPsNm8AILE',
-    },
-};
-
-export const getTVseries = createAsyncThunk('TVseries/getTVseries', async (_, thunkAPI) => {
-    try {
-        let allResults = [];
-
-        for (let page = 1; page <= 6; page++) {
-            const koResponse = await axios.get('https://api.themoviedb.org/3/discover/tv', {
-                ...TVoptions,
-                params: { ...TVoptions.params, page: page.toString() },
-            });
-
-            const pageResults = koResponse.data.results.filter(
-                (show) =>
-                    show.backdrop_path !== null && // backdrop_path가 있는 항목만 필터링
-                    show.overview && // overview가 존재하는지 확인
-                    show.overview.length >= 10 // overview가 충분히 긴지 확인
-            );
-
-            allResults = [...allResults, ...pageResults];
-        }
-
-        // 결과가 24개를 초과하면 상위 24개만 반환
-        return allResults.length > 24 ? allResults.slice(0, 24) : allResults;
-    } catch (error) {
-        return thunkAPI.rejectWithValue(error.message);
-    }
-});
-
-//Movie유튜브링크 가져오기
+//영화 - 유튜브링크 가져오기
 const videoOptions = {
-    params: {
-        language: 'ko-KR',
-    },
+    params: {},
     headers: {
         accept: 'application/json',
         Authorization:
@@ -94,7 +49,7 @@ export const getMovieVideos = createAsyncThunk(
     }
 );
 
-// 영화 리뷰 데이터 끌어오기
+// 영화 - 리뷰 데이터 끌어오기
 const reviewOptions = {
     params: {
         language: 'ko-KR',
@@ -134,6 +89,170 @@ export const getMovieReviews = createAsyncThunk('reviews/getMovieReviews', async
         return allReviews;
     } catch (error) {
         return rejectWithValue(error.message);
+    }
+});
+
+//TV시리즈 - 기본정보
+const TVoptions = {
+    params: {
+        include_adult: 'false',
+        include_null_first_air_dates: 'false',
+        language: 'ko-KR',
+        page: '1',
+        sort_by: 'popularity.desc',
+    },
+    headers: {
+        accept: 'application/json',
+        Authorization:
+            'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJkZGY2NTIxYzQzYzJlMDNmNTlkMjc2N2YxMDlhYWFhNCIsIm5iZiI6MTczNzUxMDE4NS4yNjIsInN1YiI6IjY3OTA0ZDI5MmQ2MWMzM2U2M2RmZTVlNiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ._QJjWVEDYEcIfVZtQRYG0JSRb22Dit3HopPsNm8AILE',
+    },
+};
+
+export const getTVseries = createAsyncThunk('TVseries/getTVseries', async (_, thunkAPI) => {
+    try {
+        let allResults = [];
+        let page = 1;
+
+        while (allResults.length < 24) {
+            console.log(`Fetching page ${page}`);
+
+            // TV 시리즈 기본 정보 가져오기
+            const response = await axios.get('https://api.themoviedb.org/3/discover/tv', {
+                ...TVoptions,
+                params: {
+                    ...TVoptions.params,
+                    page: page.toString(),
+                },
+            });
+
+            // 기본 필터링: overview, poster_path, backdrop_path가 있는 콘텐츠만
+            const filteredResults = response.data.results.filter(
+                (show) => show.overview && show.poster_path && show.backdrop_path
+            );
+
+            // 각 TV 시리즈의 비디오 정보 확인
+            for (const show of filteredResults) {
+                try {
+                    const videoResponse = await axios.get(`https://api.themoviedb.org/3/tv/${show.id}/videos`, {
+                        headers: TVoptions.headers,
+                    });
+
+                    // 예고편이나 티저 찾기
+                    const trailer = videoResponse.data.results.find(
+                        (video) =>
+                            video.site === 'YouTube' &&
+                            video.key &&
+                            (video.type === 'Trailer' || video.type === 'Teaser')
+                    );
+
+                    // 모든 show를 저장하되, videoKey의 유무로 구분
+                    allResults.push({
+                        ...show,
+                        videoKey: trailer ? trailer.key : null,
+                    });
+
+                    // 24개를 채웠다면 종료
+                    if (allResults.length >= 24) {
+                        break;
+                    }
+                } catch (error) {
+                    console.error(`Error fetching videos for show ${show.id}:`, error.message);
+                }
+            }
+
+            page++;
+
+            // 더 이상 결과가 없거나 10페이지까지 검색했다면 종료
+            if (!response.data.results.length || page > 10) {
+                break;
+            }
+        }
+
+        console.log(`Final results: ${allResults.length} shows`);
+        return allResults.slice(0, 24);
+    } catch (error) {
+        console.error('Main error:', error.message);
+        return thunkAPI.rejectWithValue(error.message);
+    }
+});
+
+//TV 시리즈 - 상세정보 가져오기
+export const getTVDetail = createAsyncThunk('TVDetail/getTVDetail', async (tvId, { rejectWithValue }) => {
+    try {
+        const response = await axios.get(`https://api.themoviedb.org/3/tv/${tvId}`, {
+            params: {
+                language: 'ko-KR',
+            },
+            headers: {
+                accept: 'application/json',
+                Authorization:
+                    'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJkZGY2NTIxYzQzYzJlMDNmNTlkMjc2N2YxMDlhYWFhNCIsIm5iZiI6MTczNzUxMDE4NS4yNjIsInN1YiI6IjY3OTA0ZDI5MmQ2MWMzM2U2M2RmZTVlNiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ._QJjWVEDYEcIfVZtQRYG0JSRb22Dit3HopPsNm8AILE',
+            },
+        });
+
+        return response.data;
+    } catch (error) {
+        return rejectWithValue(error.message);
+    }
+});
+
+//Tv시리즈 - 유튜브 링크 끌어오기
+export const getTVVideos = createAsyncThunk('player/getTVVideos', async (tvId = null, { rejectWithValue }) => {
+    try {
+        if (!tvId) {
+            console.log('No tvId provided, returning default video');
+            return 'MkcqlqCfYcg';
+        }
+
+        console.log('Fetching videos for TV ID:', tvId);
+
+        const response = await axios.get(`https://api.themoviedb.org/3/tv/${tvId}/videos`, {
+            params: {
+                language: 'ko-KR',
+            },
+            headers: {
+                accept: 'application/json',
+                Authorization:
+                    'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJkZGY2NTIxYzQzYzJlMDNmNTlkMjc2N2YxMDlhYWFhNCIsIm5iZiI6MTczNzUxMDE4NS4yNjIsInN1YiI6IjY3OTA0ZDI5MmQ2MWMzM2U2M2RmZTVlNiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ._QJjWVEDYEcIfVZtQRYG0JSRb22Dit3HopPsNm8AILE',
+            },
+        });
+
+        console.log('API Response:', response.data);
+
+        const videos = response.data.results;
+        console.log('Available videos:', videos);
+
+        // 한국어 예고편 찾기
+        let youtubeVideo = videos.find(
+            (video) =>
+                video.site === 'YouTube' &&
+                video.key &&
+                (video.type === 'Trailer' || video.type === 'Teaser') &&
+                video.iso_639_1 === 'ko'
+        );
+
+        // 한국어 예고편이 없으면 영어 예고편 찾기
+        if (!youtubeVideo) {
+            console.log('No Korean trailer found, searching for any trailer');
+            youtubeVideo = videos.find(
+                (video) =>
+                    video.site === 'YouTube' && video.key && (video.type === 'Trailer' || video.type === 'Teaser')
+            );
+        }
+
+        // 예고편이 없으면 아무 YouTube 비디오나 찾기
+        if (!youtubeVideo) {
+            console.log('No trailer found, searching for any YouTube video');
+            youtubeVideo = videos.find((video) => video.site === 'YouTube' && video.key);
+        }
+
+        const videoKey = youtubeVideo ? youtubeVideo.key : 'MkcqlqCfYcg';
+        console.log('Selected video key:', videoKey);
+
+        return videoKey;
+    } catch (error) {
+        console.error('Error in getTVVideos:', error);
+        return rejectWithValue('Failed to fetch video: ' + error.message);
     }
 });
 

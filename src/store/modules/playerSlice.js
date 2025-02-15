@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { getTVVideos } from './getThunk';
 
 const initialState = {
     isPlaying: true,
@@ -6,6 +7,8 @@ const initialState = {
     duration: 0,
     currentTime: 0,
     videoId: 'MkcqlqCfYcg',
+    loading: false,
+    error: null,
 };
 
 export const playerSlice = createSlice({
@@ -25,8 +28,28 @@ export const playerSlice = createSlice({
             state.currentTime = action.payload;
         },
         setVideoId: (state, action) => {
+            console.log('setVideoId action:', action.payload);
             state.videoId = action.payload;
         },
+    },
+    extraReducers: (builder) => {
+        builder
+            .addCase(getTVVideos.pending, (state) => {
+                console.log('getTVVideos.pending');
+                state.loading = true;
+                state.error = null;
+            })
+            .addCase(getTVVideos.fulfilled, (state, action) => {
+                console.log('getTVVideos.fulfilled with payload:', action.payload);
+                state.loading = false;
+                state.videoId = action.payload;
+            })
+            .addCase(getTVVideos.rejected, (state, action) => {
+                console.log('getTVVideos.rejected with error:', action.payload);
+                state.loading = false;
+                state.error = action.payload;
+                state.videoId = 'MkcqlqCfYcg';
+            });
     },
 });
 
