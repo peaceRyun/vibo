@@ -1,11 +1,10 @@
-import { useState, useEffect } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import styled from 'styled-components';
 // import { Pagination } from 'swiper/modules'; // 페이지네이션 모듈 주석 처리
-import CommonItem from './CommonItem';
 import { useNavigate } from 'react-router';
 import { useSelector } from 'react-redux';
+import CommonItem from './CommonItem';
 
 export const CommonList = () => {
     const navigate = useNavigate();

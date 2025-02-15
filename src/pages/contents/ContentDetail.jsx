@@ -2,18 +2,21 @@ import { useDispatch } from 'react-redux';
 import EpList from '../../components/contents/EpList';
 import PlayBanner from '../../components/contents/PlayBanner';
 import ReList from '../../components/contents/ReList';
-import ReviewList from '../../components/contents/ReviewList';
 import { Flex, FlexUl, H3, Inner, SpanInfo, SpanInfoDim } from '../../components/contents/style';
 import { BadgeBlank } from './style';
 import { useEffect } from 'react';
-import { getTVseries } from '../../store/modules/getThunk';
+import { getTVReviews, getTVseries } from '../../store/modules/getThunk';
+import { useParams } from 'react-router';
+import ReviewList from '../../components/contents/ReviewList';
 
 // 콘텐츠 상세
 const ContentDetail = () => {
     const dispatch = useDispatch();
+    const { id } = useParams();
     useEffect(() => {
         dispatch(getTVseries());
-    }, []);
+        dispatch(getTVReviews(id));
+    }, [id]);
     return (
         <>
             <Inner>

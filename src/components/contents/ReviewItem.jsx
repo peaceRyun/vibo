@@ -1,16 +1,22 @@
+import styled from 'styled-components';
 import { Flex } from './style';
 
-const ReviewItem = ({ nickname, rating, content, date }) => {
+const ReviewItem = ({ nickname, rating, content, date, imgurl }) => {
+    const ratingrefined = Math.floor((rating || 0) / 2);
     return (
         <li style={{ marginLeft: '107px' }}>
             <Flex $gap='17px' $alignItems='center'>
-                <img src='/contentdetail/sample/SampleProfile.png' alt='샘플프로필' />
+                <img
+                    src={`https://image.tmdb.org/t/p/w185${imgurl}`}
+                    alt='샘플프로필'
+                    style={{ width: '40px', height: '40px', borderRadius: '50%' }}
+                />
                 <Flex $flexDirection='column' $position='relative' style={{ width: '100%' }}>
                     <Flex $gap='15px' $alignItems='center' $justifyContent='space-between'>
                         <Flex $gap='15px' $alignItems='center'>
                             <span>{nickname}</span>
                             <Flex $gap='5px' $alignItems='center'>
-                                {Array(rating)
+                                {Array(ratingrefined)
                                     .fill()
                                     .map((_, index) => (
                                         <img key={index} src='/contentdetail/ui/StarActive.png' alt='별' />
@@ -19,7 +25,7 @@ const ReviewItem = ({ nickname, rating, content, date }) => {
                         </Flex>
                         <span style={{ color: '#666', fontSize: '14px' }}>{date}</span>
                     </Flex>
-                    <p style={{ marginTop: '10px' }}>{content}</p>
+                    <ContentP>{content}</ContentP>
                 </Flex>
             </Flex>
         </li>
@@ -27,3 +33,12 @@ const ReviewItem = ({ nickname, rating, content, date }) => {
 };
 
 export default ReviewItem;
+
+export const ContentP = styled.p`
+    margin-top: 10px;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+`;

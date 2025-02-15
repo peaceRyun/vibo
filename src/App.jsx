@@ -2,7 +2,7 @@ import { BrowserRouter, Routes, Route } from 'react-router';
 import GlobalStyle from './styled/GlobalStyle';
 import MainHome from './pages/home/main/MainHome';
 import AboutP from './pages/about/AboutP';
-// import ContentDetail from './pages/contents/ContentDetail';
+import ContentDetail from './pages/contents/ContentDetail';
 import Layout from './common/Layout';
 import ContentList from './pages/contents/ContentList';
 import MovieHome from './pages/home/movie/MovieHome';
@@ -17,7 +17,6 @@ import ProfileForEdit from './components/member/mobileprofile/ProfileForEdit';
 import ProfilesForEdit from './components/member/mobileprofile/ProfilesForEdit';
 import ContentPlayer from './pages/contents/ContentPlayer';
 import ScrollToTop from './utils/routeUtils';
-import ContentDetailTest from './pages/contents/ContentDetailTest';
 
 const App = () => {
     return (
@@ -43,11 +42,10 @@ const App = () => {
                         <Route path='/profilesforedit' element={<ProfilesForEdit />} />
                         <Route path='/profileinfoedit' element={<ProfileInfoEdit />} />
                         <Route path='/mypage' element={<Mypage />} />
-                        <Route path='/detail'>
-                            <Route index element={<ContentDetailTest />} />
+                        <Route path='/detail/:id'>
+                            <Route index element={<ContentDetail />} />
                             {/* <Route path=':name' element={<Project />} /> */}
                         </Route>
-
                         <Route path='/contentlist'>
                             <Route index element={<ContentList />} />
                             {/* <Route path=':name' element={<Project />} /> */}
