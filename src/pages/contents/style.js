@@ -170,3 +170,74 @@ export const ControlButton = styled.button`
     height: 24px;
   }
 `;
+// 반응형 구ㄴ
+// export const PageWrapper = styled.div`
+//   width: 100%;
+//   padding: 20px;
+
+//   @media (max-width: 590px) {
+//     padding: 10px;
+//   }
+// `;
+
+// /* 📌 비디오 배너 스타일 */
+// export const PlayBannerWrapper = styled.div`
+//   width: 100%;
+
+//   &.mobile-only {
+//     display: none; // 기본적으로 숨김
+
+//     @media (max-width: 590px) {
+//       display: block;
+//       position: absolute;
+//       top: 0;
+//       left: 0;
+//       width: 100%;
+//       z-index: 10;
+//     }
+//   }
+
+//   &.pc-only {
+//     display: block;
+
+//     @media (max-width: 590px) {
+//       display: none;
+//     }
+//   }
+// `;
+
+// /* 콘텐츠 레이아웃 */
+// export const ContentLayout = styled.div`
+//   display: grid;
+//   grid-template-columns: 3fr 1fr;
+//   gap: 20px;
+
+//   @media (max-width: 1024px) {
+//     grid-template-columns: 1fr;
+//   }
+// `;
+
+// /* 왼쪽 콘텐츠 */
+// export const LeftContent = styled.section`
+//   order: 1;
+//   padding: 20px;
+
+//   @media (max-width: 590px) {
+//     order: 2;
+//   }
+// `;
+
+// /* 추천 콘텐츠 */
+// export const RightContent = styled.section`
+//   order: 2;
+
+//   @media (max-width: 590px) {
+//     order: 3;
+//   }
+// `;
+
+// /* 리뷰 섹션 */
+// export const ReviewSection = styled.section`
+//   order: 3;
+//   padding: 20px;
+// `;
