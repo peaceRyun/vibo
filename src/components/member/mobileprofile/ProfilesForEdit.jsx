@@ -4,9 +4,16 @@ import { FaPen } from 'react-icons/fa';
 
 const ProfilesForEdit = () => {
     const navigate = useNavigate();
+
     const onGo = () => {
+        localStorage.setItem('profileEditBackUrl', '/profilesforedit');
         navigate('/profileforedit');
     };
+
+    const onGoComplete = () => {
+        navigate('/profileselect');
+    };
+
     return (
         <>
             <PageWrap>
@@ -16,26 +23,48 @@ const ProfilesForEdit = () => {
                             <H2>프로필 편집</H2>
                             <P $color='var(--gray-500)'>편집할 프로필을 선택해주세요</P>
                         </Flex>
-                        <Flex $gap='20px' $flexDirection='column' $alignItems='center'>
-                            <ProfileImgWrap>
-                                <ProfileImg
-                                    $width='200px'
-                                    $height='200px'
-                                    src='/contentdetail/sample프아.png'
-                                    alt='샘플프아'
-                                    $filter
-                                />
-                                <DimmedWrap>
-                                    <button onClick={onGo}>
-                                        <FaPen size='40px' color='white' />
-                                    </button>
-                                </DimmedWrap>
-                            </ProfileImgWrap>
-                            <P $fontSize='17px' $color='var(--gray-500)'>
-                                닉네임1
-                            </P>
+                        <Flex $gap='15px' $alignItems='center'>
+                            <Flex $gap='20px' $flexDirection='column' $alignItems='center'>
+                                <ProfileImgWrap>
+                                    <ProfileImg
+                                        $width='200px'
+                                        $height='200px'
+                                        src='/contentdetail/sample프아.png'
+                                        alt='샘플프아'
+                                        $filter
+                                    />
+                                    <DimmedWrap>
+                                        <button onClick={onGo}>
+                                            <FaPen size='40px' color='white' />
+                                        </button>
+                                    </DimmedWrap>
+                                </ProfileImgWrap>
+                                <P $fontSize='17px' $color='var(--gray-500)'>
+                                    닉네임1
+                                </P>
+                            </Flex>
+                            <Flex $gap='20px' $flexDirection='column' $alignItems='center'>
+                                <ProfileImgWrap>
+                                    <ProfileImg
+                                        $width='200px'
+                                        $height='200px'
+                                        src='/contentdetail/sample프아.png'
+                                        alt='샘플프아'
+                                        $filter
+                                    />
+                                    <DimmedWrap>
+                                        <button onClick={onGo}>
+                                            <FaPen size='40px' color='white' />
+                                        </button>
+                                    </DimmedWrap>
+                                </ProfileImgWrap>
+                                <P $fontSize='17px' $color='var(--gray-500)'>
+                                    닉네임2
+                                </P>
+                            </Flex>
                         </Flex>
                         <ButtonLight
+                            onClick={onGoComplete}
                             $padding='1.675rem'
                             $border='1px solid var(--gray-500)'
                             $borderRadius='5px'

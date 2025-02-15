@@ -2,55 +2,73 @@ import IconItem from './IconItem';
 import IconSwiper from './IconSwiper';
 import ModalHeader from './ModalHeader';
 import { Flex, H3, ModalBackdrop, ModalContainer } from './style';
-
-const imgUrl = 'https://raw.githubusercontent.com/peaceRyun/vibostatic/refs/heads/main/public';
+import { useDispatch } from 'react-redux';
+import { basicIcons, profileActions } from '../../../store/modules/profileSlice';
 
 const IconList = ({ handleModalOpen }) => {
-    const srcList = [
-        { id: '1', name: '프아V', src: `${imgUrl}/프아V.png` },
-        { id: '2', name: '프아I', src: `${imgUrl}/프아I.png` },
-        { id: '3', name: '프아B', src: `${imgUrl}/프아B.png` },
-        { id: '4', name: '프아O', src: `${imgUrl}/프아O.png` },
-    ];
+    const dispatch = useDispatch();
+    const handleIcon = (selectedItem) => {
+        const theIcon = basicIcons.find((item) => selectedItem.name === item.name);
+        dispatch(profileActions.setIconNow(theIcon));
+    };
+
+    // 필터링된 아이콘들을 변수로 저장
+    const modernIcons = basicIcons.filter((item) => (parseInt(item.id) > 4) & (parseInt(item.id) < 11));
+    const comicIcons = basicIcons.filter((item) => parseInt(item.id) < 5);
+    const normalIcons = basicIcons.filter((item) => parseInt(item.id) > 10);
+
     return (
         <>
             <ModalBackdrop />
             <ModalContainer>
-                {/* <div style={{ position: 'absolute', top: '0', right: '0', padding: '20px 20px 0 0' }}>
-                    <IoMdClose size='60px' />
-                </div>
-                <H2>이미지 선택</H2> */}
                 <ModalHeader handleModalOpen={handleModalOpen} />
                 <Flex $flexDirection='column' $gap='30px'>
                     <Flex $flexDirection='column'>
-                        <H3>기본 이미지</H3>
-                        <IconSwiper />
-                    </Flex>
-                    <Flex $flexDirection='column'>
-                        <H3>모던 이미지</H3>
-                        <Flex $gap='20px'>
-                            <IconItem />
-                            <IconItem />
-                            <IconItem />
-                            <IconItem />
-                        </Flex>
-                    </Flex>
-                    <Flex $flexDirection='column'>
                         <H3>코믹 이미지</H3>
                         <Flex $gap='10px'>
-                            {srcList.map((item) => (
-                                <IconItem key={item.id} src={item.src} />
+                            {comicIcons.map((item) => (
+                                <IconItem
+                                    key={item.id}
+                                    item={item}
+                                    handleIcon={handleIcon}
+                                    handleModalOpen={handleModalOpen}
+                                />
                             ))}
                         </Flex>
                     </Flex>
                     <Flex $flexDirection='column'>
-                        <H3>코믹 이미지</H3>
-                        <Flex $gap='10px'>
-                            <IconItem />
-                            <IconItem />
-                            <IconItem />
-                            <IconItem />
-                        </Flex>
+                        <H3>기본 이미지</H3>
+                        {normalIcons.length > 5 ? (
+                            <IconSwiper icons={normalIcons} handleIcon={handleIcon} handleModalOpen={handleModalOpen} />
+                        ) : (
+                            <Flex $gap='20px'>
+                                {normalIcons.map((item) => (
+                                    <IconItem
+                                        key={item.id}
+                                        item={item}
+                                        handleIcon={handleIcon}
+                                        handleModalOpen={handleModalOpen}
+                                    />
+                                ))}
+                            </Flex>
+                        )}
+                    </Flex>
+                    <Flex $flexDirection='column'>
+                        <H3>모던 이미지</H3>
+                        {modernIcons.length > 5 ? (
+                            <IconSwiper icons={modernIcons} handleIcon={handleIcon} handleModalOpen={handleModalOpen} />
+                        ) : (
+                            <Flex $gap='20px'>
+                                {modernIcons.map((item) => (
+                                    <IconItem
+                                        key={item.id}
+                                        item={item}
+                                        handleIcon={handleIcon}
+                                        handleModalOpen={handleModalOpen}
+                                    />
+                                ))}
+                            </Flex>
+                        )}
                     </Flex>
                 </Flex>
             </ModalContainer>
