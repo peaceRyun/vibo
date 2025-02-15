@@ -381,3 +381,12 @@ export const Flex = styled.div`
     padding: ${(props) => props.$mobilePadding || '0 16px'};
   }
 `;
+
+export const SwiperContainer = styled.div`
+  width: 100%;
+  overflow: hidden;
+
+  @media (max-width: 590px) {
+    padding: 0 10px; /* 📌 모바일에서는 좌우 여백 추가 */
+  }
+`;
