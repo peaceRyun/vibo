@@ -143,7 +143,6 @@ export const FlexUl = styled.ul`
   width: ${(props) => props.$width || 'auto'};
 
   @media (max-width: 590px) {
-    flex-direction: column;
     gap: 10px;
   }
 `;
@@ -308,12 +307,21 @@ export const EpItemsWrap = styled.div`
   overflow: hidden;
   // 초기 높이를 auto로 설정
   height: auto;
+
+  @media (max-width: 590px) {
+    max-width: 100%;
+    padding: 10px;
+  }
 `;
 
 export const CloseButton = styled.button`
   position: absolute;
   top: 20px;
   right: 20px;
+  @media (max-width: 590px) {
+    top: 5px; /* 📌 모바일에서 버튼 위치 조정 */
+    right: 5px;
+  }
 `;
 
 // 반응형
