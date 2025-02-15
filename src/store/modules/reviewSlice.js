@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { getMovieReviews } from './reviewThunk';
+import { getTVReviews } from './getThunk';
 
 const initialState = {
     reviewData: [],
@@ -19,16 +19,16 @@ export const reviewSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder
-            .addCase(getMovieReviews.pending, (state) => {
+            .addCase(getTVReviews.pending, (state) => {
                 state.loading = true;
                 state.error = null;
             })
-            .addCase(getMovieReviews.fulfilled, (state, action) => {
+            .addCase(getTVReviews.fulfilled, (state, action) => {
                 state.loading = false;
                 state.reviewData = action.payload;
                 state.currentMovieId = action.meta.arg; // movieId 저장
             })
-            .addCase(getMovieReviews.rejected, (state, action) => {
+            .addCase(getTVReviews.rejected, (state, action) => {
                 state.loading = false;
                 state.error = action.payload;
             });

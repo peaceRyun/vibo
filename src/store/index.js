@@ -8,6 +8,7 @@ import tvSeriesR from './modules/tvSeriesSlice';
 // import pagenationR from './modules/pagenationSlice';
 import contPlayerR from './modules/contPlayerSlice';
 import profileR from './modules/profileSlice';
+import reviewR from './modules/reviewSlice';
 
 export const store = configureStore({
     reducer: {
@@ -20,5 +21,6 @@ export const store = configureStore({
         contPlayerR,
         // pagenationR,
         profileR,
+        reviewR,
     },
 });

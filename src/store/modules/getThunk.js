@@ -94,7 +94,7 @@ export const getMovieVideos = createAsyncThunk(
     }
 );
 
-// 리뷰 데이터 끌어오기
+// 영화 리뷰 데이터 끌어오기
 const reviewOptions = {
     params: {
         language: 'ko-KR',
@@ -117,6 +117,49 @@ export const getMovieReviews = createAsyncThunk('reviews/getMovieReviews', async
             const response = await axios.get(`https://api.themoviedb.org/3/movie/${movieId}/reviews`, {
                 ...reviewOptions,
                 params: { ...reviewOptions.params, page: page.toString() },
+            });
+
+            const { results, total_pages } = response.data;
+
+            // 유효한 리뷰만 필터링 (내용이 있는 리뷰)
+            const validReviews = results.filter((review) => review.content && review.content.trim().length > 0);
+
+            allReviews = [...allReviews, ...validReviews];
+
+            // 다음 페이지 확인
+            hasMorePages = page < total_pages && page < 5; // 최대 5페이지까지만 가져옴
+            page++;
+        }
+
+        return allReviews;
+    } catch (error) {
+        return rejectWithValue(error.message);
+    }
+});
+
+//TV시리즈 리뷰 끌어오기
+const reviewTVOptions = {
+    params: {
+        language: 'en-US',
+        page: '1',
+    },
+    headers: {
+        accept: 'application/json',
+        Authorization:
+            'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJkZGY2NTIxYzQzYzJlMDNmNTlkMjc2N2YxMDlhYWFhNCIsIm5iZiI6MTczNzUxMDE4NS4yNjIsInN1YiI6IjY3OTA0ZDI5MmQ2MWMzM2U2M2RmZTVlNiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ._QJjWVEDYEcIfVZtQRYG0JSRb22Dit3HopPsNm8AILE',
+    },
+};
+
+export const getTVReviews = createAsyncThunk('reviews/getTvReviews', async (tvId, { rejectWithValue }) => {
+    try {
+        let allReviews = [];
+        let page = 1;
+        let hasMorePages = true;
+
+        while (hasMorePages) {
+            const response = await axios.get(`https://api.themoviedb.org/3/tv/${tvId}/reviews`, {
+                ...reviewTVOptions,
+                params: { ...reviewTVOptions.params, page: page.toString() },
             });
 
             const { results, total_pages } = response.data;
