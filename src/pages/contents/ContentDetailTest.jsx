@@ -14,7 +14,7 @@ const ContentDetailTest = () => {
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(getTVseries());
-        dispatch(getTVReviews(1396));
+        dispatch(getTVReviews(1399));
     }, []);
     return (
         <>

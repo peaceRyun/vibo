@@ -156,7 +156,8 @@ export const getTVReviews = createAsyncThunk('reviews/getTvReviews', async (tvId
         let page = 1;
         let hasMorePages = true;
 
-        while (hasMorePages) {
+        while (hasMorePages && allReviews.length < 20) {
+            // 20개 채우면 중단
             const response = await axios.get(`https://api.themoviedb.org/3/tv/${tvId}/reviews`, {
                 ...reviewTVOptions,
                 params: { ...reviewTVOptions.params, page: page.toString() },
@@ -164,17 +165,20 @@ export const getTVReviews = createAsyncThunk('reviews/getTvReviews', async (tvId
 
             const { results, total_pages } = response.data;
 
-            // 유효한 리뷰만 필터링 (내용이 있는 리뷰)
-            const validReviews = results.filter((review) => review.content && review.content.trim().length > 0);
+            // 내용이 있고 avatar_path가 있는 리뷰만 필터링
+            const validReviews = results.filter(
+                (review) => review.content && review.content.trim().length > 0 && review.author_details?.avatar_path
+            );
 
             allReviews = [...allReviews, ...validReviews];
 
             // 다음 페이지 확인
-            hasMorePages = page < total_pages && page < 5; // 최대 5페이지까지만 가져옴
+            hasMorePages = page < total_pages && page < 5; // 최대 n페이지까지만 확인
             page++;
         }
 
-        return allReviews;
+        // 최종적으로 20개로 제한
+        return allReviews.slice(0, 20);
     } catch (error) {
         return rejectWithValue(error.message);
     }

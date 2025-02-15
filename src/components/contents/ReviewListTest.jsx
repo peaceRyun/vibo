@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { ButtonBlank } from '../../ui/button/Button';
-import ReviewItem from './ReviewItem';
+// import ReviewItem from './ReviewItem';
 import { Badge, Flex, FlexUl, H3, Line, LoadMoreBtn, LoadMoreBtnWrapper } from './style';
 import ReviewModal from './ReviewModal';
+import ReviewItemTest from './ReviewItemTest';
 
 const ReviewListTest = () => {
     const [openModal, setOpenModal] = useState(false);
@@ -50,12 +51,13 @@ const ReviewListTest = () => {
                 </Flex>
                 <FlexUl $flexDirection='column' $gap='50px'>
                     {reviewData.slice(0, visibleItems).map((review) => (
-                        <ReviewItem
+                        <ReviewItemTest
                             key={review.id}
                             nickname={review.author}
                             rating={review.author_details?.rating || 0}
                             content={review.content}
                             date={review.created_at.split('T')[0]}
+                            imgurl={review.author_details.avatar_path}
                         />
                     ))}
                 </FlexUl>
