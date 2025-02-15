@@ -1,3 +1,4 @@
+import { FaCircleCheck } from 'react-icons/fa6';
 import styled from 'styled-components';
 
 export const Container = styled.div`
@@ -543,4 +544,75 @@ export const InputButton = styled.button`
   &:active {
     background-color: #04998a;
   }
+`;
+
+/* /* ///////////////////////////////// 정혜지 회원가입 개인정보 추가 수정 */
+export const CheckBox = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+/* 테스트!!!!!!!!! */
+
+export const CeheckContainer = styled.div`
+  width: 100%;
+  padding: 20px;
+  background: black;
+  color: white;
+`;
+
+export const Section = styled.div`
+  margin-bottom: 20px;
+`;
+
+export const CheckTitle = styled.h2`
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 5px;
+`;
+
+export const Description = styled.p`
+  font-size: 14px;
+  color: var(--gray-100);
+  margin-bottom: 10px;
+`;
+
+export const ConsentItem = styled.div`
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  padding: 10px 0;
+`;
+
+export const Icon = styled(FaCircleCheck)`
+  font-size: 20px;
+  color: ${(props) => (props.active ? 'var(--primary-base)' : 'var(--gray-100)')};
+  margin-right: 10px;
+`;
+
+export const CheckLabel = styled.p`
+  font-size: 16px;
+  color: white;
+`;
+
+export const SubOptions = styled.div`
+  display: flex;
+  gap: 15px;
+  margin-left: 30px;
+`;
+
+export const SubOption = styled.div`
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+`;
+
+export const IconSmall = styled(FaCircleCheck)`
+  font-size: 15px;
+  color: ${(props) => (props.active ? 'var(--primary-base)' : 'var(--gray-100)')};
+  margin-right: 5px;
+`;
+
+export const SubText = styled.p`
+  font-size: 14px;
+  color: var(--gray-100);
 `;

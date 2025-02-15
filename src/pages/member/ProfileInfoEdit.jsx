@@ -1,26 +1,51 @@
 // 회원정보 변경 페이지
 
+import { useState } from 'react';
 import { MainContent } from '../home/main/style';
 import {
   Button,
   ButtonGroup,
-  ChecksWrap,
+  CeheckContainer,
+  CheckLabel,
+  CheckTitle,
+  ConsentItem,
   DeleteAccountText,
-  Flex,
+  Description,
   FlexGroup,
   FormGroup,
+  Icon,
+  IconSmall,
   InformationBox,
-  InformationText,
   InfoTitle,
   Input,
   InputContainer,
   Label,
   ProfileContainer,
+  Section,
   Select,
+  SubOption,
+  // SubOption,
+  SubOptions,
+  SubText,
 } from './style';
-import { FaCheck, FaCircleCheck } from 'react-icons/fa6';
+// import { FaCheck, FaCircleCheck } from 'react-icons/fa6';
 
 const ProfileInfoEdit = () => {
+  const [consent, setConsent] = useState({
+    personalInfo: false,
+    marketing: false,
+    push: false,
+    email: false,
+    sms: false,
+    thirdParty: false,
+  });
+
+  const toggleConsent = (key) => {
+    setConsent((prev) => ({
+      ...prev,
+      [key]: !prev[key],
+    }));
+  };
   return (
     <>
       <MainContent>
@@ -81,18 +106,72 @@ const ProfileInfoEdit = () => {
               </InputContainer>
             </FormGroup>
 
-            {/* 프로필 이미지 업로드 */}
             <FormGroup>
               <InformationBox>
-                <InformationText>
-                  <h3>개인정보 수집 및 마케팅 수신 동의</h3>
-                  <p>
-                    수신동의를 하시면 티빙에서 제공하는 다양한 프로모션과 이벤트/신규 콘텐츠 등의 정보를 만나실 수
-                    있습니다.
-                  </p>
-                </InformationText>
+                {/* 체크 박스 커스텀 직접 하는걸로 */}
+                {/* <CheckBox>
+                  <Label>
+                    <input type="checkbox" id="agree" />
+                    <span>[선택] 개인정보 수집 및 이용 동의</span>
+                    <span>맞춤형 광고 설정 활성화</span>
+                  </Label>
+                  <label>
+                    <input type="checkbox" id="agree" />
+                    <span>[선택] 마케팅 정보 수신 동의</span>
+                  </label>
+                </CheckBox> */}
 
-                <ChecksWrap>
+                {/*  테스트!!!! */}
+                <CeheckContainer>
+                  <Section>
+                    <CheckTitle>개인정보 수집 및 마케팅 수신 동의</CheckTitle>
+                    <Description>
+                      수신동의를 하시면 티빙에서 제공하는 다양한 프로모션과 이벤트/신규 콘텐츠 등의 정보를 만나실 수
+                      있습니다.
+                    </Description>
+
+                    {/* 개인정보 수집 동의 */}
+                    <ConsentItem onClick={() => toggleConsent('personalInfo')}>
+                      <Icon active={consent.personalInfo} />
+                      <CheckLabel>[선택] 개인정보 수집 및 이용 동의</CheckLabel>
+                    </ConsentItem>
+                    <SubOption>
+                      <IconSmall active={consent.personalInfo} />
+                      <SubText>맞춤형 광고 설정 활성화</SubText>
+                    </SubOption>
+
+                    {/* 마케팅 정보 수신 동의 */}
+                    <ConsentItem onClick={() => toggleConsent('marketing')}>
+                      <Icon active={consent.marketing} />
+                      <CheckLabel>[선택] 마케팅 정보 수신 동의</CheckLabel>
+                    </ConsentItem>
+                    <SubOptions>
+                      <SubOptions onClick={() => toggleConsent('push')}>
+                        <IconSmall active={consent.push} />
+                        <SubText>푸시 알림</SubText>
+                      </SubOptions>
+                      <SubOption onClick={() => toggleConsent('email')}>
+                        <IconSmall active={consent.email} />
+                        <SubText>이메일</SubText>
+                      </SubOption>
+                      <SubOption onClick={() => toggleConsent('sms')}>
+                        <IconSmall active={consent.sms} />
+                        <SubText>SMS</SubText>
+                      </SubOption>
+                    </SubOptions>
+                  </Section>
+
+                  {/* 개인정보 3자 제공 동의 */}
+                  <Section>
+                    <ConsentItem onClick={() => toggleConsent('thirdParty')}>
+                      <Icon active={consent.thirdParty} />
+                      <CheckLabel>[선택] CJ 음니서비스 이용을 위한 개인정보 제 3자 제공 동의</CheckLabel>
+                    </ConsentItem>
+                  </Section>
+                </CeheckContainer>
+                {/* 아래 내용 윤구님 작성 */}
+
+                {/* <ChecksWrap>
                   <input type="checkbox" id="info" />
                   <Flex $gap="10px" $alignItems="center">
                     <button>
@@ -147,12 +226,8 @@ const ProfileInfoEdit = () => {
                     </button>
                     <label htmlFor="agree">[선택] CJ 옴니서비스 이용을 위한 개인정보 제 3자 제공 동의</label>
                   </Flex>
-                </ChecksWrap>
+                </ChecksWrap> */}
               </InformationBox>
-              {/* <Label>개인정보</Label>
-            <InputContainer>
-              <InformationBox>약관 내용 확인</InformationBox>
-            </InputContainer> */}
             </FormGroup>
 
             {/* 회원탈퇴 및 계정 삭제 */}
