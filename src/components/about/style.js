@@ -479,3 +479,106 @@ export const LastSectionWrapper = styled.div`
     }
   }
 `;
+
+// ----------------------About M style
+
+export const AboutSwiperWrapper = styled.div`
+  width: 100%;
+  height: 100vh;
+  background: black;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+
+  .about-swiper {
+    width: 100%;
+    height: 100%;
+  }
+
+  .swiper-pagination {
+    position: absolute;
+    bottom: 50px;
+  }
+
+  .swiper-pagination-bullet {
+    background: #ffffff;
+    opacity: 0.5;
+  }
+
+  .swiper-pagination-bullet-active {
+    background: #07ffe6;
+    opacity: 1;
+  }
+`;
+
+export const SlideContainer = styled.div`
+  width: 100%;
+  height: 432px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  position: relative;
+  color: white;
+  text-align: center;
+  padding: 20px;
+
+  .background-img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    top: 0;
+    left: 0;
+    z-index: -1;
+  }
+`;
+
+export const SlideTitle = styled.h2`
+  font-size: 28px;
+  font-weight: 900;
+  margin-bottom: 10px;
+
+  .bold {
+    font-size: 34px;
+  }
+`;
+
+export const SlideSubtitle = styled.p`
+  font-size: 18px;
+  color: #d1d2d4;
+  margin-bottom: 20px;
+
+  .highlight {
+    color: #07ffe6;
+    font-weight: 700;
+  }
+`;
+
+export const ButtonWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  .main-btn {
+    width: 260px;
+    height: 50px;
+    background: #07ffe6;
+    color: black;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+
+  .sub-btn {
+    width: 260px;
+    height: 50px;
+    background: none;
+    color: white;
+    font-weight: bold;
+    border: 1px solid white;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+`;
