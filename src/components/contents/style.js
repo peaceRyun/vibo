@@ -497,9 +497,10 @@ export const TabContainer = styled.div`
   display: flex;
   justify-content: space-around;
   background-color: #222;
-  padding: 10px 0;
-  border-radius: 8px;
-  margin-bottom: 10px;
+  /* padding: 10px 0; */
+  /* border-radius: 8px; */
+  /* margin-bottom: 10px; */
+  position: relative;
 `;
 
 export const TabButton = styled.button`
@@ -507,13 +508,37 @@ export const TabButton = styled.button`
   padding: 12px 0;
   font-size: 16px;
   color: ${(props) => (props.active ? '#fff' : '#aaa')};
-  background: ${(props) => (props.active ? '#00c8ff' : 'transparent')};
+  /* background: ${(props) => (props.active ? '#00c8ff' : 'transparent')}; */
   border: none;
-  border-bottom: ${(props) => (props.active ? '3px solid #fff' : 'none')};
+  /* border-bottom: ${(props) => (props.active ? '3px solid #fff' : 'none')}; */
   cursor: pointer;
   transition: 0.3s;
+  position: relative;
 
   &:hover {
     color: #fff;
   }
+  /* 위에 클릭하면 컬러 보이게 해야함 */
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    height: 4px;
+    background-color: ${(props) => (props.active ? '#00c8ff' : 'transparent')};
+    border-radius: 4px;
+  }
 `;
+
+export const TabHeader = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 10px 0;
+  border-bottom: 1px solid #444;
+`;
+
+// //////에피소드 모바일 버전 스타일링!!!

@@ -20,6 +20,7 @@ import {
 } from '../../components/contents/style';
 import MobileReItem from '../../components/contents/MobileReItem';
 import { useMediaQuery } from 'react-responsive';
+import EpListMobile from '../../components/contents/EpListMobile';
 
 const ContentDetail = () => {
   const dispatch = useDispatch();
@@ -57,10 +58,10 @@ const ContentDetail = () => {
             <PlayBanner />
           </div>
 
-          <div>
+          {/* <div>
             <ContDetail />
             <EpList />
-          </div>
+          </div> */}
 
           {/* 📌 PC에서는 오른쪽, 모바일에서는 아래쪽으로 이동 */}
           {/* <ListWrapper $flexDirection={isMobile ? 'column' : 'row'}>
@@ -90,7 +91,7 @@ const ContentDetail = () => {
               </TabContainer>
 
               {/* ✅ 선택된 탭에 따라 다른 콘텐츠 렌더링 */}
-              {activeTab === 'episodes' ? <EpList /> : <MobileReItem />}
+              {activeTab === 'episodes' ? <EpListMobile /> : <MobileReItem />}
             </>
           )}
 
