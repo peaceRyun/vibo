@@ -398,3 +398,122 @@ export const SwiperContainer = styled.div`
     padding: 0 10px; /* 📌 모바일에서는 좌우 여백 추가 */
   }
 `;
+
+// ////////////모바일버전 비슷한 콘테츠 컴포넌트 스타일링
+
+// 전체 컨테이너
+export const MReitemContainer = styled.div`
+  margin-top: 20px;
+  padding: 16px;
+`;
+
+// 비디오 섹션
+export const VideoSection = styled.div`
+  video {
+    width: 100%;
+    border-radius: 10px;
+  }
+`;
+
+// 정보 섹션
+export const InfoSection = styled.div`
+  text-align: center;
+`;
+
+export const TagContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin: 10px 0;
+`;
+
+export const Tag = styled.span`
+  background: #333;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 5px;
+`;
+
+// 재생 버튼
+export const PlayButton = styled.button`
+  width: 100%;
+  padding: 10px;
+  background: #00c8ff;
+  color: white;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+`;
+
+// 에피소드 섹션
+export const EpisodesSection = styled.div`
+  margin-top: 20px;
+`;
+
+export const EpisodeList = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
+`;
+
+export const Episode = styled.div`
+  img {
+    width: 100%;
+    border-radius: 5px;
+  }
+`;
+
+// 비슷한 콘텐츠 섹션
+export const ContentWrapper = styled.div`
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* ✅ 모바일 2열 그리드 */
+  gap: 10px;
+`;
+
+export const ContentCard = styled.div`
+  img {
+    width: 100%;
+    border-radius: 10px;
+  }
+`;
+
+// 사용자 리뷰 섹션
+export const ReviewsSection = styled.div`
+  margin-top: 20px;
+`;
+
+export const Review = styled.div`
+  background: #222;
+  padding: 10px;
+  margin: 5px 0;
+  border-radius: 5px;
+`;
+
+export const TabContainer = styled.div`
+  display: flex;
+  justify-content: space-around;
+  background-color: #222;
+  padding: 10px 0;
+  border-radius: 8px;
+  margin-bottom: 10px;
+`;
+
+export const TabButton = styled.button`
+  flex: 1;
+  padding: 12px 0;
+  font-size: 16px;
+  color: ${(props) => (props.active ? '#fff' : '#aaa')};
+  background: ${(props) => (props.active ? '#00c8ff' : 'transparent')};
+  border: none;
+  border-bottom: ${(props) => (props.active ? '3px solid #fff' : 'none')};
+  cursor: pointer;
+  transition: 0.3s;
+
+  &:hover {
+    color: #fff;
+  }
+`;

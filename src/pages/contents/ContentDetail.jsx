@@ -1,5 +1,5 @@
 import { useDispatch } from 'react-redux';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 import { getTVReviews, getTVseries } from '../../store/modules/getThunk';
 
@@ -10,11 +10,23 @@ import ReList from '../../components/contents/ReList';
 import ReviewList from '../../components/contents/ReviewList';
 import ContMoreDetail from '../../components/contents/ContMoreDetail';
 
-import { Flex, ListWrapper, PageWrapper, PlayBannerWrapper } from '../../components/contents/style';
+import {
+  Flex,
+  ListWrapper,
+  PageWrapper,
+  PlayBannerWrapper,
+  TabButton,
+  TabContainer,
+} from '../../components/contents/style';
+import MobileReItem from '../../components/contents/MobileReItem';
+import { useMediaQuery } from 'react-responsive';
 
 const ContentDetail = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
+  const isMobile = useMediaQuery({ query: '(max-width: 590px)' });
+
+  const [activeTab, setActiveTab] = useState('episodes');
 
   useEffect(() => {
     dispatch(getTVseries());
@@ -32,12 +44,15 @@ const ContentDetail = () => {
         <Flex
           $flexDirection="column"
           $position="relative"
-          $gap="30px"
-          $padding="0 50px"
-          $mobilePadding="0 16px"
-          $mobileGap="20px"
+          $gap={isMobile ? '20px' : '30px'}
+          $padding={isMobile ? '0 16px' : '0 50px'}
+          // $gap="30px"
+          // $padding="0 50px"
+          // $mobilePadding="0 16px"
+          // $mobileGap="20px"
         >
           {/* 📌 PC에서만 PlayBanner 표시 */}
+          {/* {!isMobile && <PlayBanner />} */}
           <div className="pc-only">
             <PlayBanner />
           </div>
@@ -48,14 +63,46 @@ const ContentDetail = () => {
           </div>
 
           {/* 📌 PC에서는 오른쪽, 모바일에서는 아래쪽으로 이동 */}
-          <ListWrapper>
+          {/* <ListWrapper $flexDirection={isMobile ? 'column' : 'row'}>
             <ReList />
             <ReviewList />
-          </ListWrapper>
+          </ListWrapper> */}
+          {/* <ListWrapper>
+            <ReList />
+            <ReviewList />
+          </ListWrapper> */}
+          {/* 테스트!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */}
+          {!isMobile ? (
+            <ListWrapper $flexDirection="row">
+              <EpList />
+              <ReList />
+            </ListWrapper>
+          ) : (
+            <>
+              {/* ✅ 모바일: 탭 UI 추가 */}
+              <TabContainer>
+                <TabButton active={activeTab === 'episodes'} onClick={() => setActiveTab('episodes')}>
+                  에피소드
+                </TabButton>
+                <TabButton active={activeTab === 'similar'} onClick={() => setActiveTab('similar')}>
+                  비슷한 콘텐츠
+                </TabButton>
+              </TabContainer>
 
+              {/* ✅ 선택된 탭에 따라 다른 콘텐츠 렌더링 */}
+              {activeTab === 'episodes' ? <EpList /> : <MobileReItem />}
+            </>
+          )}
+
+          <ReviewList />
           <ContMoreDetail />
         </Flex>
       </PageWrapper>
+      {/* {isMobile ? <MobileReItem /> : null} */}
+      {/* {isMobile ? <MobileReItem /> : <ReList />}
+          <ContMoreDetail />
+        </Flex>
+      </PageWrapper> */}
     </>
   );
 };
