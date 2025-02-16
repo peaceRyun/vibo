@@ -1,13 +1,16 @@
 // 어바웃 모바일
+import AboutMButton from '../../components/about/AboutMButton';
 import AboutMswiper from '../../components/about/AboutMswiper';
-import { Inner } from './style';
+
+import { AboutMInner } from './style';
 
 const AboutM = () => {
   return (
     <>
-      <Inner>
+      <AboutMInner>
         <AboutMswiper />
-      </Inner>
+        <AboutMButton />
+      </AboutMInner>
     </>
   );
 };

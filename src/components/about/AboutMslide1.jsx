@@ -12,10 +12,6 @@ const AboutMslide1 = () => {
         <br />
         드라마, 예능, 영화, 해외 시리즈까지
       </SlideSubtitle>
-      <ButtonWrapper>
-        <button className="main-btn">VIBO 시작하기</button>
-        <button className="sub-btn">다른 계정으로 로그인 하기</button>
-      </ButtonWrapper>
     </SlideContainer>
   );
 };

@@ -13,10 +13,6 @@ const AboutMslide2 = () => {
         <br />
         콘텐츠를 한눈에 확인하세요.
       </SlideSubtitle>
-      <ButtonWrapper>
-        <button className="main-btn">VIBO 시작하기</button>
-        <button className="sub-btn">다른 계정으로 로그인 하기</button>
-      </ButtonWrapper>
     </SlideContainer>
   );
 };

@@ -488,7 +488,7 @@ export const AboutSwiperWrapper = styled.div`
   background: black;
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: center;
 
   .about-swiper {
     width: 100%;
@@ -497,17 +497,24 @@ export const AboutSwiperWrapper = styled.div`
 
   .swiper-pagination {
     position: absolute;
-    bottom: 50px;
+    bottom: 150px;
   }
 
   .swiper-pagination-bullet {
     background: #ffffff;
     opacity: 0.5;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    transition: all 0.3s ease;
   }
 
+  /* ✅ 활성화된 페이지네이션 bullet 길쭉하게 변경 */
   .swiper-pagination-bullet-active {
     background: #07ffe6;
     opacity: 1;
+    width: 24px; /* 길쭉한 모양 */
+    border-radius: 10px; /* pill 형태 */
   }
 `;
 
@@ -569,6 +576,11 @@ export const ButtonWrapper = styled.div`
     border: none;
     border-radius: 8px;
     cursor: pointer;
+    position: absolute;
+    bottom: 40px; /* 화면 하단에서 40px 위에 배치 */
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
   }
 
   .sub-btn {
@@ -580,5 +592,6 @@ export const ButtonWrapper = styled.div`
     border: 1px solid white;
     border-radius: 8px;
     cursor: pointer;
+    z-index: 10;
   }
 `;
