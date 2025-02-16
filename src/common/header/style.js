@@ -19,12 +19,21 @@ export const HeaderContainer = styled.header`
   backdrop-filter: blur(30px);
   background-color: rgba(0, 0, 0, 0.7);
   inset: -1px 0px 0px;
+
+  @media (max-width: 590px) {
+    height: 4rem;
+    padding: 15px;
+  }
 `;
 
 export const LeftSection = styled.div`
   display: flex;
   align-items: center;
   gap: 3.0625rem;
+
+  @media (max-width: 590px) {
+    gap: 1rem;
+  }
 `;
 
 export const Logo = styled.h1`
@@ -35,17 +44,28 @@ export const Logo = styled.h1`
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   margin: 0;
+  @media (max-width: 590px) {
+    font-size: 1.8rem;
+  }
 `;
 
 export const RightContainer = styled.div`
   display: flex;
   align-items: center;
   gap: 1.5rem;
+
+  @media (max-width: 590px) {
+    gap: 1rem;
+  }
 `;
 
 export const NavContainer = styled.nav`
   display: flex;
   gap: 3.5rem;
+
+  @media (max-width: 590px) {
+    display: none;
+  }
 `;
 
 export const NavItem = styled.span`
@@ -58,6 +78,10 @@ export const NavItem = styled.span`
 
   &:hover {
     color: #07ffe6;
+  }
+
+  @media (max-width: 590px) {
+    font-size: 0.9rem;
   }
 `;
 
@@ -85,6 +109,11 @@ export const ProfileLogo = styled.img`
   object-fit: cover;
   margin-right: 1.75rem;
   cursor: pointer;
+
+  @media (max-width: 590px) {
+    width: 2rem;
+    height: 2rem;
+  }
 `;
 
 export const SearchIconContainer = styled.div`
@@ -315,5 +344,36 @@ export const LogOut = styled.div`
   &:hover {
     background-color: #07ffe6;
     color: #191919;
+  }
+`;
+
+// 모바일 전용 추가
+
+export const MobileMenuIcon = styled.div`
+  display: none;
+  cursor: pointer;
+  font-size: 2rem;
+  color: #07ffe6;
+
+  @media (max-width: 590px) {
+    display: block;
+  }
+`;
+
+export const MobileMenu = styled.div`
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 4rem;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.9);
+  width: 100%;
+  text-align: center;
+  padding: 1rem;
+  z-index: 999;
+
+  ${NavItem} {
+    padding: 1rem;
+    font-size: 1.2rem;
   }
 `;
