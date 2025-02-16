@@ -12,8 +12,10 @@ const WeeklyList = () => {
   return (
     <Section>
       <WeeklyInfo>
-        <UpdateText>VIBO 신작 업데이트</UpdateText>
-        <UploadNotice>업로드 공지</UploadNotice>
+        <WeeklyTitle>
+          <UpdateText>VIBO 신작 업데이트</UpdateText>
+          <UploadNotice>업로드 공지</UploadNotice>
+        </WeeklyTitle>
         <DaySelect activeDay={activeDay} setActiveDay={setActiveDay} />
       </WeeklyInfo>
       <WeeklySwiper spaceBetween={50} pagination={{ clickable: true }} slidesPerView={6}>
@@ -37,11 +39,12 @@ const Section = styled.section`
 
 const WeeklyInfo = styled.div`
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: flex-start;
   width: 100%;
-  margin-bottom: 4.375rem;
-  gap: 1.5rem;
+  margin-bottom: 2.375rem;
+  gap: 0.5rem;
+  flex-direction: column;
 `;
 
 const UpdateText = styled.h3`
@@ -66,6 +69,7 @@ const UploadNotice = styled.div`
 `;
 const WeeklySwiper = styled(Swiper)`
   width: 100%;
+
   .swiper-slide {
     display: flex;
     justify-content: center;
@@ -80,4 +84,10 @@ const WeeklySwiper = styled(Swiper)`
     background-color: #1ee0b6;
     opacity: 1;
   }
+`;
+
+const WeeklyTitle = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 25px;
 `;
