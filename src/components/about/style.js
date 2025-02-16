@@ -485,7 +485,7 @@ export const LastSectionWrapper = styled.div`
 export const AboutSwiperWrapper = styled.div`
   width: 100%;
   height: 100vh;
-  background: black;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.8) 80%, black 100%);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -497,7 +497,7 @@ export const AboutSwiperWrapper = styled.div`
 
   .swiper-pagination {
     position: absolute;
-    bottom: 150px;
+    bottom: 190px;
   }
 
   .swiper-pagination-bullet {
@@ -523,7 +523,11 @@ export const SlideContainer = styled.div`
   height: 432px;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  position: absolute;
+  bottom: 30px;
+  left: 0;
+  gap: 30px;
+  // align-items: center;
   justify-content: flex-end;
   position: relative;
   color: white;
@@ -542,9 +546,9 @@ export const SlideContainer = styled.div`
 `;
 
 export const SlideTitle = styled.h2`
-  font-size: 28px;
-  font-weight: 900;
-  margin-bottom: 10px;
+  font-size: 32px;
+  font-weight: 800;
+  // margin-bottom: 10px;
 
   .bold {
     font-size: 34px;
@@ -552,12 +556,13 @@ export const SlideTitle = styled.h2`
 `;
 
 export const SlideSubtitle = styled.p`
-  font-size: 18px;
-  color: #d1d2d4;
-  margin-bottom: 20px;
+  font-size: 20px;
+  font-weight: 700;
+  color: #a8a9ad;
+  margin-bottom: 30px;
 
   .highlight {
-    color: #07ffe6;
+    color: #06dbbf;
     font-weight: 700;
   }
 `;
@@ -565,33 +570,62 @@ export const SlideSubtitle = styled.p`
 export const ButtonWrapper = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 10px;
 
   .main-btn {
-    width: 260px;
-    height: 50px;
-    background: #07ffe6;
-    color: black;
+    width: 346px;
+    height: 52px;
+    background: #06dbbf;
+    color: white;
     font-weight: bold;
     border: none;
     border-radius: 8px;
     cursor: pointer;
     position: absolute;
-    bottom: 40px; /* 화면 하단에서 40px 위에 배치 */
+    bottom: 100px;
     left: 50%;
     transform: translateX(-50%);
     z-index: 10;
   }
 
   .sub-btn {
-    width: 260px;
-    height: 50px;
+    width: 346px;
+    height: 52px;
     background: none;
     color: white;
     font-weight: bold;
     border: 1px solid white;
     border-radius: 8px;
     cursor: pointer;
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
     z-index: 10;
+  }
+`;
+
+export const ImgContainer = styled.div`
+  display: grid;
+  // grid-template-rows: repeat(2, auto);
+  grid-template-columns: repeat(5, auto);
+  gap: 14px;
+  justify-content: center;
+  align-items: center;
+  width: fit-content;
+  margin: 0 auto;
+  overflow: visible;
+  position: absolute;
+  top: -100px;
+  z-index: -1;
+  .slide1card {
+    min-width: 100px; /* 최소 너비 유지 */
+    min-height: 144px; /* 최소 높이 유지 */
+    width: auto; /* 원본 크기 유지 */
+    height: auto;
+    max-height: 160px; /* 최대 높이 설정 */
+    object-fit: contain; /* 이미지 비율 유지 */
+    overflow: visible;
   }
 `;
