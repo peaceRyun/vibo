@@ -116,11 +116,11 @@ const ContentDetail = () => {
 
   const [activeTab, setActiveTab] = useState('episodes');
   // 모바일 테스트 적용
-  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 1024);
 
   useEffect(() => {
     const handleResize = () => {
-      setIsMobile(window.innerWidth <= 768); // 모바일 기준을 768px로 설정
+      setIsMobile(window.innerWidth <= 1024); // 모바일 기준을 1024px로 설정
     };
 
     window.addEventListener('resize', handleResize);
