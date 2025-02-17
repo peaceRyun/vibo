@@ -29,6 +29,12 @@ const LiveList = ({ title }) => {
             title: 'KBO 리그 - 잠실구장 현장',
             broadcaster: 'KBS N SPORTS',
         },
+        {
+            id: 5,
+            url: 'https://raw.githubusercontent.com/peaceRyun/vibostatic/refs/heads/main/public/videos/Busy_Pedestrian_Street_fhd_172445.mp4',
+            title: '서울로 7017 - 퇴근길 풍경',
+            broadcaster: 'tvN',
+        },
     ];
 
     return (

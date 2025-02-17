@@ -28,14 +28,10 @@ const LiveItem = ({ videoData }) => {
 
     const handleMouseEnter = async () => {
         setIsHovered(true);
-        try {
-            const video = videoRef.current;
-            if (video && video.readyState >= 2) {
-                // 비디오가 재생 가능한 상태인지 확인
-                await video.play();
-            }
-        } catch (error) {
-            console.log('재생 시작 실패:', error);
+        const video = videoRef.current;
+        if (video && video.readyState >= 2) {
+            // 비디오가 재생 가능한 상태인지 확인
+            video.play();
         }
     };
 
@@ -55,6 +51,7 @@ const LiveItem = ({ videoData }) => {
                     muted
                     loop
                     playsInline
+                    autoPlay
                     preload='metadata'
                     style={{
                         width: '100%',
@@ -64,9 +61,8 @@ const LiveItem = ({ videoData }) => {
                     }}
                     width='100%'
                     height='100%'
-                >
-                    <source src={url} type='video/mp4' />
-                </video>
+                    src={url}
+                ></video>
             </VideoWrapper>
             <CardInfo>
                 <CardTitle>{title}</CardTitle>
