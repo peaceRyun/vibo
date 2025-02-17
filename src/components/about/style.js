@@ -265,7 +265,8 @@ export const OriginalWrapper = styled.div`
 `;
 export const AboutPswiperWrapper = styled.div`
   width: 100%;
-  padding: 20px 0;
+  // padding: 0 0;
+
   overflow: hidden;
   position: absolute;
   top: 300px;
@@ -273,7 +274,7 @@ export const AboutPswiperWrapper = styled.div`
   .slider-container {
     position: relative;
     width: 100%;
-    height: 300px;
+    height: 240px;
     overflow: hidden;
     display: flex;
     align-items: center;
@@ -281,6 +282,7 @@ export const AboutPswiperWrapper = styled.div`
 
   .slide-track {
     display: flex;
+
     position: absolute;
     top: 0;
     left: 0;
@@ -290,7 +292,7 @@ export const AboutPswiperWrapper = styled.div`
   .slide {
     width: 380px;
     height: 225px;
-    margin: 45px 30px;
+    margin: 0 20px;
     // background: #111;
     border-radius: 10px;
     overflow: hidden;
@@ -298,7 +300,9 @@ export const AboutPswiperWrapper = styled.div`
     justify-content: center;
     align-items: center;
   }
-
+  .slide:last-child {
+    margin-right: 0;
+  }
   img {
     width: 100%;
     height: 100%;
@@ -310,7 +314,7 @@ export const ContentContainer = styled.div`
   position: relative;
   text-align: center;
   color: white;
-  height: 1100px;
+  height: 920px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -435,7 +439,7 @@ export const AnswerWrapper = styled.div`
 
 export const LastSectionWrapper = styled.div`
   width: 100vw;
-  height: 100vh;
+  height: 50vh;
   display: flex;
   flex-direction: column;
   align-items: center;

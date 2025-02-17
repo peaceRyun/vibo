@@ -23,10 +23,10 @@ const AboutMcard1 = () => {
     });
     if (liveImgRef.current) {
       gsap.to(liveImgRef.current, {
-        x: '-100%', // 왼쪽으로 이동
-        duration: 5, // 애니메이션 속도
-        repeat: -1, // 무한 반복
-        ease: 'linear', // 부드러운 이동
+        x: '-100%', 
+        duration: 5, 
+        repeat: -1, 
+        ease: 'linear', 
       });
     }
   }, []);

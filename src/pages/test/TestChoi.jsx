@@ -10,7 +10,7 @@ const TestChoi = () => {
       {/* <AboutP /> */}
       {/* <Login /> */}
       {/* <Register /> */}
-      <AboutM />
+      {/* <AboutM /> */}
     </>
   );
 };

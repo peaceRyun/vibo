@@ -6,7 +6,7 @@ export const AboutWrapper = styled.div`
 `;
 
 export const Inner = styled.div`
-  //   margin: 0 auto;
+  margin: 100px auto;
   //   @media (max-width: 599px) {
   //     max-width: calc(390px - var(--spacing-8));
   //   }
@@ -34,6 +34,6 @@ export const AboutMInner = styled.div`
   // flex-direction: column;
   // align-items: center;
   justify-content: center;
-  opacity: 0; /* ✅ 처음에는 투명하게 시작 */
+  opacity: 0;
   transition: opacity 0.5s ease-in-out;
 `;

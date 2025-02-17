@@ -21,7 +21,7 @@ const AboutMswiper = ({ activeIndex, setActiveIndex }) => {
       const swiper = swiperRef.current.swiper;
 
       swiper.on('slideChangeTransitionStart', () => {
-        // ✅ 전체 화면 투명도 변화
+        
         gsap.to(wrapperRef.current, {
           opacity: 0,
           duration: 0.2,
@@ -44,8 +44,7 @@ const AboutMswiper = ({ activeIndex, setActiveIndex }) => {
         modules={[Pagination]}
         className="about-swiper"
         onSlideChange={(swiper) => setActiveIndex(swiper.activeIndex)}
-        // onTouchStart={() => (isDragging.current = true)} // ✅ 드래그 시작 감지
-        // onTouchEnd={() => (isDragging.current = false)} // ✅ 드래그 종료 감지
+       
       >
         <SwiperSlide>
           <AboutMslide1 />
