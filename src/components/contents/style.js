@@ -392,12 +392,23 @@ export const Flex = styled.div`
   border-top: ${(props) => props.$borderTop};
   white-space: ${(props) => props.$whiteSpace};
   font-size: ${(props) => props.$fontSize};
-  /* 반응형추가 */
-  @media (max-width: 590px) {
-    padding: 15px;
-    gap: 20px;
-  }
+  /* @media (max-width: 1024px) {
+    display: none;
+  } */
 `;
+
+export const PcContainer = styled.div``;
+
+export const MobileInner = styled.div`
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+`;
+// @media (max-width: 590px) {
+//   padding: 15px;
+//   gap: 20px;
+// }
 
 export const FlexMobile = styled.div`
   display: flex;
@@ -523,6 +534,9 @@ export const TabContainer = styled.div`
   /* border-radius: 8px; */
   /* margin-bottom: 10px; */
   position: relative;
+  @media (min-width: 1024px) {
+    display: none; // 화면이 768px 이하일 때 이 컴포넌트 숨기기
+  }
 `;
 
 export const TabButton = styled.button`
