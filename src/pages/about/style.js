@@ -27,5 +27,13 @@ export const AboutMInner = styled.div`
   //   max-width: calc(var(--breakpoint-tablet) - var(--spacing-8));
   // }
 
-  position: relative;
+  // position: relative;
+  // width: 100%;
+  // height: 100vh;
+  // display: flex;
+  // flex-direction: column;
+  // align-items: center;
+  justify-content: center;
+  opacity: 0; /* ✅ 처음에는 투명하게 시작 */
+  transition: opacity 0.5s ease-in-out;
 `;

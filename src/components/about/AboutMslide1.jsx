@@ -1,4 +1,3 @@
-import AboutMcard from './AboutMcard';
 import { SlideContainer, SlideTitle, SlideSubtitle } from './style';
 
 const AboutMslide1 = () => {

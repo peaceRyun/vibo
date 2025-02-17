@@ -485,7 +485,7 @@ export const LastSectionWrapper = styled.div`
 export const AboutSwiperWrapper = styled.div`
   width: 100%;
   height: 100vh;
-  // background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.8) 80%, black 100%);
+
   display: flex;
   align-items: center;
   justify-content: center;
@@ -495,6 +495,7 @@ export const AboutSwiperWrapper = styled.div`
   .about-swiper {
     width: 100%;
     height: 100%;
+    transition: opacity 0.5s ease-in-out;
   }
 
   .swiper-pagination {
@@ -517,6 +518,9 @@ export const AboutSwiperWrapper = styled.div`
     width: 24px;
     border-radius: 10px;
   }
+  .swiper-slide {
+    opacity: 1; 
+    transition: opacity 1s ease-in-out; 
 `;
 
 export const SlideContainer = styled.div`
@@ -546,7 +550,7 @@ export const SlideContainer = styled.div`
     background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, black 10%);
 
     z-index: 1;
-  }
+    
 `;
 
 export const SlideTitle = styled.h2`
@@ -657,5 +661,22 @@ export const ImgContainer = styled.div`
     max-height: 160px;
     object-fit: contain;
     overflow: visible;
+  }
+`;
+
+export const LiveImgContainer = styled.div`
+  display: flex;
+  position: absolute;
+  top: -200px;
+  left: 0;
+  width: 100%;
+  gap: 10px;
+  white-space: nowrap;
+  overflow: visible;
+
+  .live-slide {
+    width: 700px;
+    height: 744px;
+    object-fit: contain;
   }
 `;

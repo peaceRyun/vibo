@@ -1,3 +1,4 @@
+import AboutMcard2 from './AboutMcard2';
 import { SlideContainer, SlideTitle, SlideSubtitle, ButtonWrapper } from './style';
 
 const AboutMslide2 = () => {
