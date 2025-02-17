@@ -52,57 +52,100 @@ const Header = () => {
   const [isSearchOpen, setSearchOpen] = useState(false);
   const [isProfileOpen, setProfileOpen] = useState(false);
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const location = useLocation(); // 현재 페이지 경로 가져오기
+  const location = useLocation();
 
   const hideNavPages = ['/profilesforedit', '/profileinfoedit', '/profileselect', '/profileforedit'];
   const isNavHidden = hideNavPages.includes(location.pathname);
+  const isAboutPage = location.pathname === '/aboutpage';
 
   const toggleSearchDropdown = () => setSearchOpen((prev) => !prev);
   const toggleProfileDropdown = () => setProfileOpen((prev) => !prev);
   const toggleMobileMenu = () => setMobileMenuOpen((prev) => !prev);
 
   return (
-    <HeaderContainer>
-      <LeftSection>
-        <Link to="/">
-          <Logo>VIBO</Logo>
-        </Link>
-        {!isNavHidden && <Nav />}
-      </LeftSection>
+    <>
+      {isAboutPage ? (
+        <HeaderCenter />
+      ) : (
+        <HeaderContainer>
+          <LeftSection>
+            <Link to="/">
+              <Logo>VIBO</Logo>
+            </Link>
+            {!isNavHidden && <Nav />}
+          </LeftSection>
 
-      {!isNavHidden && (
-        <RightContainer>
-          <HeaderRight
-            onSearchClick={toggleSearchDropdown}
-            onProfileClick={toggleProfileDropdown}
-            toggleMobileMenu={toggleMobileMenu}
-          />
-          {/* 더보기 메뉴 별로여서 일단 숨김.. */}
-          {/* <MobileMenuIcon onClick={toggleMobileMenu}>
-            <IoMdMore />
-          </MobileMenuIcon> */}
-        </RightContainer>
+          {!isNavHidden && (
+            <RightContainer>
+              <HeaderRight
+                onSearchClick={toggleSearchDropdown}
+                onProfileClick={toggleProfileDropdown}
+                toggleMobileMenu={toggleMobileMenu}
+              />
+            </RightContainer>
+          )}
+
+          {isMobileMenuOpen && (
+            <MobileMenu>
+              <Link to="/serieshome" onClick={toggleMobileMenu}>
+                <NavItem>시리즈</NavItem>
+              </Link>
+              <Link to="/moviehome" onClick={toggleMobileMenu}>
+                <NavItem>영화</NavItem>
+              </Link>
+              <Link to="/livehome" onClick={toggleMobileMenu}>
+                <NavItem>라이브</NavItem>
+              </Link>
+              <NavItem onClick={toggleMobileMenu}>VIBO+</NavItem>
+            </MobileMenu>
+          )}
+
+          {isSearchOpen && <Dropdown />}
+          {isProfileOpen && <ProfileDropdown />}
+        </HeaderContainer>
       )}
+    </>
+    // <HeaderContainer>
+    //   <LeftSection>
+    //     <Link to="/">
+    //       <Logo>VIBO</Logo>
+    //     </Link>
+    //     {!isNavHidden && <Nav />}
+    //   </LeftSection>
 
-      {/* 모바일 메뉴 */}
-      {isMobileMenuOpen && (
-        <MobileMenu>
-          <Link to="/serieshome" onClick={toggleMobileMenu}>
-            <NavItem>시리즈</NavItem>
-          </Link>
-          <Link to="/moviehome" onClick={toggleMobileMenu}>
-            <NavItem>영화</NavItem>
-          </Link>
-          <Link to="/livehome" onClick={toggleMobileMenu}>
-            <NavItem>라이브</NavItem>
-          </Link>
-          <NavItem onClick={toggleMobileMenu}>VIBO+</NavItem>
-        </MobileMenu>
-      )}
+    //   {!isNavHidden && (
+    //     <RightContainer>
+    //       <HeaderRight
+    //         onSearchClick={toggleSearchDropdown}
+    //         onProfileClick={toggleProfileDropdown}
+    //         toggleMobileMenu={toggleMobileMenu}
+    //       />
+    //       {/* 더보기 메뉴 별로여서 일단 숨김.. */}
+    //       {/* <MobileMenuIcon onClick={toggleMobileMenu}>
+    //         <IoMdMore />
+    //       </MobileMenuIcon> */}
+    //     </RightContainer>
+    //   )}
 
-      {isSearchOpen && <Dropdown />}
-      {isProfileOpen && <ProfileDropdown />}
-    </HeaderContainer>
+    //   {/* 모바일 메뉴 */}
+    //   {isMobileMenuOpen && (
+    //     <MobileMenu>
+    //       <Link to="/serieshome" onClick={toggleMobileMenu}>
+    //         <NavItem>시리즈</NavItem>
+    //       </Link>
+    //       <Link to="/moviehome" onClick={toggleMobileMenu}>
+    //         <NavItem>영화</NavItem>
+    //       </Link>
+    //       <Link to="/livehome" onClick={toggleMobileMenu}>
+    //         <NavItem>라이브</NavItem>
+    //       </Link>
+    //       <NavItem onClick={toggleMobileMenu}>VIBO+</NavItem>
+    //     </MobileMenu>
+    //   )}
+
+    //   {isSearchOpen && <Dropdown />}
+    //   {isProfileOpen && <ProfileDropdown />}
+    // </HeaderContainer>
   );
 };
 
