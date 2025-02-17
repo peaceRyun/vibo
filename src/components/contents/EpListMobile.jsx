@@ -31,7 +31,7 @@ const EpListMobile = () => {
   return (
     <>
       <section>
-        <Flex $flexDirection="column" $gap="10px" $padding="20px 0" $width="100%">
+        <Flex $flexDirection="column" $gap="15px" $padding="20px 0" $width="100%">
           <FlexMobile>
             <SeasonDropdown
               isOpen={isDropdownOpen}
@@ -51,7 +51,7 @@ const EpListMobile = () => {
           <EpItemsWrap>
             <FlexUl $flexDirection="column">
               {[...Array(4)].map((_, index) => (
-                <EpItemMobile key={index} />
+                <EpItemMobile key={index} number={seasonNumber} />
               ))}
             </FlexUl>
           </EpItemsWrap>

@@ -146,7 +146,7 @@ export const FlexUl = styled.ul`
   width: ${(props) => props.$width || 'auto'};
 
   @media (max-width: 590px) {
-    gap: 10px;
+    gap: 20px;
   }
 `;
 
@@ -401,15 +401,11 @@ export const Flex = styled.div`
 export const PcContainer = styled.div``;
 
 export const MobileInner = styled.div`
-  padding: 20px;
+  padding: 0 20px;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 17px;
 `;
-// @media (max-width: 590px) {
-//   padding: 15px;
-//   gap: 20px;
-// }
 
 export const FlexMobile = styled.div`
   display: flex;
@@ -417,22 +413,11 @@ export const FlexMobile = styled.div`
   justify-content: space-between;
   align-items: center;
   gap: 10px;
-
-  /* @media (max-width: 590px) {
-    display: flex;
-    align-items: center;
-    flex-direction: row;
-    gap: 10px;
-  } */
 `;
 
 export const SwiperContainer = styled.div`
   width: 100%;
   overflow: hidden;
-
-  /* @media (max-width: 590px) {
-    padding: 0 10px; 
-  } */
 `;
 
 // ////////////모바일버전 비슷한 콘테츠 컴포넌트 스타일링
@@ -589,6 +574,7 @@ export const ContMobileContainer = styled.div`
 
 export const Header = styled.div`
   display: flex;
+  gap: 15px;
   flex-direction: column;
   margin-bottom: 16px;
 `;
@@ -777,5 +763,13 @@ export const EpMobileTitle = styled.div`
   width: 100%;
   justify-content: space-between;
   align-items: center;
-  padding: 20px;
+  padding: 0 10px;
+`;
+
+export const EpMobileList = styled.div`
+  display: flex;
+  width: 100%;
+  gap: 10px;
+  flex-direction: row;
+  justify-content: space-between;
 `;

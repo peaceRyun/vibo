@@ -4,31 +4,25 @@ import {
   Content,
   ContMobileContainer,
   Description,
-  DownloadButton,
   EpisodeInfo,
-  Flex,
-  H2,
   Header,
   IconSection,
   LikeIcon,
-  PBuiWrap,
   PlayBar,
   PlayMobileButton,
   ProgressBar,
   RatingIcon,
   RatingNumber,
-  SaveButton,
   SeasonInfo,
   SeasonTitle,
   ShareIcon,
   TimeRemaining,
 } from './style';
 import { FaPlay } from 'react-icons/fa';
-import { FiDownload } from 'react-icons/fi';
+
 import { IoShareSocial } from 'react-icons/io5';
 import MoreFilter from './MoreFilter';
-import Button from '../../ui/button/Button';
-import LiLikeButton from '../../ui/lordicon/LiLikeButton';
+
 import { useDispatch, useSelector } from 'react-redux';
 import { getTVDetail, getTVVideos } from '../../store/modules/getThunk';
 import { useParams } from 'react-router';
@@ -66,6 +60,8 @@ const ContMobile = () => {
             {/* test */}
             {/* <PBuiWrap></PBuiWrap> */}
             <SeasonTitle>{tvDetail?.name || '제목 로딩 중...'}</SeasonTitle>
+            <div>로맨틱 법정 복잡하다</div>
+            {/* 태그요소 수정해야함. 자리만  */}
             <SeasonInfo>2024년 전체 FHD</SeasonInfo>
             <EpisodeInfo>시즌 1: 13화 | 2025.01.02</EpisodeInfo>
             <PlayBar>
