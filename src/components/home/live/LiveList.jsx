@@ -4,54 +4,73 @@ import styled from 'styled-components';
 import LiveItem from './LiveItem';
 
 const LiveList = ({ title }) => {
-  const videoUrls = [
-    'https://www.youtube.com/embed/9z3HYlFcc6Q?autoplay=1&mute=1',
-    'https://www.youtube.com/embed/cw83AVjugmg?autoplay=1&mute=1',
-    'https://www.youtube.com/embed/MKX5W7mGUzo?autoplay=1&mute=1',
-    'https://www.youtube.com/embed/clqcIUYkbGQ?autoplay=1&mute=1',
-    'https://www.youtube.com/embed/v4iz9Mh8R-4?autoplay=1&mute=1',
-    'https://www.youtube.com/embed/9z3HYlFcc6Q?autoplay=1&mute=1',
-    'https://www.youtube.com/embed/cw83AVjugmg?autoplay=1&mute=1',
-    'https://www.youtube.com/embed/MKX5W7mGUzo?autoplay=1&mute=1',
-    'https://www.youtube.com/embed/clqcIUYkbGQ?autoplay=1&mute=1',
-    'https://www.youtube.com/embed/v4iz9Mh8R-4?autoplay=1&mute=1',
-  ];
+    const videoData = [
+        {
+            id: 1,
+            url: 'https://raw.githubusercontent.com/peaceRyun/vibostatic/refs/heads/main/public/videos/A_Close-Up_Of_A_Ball_Being_Kicked_fhd_1248072.mp4',
+            title: '축구 하이라이트 - 볼 킥 장면',
+            broadcaster: 'KBS N',
+        },
+        {
+            id: 2,
+            url: 'https://raw.githubusercontent.com/peaceRyun/vibostatic/refs/heads/main/public/videos/Aerial_Hyper_Lapse_Video_Of_Sport_City_-_Manchester_UK_fhd_2395741.mp4',
+            title: '맨체스터 스포츠 시티 하이퍼랩스',
+            broadcaster: 'Sky Sports',
+        },
+        {
+            id: 3,
+            url: 'https://raw.githubusercontent.com/peaceRyun/vibostatic/refs/heads/main/public/videos/Athletes_Practice_At_Swimming_Pool_fhd_1018922.mp4',
+            title: '수영 국가대표 훈련 현장',
+            broadcaster: 'MBC Sports+',
+        },
+        {
+            id: 4,
+            url: 'https://raw.githubusercontent.com/peaceRyun/vibostatic/refs/heads/main/public/videos/Baseball_Game_In_The_Stadium_fhd_141965.mp4',
+            title: 'KBO 리그 - 잠실구장 현장',
+            broadcaster: 'KBS N SPORTS',
+        },
+        {
+            id: 5,
+            url: 'https://raw.githubusercontent.com/peaceRyun/vibostatic/refs/heads/main/public/videos/Busy_Pedestrian_Street_fhd_172445.mp4',
+            title: '서울로 7017 - 퇴근길 풍경',
+            broadcaster: 'tvN',
+        },
+    ];
 
-  return (
-    <LiveContainer>
-      <StyledTitle>{title}</StyledTitle>
-      <StyledSwiper slidesPerView={4.2} spaceBetween={16}>
-        {videoUrls.map((url, index) => (
-          <SwiperSlide key={index}>
-            <LiveItem videoUrl={url} />
-          </SwiperSlide>
-        ))}
-      </StyledSwiper>
-    </LiveContainer>
-  );
+    return (
+        <LiveContainer>
+            <StyledTitle>{title}</StyledTitle>
+            <StyledSwiper slidesPerView={4.2} spaceBetween={16}>
+                {videoData.map((item) => (
+                    <SwiperSlide key={item.id}>
+                        <LiveItem videoData={item} />
+                    </SwiperSlide>
+                ))}
+            </StyledSwiper>
+        </LiveContainer>
+    );
 };
 
 export default LiveList;
 
-// Styled Components
+// Styled components remain the same
 const LiveContainer = styled.section`
-  width: 100%;
-  margin: 0 auto;
+    width: 100%;
+    margin: 0 auto;
 `;
 
 const StyledTitle = styled.h3`
-  color: white;
-  font-size: 24px;
-  font-weight: bold;
-  margin-bottom: 10px;
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
 `;
 
 const StyledSwiper = styled(Swiper)`
-  padding-bottom: 20px;
-  /* overflow: visible !important; */
+    padding-bottom: 20px;
 
-  .swiper-slide {
-    border-radius: 8px;
-    width: auto;
-  }
+    .swiper-slide {
+        border-radius: 8px;
+        width: auto;
+    }
 `;
