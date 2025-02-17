@@ -17,7 +17,8 @@ import ProfileForEdit from './components/member/mobileprofile/ProfileForEdit';
 import ProfilesForEdit from './components/member/mobileprofile/ProfilesForEdit';
 import ContentPlayer from './pages/contents/ContentPlayer';
 import ScrollToTop from './utils/routeUtils';
-
+import Register from './pages/member/Register';
+import Login from './pages/member/Login';
 const App = () => {
     return (
         <>
@@ -25,31 +26,33 @@ const App = () => {
                 <ScrollToTop />
                 <GlobalStyle />
                 <Routes>
-                    <Route path='/player'>
+                    <Route path="/player">
                         <Route index element={<ContentPlayer />} />
                         {/* <Route path=':name' element={<Project />} /> */}
                     </Route>
-                    <Route path='/' element={<Layout />}>
+                    <Route path="/" element={<Layout />}>
                         <Route index element={<MainHome />} />
-                        <Route path='/membership' element={<Membership />} />
-                        <Route path='/moviehome' element={<MovieHome />} />
-                        <Route path='/serieshome' element={<SeriesHome />} />
-                        <Route path='/livehome' element={<LiveHome />} />
-                        <Route path='/about' element={<AboutP />} />
-                        <Route path='/profileedit' element={<ProfileEdit />} />
-                        <Route path='/profileselect' element={<ProfilesSelect />} />
-                        <Route path='/profileforedit' element={<ProfileForEdit />} />
-                        <Route path='/profilesforedit' element={<ProfilesForEdit />} />
-                        <Route path='/profileinfoedit' element={<ProfileInfoEdit />} />
-                        <Route path='/mypage' element={<Mypage />} />
-                        <Route path='/detail/:id'>
+                        <Route path="/membership" element={<Membership />} />
+                        <Route path="/moviehome" element={<MovieHome />} />
+                        <Route path="/serieshome" element={<SeriesHome />} />
+                        <Route path="/livehome" element={<LiveHome />} />
+                        <Route path="/about" element={<AboutP />} />
+                        <Route path="/profileedit" element={<ProfileEdit />} />
+                        <Route path="/profileselect" element={<ProfilesSelect />} />
+                        <Route path="/profileforedit" element={<ProfileForEdit />} />
+                        <Route path="/profilesforedit" element={<ProfilesForEdit />} />
+                        <Route path="/profileinfoedit" element={<ProfileInfoEdit />} />
+                        <Route path="/mypage" element={<Mypage />} />
+                        <Route path="/detail/:id">
                             <Route index element={<ContentDetail />} />
                             {/* <Route path=':name' element={<Project />} /> */}
                         </Route>
-                        <Route path='/contentlist'>
+                        <Route path="/contentlist">
                             <Route index element={<ContentList />} />
                             {/* <Route path=':name' element={<Project />} /> */}
                         </Route>
+                        <Route path="/register" element={<Register />}></Route>
+                        <Route path="/login" element={<Login />}></Route>
                     </Route>
                 </Routes>
             </BrowserRouter>
