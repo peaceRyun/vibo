@@ -7,6 +7,9 @@ const MobileReItem = () => {
     { title: '옥씨 부인전', image: '/contentdetail/sample/sample-contentlsit.png' },
     { title: '투주기', image: '/contentdetail/sample/sample-contentlsit.png' },
     { title: '너를 좋아해', image: '/contentdetail/sample/sample-contentlsit.png' },
+    { title: '옥씨 부인전', image: '/contentdetail/sample/sample-contentlsit.png' },
+    { title: '투주기', image: '/contentdetail/sample/sample-contentlsit.png' },
+    { title: '너를 좋아해', image: '/contentdetail/sample/sample-contentlsit.png' },
   ];
 
   return (

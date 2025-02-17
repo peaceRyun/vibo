@@ -214,6 +214,10 @@ export const P = styled.p`
   -webkit-box-orient: vertical;
   -webkit-line-clamp: ${(props) => props.$lineClamp}; /* 원하는 줄 수 */
   overflow: hidden;
+
+  @media (max-width: 590px) {
+    padding: 10px 0;
+  }
 `;
 
 export const P28 = styled.p`
@@ -283,8 +287,8 @@ export const EpItemContImg = styled.img`
   height: ${(props) => props.$height};
 
   @media (max-width: 590px) {
-    width: 120px; /* 📌 기존 150px에서 더 줄이기 */
-    height: 80px;
+    width: 150px; /* 📌 기존 150px에서 더 줄이기 */
+    height: 100px;
   }
   /* @media (max-width: 590px) {
     width: ${(props) => props.$mobileWidth || '150px'};
@@ -310,7 +314,7 @@ export const EpItemsWrap = styled.div`
 
   @media (max-width: 590px) {
     max-width: 100%;
-    padding: 10px;
+    /* padding: 10px; */
   }
 `;
 
@@ -384,9 +388,13 @@ export const Flex = styled.div`
   font-size: ${(props) => props.$fontSize};
   /* 반응형추가 */
   @media (max-width: 590px) {
-    flex-direction: column;
+    /* display: flex;
+    gap: ${(props) => props.$mobileGap || '30px'}; */
+    /* flex-direction: row;
+    gap: 20px; */
+    /* flex-direction: column;
     gap: ${(props) => props.$mobileGap || '20px'};
-    padding: ${(props) => props.$mobilePadding || '0 16px'};
+    padding: ${(props) => props.$mobilePadding || '0 16px'}; */
   }
 `;
 
