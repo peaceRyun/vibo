@@ -230,6 +230,12 @@ export const P20 = styled.p`
   font-size: 20px;
   font-weight: 400;
   text-align: start;
+
+  @media (max-width: 590px) {
+    font-size: 16px;
+    font-weight: 400;
+    text-align: center;
+  }
 `;
 
 export const ModalOverlay = styled.div`
@@ -388,13 +394,21 @@ export const Flex = styled.div`
   font-size: ${(props) => props.$fontSize};
   /* 반응형추가 */
   @media (max-width: 590px) {
-    /* display: flex;
-    gap: ${(props) => props.$mobileGap || '30px'}; */
-    /* flex-direction: row;
-    gap: 20px; */
-    /* flex-direction: column;
-    gap: ${(props) => props.$mobileGap || '20px'};
-    padding: ${(props) => props.$mobilePadding || '0 16px'}; */
+    padding: 15px;
+    gap: 20px;
+  }
+`;
+
+export const FlexMobile = styled.div`
+  display: flex;
+  width: auto;
+  justify-content: space-between;
+
+  @media (max-width: 590px) {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    gap: 10px;
   }
 `;
 
@@ -485,14 +499,14 @@ export const ContentWrapper = styled.div`
 export const ContentCard = styled.div`
   img {
     width: 100%;
-    border-radius: 10px;
+    border-radius: 5px;
   }
 `;
 
 // 사용자 리뷰 섹션
-export const ReviewsSection = styled.div`
-  margin-top: 20px;
-`;
+// export const ReviewsSection = styled.div`
+//   margin-top: 20px;
+// `;
 
 export const Review = styled.div`
   background: #222;
@@ -549,4 +563,116 @@ export const TabHeader = styled.div`
   border-bottom: 1px solid #444;
 `;
 
-// //////에피소드 모바일 버전 스타일링!!!
+// //////모바일 버전
+export const ContMobileContainer = styled.div`
+  /* padding: 20px; */
+  /* background-color: #000;
+  color: #fff; */
+`;
+
+export const Header = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 16px;
+`;
+
+export const playbar = styled.div`
+  /* width: 100%;
+  background-color: red; */
+`;
+export const SeasonInfo = styled.p`
+  font-size: 14px;
+  color: #888;
+`;
+
+export const EpisodeInfo = styled.p`
+  font-size: 18px;
+  font-weight: bold;
+`;
+
+export const TimeRemaining = styled.p`
+  font-size: 12px;
+  color: #888;
+`;
+
+export const ButtonContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 16px;
+`;
+
+export const PlayMobileButton = styled.button`
+  width: 100%;
+  height: 50px;
+  padding: 8px 16px;
+  background-color: var(--primary-base);
+  color: var(--black);
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+`;
+
+export const SaveButton = styled.button`
+  width: 100%;
+  height: 50px;
+  padding: 8px 16px;
+  background-color: var(--gray-700);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+`;
+
+export const Content = styled.div`
+  margin-bottom: 16px;
+`;
+
+export const Description = styled.div`
+  margin-bottom: 16px;
+
+  h4 {
+    font-size: 13px;
+    color: #ddd;
+  }
+  p {
+    font-size: 10px;
+  }
+`;
+
+export const IconSection = styled.div`
+  display: flex;
+  gap: 16px;
+`;
+
+export const LikeIcon = styled.button`
+  background: none;
+  color: #1db954;
+  border: none;
+  font-size: 16px;
+`;
+
+export const RatingIcon = styled.p`
+  font-size: 14px;
+  color: #888;
+`;
+
+export const ShareIcon = styled.button`
+  background: none;
+  color: #1db954;
+  border: none;
+  font-size: 16px;
+`;
+
+export const DownloadButton = styled.button`
+  background: none;
+  color: #1db954;
+  border: none;
+  font-size: 16px;
+`;
