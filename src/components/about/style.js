@@ -485,10 +485,12 @@ export const LastSectionWrapper = styled.div`
 export const AboutSwiperWrapper = styled.div`
   width: 100%;
   height: 100vh;
-  background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.8) 80%, black 100%);
+  // background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.8) 80%, black 100%);
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
+  z-index: 0;
 
   .about-swiper {
     width: 100%;
@@ -522,35 +524,59 @@ export const SlideContainer = styled.div`
   height: 432px;
   display: flex;
   flex-direction: column;
-  position: absolute;
+  // position: absolute;
   bottom: 30px;
   left: 0;
   gap: 30px;
-  // align-items: center;
+  align-items: center;
+  white-space: nowrap;
   justify-content: flex-end;
   position: relative;
   color: white;
   text-align: center;
   padding: 20px;
 
-  .background-img {
+  .TitleBackground {
     position: absolute;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    top: 0;
-    left: 0;
-    z-index: -1;
+    bottom: -250px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100vw;
+    height: 500px;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, black 10%);
+
+    z-index: 1;
   }
 `;
 
 export const SlideTitle = styled.h2`
   font-size: 32px;
   font-weight: 800;
-  // margin-bottom: 10px;
+  position: absolute;
+  z-index: 10;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 150px;
 
-  .bold {
-    font-size: 34px;
+  .LastTitle {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    z-index: 10;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: -80px;
+    .bold {
+      position: absolute;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 34px;
+      font-family: metrobarat;
+      font-size: 74px;
+      letter-spacing: 3px;
+      font-weight: 700;
+    }
   }
 `;
 
@@ -559,6 +585,8 @@ export const SlideSubtitle = styled.p`
   font-weight: 700;
   color: #a8a9ad;
   margin-bottom: 30px;
+  position: absolute;
+  z-index: 100;
 
   .highlight {
     color: #06dbbf;
@@ -616,10 +644,11 @@ export const ImgContainer = styled.div`
   margin: 0 0;
   overflow: visible;
   position: absolute;
-  top: -100px;
+  top: 70px;
   left: 50%;
   transform: translateX(-50%);
-  z-index: -1;
+  z-index: 0;
+  // background-color: #1b1b1b;
   .slide1card {
     min-width: 100px;
     min-height: 144px;

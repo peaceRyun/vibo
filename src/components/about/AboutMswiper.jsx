@@ -7,12 +7,14 @@ import AboutMslide1 from './AboutMslide1';
 import AboutMslide2 from './AboutMslide2';
 import AboutMslide3 from './AboutMslide3';
 import { AboutSwiperWrapper } from './style';
+import AboutMcard from './AboutMcard';
 const AboutMswiper = () => {
   return (
     <AboutSwiperWrapper>
       <Swiper pagination={{ clickable: true }} modules={[Pagination]} className="about-swiper">
         <SwiperSlide>
           <AboutMslide1 />
+          <AboutMcard />
         </SwiperSlide>
         <SwiperSlide>
           <AboutMslide2 />

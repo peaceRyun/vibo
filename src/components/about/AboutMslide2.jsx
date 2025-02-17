@@ -3,6 +3,7 @@ import { SlideContainer, SlideTitle, SlideSubtitle, ButtonWrapper } from './styl
 const AboutMslide2 = () => {
   return (
     <SlideContainer>
+      <div className="TitleBackground"></div>
       <SlideTitle>
         실시간으로 즐기는
         <br />

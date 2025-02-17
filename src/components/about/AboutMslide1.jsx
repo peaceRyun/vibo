@@ -5,6 +5,7 @@ const AboutMslide1 = () => {
   return (
     <>
       <SlideContainer>
+        <div className="TitleBackground"></div>
         <SlideTitle>
           요즘 뜨는 모든 콘텐츠
           <br />
@@ -15,7 +16,6 @@ const AboutMslide1 = () => {
           <br />
           드라마, 예능, 영화, 해외 시리즈까지
         </SlideSubtitle>
-        <AboutMcard />
       </SlideContainer>
     </>
   );
