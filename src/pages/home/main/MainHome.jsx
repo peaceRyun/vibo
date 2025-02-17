@@ -20,35 +20,35 @@ import { getTVseries } from '../../../store/modules/getThunk';
 // import { LiveContainer } from '../live/style';
 // import { Container } from '../../../components/home/viboOnly/only1/style';
 
-const liveTitles = [{ id: '1', title: '시청중인 콘텐츠' }];
+const liveTitles = [{ id: '1', title: '실시간 인기 LIVE' }];
 
 const MainHome = () => {
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(getTVseries());
-  }, []);
-  return (
-    <MainContent>
-      <MainBanner />
-      <MainContainer>
-        <WatchingList />
-        <div>
-          {liveTitles.map((section) => (
-            <LiveList key={section.id} title={section.title} />
-          ))}
-        </div>
-        <WeeklyList />
-        <RateList />
-        <GenreNav />
-        <AdBanner />
-        <CommonList />
-        <CommonList />
-        <CommonList />
-        <ViboOnly />
-      </MainContainer>
-      <MenuSection />
-    </MainContent>
-  );
+    const dispatch = useDispatch();
+    useEffect(() => {
+        dispatch(getTVseries());
+    }, []);
+    return (
+        <MainContent>
+            <MainBanner />
+            <MainContainer>
+                <div>
+                    {liveTitles.map((section) => (
+                        <LiveList key={section.id} title={section.title} />
+                    ))}
+                </div>
+                <WatchingList />
+                <WeeklyList />
+                <RateList />
+                <GenreNav />
+                <AdBanner />
+                <CommonList />
+                <CommonList />
+                <CommonList />
+                <ViboOnly />
+            </MainContainer>
+            <MenuSection />
+        </MainContent>
+    );
 };
 
 export default MainHome;
