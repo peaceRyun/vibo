@@ -1,6 +1,7 @@
 // 에피소드 정보
 import { FiDownload } from 'react-icons/fi';
 import { EpItemContImg, Flex, H4, P, Span } from './style';
+import { useState } from 'react';
 
 // 시리즈 한정 에피소드
 const EpItemMobile = () => {
@@ -14,7 +15,7 @@ const EpItemMobile = () => {
           alt="에피회차별썸네일샘플"
         />
         <Flex $flex-direction="row" $width="100%" $justify-content="space-between">
-          <Flex $padding="0 10px" $gap="15px" $width="100%">
+          <Flex $flex-direction="column" $padding="0 10px" $gap="10px" $width="100%">
             <H4 $fontSize="15px" $fontWeight="700">
               애인있어요
             </H4>

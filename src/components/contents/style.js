@@ -415,21 +415,21 @@ export const FlexMobile = styled.div`
   width: auto;
   justify-content: space-between;
 
-  @media (max-width: 590px) {
+  /* @media (max-width: 590px) {
     display: flex;
     align-items: center;
     flex-direction: row;
     gap: 10px;
-  }
+  } */
 `;
 
 export const SwiperContainer = styled.div`
   width: 100%;
   overflow: hidden;
 
-  @media (max-width: 590px) {
-    padding: 0 10px; /* 📌 모바일에서는 좌우 여백 추가 */
-  }
+  /* @media (max-width: 590px) {
+    padding: 0 10px; 
+  } */
 `;
 
 // ////////////모바일버전 비슷한 콘테츠 컴포넌트 스타일링
@@ -689,4 +689,37 @@ export const DownloadButton = styled.button`
   color: #1db954;
   border: none;
   font-size: 16px;
+`;
+
+export const ProgressBar = styled.progress`
+  width: 80%;
+  height: 6px;
+  -webkit-appearance: none;
+  appearance: none;
+  border-radius: 10px;
+  background-color: #444;
+
+  &::-webkit-progress-bar {
+    background-color: #444;
+    border-radius: 10px;
+  }
+
+  &::-webkit-progress-value {
+    background-color: var(--primary-base);
+    border-radius: 10px;
+  }
+
+  &::-moz-progress-bar {
+    background-color: var(--primary-base);
+    border-radius: 10px;
+  }
+`;
+
+export const PlayBar = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+  /* flexdirection="row" justifycontent="spacebetween" alignitem="center" */
 `;

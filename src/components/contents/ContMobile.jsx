@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   ButtonContainer,
   Content,
@@ -6,10 +6,13 @@ import {
   Description,
   DownloadButton,
   EpisodeInfo,
+  Flex,
   Header,
   IconSection,
   LikeIcon,
+  PlayBar,
   PlayMobileButton,
+  ProgressBar,
   RatingIcon,
   SaveButton,
   SeasonInfo,
@@ -19,6 +22,16 @@ import {
 import { FaPlay } from 'react-icons/fa';
 import { FiDownload } from 'react-icons/fi';
 const ContMobile = () => {
+  const [progress, setProgress] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (progress < 50) {
+        setProgress((prev) => prev + 1); // 1초마다 1%씩 증가
+      }
+    }, 100);
+    return () => clearInterval(interval);
+  }, [progress]);
   return (
     <div>
       <>
@@ -26,12 +39,13 @@ const ContMobile = () => {
           <Header>
             <SeasonInfo>2024년 15 FHD</SeasonInfo>
             <EpisodeInfo>시즌 1: 13화 | 2025.01.02</EpisodeInfo>
-            <playbar></playbar>
-            <TimeRemaining>10분 남음</TimeRemaining>
+            <PlayBar>
+              <ProgressBar value={progress} max="100" />
+              <TimeRemaining>10분 남음</TimeRemaining>
+            </PlayBar>
           </Header>
           <ButtonContainer>
             <PlayMobileButton>
-              {' '}
               <FaPlay size={20} />
               재생
             </PlayMobileButton>

@@ -27,9 +27,6 @@ const EpListMobile = () => {
     setSelectedSeason(season);
     setIsDropdownOpen(false);
   };
-  // const handleSeasonSelect = (season) => {
-  //   setSelectedSeason(season);
-  // };
 
   return (
     <>
@@ -49,15 +46,7 @@ const EpListMobile = () => {
             </FlexMobile>
           </FlexMobile>
           <handleToggle onToggle={handleToggle} />
-          {/* isOn={isDropdownOpen} */}
 
-          {/* <EpItemsWrap>
-            <FlexUl $flexDirection="column">
-              {[...Array(4)].map((_, index) => (
-                <EpItem key={index} number={seasonNumber} />
-              ))}
-            </FlexUl>
-          </EpItemsWrap> */}
           {/* 에피소드 모바일 아이템을 가져오도록 */}
           <EpItemsWrap>
             <FlexUl $flexDirection="column">
