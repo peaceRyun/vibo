@@ -302,3 +302,39 @@ export const getTVReviews = createAsyncThunk('reviews/getTvReviews', async (tvId
         return rejectWithValue(error.message);
     }
 });
+
+//메인홈 요일별 컴포넌트
+export const getAiringToday = createAsyncThunk('content/getAiringToday', async (_, { rejectWithValue }) => {
+    try {
+        const response = await axios.get('https://api.themoviedb.org/3/tv/airing_today', {
+            params: {
+                language: 'ko-KR',
+                page: '1',
+            },
+            headers: {
+                accept: 'application/json',
+                Authorization:
+                    'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJkZGY2NTIxYzQzYzJlMDNmNTlkMjc2N2YxMDlhYWFhNCIsIm5iZiI6MTczNzUxMDE4NS4yNjIsInN1YiI6IjY3OTA0ZDI5MmQ2MWMzM2U2M2RmZTVlNiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ._QJjWVEDYEcIfVZtQRYG0JSRb22Dit3HopPsNm8AILE',
+            },
+        });
+
+        // 요일별로 데이터 그룹화
+        const shows = response.data.results;
+        const groupedByDay = shows.reduce((acc, show) => {
+            const airDate = new Date(show.first_air_date);
+            const day = airDate.getDay(); // 0: 일요일, 1: 월요일, ...
+            const koreanDays = ['일', '월', '화', '수', '목', '금', '토'];
+            const koreanDay = koreanDays[day];
+
+            if (!acc[koreanDay]) {
+                acc[koreanDay] = [];
+            }
+            acc[koreanDay].push(show);
+            return acc;
+        }, {});
+
+        return groupedByDay;
+    } catch (error) {
+        return rejectWithValue(error.message);
+    }
+});
