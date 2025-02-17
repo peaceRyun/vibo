@@ -107,7 +107,7 @@ import ContMoreDetail from '../../components/contents/ContMoreDetail';
 import EpListMobile from '../../components/contents/EpListMobile';
 import EpItemMobile from '../../components/contents/EpItemMobile';
 import ContMobile from '../../components/contents/ContMobile';
-
+import MobileReItem from '../../components/contents/MobileReitem';
 // 콘텐츠 상세
 const ContentDetail = () => {
   const dispatch = useDispatch();
@@ -167,8 +167,9 @@ const ContentDetail = () => {
               비슷한 콘텐츠
             </TabButton>
           </TabContainer>
-          <EpListMobile />
-          <EpItemMobile />
+          {/* 탭 활성화해야함 */}
+          {activeTab === 'episodes' && <EpListMobile />}
+          {activeTab === 'similar' && <MobileReItem />}
         </MobileInner>
       )}
       {/* // {activeTab === 'episodes' ? <EpListMobile /> : <MobileReItem />} */}
@@ -177,3 +178,7 @@ const ContentDetail = () => {
 };
 
 export default ContentDetail;
+
+// {activeTab === 'episodes' && <EpListMobile />}
+// {activeTab === 'episodes' && <EpItemMobile />}
+// {activeTab === 'similar' && <ContMobile />}
