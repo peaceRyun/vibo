@@ -6,15 +6,29 @@ import WatchingItem from './WatchingItem';
 // import { MainContainer } from '../../../pages/home/main/style';
 
 const WatchingList = () => {
+  const watchingUrl = [
+    'https://www.youtube.com/embed/9z3HYlFcc6Q?autoplay=1&mute=1',
+    'https://www.youtube.com/embed/cw83AVjugmg?autoplay=1&mute=1',
+    'https://www.youtube.com/embed/MKX5W7mGUzo?autoplay=1&mute=1',
+    'https://www.youtube.com/embed/clqcIUYkbGQ?autoplay=1&mute=1',
+    'https://www.youtube.com/embed/v4iz9Mh8R-4?autoplay=1&mute=1',
+    'https://www.youtube.com/embed/9z3HYlFcc6Q?autoplay=1&mute=1',
+    'https://www.youtube.com/embed/cw83AVjugmg?autoplay=1&mute=1',
+    'https://www.youtube.com/embed/MKX5W7mGUzo?autoplay=1&mute=1',
+    'https://www.youtube.com/embed/clqcIUYkbGQ?autoplay=1&mute=1',
+    'https://www.youtube.com/embed/v4iz9Mh8R-4?autoplay=1&mute=1',
+  ];
+
   return (
     // <MainContainer>
     <LiveContainer>
       <LiveTitle>실시간 인기 LIVE</LiveTitle>
-      <LiveSwiper slidesPerView={4.2} spaceBetween={16} pagination={{ clickable: true }}>
-        {[...Array(5)].map((_, index) => (
+      <LiveSwiper slidesPerView={4.2} spaceBetween={16}>
+        {/* pagination={{ clickable: true }} */}
+        {watchingUrl.map((url, index) => (
           <SwiperSlide key={index}>
             {/* style={{ overflow: 'visible' }} */}
-            <WatchingItem />
+            <WatchingItem watchingUrl={url} />
           </SwiperSlide>
         ))}
       </LiveSwiper>

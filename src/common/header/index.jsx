@@ -43,12 +43,14 @@ import Nav from './Nav';
 import HeaderRight from './HeaderRight';
 import Dropdown from './Dropdown';
 import ProfileDropdown from './ProfileDropdown';
-import { HeaderContainer, Logo, LeftSection } from './style';
+import { HeaderContainer, Logo, LeftSection, MobileMenuIcon, MobileMenu, NavItem, RightContainer } from './style';
 import { Link } from 'react-router-dom'; // 'react-router' → 'react-router-dom'으로 변경
+import { FaBars } from 'react-icons/fa';
 
 const Header = () => {
   const [isSearchOpen, setSearchOpen] = useState(false);
   const [isProfileOpen, setProfileOpen] = useState(false);
+  const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
   const location = useLocation(); // 현재 페이지 경로 가져오기
 
   const hideNavPages = ['/profilesforedit', '/profileinfoedit', '/profileselect', '/profileforedit'];
@@ -56,24 +58,50 @@ const Header = () => {
 
   const toggleSearchDropdown = () => setSearchOpen((prev) => !prev);
   const toggleProfileDropdown = () => setProfileOpen((prev) => !prev);
+  const toggleMobileMenu = () => setMobileMenuOpen((prev) => !prev);
 
   return (
-    <div style={{ position: 'relative' }}>
-      <HeaderContainer>
-        <LeftSection>
-          <Link to="/">
-            <Logo>VIBO</Logo>
-          </Link>
-          {/* 특정 페이지에서 Nav 숨김 */}
-          {!isNavHidden && <Nav />}
-        </LeftSection>
+    <HeaderContainer>
+      <LeftSection>
+        <Link to="/">
+          <Logo>VIBO</Logo>
+        </Link>
+        {!isNavHidden && <Nav />}
+      </LeftSection>
 
-        {!isNavHidden && <HeaderRight onSearchClick={toggleSearchDropdown} onProfileClick={toggleProfileDropdown} />}
-      </HeaderContainer>
+      {!isNavHidden && (
+        <RightContainer>
+          <HeaderRight
+            onSearchClick={toggleSearchDropdown}
+            onProfileClick={toggleProfileDropdown}
+            toggleMobileMenu={toggleMobileMenu}
+          />
+
+          <MobileMenuIcon onClick={toggleMobileMenu}>
+            <FaBars />
+          </MobileMenuIcon>
+        </RightContainer>
+      )}
+
+      {/* 모바일 메뉴 */}
+      {isMobileMenuOpen && (
+        <MobileMenu>
+          <Link to="/serieshome" onClick={toggleMobileMenu}>
+            <NavItem>시리즈</NavItem>
+          </Link>
+          <Link to="/moviehome" onClick={toggleMobileMenu}>
+            <NavItem>영화</NavItem>
+          </Link>
+          <Link to="/livehome" onClick={toggleMobileMenu}>
+            <NavItem>라이브</NavItem>
+          </Link>
+          <NavItem onClick={toggleMobileMenu}>VIBO+</NavItem>
+        </MobileMenu>
+      )}
 
       {isSearchOpen && <Dropdown />}
       {isProfileOpen && <ProfileDropdown />}
-    </div>
+    </HeaderContainer>
   );
 };
 
