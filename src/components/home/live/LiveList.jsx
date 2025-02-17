@@ -7,30 +7,24 @@ const LiveList = ({ title }) => {
     const videoData = [
         {
             id: 1,
-            url: 'https://www.youtube.com/embed/clqcIUYkbGQ?autoplay=1&mute=1',
-            title: 'KBO 프로야구 생중계',
-            broadcaster: 'SBS Sports',
-        },
-        {
-            id: 2,
             url: 'https://raw.githubusercontent.com/peaceRyun/vibostatic/refs/heads/main/public/videos/A_Close-Up_Of_A_Ball_Being_Kicked_fhd_1248072.mp4',
             title: '축구 하이라이트 - 볼 킥 장면',
             broadcaster: 'KBS N',
         },
         {
-            id: 3,
+            id: 2,
             url: 'https://raw.githubusercontent.com/peaceRyun/vibostatic/refs/heads/main/public/videos/Aerial_Hyper_Lapse_Video_Of_Sport_City_-_Manchester_UK_fhd_2395741.mp4',
             title: '맨체스터 스포츠 시티 하이퍼랩스',
             broadcaster: 'Sky Sports',
         },
         {
-            id: 4,
+            id: 3,
             url: 'https://raw.githubusercontent.com/peaceRyun/vibostatic/refs/heads/main/public/videos/Athletes_Practice_At_Swimming_Pool_fhd_1018922.mp4',
             title: '수영 국가대표 훈련 현장',
             broadcaster: 'MBC Sports+',
         },
         {
-            id: 5,
+            id: 4,
             url: 'https://raw.githubusercontent.com/peaceRyun/vibostatic/refs/heads/main/public/videos/Baseball_Game_In_The_Stadium_fhd_141965.mp4',
             title: 'KBO 리그 - 잠실구장 현장',
             broadcaster: 'KBS N SPORTS',

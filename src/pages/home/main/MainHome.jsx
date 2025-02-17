@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 // import { Container } from '../../../common/style';
 import LiveList from '../../../components/home/live/LiveList';
 import RateList from '../../../components/home/rating/RateList';
-import WatchingList from '../../../components/home/watching/WatchingList';
+// import WatchingList from '../../../components/home/watching/WatchingList';
 import GenreNav from '../../../components/home/genreNav/GenreNav';
 import WeeklyList from '../../../components/home/weekly/WeeklyList';
 import AdBanner from '../../../components/home/adBanner/AdBanner';
@@ -37,7 +37,7 @@ const MainHome = () => {
                         <LiveList key={section.id} title={section.title} />
                     ))}
                 </div>
-                <WatchingList />
+                {/* <WatchingList /> */}
                 <WeeklyList />
                 <RateList />
                 <GenreNav />
