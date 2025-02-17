@@ -10,6 +10,10 @@ export const MainContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 60px;
+
+  @media (max-width: 480px) {
+    padding: 30px;
+  }
 `;
 
 export const MainContent = styled.div`

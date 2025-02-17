@@ -31,12 +31,12 @@ const MainHome = () => {
     <MainContent>
       <MainBanner />
       <MainContainer>
-        <WatchingList />
+        {/* <WatchingList />
         <div>
           {liveTitles.map((section) => (
             <LiveList key={section.id} title={section.title} />
           ))}
-        </div>
+        </div> */}
         <WeeklyList />
         <RateList />
         <GenreNav />
