@@ -78,3 +78,25 @@ export const CardTitle = styled.h3`
 export const CardBcName = styled.p`
   ${responsiveFont}
 `;
+
+//
+
+export const IframeWrapper = styled.div`
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 8px;
+  overflow: hidden;
+  background: black;
+  /* width: 100%;
+  height: 100%;
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  background: black; */
+`;
+
+export const StyledIframe = styled.iframe`
+  width: 100%;
+  height: 100%;
+  border: none;
+`;

@@ -53,7 +53,7 @@ const Membership = () => {
               >
                 <h2>베이직</h2>
               </Plan>
-              <FeatureList>
+              <FeatureList className="text" $isFilled={selectedPlan === 'basic'}>
                 <li>무료</li>
                 <li>1개</li>
                 <li>x</li>
@@ -70,7 +70,7 @@ const Membership = () => {
               >
                 <h2>스탠다드</h2>
               </Plan>
-              <FeatureList>
+              <FeatureList className="text" $isFilled={selectedPlan === 'standard'}>
                 <li>5,500원</li>
                 <li>3개</li>
                 <li>✔</li>
@@ -87,7 +87,7 @@ const Membership = () => {
               >
                 <h2>프리미엄</h2>
               </Plan>
-              <FeatureList>
+              <FeatureList className="premium" $isFilled={selectedPlan === 'premium'}>
                 <li>9,900원</li>
                 <li>3개</li>
                 <li>✔</li>

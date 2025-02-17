@@ -1,11 +1,10 @@
-import { useState, useEffect } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import styled from 'styled-components';
 // import { Pagination } from 'swiper/modules'; // 페이지네이션 모듈 주석 처리
-import CommonItem from './CommonItem';
 import { useNavigate } from 'react-router';
 import { useSelector } from 'react-redux';
+import CommonItem from './CommonItem';
 
 export const CommonList = () => {
     const navigate = useNavigate();
@@ -29,7 +28,7 @@ export const CommonList = () => {
                     </CommonTitle>
                     <MoreBtn onClick={onGo}>더보기</MoreBtn>
                 </CommonInfo>
-                <CommonSwiper spaceBetween={20} pagination={{ clickable: true }} slidesPerView={5.5}>
+                <CommonSwiper spaceBetween={30} pagination={{ clickable: true }} slidesPerView={5.5}>
                     {/* modules={[Pagination]} */}
                     {TVseriesData.map((content) => (
                         <SwiperSlide key={content.id}>
@@ -48,7 +47,7 @@ const Section = styled.section`
     display: flex;
     /* align-items: center; */
     position: relative;
-    gap: 5px;
+    // gap: 5px;
 `;
 
 const VerticalText = styled.div`
