@@ -51,9 +51,9 @@ export const CardImage = styled.img`
 export const CardInfo = styled.div`
     width: ${(props) => props.width || '28.0625rem'};
     height: ${(props) => props.height || '4.375rem'};
-    /* position: absolute;
-    bottom: 0; */
-    position: relative;
+    position: absolute;
+    bottom: 0;
+    /* position: relative; */
     background: ${(props) => props.bgColor || '#191919'};
     color: ${(props) => props.textColor || 'white'};
     padding: ${(props) => props.padding || '0.75rem 1.25rem 1rem 1.25rem'};
@@ -91,11 +91,11 @@ export const IframeWrapper = styled.div`
     overflow: hidden;
     background: black;
     /* width: 100%;
-  height: 100%;
-  position: relative;
-  border-radius: 8px;
-  overflow: hidden;
-  background: black; */
+    height: 100%;
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+    background: black; */
 `;
 
 export const StyledIframe = styled.iframe`
