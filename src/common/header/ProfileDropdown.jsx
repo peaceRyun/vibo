@@ -63,9 +63,10 @@ const ProfileDropdown = ({ onClose }) => {
                         회원정보수정
                     </DropdownItem>
                 </Link>
-                <DropdownItem>
+                <DropdownItem className="noHover">
                     <BorderLine />
                 </DropdownItem>
+
                 {/* 로그아웃 버튼 */}
                 <LogOut onClick={handleLogout}>
                     <FiLogOut size={20} />
