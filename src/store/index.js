@@ -10,6 +10,7 @@ import contPlayerR from './modules/contPlayerSlice';
 import profileR from './modules/profileSlice';
 import reviewR from './modules/reviewSlice';
 import tvDetailR from './modules/tvDetailSlice';
+import topRatedR from './modules/topRatedSlice';
 
 export const store = configureStore({
     reducer: {
@@ -24,5 +25,6 @@ export const store = configureStore({
         profileR,
         reviewR,
         tvDetailR,
+        topRatedR,
     },
 });
