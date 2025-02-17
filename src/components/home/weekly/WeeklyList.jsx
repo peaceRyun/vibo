@@ -158,10 +158,22 @@ const UpdateText = styled.h2`
 `;
 
 const UploadNotice = styled.p`
-  font-size: 16px;
-  color: gray;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #1a1a1a;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: 2rem;
+  font-size: 14px;
+  font-weight: 500;
+  border: 1px solid #009c8c;
+  white-space: nowrap;
+  /* font-size: 16px;
+  color: gray; */
 
   @media (max-width: 1024px) {
-    font-size: 14px;
+    font-size: 12px;
+    padding: 5px 12px;
   }
 `;
