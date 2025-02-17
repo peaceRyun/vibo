@@ -1,7 +1,8 @@
 // 에피소드 정보
 import { FiDownload } from 'react-icons/fi';
 import { EpItemContImg, EpMobileText, EpMobileTitle, Flex, H4, P, Span } from './style';
-import { useState } from 'react';
+import { IoIosPlayCircle } from 'react-icons/io';
+import { FaRegCirclePlay } from 'react-icons/fa6';
 
 // 시리즈 한정 에피소드
 const EpItemMobile = () => {
@@ -17,13 +18,15 @@ const EpItemMobile = () => {
         <EpMobileTitle>
           <EpMobileText>
             <H4 $fontSize="15px" $fontWeight="700">
+              {/* 숫자 추가 해야함. 시즌 1 이거 */}
               애인있어요
             </H4>
             <Span $fontSize="15px" $whiteSpace="nowrap">
               52분
             </Span>
           </EpMobileText>
-          <FiDownload size={25} />
+          <FaRegCirclePlay size={30} />
+          {/* <FiDownload size={25} /> */}
         </EpMobileTitle>
       </Flex>
       <P>

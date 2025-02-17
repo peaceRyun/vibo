@@ -79,10 +79,10 @@ const ContMobile = () => {
               재생
             </PlayMobileButton>
 
-            <SaveButton>
+            {/* <SaveButton>
               <FiDownload size={25} />
               저장
-            </SaveButton>
+            </SaveButton> */}
           </ButtonContainer>
           <Content>
             <Description>
@@ -121,12 +121,12 @@ const ContMobile = () => {
                 <IoShareSocial size={30} />
                 <p>공유</p>
               </ShareIcon>
-              <DownloadButton>
+              {/* <DownloadButton>
                 <FiDownload size={30} />
                 <p>
                   전체 회차 <br /> 다운로드
                 </p>
-              </DownloadButton>
+              </DownloadButton> */}
             </IconSection>
           </Content>
         </ContMobileContainer>
