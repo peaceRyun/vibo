@@ -265,7 +265,8 @@ export const OriginalWrapper = styled.div`
 `;
 export const AboutPswiperWrapper = styled.div`
   width: 100%;
-  padding: 20px 0;
+  // padding: 0 0;
+
   overflow: hidden;
   position: absolute;
   top: 300px;
@@ -273,7 +274,7 @@ export const AboutPswiperWrapper = styled.div`
   .slider-container {
     position: relative;
     width: 100%;
-    height: 300px;
+    height: 240px;
     overflow: hidden;
     display: flex;
     align-items: center;
@@ -281,6 +282,7 @@ export const AboutPswiperWrapper = styled.div`
 
   .slide-track {
     display: flex;
+
     position: absolute;
     top: 0;
     left: 0;
@@ -290,7 +292,7 @@ export const AboutPswiperWrapper = styled.div`
   .slide {
     width: 380px;
     height: 225px;
-    margin: 45px 30px;
+    margin: 0 20px;
     // background: #111;
     border-radius: 10px;
     overflow: hidden;
@@ -298,7 +300,9 @@ export const AboutPswiperWrapper = styled.div`
     justify-content: center;
     align-items: center;
   }
-
+  .slide:last-child {
+    margin-right: 0;
+  }
   img {
     width: 100%;
     height: 100%;
@@ -310,7 +314,7 @@ export const ContentContainer = styled.div`
   position: relative;
   text-align: center;
   color: white;
-  height: 1100px;
+  height: 920px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -435,7 +439,7 @@ export const AnswerWrapper = styled.div`
 
 export const LastSectionWrapper = styled.div`
   width: 100vw;
-  height: 100vh;
+  height: 50vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -477,5 +481,206 @@ export const LastSectionWrapper = styled.div`
     &:active {
       background-color: #04998a;
     }
+  }
+`;
+
+// ----------------------About M style
+
+export const AboutSwiperWrapper = styled.div`
+  width: 100%;
+  height: 100vh;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 0;
+
+  .about-swiper {
+    width: 100%;
+    height: 100%;
+    transition: opacity 0.5s ease-in-out;
+  }
+
+  .swiper-pagination {
+    position: absolute;
+    bottom: 190px;
+  }
+
+  .swiper-pagination-bullet {
+    background: #ffffff;
+    opacity: 0.5;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+  }
+
+  .swiper-pagination-bullet-active {
+    background: #07ffe6;
+    opacity: 1;
+    width: 24px;
+    border-radius: 10px;
+  }
+  .swiper-slide {
+    opacity: 1; 
+    transition: opacity 1s ease-in-out; 
+`;
+
+export const SlideContainer = styled.div`
+  width: 100%;
+  height: 432px;
+  display: flex;
+  flex-direction: column;
+  // position: absolute;
+  bottom: 30px;
+  left: 0;
+  gap: 30px;
+  align-items: center;
+  white-space: nowrap;
+  justify-content: flex-end;
+  position: relative;
+  color: white;
+  text-align: center;
+  padding: 20px;
+
+  .TitleBackground {
+    position: absolute;
+    bottom: -250px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100vw;
+    height: 500px;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, black 10%);
+
+    z-index: 1;
+    
+`;
+
+export const SlideTitle = styled.h2`
+  font-size: 32px;
+  font-weight: 800;
+  position: absolute;
+  z-index: 10;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 150px;
+
+  .LastTitle {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    z-index: 10;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: -80px;
+    .bold {
+      position: absolute;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 34px;
+      font-family: metrobarat;
+      font-size: 74px;
+      letter-spacing: 3px;
+      font-weight: 700;
+    }
+  }
+`;
+
+export const SlideSubtitle = styled.p`
+  font-size: 20px;
+  font-weight: 700;
+  color: #a8a9ad;
+  margin-bottom: 30px;
+  position: absolute;
+  z-index: 100;
+
+  .highlight {
+    color: #06dbbf;
+    font-weight: 700;
+  }
+`;
+
+export const ButtonWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+
+  .main-btn {
+    width: 346px;
+    height: 52px;
+    background: #06dbbf;
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    position: absolute;
+    bottom: 100px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+  }
+
+  .sub-btn {
+    width: 346px;
+    height: 52px;
+    background: none;
+    color: white;
+    font-weight: bold;
+    border: 1px solid white;
+    border-radius: 8px;
+    cursor: pointer;
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+  }
+`;
+
+export const ImgContainer = styled.div`
+  display: grid;
+  // grid-template-rows: repeat(0, auto);
+  grid-template-columns: repeat(6, auto);
+  gap: 14px;
+  justify-content: center;
+  align-items: center;
+  width: fit-content;
+  margin: 0 0;
+  overflow: visible;
+  position: absolute;
+  top: 70px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 0;
+  // background-color: #1b1b1b;
+  .slide1card {
+    min-width: 100px;
+    min-height: 144px;
+    width: auto;
+    height: auto;
+    max-height: 160px;
+    object-fit: contain;
+    overflow: visible;
+  }
+`;
+
+export const LiveImgContainer = styled.div`
+  display: flex;
+  position: absolute;
+  top: -200px;
+  left: 0;
+  width: 100%;
+  gap: 10px;
+  white-space: nowrap;
+  overflow: visible;
+
+  .live-slide {
+    width: 700px;
+    height: 744px;
+    object-fit: contain;
   }
 `;
