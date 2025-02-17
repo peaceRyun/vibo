@@ -46,6 +46,7 @@ import ProfileDropdown from './ProfileDropdown';
 import { HeaderContainer, Logo, LeftSection, MobileMenuIcon, MobileMenu, NavItem, RightContainer } from './style';
 import { Link } from 'react-router-dom'; // 'react-router' → 'react-router-dom'으로 변경
 import { FaBars } from 'react-icons/fa';
+import { IoMdMore } from 'react-icons/io';
 
 const Header = () => {
   const [isSearchOpen, setSearchOpen] = useState(false);
@@ -76,10 +77,10 @@ const Header = () => {
             onProfileClick={toggleProfileDropdown}
             toggleMobileMenu={toggleMobileMenu}
           />
-
-          <MobileMenuIcon onClick={toggleMobileMenu}>
-            <FaBars />
-          </MobileMenuIcon>
+          {/* 더보기 메뉴 별로여서 일단 숨김.. */}
+          {/* <MobileMenuIcon onClick={toggleMobileMenu}>
+            <IoMdMore />
+          </MobileMenuIcon> */}
         </RightContainer>
       )}
 

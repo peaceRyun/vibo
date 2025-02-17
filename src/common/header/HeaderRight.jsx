@@ -40,16 +40,15 @@ const HeaderRight = () => {
 
   return (
     <RightContainer>
-      {/* 프로필 버튼 */}
-      <div ref={profileRef}>
-        <ProfileLogo onClick={togglesProfile} />
-        {isProfileOpen && <ProfileDropdown onClose={() => setIsProfileOpen(false)} />}
-      </div>
-
       {/* 검색 아이콘 OR 닫기 아이콘 */}
       <div ref={searchRef}>
         {isSearchOpen ? <CloseIcon onClick={toggleSearch} /> : <SearchIcon onClick={toggleSearch} />}
         {isSearchOpen && <Dropdown onClose={() => setIsSearchOpen(false)} />}
+      </div>
+      {/* 프로필 버튼 */}
+      <div ref={profileRef}>
+        <ProfileLogo onClick={togglesProfile} />
+        {isProfileOpen && <ProfileDropdown onClose={() => setIsProfileOpen(false)} />}
       </div>
     </RightContainer>
   );

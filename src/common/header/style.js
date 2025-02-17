@@ -350,14 +350,15 @@ export const LogOut = styled.div`
 // 모바일 전용 추가
 
 export const MobileMenuIcon = styled.div`
-  display: none;
+  /* display: none; */
   cursor: pointer;
-  font-size: 2rem;
-  color: #07ffe6;
+  font-size: 2.5rem;
+  color: white;
+  height: 43px;
 
-  @media (max-width: 590px) {
+  /* @media (max-width: 590px) {
     display: block;
-  }
+  } */
 `;
 
 export const MobileMenu = styled.div`
