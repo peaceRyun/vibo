@@ -4,7 +4,7 @@ import { useParams } from 'react-router';
 import { getTVReviews, getTVseries } from '../../store/modules/getThunk';
 
 import PlayBanner from '../../components/contents/PlayBanner';
-import ContDetail from '../../components/contents/ContDetail';
+// import ContDetail from '../../components/contents/ContDetail';
 import EpList from '../../components/contents/EpList';
 import ReList from '../../components/contents/ReList';
 import ReviewList from '../../components/contents/ReviewList';
@@ -19,6 +19,7 @@ import {
   TabContainer,
 } from '../../components/contents/style';
 import MobileReItem from '../../components/contents/MobileReItem';
+// 라이브러리 새로 설치해봄
 import { useMediaQuery } from 'react-responsive';
 import EpListMobile from '../../components/contents/EpListMobile';
 
@@ -37,7 +38,6 @@ const ContentDetail = () => {
   return (
     <>
       <PageWrapper>
-        {/* 📌 모바일에서 PlayBanner를 최상단으로 이동 */}
         <PlayBannerWrapper className="mobile-only">
           <PlayBanner />
         </PlayBannerWrapper>
@@ -47,13 +47,7 @@ const ContentDetail = () => {
           $position="relative"
           $gap={isMobile ? '20px' : '30px'}
           $padding={isMobile ? '0 16px' : '0 50px'}
-          // $gap="30px"
-          // $padding="0 50px"
-          // $mobilePadding="0 16px"
-          // $mobileGap="20px"
         >
-          {/* 📌 PC에서만 PlayBanner 표시 */}
-          {/* {!isMobile && <PlayBanner />} */}
           <div className="pc-only">
             <PlayBanner />
           </div>

@@ -11,7 +11,7 @@ const MobileReItem = () => {
 
   return (
     <MReitemContainer>
-      <h2>비슷한 콘텐츠</h2>
+      {/* <h2>비슷한 콘텐츠</h2> */}
       <ContentWrapper>
         {contentList.map((content, index) => (
           <ContentCard key={index}>
