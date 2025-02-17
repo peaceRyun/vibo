@@ -72,6 +72,9 @@ export const PBuiWrap = styled.div`
   left: 0;
   width: 90%;
   margin: 0px 50px 63px;
+  @media (max-width: 1024px) {
+    display: none;
+  }
 `;
 
 export const ItemWrap = styled.div`
@@ -188,6 +191,9 @@ export const H2 = styled.h2`
   font-size: 40px;
   font-weight: 700;
   line-height: 100%;
+  @media (max-width: 1024px) {
+    display: none;
+  }
 `;
 
 export const H3 = styled.h3`
@@ -341,8 +347,6 @@ export const ListWrapper = styled.div`
   @media (max-width: 590px) {
     margin-top: 20px;
   }
-  /* @media (max-width: 590px) {
-    flex-direction: column-reverse; /* 모바일에서 순서 바꾸기 */
 `;
 
 export const PlayBannerWrapper = styled.div`
@@ -392,9 +396,6 @@ export const Flex = styled.div`
   border-top: ${(props) => props.$borderTop};
   white-space: ${(props) => props.$whiteSpace};
   font-size: ${(props) => props.$fontSize};
-  /* @media (max-width: 1024px) {
-    display: none;
-  } */
 `;
 
 export const PcContainer = styled.div``;
@@ -414,6 +415,8 @@ export const FlexMobile = styled.div`
   display: flex;
   width: auto;
   justify-content: space-between;
+  align-items: center;
+  gap: 10px;
 
   /* @media (max-width: 590px) {
     display: flex;
@@ -599,6 +602,12 @@ export const SeasonInfo = styled.p`
   color: #888;
 `;
 
+export const SeasonTitle = styled.div`
+  font-size: 30px;
+  font-weight: 600;
+  line-height: 100%;
+`;
+
 export const EpisodeInfo = styled.p`
   font-size: 18px;
   font-weight: bold;
@@ -663,32 +672,65 @@ export const Description = styled.div`
 export const IconSection = styled.div`
   display: flex;
   gap: 16px;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
 `;
 
-export const LikeIcon = styled.button`
-  background: none;
-  color: #1db954;
-  border: none;
-  font-size: 16px;
+export const LikeIcon = styled.div`
+  img {
+    width: 30px;
+  }
+  p {
+    color: white;
+    margin-top: 6px;
+    font-size: 12px;
+  }
 `;
 
 export const RatingIcon = styled.p`
-  font-size: 14px;
-  color: #888;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  p {
+    color: white;
+    margin-top: 6px;
+    font-size: 12px;
+  }
 `;
 
-export const ShareIcon = styled.button`
-  background: none;
-  color: #1db954;
-  border: none;
-  font-size: 16px;
+export const RatingNumber = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  h2 {
+    font-size: 16px;
+  }
+  span {
+    font-size: 12px;
+  }
 `;
 
-export const DownloadButton = styled.button`
-  background: none;
-  color: #1db954;
-  border: none;
-  font-size: 16px;
+export const ShareIcon = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  p {
+    color: white;
+    margin-top: 6px;
+    font-size: 12px;
+  }
+`;
+
+export const DownloadButton = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  p {
+    color: white;
+    margin-top: 6px;
+    font-size: 12px;
+  }
 `;
 
 export const ProgressBar = styled.progress`
@@ -722,4 +764,18 @@ export const PlayBar = styled.div`
   align-items: center;
 
   /* flexdirection="row" justifycontent="spacebetween" alignitem="center" */
+`;
+
+export const EpMobileText = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+`;
+
+export const EpMobileTitle = styled.div`
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
 `;

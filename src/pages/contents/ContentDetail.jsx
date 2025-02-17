@@ -105,9 +105,10 @@ import ReviewList from '../../components/contents/ReviewList';
 import ContDetail from '../../components/contents/ContDetail';
 import ContMoreDetail from '../../components/contents/ContMoreDetail';
 import EpListMobile from '../../components/contents/EpListMobile';
-import EpItemMobile from '../../components/contents/EpItemMobile';
+
 import ContMobile from '../../components/contents/ContMobile';
 import MobileReItem from '../../components/contents/MobileReitem';
+
 // 콘텐츠 상세
 const ContentDetail = () => {
   const dispatch = useDispatch();
@@ -154,7 +155,7 @@ const ContentDetail = () => {
       {/* 모바일버전 */}
       {isMobile && (
         <MobileInner>
-          <div className="pc-only">
+          <div>
             <PlayBanner />
           </div>
           <ContMobile />
@@ -170,6 +171,8 @@ const ContentDetail = () => {
           {/* 탭 활성화해야함 */}
           {activeTab === 'episodes' && <EpListMobile />}
           {activeTab === 'similar' && <MobileReItem />}
+          <ReviewList />
+          {/* 리뷰 내역 입력 후 리스트 보이게? */}
         </MobileInner>
       )}
       {/* // {activeTab === 'episodes' ? <EpListMobile /> : <MobileReItem />} */}

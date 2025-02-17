@@ -1,6 +1,6 @@
 // 에피소드 정보
 import { FiDownload } from 'react-icons/fi';
-import { EpItemContImg, Flex, H4, P, Span } from './style';
+import { EpItemContImg, EpMobileText, EpMobileTitle, Flex, H4, P, Span } from './style';
 import { useState } from 'react';
 
 // 시리즈 한정 에피소드
@@ -14,17 +14,17 @@ const EpItemMobile = () => {
           src="/contentdetail/sample/EpItemImgSample.png"
           alt="에피회차별썸네일샘플"
         />
-        <Flex $flex-direction="row" $width="100%" $justify-content="space-between">
-          <Flex $flex-direction="column" $padding="0 10px" $gap="10px" $width="100%">
+        <EpMobileTitle>
+          <EpMobileText>
             <H4 $fontSize="15px" $fontWeight="700">
               애인있어요
             </H4>
             <Span $fontSize="15px" $whiteSpace="nowrap">
               52분
             </Span>
-          </Flex>
+          </EpMobileText>
           <FiDownload size={25} />
-        </Flex>
+        </EpMobileTitle>
       </Flex>
       <P>
         아직도 넌 혼잔거니 물어오네요. 난 그저 웃어요. 사랑하고있죠. 사랑하는 사람 있어요. 그대는 내가 안쓰러운건가봐,
