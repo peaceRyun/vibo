@@ -306,35 +306,108 @@ export const getTVReviews = createAsyncThunk('reviews/getTvReviews', async (tvId
 //메인홈 요일별 컴포넌트
 export const getAiringToday = createAsyncThunk('content/getAiringToday', async (_, { rejectWithValue }) => {
     try {
-        const response = await axios.get('https://api.themoviedb.org/3/tv/airing_today', {
-            params: {
-                language: 'ko-KR',
-                page: '1',
-            },
-            headers: {
-                accept: 'application/json',
-                Authorization:
-                    'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJkZGY2NTIxYzQzYzJlMDNmNTlkMjc2N2YxMDlhYWFhNCIsIm5iZiI6MTczNzUxMDE4NS4yNjIsInN1YiI6IjY3OTA0ZDI5MmQ2MWMzM2U2M2RmZTVlNiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ._QJjWVEDYEcIfVZtQRYG0JSRb22Dit3HopPsNm8AILE',
-            },
-        });
+        // 이번 주의 시작일과 종료일 계산
+        const today = new Date();
+        const startOfWeek = new Date(today);
+        startOfWeek.setDate(today.getDate() - today.getDay());
+        const endOfWeek = new Date(startOfWeek);
+        endOfWeek.setDate(startOfWeek.getDate() + 6);
+
+        let allShows = [];
+        let page = 1;
+
+        while (page <= 5) {
+            // 페이지 수 줄임
+            try {
+                const response = await axios.get('https://api.themoviedb.org/3/tv/on_the_air', {
+                    params: {
+                        language: 'ko-KR',
+                        page: page.toString(),
+                    },
+                    headers: {
+                        accept: 'application/json',
+                        Authorization:
+                            'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJkZGY2NTIxYzQzYzJlMDNmNTlkMjc2N2YxMDlhYWFhNCIsIm5iZiI6MTczNzUxMDE4NS4yNjIsInN1YiI6IjY3OTA0ZDI5MmQ2MWMzM2U2M2RmZTVlNiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ._QJjWVEDYEcIfVZtQRYG0JSRb22Dit3HopPsNm8AILE',
+                    },
+                });
+
+                const showsWithDetails = await Promise.all(
+                    response.data.results
+                        .filter((show) => show.poster_path)
+                        .map(async (show) => {
+                            try {
+                                const detailResponse = await axios.get(`https://api.themoviedb.org/3/tv/${show.id}`, {
+                                    params: {
+                                        language: 'ko-KR',
+                                    },
+                                    headers: {
+                                        accept: 'application/json',
+                                        Authorization:
+                                            'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJkZGY2NTIxYzQzYzJlMDNmNTlkMjc2N2YxMDlhYWFhNCIsIm5iZiI6MTczNzUxMDE4NS4yNjIsInN1YiI6IjY3OTA0ZDI5MmQ2MWMzM2U2M2RmZTVlNiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ._QJjWVEDYEcIfVZtQRYG0JSRb22Dit3HopPsNm8AILE',
+                                    },
+                                });
+
+                                if (detailResponse.data.next_episode_to_air) {
+                                    const nextAirDate = new Date(detailResponse.data.next_episode_to_air.air_date);
+                                    if (nextAirDate >= startOfWeek && nextAirDate <= endOfWeek) {
+                                        return {
+                                            ...show,
+                                            next_air_date: detailResponse.data.next_episode_to_air.air_date,
+                                        };
+                                    }
+                                }
+                                return null;
+                            } catch (err) {
+                                console.error(`Error fetching show details: ${err.message}`);
+                                return null;
+                            }
+                        })
+                );
+
+                const validShows = showsWithDetails.filter((show) => show !== null);
+                allShows = [...allShows, ...validShows];
+
+                if (!response.data.results.length) {
+                    break;
+                }
+
+                page++;
+            } catch (err) {
+                console.error(`Error fetching page ${page}: ${err.message}`);
+                break;
+            }
+        }
 
         // 요일별로 데이터 그룹화
-        const shows = response.data.results;
-        const groupedByDay = shows.reduce((acc, show) => {
-            const airDate = new Date(show.first_air_date);
-            const day = airDate.getDay(); // 0: 일요일, 1: 월요일, ...
+        const groupedByDay = allShows.reduce((acc, show) => {
+            const airDate = new Date(show.next_air_date);
+            const day = airDate.getDay();
             const koreanDays = ['일', '월', '화', '수', '목', '금', '토'];
             const koreanDay = koreanDays[day];
 
             if (!acc[koreanDay]) {
                 acc[koreanDay] = [];
             }
-            acc[koreanDay].push(show);
+
+            acc[koreanDay].push({
+                ...show,
+                airDate: show.next_air_date,
+                dayOfWeek: koreanDay,
+            });
+
             return acc;
         }, {});
 
-        return groupedByDay;
-    } catch (error) {
-        return rejectWithValue(error.message);
+        // 각 요일별 데이터 정렬 및 제한
+        const finalGroupedByDay = {};
+        ['일', '월', '화', '수', '목', '금', '토'].forEach((day) => {
+            finalGroupedByDay[day] = (groupedByDay[day] || [])
+                .sort((a, b) => new Date(a.next_air_date) - new Date(b.next_air_date))
+                .slice(0, 10);
+        });
+
+        return finalGroupedByDay;
+    } catch (err) {
+        return rejectWithValue(err.message);
     }
 });

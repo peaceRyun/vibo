@@ -5,6 +5,7 @@ const initialState = {
     weeklyContent: {},
     loading: false,
     error: null,
+    isComplete: false,
 };
 
 export const contentSlice = createSlice({
@@ -16,14 +17,17 @@ export const contentSlice = createSlice({
             .addCase(getAiringToday.pending, (state) => {
                 state.loading = true;
                 state.error = null;
+                state.isComplete = false;
             })
             .addCase(getAiringToday.fulfilled, (state, action) => {
                 state.loading = false;
                 state.weeklyContent = action.payload;
+                state.isComplete = true;
             })
             .addCase(getAiringToday.rejected, (state, action) => {
                 state.loading = false;
                 state.error = action.payload;
+                state.isComplete = false;
             });
     },
 });
