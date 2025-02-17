@@ -23,7 +23,6 @@ const LiveItem = ({ videoUrl }) => {
       </IframeWrapper> */}
             <VideoWrapper>
                 <video
-                    controls
                     autoPlay
                     muted
                     loop
