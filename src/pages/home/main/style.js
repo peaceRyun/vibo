@@ -11,7 +11,7 @@ export const MainContainer = styled.div`
   flex-direction: column;
   gap: 60px;
 
-  @media (max-width: 480px) {
+  @media (max-width: 1024px) {
     padding: 30px;
   }
 `;
