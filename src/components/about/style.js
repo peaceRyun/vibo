@@ -509,12 +509,11 @@ export const AboutSwiperWrapper = styled.div`
     transition: all 0.3s ease;
   }
 
-  /* ✅ 활성화된 페이지네이션 bullet 길쭉하게 변경 */
   .swiper-pagination-bullet-active {
     background: #07ffe6;
     opacity: 1;
-    width: 24px; /* 길쭉한 모양 */
-    border-radius: 10px; /* pill 형태 */
+    width: 24px;
+    border-radius: 10px;
   }
 `;
 
@@ -608,24 +607,26 @@ export const ButtonWrapper = styled.div`
 
 export const ImgContainer = styled.div`
   display: grid;
-  // grid-template-rows: repeat(2, auto);
-  grid-template-columns: repeat(5, auto);
+  // grid-template-rows: repeat(0, auto);
+  grid-template-columns: repeat(6, auto);
   gap: 14px;
   justify-content: center;
   align-items: center;
   width: fit-content;
-  margin: 0 auto;
+  margin: 0 0;
   overflow: visible;
   position: absolute;
   top: -100px;
+  left: 50%;
+  transform: translateX(-50%);
   z-index: -1;
   .slide1card {
-    min-width: 100px; /* 최소 너비 유지 */
-    min-height: 144px; /* 최소 높이 유지 */
-    width: auto; /* 원본 크기 유지 */
+    min-width: 100px;
+    min-height: 144px;
+    width: auto;
     height: auto;
-    max-height: 160px; /* 최대 높이 설정 */
-    object-fit: contain; /* 이미지 비율 유지 */
+    max-height: 160px;
+    object-fit: contain;
     overflow: visible;
   }
 `;
