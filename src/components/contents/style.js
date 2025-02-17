@@ -566,7 +566,7 @@ export const TabButton = styled.button`
     transform: translateX(-50%);
     width: 100%;
     height: 4px;
-    background-color: ${(props) => (props.active ? '#00c8ff' : 'transparent')};
+    background-color: ${(props) => (props.active ? '#07FFE6' : 'transparent')};
     border-radius: 4px;
   }
 `;
