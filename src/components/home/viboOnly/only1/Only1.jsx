@@ -1,23 +1,47 @@
 import { Container, Poster, InfoSection, Title, Tags, Tag, Description, Flex, Label } from './style';
 
-const Only1 = () => {
+const Only1 = ({ content }) => {
+    if (!content) return null;
+
+    const getGenreName = (genreId) => {
+        const genreMap = {
+            28: '액션',
+            12: '모험',
+            16: '애니메이션',
+            35: '코미디',
+            80: '범죄',
+            99: '다큐멘터리',
+            18: '드라마',
+            10751: '가족',
+            14: '판타지',
+            36: '역사',
+            27: '공포',
+            10402: '음악',
+            9648: '미스터리',
+            10749: '로맨스',
+            878: 'SF',
+            10770: 'TV 영화',
+            53: '스릴러',
+            10752: '전쟁',
+            37: '서부',
+        };
+        return genreMap[genreId] || '기타';
+    };
+
     return (
         <Container>
-            <Poster src='/mainhome/sample/Only1Sample.png' alt='파묘' />
+            <Poster src={`https://image.tmdb.org/t/p/original${content.posterPath}`} alt={content.title} />
             <InfoSection>
                 <Flex $alignItems='flex-end' $gap='30px' $padding='20px 0'>
                     <Label>1</Label>
-                    <Title>파묘</Title>
+                    <Title>{content.title}</Title>
                 </Flex>
                 <Tags>
-                    <Tag>2025</Tag>
-                    <Tag>미스터리</Tag>
-                    <Tag>15세</Tag>
+                    <Tag>{content.releaseYear}</Tag>
+                    <Tag>{content.genres?.map((genreId) => getGenreName(genreId)).join(', ')}</Tag>
+                    <Tag>{content.adult ? '청소년 관람불가' : '전체 관람가'}</Tag>
                 </Tags>
-                <Description>
-                    미국 LA, 거액의 의뢰를 받은 무당 ‘화림’과 ‘봉길’은 기이한 병이 대물림되는 집안의 장소를 만난다.
-                    조상의 묘자리가 화근임을 알아챈 ‘화림’은 이장을 ...
-                </Description>
+                <Description>{content.overview}</Description>
             </InfoSection>
         </Container>
     );
