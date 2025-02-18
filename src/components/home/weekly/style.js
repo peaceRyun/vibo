@@ -7,13 +7,15 @@ export const WeeklyItemContainer = styled.div`
   border-radius: 0.5rem;
   position: relative;
   cursor: pointer;
+  transition: width 0.5s ease, height 0.5s ease;
+
   @media (max-width: 1024px) {
     width: 250px;
     height: 400px;
   }
   @media (max-width: 600px) {
-    width: 200px;
-    height: 300px;
+    width: 230px;
+    height: 350px;
   }
 `;
 

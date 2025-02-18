@@ -18,27 +18,26 @@ const DaySelect = ({ activeDay, setActiveDay }) => {
 };
 
 export default DaySelect;
+
 const DayContainer = styled.div`
   display: flex;
   justify-content: center;
-  gap: 15px;
-  padding: 15px 0;
+  gap: clamp(8px, 2vw, 15px); /* ✅ 반응형 간격 조정 */
+  padding: 10px;
 
   @media (max-width: 1024px) {
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
+    gap: 10px; /* 태블릿에서 버튼 간격 조정 */
   }
 `;
 
 const DayItem = styled.button`
-  width: 3.5rem;
-  height: 3.5rem;
+  width: clamp(50px, 3.5vw, 56px); /* ✅ 반응형 크기 조정 */
+  height: clamp(50px, 3.5vw, 56px);
   border-radius: 50%;
   border: 2px solid #a8a9ad;
   background-color: #333;
   color: white;
-  font-size: 1rem;
+  font-size: clamp(1rem, 1vw, 1rem); /* ✅ 반응형 폰트 크기 */
   font-weight: bold;
   display: flex;
   align-items: center;
@@ -58,34 +57,8 @@ const DayItem = styled.button`
     box-shadow: 0px 0px 15px rgba(7, 255, 230, 0.7);
   }
   @media (max-width: 1024px) {
-    width: 48px;
-    height: 48px;
-    font-size: 16px;
-  }
-  @media (max-width: 600px) {
-    width: 35px;
-    height: 35px;
-    font-size: 12px;
+    width: clamp(40px, 4vw, 45px);
+    height: clamp(40px, 4vw, 45px);
+    font-size: clamp(0.875rem, 1vw, 1.3rem);
   }
 `;
-
-// const DayContainer = styled.div`
-//   /* display: flex;
-//   border-radius: 0.25rem;
-//   border: 1px solid #a8a9ad; */
-//   display: flex;
-//   justify-content: center;
-//   gap: 15px;
-//   padding: 10px;
-// `;
-
-// const DayItem = styled.button`
-//   width: 5rem;
-//   height: 3.5rem;
-//   padding: 8px 12px;
-//   border: 1px solid var(#07ffe6);
-//   border-radius: 5px;
-//   background-color: ${({ className }) => (className === 'active' ? '#009C8C' : '#6C6D70')};
-//   color: ${({ className }) => (className === 'active' ? '#ffffff' : '#000000')};
-//   cursor: pointer;
-// `;
