@@ -50,7 +50,9 @@ const ContentDetail = () => {
                                 <EpList />
                                 <ReList />
                                 <ReviewList />
-                                <ContMoreDetail />
+                                <div id='cont-more-detail'>
+                                    <ContMoreDetail />
+                                </div>
                             </div>
                         </Flex>
                     </Inner>
