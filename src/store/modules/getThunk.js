@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-//영화 - 기본 정보 끌어오기
+//영화 - 기본 정보 끌어오기 thunk
 const options = {
     api_key: 'ddf6521c43c2e03f59d2767f109aaaa4',
     lenguage: 'ko-KR',
@@ -18,7 +18,7 @@ export const getMovie = createAsyncThunk('movie/getMovie', async () => {
     }
 });
 
-//영화 - 유튜브링크 가져오기
+//영화 - 유튜브링크 가져오기 thunk
 const videoOptions = {
     params: {},
     headers: {
@@ -49,7 +49,7 @@ export const getMovieVideos = createAsyncThunk(
     }
 );
 
-// 영화 - 리뷰 데이터 끌어오기
+// 영화 - 리뷰 데이터 끌어오기 thunk
 const reviewOptions = {
     params: {
         language: 'ko-KR',
@@ -92,7 +92,7 @@ export const getMovieReviews = createAsyncThunk('reviews/getMovieReviews', async
     }
 });
 
-//TV시리즈 - 기본정보
+//TV시리즈 - 기본정보 thunk
 const TVoptions = {
     params: {
         include_adult: 'false',
@@ -176,7 +176,7 @@ export const getTVseries = createAsyncThunk('TVseries/getTVseries', async (_, th
     }
 });
 
-//TV 시리즈 - 상세정보 가져오기
+//TV 시리즈 - 상세정보 가져오기 thunk
 export const getTVDetail = createAsyncThunk('TVDetail/getTVDetail', async (tvId, { rejectWithValue }) => {
     try {
         const response = await axios.get(`https://api.themoviedb.org/3/tv/${tvId}`, {
@@ -196,7 +196,7 @@ export const getTVDetail = createAsyncThunk('TVDetail/getTVDetail', async (tvId,
     }
 });
 
-//Tv시리즈 - 유튜브 링크 끌어오기
+//Tv시리즈 - 유튜브 링크 끌어오기 thunk
 export const getTVVideos = createAsyncThunk('player/getTVVideos', async (tvId = null, { rejectWithValue }) => {
     try {
         if (!tvId) {
@@ -256,7 +256,7 @@ export const getTVVideos = createAsyncThunk('player/getTVVideos', async (tvId = 
     }
 });
 
-//메인홈 요일별 컴포넌트
+//메인홈 요일별 thunk
 export const getAiringToday = createAsyncThunk('content/getAiringToday', async (_, { rejectWithValue }) => {
     try {
         // 이번 주의 시작일과 종료일 계산
@@ -365,7 +365,7 @@ export const getAiringToday = createAsyncThunk('content/getAiringToday', async (
     }
 });
 
-//바이보 TOP 5
+//바이보 TOP 5 thunk
 export const getTopRated = createAsyncThunk('topRated/getTopRated', async (_, { rejectWithValue }) => {
     try {
         const headers = {
@@ -411,6 +411,7 @@ export const getTopRated = createAsyncThunk('topRated/getTopRated', async (_, { 
     }
 });
 
+//검색 thunk
 const headers = {
     accept: 'application/json',
     Authorization:
@@ -444,4 +445,49 @@ export const searchMulti = createAsyncThunk('search/multi', async ({ query, page
     } catch (error) {
         return rejectWithValue(error.message);
     }
+});
+
+// 인기 영화 top10(실시간 인기 검색어 관련) thunk
+const api = axios.create({
+    baseURL: 'https://api.themoviedb.org/3',
+    headers: {
+        accept: 'application/json',
+        Authorization:
+            'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJkZGY2NTIxYzQzYzJlMDNmNTlkMjc2N2YxMDlhYWFhNCIsIm5iZiI6MTczNzUxMDE4NS4yNjIsInN1YiI6IjY3OTA0ZDI5MmQ2MWMzM2U2M2RmZTVlNiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ._QJjWVEDYEcIfVZtQRYG0JSRb22Dit3HopPsNm8AILE',
+    },
+});
+
+// getThunk.ts
+export const fetchPopularContentThunk = createAsyncThunk('content/fetchPopular', async () => {
+    // Fetch both movies and TV shows in parallel with Korean parameters
+    const [moviesResponse, tvResponse] = await Promise.all([
+        api.get('/movie/popular', {
+            params: {
+                language: 'ko-KR',
+                region: 'KR',
+            },
+        }),
+        api.get('/tv/popular', {
+            params: {
+                language: 'ko-KR',
+                region: 'KR',
+            },
+        }),
+    ]);
+
+    const movies = moviesResponse.data.results.map((movie) => ({
+        ...movie,
+        media_type: 'movie',
+        title: movie.title,
+        release_date: movie.release_date,
+    }));
+
+    const tvShows = tvResponse.data.results.map((show) => ({
+        ...show,
+        media_type: 'tv',
+        title: show.name,
+        release_date: show.first_air_date,
+    }));
+
+    return [...movies, ...tvShows].sort((a, b) => b.popularity - a.popularity).slice(0, 10);
 });
