@@ -22,7 +22,12 @@ const DayContainer = styled.div`
   display: flex;
   justify-content: center;
   gap: 15px;
-  padding: 10px;
+  padding: 15px 0;
+
+  @media (max-width: 480px) {
+    flex-direction: column;
+    align-items: center;
+  }
 `;
 
 const DayItem = styled.button`
@@ -50,6 +55,10 @@ const DayItem = styled.button`
     color: black;
     border-color: #07ffe6;
     box-shadow: 0px 0px 15px rgba(7, 255, 230, 0.7);
+  }
+  @media (max-width: 480px) {
+    width: 3rem;
+    height: 3rem;
   }
 `;
 

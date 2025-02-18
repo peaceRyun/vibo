@@ -23,34 +23,34 @@ import { getAiringToday, getTopRated, getTVseries } from '../../../store/modules
 const liveTitles = [{ id: '1', title: '실시간 인기 LIVE' }];
 
 const MainHome = () => {
-    const dispatch = useDispatch();
-    useEffect(() => {
-        dispatch(getTVseries());
-        dispatch(getAiringToday());
-        dispatch(getTopRated());
-    }, []);
-    return (
-        <MainContent>
-            <MainBanner />
-            <MainContainer>
-                <div>
-                    {liveTitles.map((section) => (
-                        <LiveList key={section.id} title={section.title} />
-                    ))}
-                </div>
-                {/* <WatchingList /> */}
-                <WeeklyList />
-                <RateList />
-                <GenreNav />
-                <AdBanner />
-                <CommonList />
-                <CommonList />
-                <CommonList />
-                <ViboOnly />
-            </MainContainer>
-            <MenuSection />
-        </MainContent>
-    );
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getTVseries());
+    dispatch(getAiringToday());
+    dispatch(getTopRated());
+  }, []);
+  return (
+    <MainContent>
+      <MainBanner />
+      <MainContainer>
+        <div>
+          {liveTitles.map((section) => (
+            <LiveList key={section.id} title={section.title} />
+          ))}
+        </div>
+        {/* <WatchingList /> */}
+        <WeeklyList />
+        <RateList />
+        <GenreNav />
+        <AdBanner />
+        <CommonList />
+        <CommonList />
+        <CommonList />
+        <ViboOnly />
+      </MainContainer>
+      <MenuSection />
+    </MainContent>
+  );
 };
 
 export default MainHome;

@@ -72,6 +72,9 @@ export const PBuiWrap = styled.div`
   left: 0;
   width: 90%;
   margin: 0px 50px 63px;
+  @media (max-width: 1024px) {
+    display: none;
+  }
 `;
 
 export const ItemWrap = styled.div`
@@ -143,7 +146,7 @@ export const FlexUl = styled.ul`
   width: ${(props) => props.$width || 'auto'};
 
   @media (max-width: 590px) {
-    gap: 10px;
+    gap: 20px;
   }
 `;
 
@@ -188,6 +191,9 @@ export const H2 = styled.h2`
   font-size: 40px;
   font-weight: 700;
   line-height: 100%;
+  @media (max-width: 1024px) {
+    display: none;
+  }
 `;
 
 export const H3 = styled.h3`
@@ -214,6 +220,10 @@ export const P = styled.p`
   -webkit-box-orient: vertical;
   -webkit-line-clamp: ${(props) => props.$lineClamp}; /* 원하는 줄 수 */
   overflow: hidden;
+
+  @media (max-width: 590px) {
+    padding: 10px 0;
+  }
 `;
 
 export const P28 = styled.p`
@@ -226,6 +236,12 @@ export const P20 = styled.p`
   font-size: 20px;
   font-weight: 400;
   text-align: start;
+
+  @media (max-width: 590px) {
+    font-size: 16px;
+    font-weight: 400;
+    text-align: center;
+  }
 `;
 
 export const ModalOverlay = styled.div`
@@ -283,8 +299,8 @@ export const EpItemContImg = styled.img`
   height: ${(props) => props.$height};
 
   @media (max-width: 590px) {
-    width: 120px; /* 📌 기존 150px에서 더 줄이기 */
-    height: 80px;
+    width: 150px; /* 📌 기존 150px에서 더 줄이기 */
+    height: 100px;
   }
   /* @media (max-width: 590px) {
     width: ${(props) => props.$mobileWidth || '150px'};
@@ -310,7 +326,7 @@ export const EpItemsWrap = styled.div`
 
   @media (max-width: 590px) {
     max-width: 100%;
-    padding: 10px;
+    /* padding: 10px; */
   }
 `;
 
@@ -331,8 +347,6 @@ export const ListWrapper = styled.div`
   @media (max-width: 590px) {
     margin-top: 20px;
   }
-  /* @media (max-width: 590px) {
-    flex-direction: column-reverse; /* 모바일에서 순서 바꾸기 */
 `;
 
 export const PlayBannerWrapper = styled.div`
@@ -382,21 +396,28 @@ export const Flex = styled.div`
   border-top: ${(props) => props.$borderTop};
   white-space: ${(props) => props.$whiteSpace};
   font-size: ${(props) => props.$fontSize};
-  /* 반응형추가 */
-  @media (max-width: 590px) {
-    flex-direction: column;
-    gap: ${(props) => props.$mobileGap || '20px'};
-    padding: ${(props) => props.$mobilePadding || '0 16px'};
-  }
+`;
+
+export const PcContainer = styled.div``;
+
+export const MobileInner = styled.div`
+  padding: 0 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 17px;
+`;
+
+export const FlexMobile = styled.div`
+  display: flex;
+  width: auto;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
 `;
 
 export const SwiperContainer = styled.div`
   width: 100%;
   overflow: hidden;
-
-  @media (max-width: 590px) {
-    padding: 0 10px; /* 📌 모바일에서는 좌우 여백 추가 */
-  }
 `;
 
 // ////////////모바일버전 비슷한 콘테츠 컴포넌트 스타일링
@@ -477,14 +498,14 @@ export const ContentWrapper = styled.div`
 export const ContentCard = styled.div`
   img {
     width: 100%;
-    border-radius: 10px;
+    border-radius: 5px;
   }
 `;
 
 // 사용자 리뷰 섹션
-export const ReviewsSection = styled.div`
-  margin-top: 20px;
-`;
+// export const ReviewsSection = styled.div`
+//   margin-top: 20px;
+// `;
 
 export const Review = styled.div`
   background: #222;
@@ -501,6 +522,9 @@ export const TabContainer = styled.div`
   /* border-radius: 8px; */
   /* margin-bottom: 10px; */
   position: relative;
+  @media (min-width: 1024px) {
+    display: none; // 화면이 768px 이하일 때 이 컴포넌트 숨기기
+  }
 `;
 
 export const TabButton = styled.button`
@@ -527,7 +551,7 @@ export const TabButton = styled.button`
     transform: translateX(-50%);
     width: 100%;
     height: 4px;
-    background-color: ${(props) => (props.active ? '#00c8ff' : 'transparent')};
+    background-color: ${(props) => (props.active ? '#07FFE6' : 'transparent')};
     border-radius: 4px;
   }
 `;
@@ -541,4 +565,211 @@ export const TabHeader = styled.div`
   border-bottom: 1px solid #444;
 `;
 
-// //////에피소드 모바일 버전 스타일링!!!
+// //////모바일 버전
+export const ContMobileContainer = styled.div`
+  /* padding: 20px; */
+  /* background-color: #000;
+  color: #fff; */
+`;
+
+export const Header = styled.div`
+  display: flex;
+  gap: 15px;
+  flex-direction: column;
+  margin-bottom: 16px;
+`;
+
+export const playbar = styled.div`
+  /* width: 100%;
+  background-color: red; */
+`;
+export const SeasonInfo = styled.p`
+  font-size: 14px;
+  color: #888;
+`;
+
+export const SeasonTitle = styled.div`
+  font-size: 30px;
+  font-weight: 600;
+  line-height: 100%;
+`;
+
+export const EpisodeInfo = styled.p`
+  font-size: 18px;
+  font-weight: bold;
+`;
+
+export const TimeRemaining = styled.p`
+  font-size: 12px;
+  color: #888;
+`;
+
+export const ButtonContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 16px;
+`;
+
+export const PlayMobileButton = styled.button`
+  width: 100%;
+  height: 50px;
+  padding: 8px 16px;
+  background-color: var(--primary-base);
+  color: var(--black);
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+`;
+
+export const SaveButton = styled.button`
+  width: 100%;
+  height: 50px;
+  padding: 8px 16px;
+  background-color: var(--gray-700);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+`;
+
+export const Content = styled.div`
+  margin-bottom: 16px;
+`;
+
+export const Description = styled.div`
+  margin-bottom: 16px;
+
+  h4 {
+    font-size: 13px;
+    color: #ddd;
+  }
+  p {
+    font-size: 10px;
+  }
+`;
+
+export const IconSection = styled.div`
+  display: flex;
+  gap: 16px;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+`;
+
+export const LikeIcon = styled.div`
+  img {
+    width: 30px;
+  }
+  p {
+    color: white;
+    margin-top: 6px;
+    font-size: 12px;
+  }
+`;
+
+export const RatingIcon = styled.p`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  p {
+    color: white;
+    margin-top: 6px;
+    font-size: 12px;
+  }
+`;
+
+export const RatingNumber = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  h2 {
+    font-size: 16px;
+  }
+  span {
+    font-size: 12px;
+  }
+`;
+
+export const ShareIcon = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  p {
+    color: white;
+    margin-top: 6px;
+    font-size: 12px;
+  }
+`;
+
+export const DownloadButton = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  p {
+    color: white;
+    margin-top: 6px;
+    font-size: 12px;
+  }
+`;
+
+export const ProgressBar = styled.progress`
+  width: 80%;
+  height: 6px;
+  -webkit-appearance: none;
+  appearance: none;
+  border-radius: 10px;
+  background-color: #444;
+
+  &::-webkit-progress-bar {
+    background-color: #444;
+    border-radius: 10px;
+  }
+
+  &::-webkit-progress-value {
+    background-color: var(--primary-base);
+    border-radius: 10px;
+  }
+
+  &::-moz-progress-bar {
+    background-color: var(--primary-base);
+    border-radius: 10px;
+  }
+`;
+
+export const PlayBar = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+  /* flexdirection="row" justifycontent="spacebetween" alignitem="center" */
+`;
+
+export const EpMobileText = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+`;
+
+export const EpMobileTitle = styled.div`
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 10px;
+`;
+
+export const EpMobileList = styled.div`
+  display: flex;
+  width: 100%;
+  gap: 10px;
+  flex-direction: row;
+  justify-content: space-between;
+`;
