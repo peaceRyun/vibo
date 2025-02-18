@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom'; // 추가!
-import { login } from '../../store/modules/memberSlice';
+import { useNavigate } from 'react-router-dom';
+import thunkUsers from '../../store/modules/getThunkUser';
 import {
     LoginContainer,
     Form,
@@ -20,7 +20,7 @@ const Login = () => {
     const [autoLogin, setAutoLogin] = useState(false);
     const isDisabled = userId.trim() === '' || password.trim() === '';
     const dispatch = useDispatch();
-    const navigate = useNavigate(); // 🔹 추가
+    const navigate = useNavigate();
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -30,10 +30,11 @@ const Login = () => {
             return;
         }
 
-        // Redux 로그인 액션 호출
-        dispatch(login({ userId, password, autoLogin })).then((result) => {
+        dispatch(thunkUsers.login({ userId, password, autoLogin })).then((result) => {
             if (result.payload?.success) {
-                navigate('/'); // ✅ 로그인 성공 시 루트('/')로 이동
+                navigate('/');
+            } else {
+                alert(result.payload?.message || '로그인 실패');
             }
         });
     };
@@ -82,7 +83,7 @@ const Login = () => {
                         <span>|</span>
                         <a href="/find-password">비밀번호 찾기</a>
                         <span>|</span>
-                        <a href="/signup">회원가입</a>
+                        <a href="/register">회원가입</a>
                     </StyledLinks>
                 </Fieldset>
             </Form>
