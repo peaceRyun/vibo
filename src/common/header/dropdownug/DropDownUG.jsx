@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchPopularContentThunk, searchMulti } from '../../../store/modules/getThunk';
+import { fetchGenresThunk, fetchPopularContentThunk, searchMulti } from '../../../store/modules/getThunk';
 import { searchActions } from '../../../store/modules/searchSlice';
 import {
     DropdownContainer,
@@ -20,9 +20,11 @@ const Dropdown = ({ onClose }) => {
     const { searchResults, status } = useSelector((state) => state.searchR);
     const [searchTerm, setSearchTerm] = useState('');
     const { popularContent } = useSelector((state) => state.popularR);
+    const { genres } = useSelector((state) => state.genreR);
 
     useEffect(() => {
         dispatch(fetchPopularContentThunk());
+        dispatch(fetchGenresThunk());
     }, []);
     // const dropdownRef = useRef(null);
 
@@ -119,10 +121,9 @@ const Dropdown = ({ onClose }) => {
                                 장르 바로가기 <ActionText>더보기</ActionText>
                             </h3>
                             <div className='keywords'>
-                                <span># 키워드</span>
-                                <span># 키워드</span>
-                                <span># 키워드</span>
-                                <span># 키워드</span>
+                                {genres.map((item) => (
+                                    <span key={item.id}># {item.name}</span>
+                                ))}
                             </div>
                         </div>
                     </div>

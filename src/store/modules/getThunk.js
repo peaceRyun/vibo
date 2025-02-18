@@ -489,3 +489,30 @@ export const fetchPopularContentThunk = createAsyncThunk('content/fetchPopular',
 
     return [...movies, ...tvShows].sort((a, b) => b.popularity - a.popularity).slice(0, 10);
 });
+
+//장르 4개 랜덤 thunk (검색창 장르 바로가기 관련)
+export const fetchGenresThunk = createAsyncThunk('genres/fetch', async () => {
+    const [movieGenres, tvGenres] = await Promise.all([
+        api.get('/genre/movie/list', {
+            params: {
+                language: 'ko-KR',
+            },
+        }),
+        api.get('/genre/tv/list', {
+            params: {
+                language: 'ko-KR',
+            },
+        }),
+    ]);
+
+    // 모든 장르를 하나의 배열로 합치고 중복 제거
+    const allGenres = [
+        ...new Map([...movieGenres.data.genres, ...tvGenres.data.genres].map((item) => [item.id, item])).values(),
+    ];
+
+    // 배열을 무작위로 섞기
+    const shuffledGenres = allGenres.sort(() => Math.random() - 0.5);
+
+    // 처음 4개만 반환
+    return shuffledGenres.slice(0, 4);
+});
