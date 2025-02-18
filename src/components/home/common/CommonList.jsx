@@ -5,33 +5,12 @@ import styled from 'styled-components';
 import { useNavigate } from 'react-router';
 import { useSelector } from 'react-redux';
 import CommonItem from './CommonItem';
-import { useEffect, useState } from 'react';
 
 export const CommonList = () => {
   const navigate = useNavigate();
   const onGo = () => {
     navigate('/contentlist');
   };
-  // const [slidesToShow, setSlidesToShow] = useState(6.3);
-  // const [isMobile, setIsMobile] = useState(window.innerWidth <= 1024);
-  // const adjustSlidesToShow = () => {
-  //   const width = window.innerWidth;
-  //   setIsMobile(width <= 1024);
-  //   if (width <= 490) {
-  //     setSlidesToShow(1.3);
-  //   } else {
-  //     setSlidesToShow(6.3);
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   adjustSlidesToShow();
-  //   window.addEventListener('resize', adjustSlidesToShow);
-  //   return () => {
-  //     window.removeEventListener('resize', adjustSlidesToShow);
-  //   };
-  // }, []);
-
   const { TVseriesData } = useSelector((state) => state.tvSeriesR);
 
   if (!TVseriesData) {
@@ -42,23 +21,27 @@ export const CommonList = () => {
       <Section>
         <CommonInfo>
           <CommonTitle>
-            XX님이
-            <br />
-            좋아할만 한<br />
-            예능
+            {`
+  XX님이
+  좋아할만 한
+  예능
+`}
             <VerticalText>TV</VerticalText>
           </CommonTitle>
           <MoreBtn onClick={onGo}>더보기</MoreBtn>
         </CommonInfo>
-
         <CommonSwiper
-          spaceBetween={30}
-          pagination={{ clickable: true }}
+          spaceBetween={30} /* 기본 간격 */
+          slidesPerView={5.5} /* 기본값 (데스크탑) */
           breakpoints={{
-            1024: { slidesPerView: 3.3 },
-            1600: { slidesPerView: 6.3 },
+            // 1280: { slidesPerView: 5.5, spaceBetween: 30 },
+            1024: { slidesPerView: 4.2, spaceBetween: 15 },
+            // 768: { slidesPerView: 2.5, spaceBetween: 20 },
+            // 600: { slidesPerView: 1.5, spaceBetween: 15 },
+            400: { slidesPerView: 2.2, spaceBetween: 10 },
           }}
         >
+          {/* modules={[Pagination]} */}
           {TVseriesData.map((content) => (
             <SwiperSlide key={content.id}>
               <CommonItem content={content} />
@@ -77,6 +60,10 @@ const Section = styled.section`
   /* align-items: center; */
   position: relative;
   // gap: 5px;
+
+  @media (max-width: 1024px) {
+    flex-direction: column;
+  }
 `;
 
 const VerticalText = styled.div`
@@ -84,37 +71,20 @@ const VerticalText = styled.div`
   left: 19.8%;
   top: 21%;
   transform: translateY(-50%) rotate(-270deg);
-  font-size: 80px;
+  font-size: clamp(50px, 6vw, 80px);
   font-weight: bold;
   color: #5e5e5e;
   letter-spacing: 5px;
-  @media (max-width: 1040px) {
-    display: none;
+  @media (max-width: 1024px) {
+    font-size: clamp(40px, 5vw, 60px);
+    left: 15%;
+    top: 30%;
   }
   @media (max-width: 600px) {
-    display: none;
+    font-size: clamp(30px, 4vw, 50px);
+    left: 10%;
+    top: 35%;
   }
-
-  /* @media (max-width: 1040px) {
-    position: absolute;
-    left: 80%;
-    top: 15%;
-    transform: translateY(-50%) rotate(-270deg);
-    font-size: 60px;
-    font-weight: bold;
-    color: #5e5e5e;
-    letter-spacing: 5px;
-  }
-  @media (max-width: 600px) {
-    position: absolute;
-    left: 34%;
-    top: 15%;
-    transform: translateY(-50%) rotate(-270deg);
-    font-size: 60px;
-    font-weight: bold;
-    color: #5e5e5e;
-    letter-spacing: 5px;
-  } */
 `;
 
 const CommonInfo = styled.div`
@@ -122,49 +92,50 @@ const CommonInfo = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-
   /* height: 443px; */
+  @media (max-width: 1024px) {
+    text-align: left;
+    white-space: normal;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 20px 0;
+  }
 `;
 
 const CommonTitle = styled.h3`
   color: white;
-  font-size: 32px;
+  font-size: clamp(24px, 2.5vw, 32px);
   font-weight: bold;
   line-height: 1.5;
   margin: 0;
-  @media (max-width: 1040px) {
-    font-size: 30px;
-  }
-  @media (max-width: 600px) {
-    font-size: 24px;
+  white-space: pre-line;
+
+  @media (max-width: 1024px) {
+    text-align: left;
+    white-space: normal;
   }
 `;
 
 const MoreBtn = styled.button`
   background-color: var(--primary-600);
   color: black;
-  font-size: 17px;
+  font-size: clamp(14px, 1.2vw, 17px);
   padding: 15px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  width: 155px;
+  width: clamp(120px, 10vw, 155px);
   height: 40px;
   font-weight: bold;
 
   &:hover {
     background-color: var(--primary-base);
   }
-
-  @media (max-width: 600px) {
-    font-size: 15px;
-    width: 110px;
-    height: 35px;
-  }
 `;
 
 const CommonSwiper = styled(Swiper)`
-  flex: 4;
+  flex: 3;
+  max-width: 100%;
   /* height: 443px; */
 
   .swiper-slide {
@@ -175,12 +146,6 @@ const CommonSwiper = styled(Swiper)`
     align-items: center;
     overflow: hidden;
     border-radius: 8px;
-  }
-
-  @media (max-width: 1040px) {
-    flex: 3;
-  }
-  @media (max-width: 600px) {
-    flex: 1;
+    /* min-width: 390px; */
   }
 `;

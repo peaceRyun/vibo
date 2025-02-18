@@ -7,12 +7,8 @@ export const CommonItemContainer = styled.div`
   height: 375px;
   border-radius: 0.5rem;
   overflow: hidden;
-  @media (max-width: 1040px) {
-    width: 300px;
-    height: 400px;
-  }
   @media (max-width: 600px) {
-    width: 200px;
+    width: 230px;
     height: 350px;
   }
 `;
