@@ -12,8 +12,10 @@ import {
     LoadingText,
     ActionText,
 } from './style';
+import { useNavigate } from 'react-router-dom';
 
 const Dropdown = ({ onClose }) => {
+    const navigate = useNavigate();
     const dispatch = useDispatch();
     const { searchResults, status } = useSelector((state) => state.searchR);
     const [searchTerm, setSearchTerm] = useState('');
@@ -55,6 +57,11 @@ const Dropdown = ({ onClose }) => {
             dispatch(searchActions.setQuery(value));
             dispatch(searchMulti({ query: value, page: 1 }));
         }
+    };
+
+    const handleItemClick = (id) => {
+        onClose();
+        navigate(`/detail/${id}`);
     };
 
     return (
@@ -144,7 +151,12 @@ const Dropdown = ({ onClose }) => {
                                     <ResultsGrid>
                                         <h3>시리즈</h3>
                                         {categorizedResults.tv.map((item) => (
-                                            <ResultItem key={item.id}>
+                                            <ResultItem
+                                                key={item.id}
+                                                onClick={() => {
+                                                    handleItemClick(item.id);
+                                                }}
+                                            >
                                                 <img
                                                     src={
                                                         item.poster_path

@@ -172,7 +172,7 @@ export const ResultItem = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-
+    cursor: pointer;
     img {
         width: 100%;
         height: auto;
