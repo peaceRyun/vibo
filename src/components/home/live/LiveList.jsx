@@ -40,7 +40,22 @@ const LiveList = ({ title }) => {
   return (
     <LiveContainer>
       <StyledTitle>{title}</StyledTitle>
-      <StyledSwiper slidesPerView={4.2} spaceBetween={16}>
+      <StyledSwiper
+        breakpoints={{
+          1024: {
+            slidesPerView: 4.2,
+            spaceBetween: 16,
+          },
+          600: {
+            slidesPerView: 2.2,
+            spaceBetween: 14,
+          },
+          0: {
+            slidesPerView: 1.2,
+            spaceBetween: 8,
+          },
+        }}
+      >
         {videoData.map((item) => (
           <SwiperSlide key={item.id}>
             <LiveItem videoData={item} />
@@ -48,6 +63,16 @@ const LiveList = ({ title }) => {
         ))}
       </StyledSwiper>
     </LiveContainer>
+    // <LiveContainer>
+    //   <StyledTitle>{title}</StyledTitle>
+    //   <StyledSwiper slidesPerView={4.2} spaceBetween={16}>
+    //     {videoData.map((item) => (
+    //       <SwiperSlide key={item.id}>
+    //         <LiveItem videoData={item} />
+    //       </SwiperSlide>
+    //     ))}
+    //   </StyledSwiper>
+    // </LiveContainer>
   );
 };
 
