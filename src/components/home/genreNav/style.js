@@ -5,14 +5,13 @@ export const GenreContainer = styled.div`
   grid-template-columns: repeat(4, 1fr);
   gap: 3rem 10px;
 
-  width: 1740px;
-
   @media (max-width: 1024px) {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     align-items: center;
     justify-items: center;
-    /* gap: 1rem 10px; */
+
+    gap: 1rem 10px;
   }
   @media (max-width: 600px) {
     display: grid;
