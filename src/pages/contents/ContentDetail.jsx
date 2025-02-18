@@ -4,7 +4,7 @@ import PlayBanner from '../../components/contents/PlayBanner';
 import ReList from '../../components/contents/ReList';
 import { Flex, Inner, MobileInner, PcContainer, TabButton, TabContainer } from '../../components/contents/style';
 import { useEffect, useState } from 'react';
-import { getTVDetail, getTVseries } from '../../store/modules/getThunk';
+import { getMovieContentRating, getTVContentRating, getTVDetail, getTVseries } from '../../store/modules/getThunk';
 import ReviewList from '../../components/contents/ReviewList';
 import ContDetail from '../../components/contents/ContDetail';
 import ContMoreDetail from '../../components/contents/ContMoreDetail';
@@ -20,6 +20,7 @@ const ContentDetail = ({ contentType }) => {
     const [isMobile, setIsMobile] = useState(window.innerWidth <= 1024);
     const isSeries = contentType === 'series';
     const { data, loading } = useSelector((state) => state.tvDetailR);
+    const { contentRating } = useSelector((state) => state.tvSeriesR);
 
     useEffect(() => {
         const handleResize = () => {
@@ -44,8 +45,10 @@ const ContentDetail = ({ contentType }) => {
         if (id) {
             if (contentType === 'series') {
                 dispatch(getTVDetail(id));
+                dispatch(getTVContentRating(id));
             } else if (contentType === 'movie') {
                 // dispatch(getMovieDetail(id));
+                dispatch(getMovieContentRating(id));
             }
         }
     }, [dispatch, id, contentType]);
@@ -73,7 +76,12 @@ const ContentDetail = ({ contentType }) => {
                                 <ReList contentType={contentType} />
                                 <ReviewList />
                                 <div id='cont-more-detail'>
-                                    <ContMoreDetail />
+                                    <ContMoreDetail
+                                        data={data}
+                                        loading={loading}
+                                        contentType={contentType}
+                                        contentRating={contentRating}
+                                    />
                                 </div>
                             </div>
                         </Flex>

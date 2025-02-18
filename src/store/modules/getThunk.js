@@ -595,3 +595,62 @@ export const getMovieRecommendations = createAsyncThunk('movies/getMovieRecommen
         return thunkAPI.rejectWithValue(error.message);
     }
 });
+
+// TV 시리즈 관람등급 가져오기
+export const getTVContentRating = createAsyncThunk('TVDetail/getTVContentRating', async (tvId, { rejectWithValue }) => {
+    try {
+        const response = await axios.get(`https://api.themoviedb.org/3/tv/${tvId}/content_ratings`, {
+            headers: {
+                accept: 'application/json',
+                Authorization:
+                    'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJkZGY2NTIxYzQzYzJlMDNmNTlkMjc2N2YxMDlhYWFhNCIsIm5iZiI6MTczNzUxMDE4NS4yNjIsInN1YiI6IjY3OTA0ZDI5MmQ2MWMzM2U2M2RmZTVlNiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ._QJjWVEDYEcIfVZtQRYG0JSRb22Dit3HopPsNm8AILE',
+            },
+        });
+
+        // 한국 관람등급 찾기
+        const krRating = response.data.results.find((rating) => rating.iso_3166_1 === 'KR');
+
+        // 한국 관람등급이 없으면 미국 관람등급 사용
+        const usRating = response.data.results.find((rating) => rating.iso_3166_1 === 'US');
+
+        return {
+            rating: krRating?.rating || usRating?.rating || '정보 없음',
+            iso_3166_1: krRating ? 'KR' : usRating ? 'US' : null,
+        };
+    } catch (error) {
+        return rejectWithValue(error.message);
+    }
+});
+
+// 영화 관람등급 가져오기
+export const getMovieContentRating = createAsyncThunk(
+    'movies/getMovieContentRating',
+    async (movieId, { rejectWithValue }) => {
+        try {
+            const response = await axios.get(`https://api.themoviedb.org/3/movie/${movieId}/release_dates`, {
+                headers: {
+                    accept: 'application/json',
+                    Authorization:
+                        'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJkZGY2NTIxYzQzYzJlMDNmNTlkMjc2N2YxMDlhYWFhNCIsIm5iZiI6MTczNzUxMDE4NS4yNjIsInN1YiI6IjY3OTA0ZDI5MmQ2MWMzM2U2M2RmZTVlNiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ._QJjWVEDYEcIfVZtQRYG0JSRb22Dit3HopPsNm8AILE',
+                },
+            });
+
+            // 한국 관람등급 찾기
+            const krRelease = response.data.results.find((release) => release.iso_3166_1 === 'KR');
+
+            // 한국 관람등급이 없으면 미국 관람등급 사용
+            const usRelease = response.data.results.find((release) => release.iso_3166_1 === 'US');
+
+            // certification 찾기
+            const krCertification = krRelease?.release_dates[0]?.certification;
+            const usCertification = usRelease?.release_dates[0]?.certification;
+
+            return {
+                rating: krCertification || usCertification || '정보 없음',
+                iso_3166_1: krRelease ? 'KR' : usRelease ? 'US' : null,
+            };
+        } catch (error) {
+            return rejectWithValue(error.message);
+        }
+    }
+);
