@@ -16,8 +16,6 @@ import ViboOnly from '../../../components/home/viboOnly/ViboOnly';
 import MenuSection from '../../../components/home/menubutton/MenuSection';
 import MainBanner from '../../../components/home/mainBanner/MainBanner';
 import { useDispatch } from 'react-redux';
-import { getTVseries } from '../../../store/modules/getThunk';
-import MobileOnly from '../../../components/home/viboOnly/MobileOnly';
 import { getAiringToday, getTVseries } from '../../../store/modules/getThunk';
 // import { LiveContainer } from '../live/style';
 // import { Container } from '../../../components/home/viboOnly/only1/style';
