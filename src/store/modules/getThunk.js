@@ -256,53 +256,6 @@ export const getTVVideos = createAsyncThunk('player/getTVVideos', async (tvId = 
     }
 });
 
-//TV시리즈 리뷰 끌어오기
-const reviewTVOptions = {
-    params: {
-        language: 'en-US',
-        page: '1',
-    },
-    headers: {
-        accept: 'application/json',
-        Authorization:
-            'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJkZGY2NTIxYzQzYzJlMDNmNTlkMjc2N2YxMDlhYWFhNCIsIm5iZiI6MTczNzUxMDE4NS4yNjIsInN1YiI6IjY3OTA0ZDI5MmQ2MWMzM2U2M2RmZTVlNiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ._QJjWVEDYEcIfVZtQRYG0JSRb22Dit3HopPsNm8AILE',
-    },
-};
-
-export const getTVReviews = createAsyncThunk('reviews/getTvReviews', async (tvId, { rejectWithValue }) => {
-    try {
-        let allReviews = [];
-        let page = 1;
-        let hasMorePages = true;
-
-        while (hasMorePages && allReviews.length < 20) {
-            // 20개 채우면 중단
-            const response = await axios.get(`https://api.themoviedb.org/3/tv/${tvId}/reviews`, {
-                ...reviewTVOptions,
-                params: { ...reviewTVOptions.params, page: page.toString() },
-            });
-
-            const { results, total_pages } = response.data;
-
-            // 내용이 있고 avatar_path가 있는 리뷰만 필터링
-            const validReviews = results.filter(
-                (review) => review.content && review.content.trim().length > 0 && review.author_details?.avatar_path
-            );
-
-            allReviews = [...allReviews, ...validReviews];
-
-            // 다음 페이지 확인
-            hasMorePages = page < total_pages && page < 5; // 최대 n페이지까지만 확인
-            page++;
-        }
-
-        // 최종적으로 20개로 제한
-        return allReviews.slice(0, 20);
-    } catch (error) {
-        return rejectWithValue(error.message);
-    }
-});
-
 //메인홈 요일별 컴포넌트
 export const getAiringToday = createAsyncThunk('content/getAiringToday', async (_, { rejectWithValue }) => {
     try {
