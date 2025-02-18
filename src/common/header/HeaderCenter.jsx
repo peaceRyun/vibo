@@ -5,7 +5,9 @@ const HeaderCenter = () => {
   return (
     <div>
       <HeaderContainer>
-        <Logo to="/">LOGO</Logo>
+        <Link to="/">
+          <Logo>VIBO</Logo>
+        </Link>
       </HeaderContainer>
     </div>
   );
@@ -14,7 +16,7 @@ const HeaderCenter = () => {
 export default HeaderCenter;
 const HeaderContainer = styled.header`
   width: 100%;
-  height: 60px;
+  height: 5rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -23,11 +25,21 @@ const HeaderContainer = styled.header`
   top: 0;
   left: 0;
   z-index: 1000;
+  @media (max-width: 1024px) {
+    height: 4rem;
+    padding: 15px;
+  }
 `;
 
 const Logo = styled(Link)`
-  font-size: 24px;
-  font-weight: bold;
-  color: white;
-  text-decoration: none;
+  font-size: 3.125rem;
+  font-family: 'metrobarat', sans-serif;
+  font-weight: 400;
+  background: linear-gradient(to right, #fff, #07ffe6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin: 0;
+  @media (max-width: 1024px) {
+    font-size: 1.8rem;
+  }
 `;
