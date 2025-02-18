@@ -19,7 +19,7 @@ const Dropdown = ({ onClose }) => {
     const dispatch = useDispatch();
     const { searchResults, status } = useSelector((state) => state.searchR);
     const [searchTerm, setSearchTerm] = useState('');
-    const dropdownRef = useRef(null);
+    // const dropdownRef = useRef(null);
 
     const categorizedResults = {
         movie: searchResults.filter((item) => item.mediaType === 'movie').slice(0, 10),
@@ -27,27 +27,29 @@ const Dropdown = ({ onClose }) => {
         person: searchResults.filter((item) => item.mediaType === 'person').slice(0, 10),
     };
 
-    useEffect(() => {
-        const handleClickOutside = (event) => {
-            if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-                onClose();
-            }
-        };
+    // 검색한 결과를 상세페이지로 클릭하고 연결되게 하는걸 이 코드가 막아서 주석처리 했습니다.
+    // useEffect(() => {
+    //     const handleClickOutside = (event) => {
+    //         if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+    //             onClose();
+    //         }
+    //     };
 
-        const handleEscKey = (event) => {
-            if (event.key === 'Escape') {
-                onClose();
-            }
-        };
+    //     const handleEscKey = (event) => {
+    //         if (event.key === 'Escape') {
+    //             onClose();
+    //         }
+    //     };
 
-        document.addEventListener('mousedown', handleClickOutside);
-        document.addEventListener('keydown', handleEscKey);
+    //     // capture: false로 설정하여 이벤트 버블링 단계에서 실행되도록 함
+    //     document.addEventListener('mousedown', handleClickOutside, { capture: false });
+    //     document.addEventListener('keydown', handleEscKey);
 
-        return () => {
-            document.removeEventListener('mousedown', handleClickOutside);
-            document.removeEventListener('keydown', handleEscKey);
-        };
-    }, [onClose]);
+    //     return () => {
+    //         document.removeEventListener('mousedown', handleClickOutside, { capture: false });
+    //         document.removeEventListener('keydown', handleEscKey);
+    //     };
+    // }, [onClose]);
 
     const handleSearch = (e) => {
         const value = e.target.value;
@@ -71,7 +73,7 @@ const Dropdown = ({ onClose }) => {
                 placeholder='제목, 인물 검색'
                 value={searchTerm}
                 onChange={handleSearch}
-                ref={dropdownRef}
+                // ref={dropdownRef}
             />
 
             {!searchTerm && (
@@ -177,7 +179,7 @@ const Dropdown = ({ onClose }) => {
                                     <ResultsGrid>
                                         <h3>영화</h3>
                                         {categorizedResults.movie.map((item) => (
-                                            <ResultItem key={item.id}>
+                                            <ResultItem key={item.id} onClick={() => handleItemClick(item.id)}>
                                                 <img
                                                     src={
                                                         item.poster_path
@@ -198,7 +200,7 @@ const Dropdown = ({ onClose }) => {
                                     <ResultsGrid>
                                         <h3>인물</h3>
                                         {categorizedResults.person.map((item) => (
-                                            <ResultItem key={item.id}>
+                                            <ResultItem key={item.id} onClick={() => handleItemClick(item.id)}>
                                                 <img
                                                     src={
                                                         item.profile_path
