@@ -35,8 +35,6 @@ const Button = styled.div`
     props.$isHovered ? 'linear-gradient(to bottom, var( --primary-base), var(--black))' : '#333'};
   color: ${(props) => (props.$isHovered ? 'var(--white)' : 'var(--gray-700)')};
   @media (max-width: 1024px) {
-    width: 200px;
-    height: 300px;
-    font-size: 20px;
+    display: none;
   }
 `;
