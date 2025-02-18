@@ -5,6 +5,8 @@ export const ViboContainer = styled.div`
   gap: 10px;
   justify-content: space-around;
   width: 1750px;
+  padding: 60px;
+
   @media (max-width: 1200px) {
     max-width: 1000px;
     gap: 5px;
@@ -64,18 +66,18 @@ export const MobileSlider = styled.div`
 `;
 
 export const MobileCard = styled.div`
-  background: #222;
+  background: black;
   border-radius: 16px;
   padding: 16px;
-  display: flex;
+  /* display: flex
+; */
   justify-content: center;
   align-items: center;
-  width: 90%;
-  max-width: 320px;
+  width: 100%;
+  max-height: 800px;
   margin: 0 auto;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
   transition: transform 0.3s ease-in-out;
-
   &:hover {
     transform: scale(1.05);
   }
@@ -95,6 +97,12 @@ export const Poster = styled.img`
   border-radius: 12px;
   object-fit: cover;
   margin-bottom: 12px;
+`;
+
+export const MobilePoster = styled.img`
+  width: 100%;
+  height: 100px;
+  border-radius: 12px;
 `;
 
 export const InfoSection = styled.div`

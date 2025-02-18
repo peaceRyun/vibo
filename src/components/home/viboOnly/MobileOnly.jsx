@@ -6,6 +6,7 @@ import {
   Description,
   InfoSection,
   MobileCard,
+  MobilePoster,
   MobileSlider,
   MobileTitle,
   Poster,
@@ -86,13 +87,13 @@ const MobileOnly = ({ content }) => {
   return (
     <>
       <MobileTitle>
-        <h3>VIBO TOP 5</h3>
+        {/* <h3>VIBO TOP 5</h3> */}
         {/* <Underline2 /> */}
       </MobileTitle>
 
       <MobileSlider>
         <Swiper
-          spaceBetween={20}
+          spaceBetween={30}
           breakpoints={{
             768: { slidesPerView: 2 },
             1024: { slidesPerView: 3 },
@@ -103,7 +104,7 @@ const MobileOnly = ({ content }) => {
             <SwiperSlide key={item.id}>
               <MobileCard>
                 <CardContainer>
-                  <Poster
+                  <MobilePoster
                     src={
                       item.posterPath ? `https://image.tmdb.org/t/p/original${item.posterPath}` : '/fallback-image.png'
                     }
@@ -116,7 +117,13 @@ const MobileOnly = ({ content }) => {
                     </Flex>
                     <Tags>
                       <Tag>{item.releaseYear}</Tag>
-                      <Tag>{item.genres?.map((genreId) => getGenreName(genreId)).join(', ')}</Tag>
+                      <Tag>
+                        {item.genres
+                          ?.slice(0, 2)
+                          .map((genreId) => getGenreName(genreId))
+                          .join(', ') || '장르 없음'}
+                      </Tag>
+
                       <Tag>{item.adult ? '청소년 관람불가' : '전체 관람가'}</Tag>
                     </Tags>
                     <Description>{item.overview}</Description>

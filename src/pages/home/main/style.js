@@ -10,7 +10,7 @@ export const MainContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 60px;
-
+  /* 
   @media (max-width: 1200px) {
     padding: 0 40px;
     gap: 40px;
@@ -24,16 +24,16 @@ export const MainContainer = styled.div`
   @media (max-width: 768px) {
     padding: 0 20px;
     gap: 20px;
-  }
+  } */
 `;
 
 export const MainContent = styled.div`
   padding-top: 100px;
-  @media (max-width: 1024px) {
+  /* @media (max-width: 1024px) {
     padding-top: 80px;
   }
 
   @media (max-width: 768px) {
     padding-top: 60px;
-  }
+  } */
 `;
