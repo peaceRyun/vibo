@@ -45,8 +45,9 @@ import Dropdown from './Dropdown';
 import ProfileDropdown from './ProfileDropdown';
 import { HeaderContainer, Logo, LeftSection, MobileMenuIcon, MobileMenu, NavItem, RightContainer } from './style';
 import { Link } from 'react-router-dom'; // 'react-router' → 'react-router-dom'으로 변경
-import { FaBars } from 'react-icons/fa';
-import { IoMdMore } from 'react-icons/io';
+// import { FaBars } from 'react-icons/fa';
+// import { IoMdMore } from 'react-icons/io';
+import HeaderCenter from './HeaderCenter';
 
 const Header = () => {
   const [isSearchOpen, setSearchOpen] = useState(false);
@@ -56,7 +57,8 @@ const Header = () => {
 
   const hideNavPages = ['/profilesforedit', '/profileinfoedit', '/profileselect', '/profileforedit'];
   const isNavHidden = hideNavPages.includes(location.pathname);
-  const isAboutPage = location.pathname === '/aboutpage';
+
+  const isAboutPage = ['/about', '/register', '/login'].includes(location.pathname);
 
   const toggleSearchDropdown = () => setSearchOpen((prev) => !prev);
   const toggleProfileDropdown = () => setProfileOpen((prev) => !prev);

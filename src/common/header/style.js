@@ -20,7 +20,7 @@ export const HeaderContainer = styled.header`
   background-color: rgba(0, 0, 0, 0.7);
   inset: -1px 0px 0px;
 
-  @media (max-width: 590px) {
+  @media (max-width: 1024px) {
     height: 4rem;
     padding: 15px;
   }
