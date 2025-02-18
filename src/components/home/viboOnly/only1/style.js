@@ -73,6 +73,15 @@ export const Flex = styled.div`
   border-top: ${(props) => props.$borderTop};
   white-space: ${(props) => props.$whiteSpace};
   font-size: ${(props) => props.$fontSize};
+
+  @media (max-width: 1024px) {
+    display: flex;
+    align-items: flex-end;
+    gap: 10px;
+    padding: 20px 0;
+    width: 100%;
+    justify-content: space-between;
+  }
 `;
 
 export const Label = styled.span`

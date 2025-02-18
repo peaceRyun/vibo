@@ -9,13 +9,13 @@ export const BannerWrapper = styled.div`
   overflow: hidden;
   position: relative;
   @media (max-width: 1024px) {
-    width: 1024px;
-    height: 20rem;
+    width: 100%;
+    height: 25rem;
   }
 
   @media (max-width: 600px) {
-    width: 390px;
-    height: 15rem;
+    width: 100%;
+    height: 20rem;
   }
 `;
 
