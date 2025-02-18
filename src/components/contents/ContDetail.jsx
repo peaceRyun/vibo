@@ -1,26 +1,18 @@
-import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
-import { getTVDetail } from '../../store/modules/getThunk';
 import { BadgeBlank } from '../../pages/contents/style';
 import { Flex, FlexUl } from './style';
 
-const ContDetail = ({ onMoreClick }) => {
-    const dispatch = useDispatch();
-    const { id } = useParams();
-    const { data, loading } = useSelector((state) => state.tvDetailR);
-
-    useEffect(() => {
-        if (id) {
-            dispatch(getTVDetail(id));
-        }
-    }, [dispatch, id]);
-
+const ContDetail = ({ data, loading, contentType, onMoreClick }) => {
     if (loading) return <div>Loading...</div>;
     if (!data) return null;
 
-    const year = new Date(data.first_air_date).getFullYear();
-    const episodeCount = data.number_of_episodes;
+    // contentType에 따라 다른 데이터 포맷 처리
+    const year =
+        contentType === 'series'
+            ? new Date(data.first_air_date).getFullYear()
+            : new Date(data.release_date).getFullYear();
+
+    const episodeCount = contentType === 'series' ? data.number_of_episodes : null;
+    const rating = data.vote_average ? data.vote_average.toFixed(1) : 'N/A';
     const cast =
         data.credits?.cast
             ?.slice(0, 3)
@@ -29,12 +21,11 @@ const ContDetail = ({ onMoreClick }) => {
     const genres = data.genres?.map((genre) => genre.name).join(', ') || '정보 없음';
 
     const handleMoreClick = () => {
-        // ContMoreDetail 요소로 스크롤
         const moreDetailElement = document.getElementById('cont-more-detail');
         if (moreDetailElement) {
             moreDetailElement.scrollIntoView({ behavior: 'smooth' });
         }
-        onMoreClick();
+        onMoreClick?.();
     };
 
     return (
@@ -43,7 +34,7 @@ const ContDetail = ({ onMoreClick }) => {
                 <Flex $flexDirection='column' $gap='15px'>
                     <Flex $gap='15px' $alignItems='center'>
                         <span>{year}년</span>
-                        <span>에피소드 {episodeCount}화</span>
+                        {contentType === 'series' && <span>에피소드 {episodeCount}화</span>}
                         <BadgeBlank>FHD</BadgeBlank>
                     </Flex>
                     <Flex $gap='10px'>
@@ -57,8 +48,7 @@ const ContDetail = ({ onMoreClick }) => {
                             alt='rateAll'
                             style={{ width: '24px' }}
                         />
-                        {/* 평점 해야함 수정 필요. 자리만 확인함 */}
-                        <BadgeBlank> 평점 7 / 10 </BadgeBlank>
+                        <BadgeBlank> 평점 {rating} / 10 </BadgeBlank>
                     </Flex>
                     <p>{data.overview || '줄거리 정보가 없습니다.'}</p>
                 </Flex>
