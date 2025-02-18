@@ -12,7 +12,7 @@ export const GenreContainer = styled.div`
   }
 
   @media (max-width: 600px) {
-    grid-template-columns: repeat(1, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: clamp(1rem, 1.5vw, 1rem);
     justify-items: center;
   }
@@ -63,7 +63,7 @@ export const GenreItem = styled.div.withConfig({
   }
 
   @media (max-width: 600px) {
-    width: clamp(160px, 80vw, 340px);
+    width: clamp(130px, 50vw, 250px);
 
     /* height: clamp(90px, 25vw, 140px); */
   }

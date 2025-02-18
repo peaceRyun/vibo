@@ -16,7 +16,7 @@ export const MainContainer = styled.div`
   }
 
   @media (max-width: 600px) {
-    padding: 0 10px; // 600px 이하에서 더 작은 패딩 적용
+    padding: 0 20px; // 600px 이하에서 더 작은 패딩 적용
     gap: 20px; // 간격 더 줄이기
   }
   /* 
