@@ -12,6 +12,7 @@ function App2() {
       <TestKwon />
       <TestChoi /> */}
       {/* <TestJung /> */}
+      {/* <TestChoi/> */}
     </>
   );
 }

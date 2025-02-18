@@ -2,7 +2,8 @@
 // import Login from '../member/Login';
 // import Register from '../member/Register';
 
-import AboutM from '../about/AboutM';
+// import TestMainBanner from '../../components/home/mainBanner/TestMainBanner';
+// import AboutM from '../about/AboutM';
 
 const TestChoi = () => {
   return (
@@ -11,6 +12,7 @@ const TestChoi = () => {
       {/* <Login /> */}
       {/* <Register /> */}
       {/* <AboutM /> */}
+      {/* <TestMainBanner /> */}
     </>
   );
 };
