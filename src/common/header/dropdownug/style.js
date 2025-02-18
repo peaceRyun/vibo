@@ -136,7 +136,7 @@ export const DropdownContainer = styled.div`
 
 // 새로운 검색 결과 관련 스타일 컴포넌트들
 export const SearchResultsContainer = styled.div`
-    padding: 2rem 0;
+    padding: 6rem 0 2rem;
     display: flex;
     flex-direction: column;
     gap: 3rem;
@@ -145,18 +145,27 @@ export const SearchResultsContainer = styled.div`
 `;
 
 export const CategorySection = styled.div`
-    h3 {
-        font-size: 1.25rem;
-        font-weight: 800;
-        margin-bottom: 1.5rem;
-        color: #ffffff;
-    }
+    margin-bottom: 2rem;
 `;
 
 export const ResultsGrid = styled.div`
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    display: flex;
+    flex-wrap: wrap;
     gap: 1.5rem;
+    width: 100%;
+
+    h3 {
+        flex: 0 0 calc((100% - (1.5rem * 5)) / 6); // 첫 줄 6개 (h3 포함)
+        font-size: 3.8rem;
+        font-weight: 800;
+        color: #ffffff;
+        margin: 0;
+    }
+
+    & > div {
+        flex: 0 0 calc((100% - (1.5rem * 5)) / 6); // 6개 아이템
+        max-width: calc((100% - (1.5rem * 5)) / 6);
+    }
 `;
 
 export const ResultItem = styled.div`
@@ -166,7 +175,7 @@ export const ResultItem = styled.div`
 
     img {
         width: 100%;
-        height: 231px;
+        height: auto;
         object-fit: cover;
         border-radius: 0.5rem;
         margin-bottom: 0.75rem;

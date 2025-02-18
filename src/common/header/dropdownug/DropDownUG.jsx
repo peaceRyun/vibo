@@ -20,9 +20,9 @@ const Dropdown = ({ onClose }) => {
     const dropdownRef = useRef(null);
 
     const categorizedResults = {
-        movie: searchResults.filter((item) => item.mediaType === 'movie').slice(0, 5),
-        tv: searchResults.filter((item) => item.mediaType === 'tv').slice(0, 5),
-        person: searchResults.filter((item) => item.mediaType === 'person').slice(0, 5),
+        movie: searchResults.filter((item) => item.mediaType === 'movie').slice(0, 10),
+        tv: searchResults.filter((item) => item.mediaType === 'tv').slice(0, 10),
+        person: searchResults.filter((item) => item.mediaType === 'person').slice(0, 10),
     };
 
     useEffect(() => {
@@ -61,7 +61,7 @@ const Dropdown = ({ onClose }) => {
         <DropdownContainer>
             <SearchInput
                 type='text'
-                placeholder='주요 콘텐츠'
+                placeholder='제목, 인물 검색'
                 value={searchTerm}
                 onChange={handleSearch}
                 ref={dropdownRef}
@@ -141,8 +141,8 @@ const Dropdown = ({ onClose }) => {
                         <>
                             {categorizedResults.tv.length > 0 && (
                                 <CategorySection>
-                                    <h3>시리즈</h3>
                                     <ResultsGrid>
+                                        <h3>시리즈</h3>
                                         {categorizedResults.tv.map((item) => (
                                             <ResultItem key={item.id}>
                                                 <img
@@ -162,8 +162,8 @@ const Dropdown = ({ onClose }) => {
 
                             {categorizedResults.movie.length > 0 && (
                                 <CategorySection>
-                                    <h3>영화</h3>
                                     <ResultsGrid>
+                                        <h3>영화</h3>
                                         {categorizedResults.movie.map((item) => (
                                             <ResultItem key={item.id}>
                                                 <img
@@ -183,14 +183,14 @@ const Dropdown = ({ onClose }) => {
 
                             {categorizedResults.person.length > 0 && (
                                 <CategorySection>
-                                    <h3>인물</h3>
                                     <ResultsGrid>
+                                        <h3>인물</h3>
                                         {categorizedResults.person.map((item) => (
                                             <ResultItem key={item.id}>
                                                 <img
                                                     src={
                                                         item.profile_path
-                                                            ? `https://image.tmdb.org/t/p/w154${item.profile_path}`
+                                                            ? `https://image.tmdb.org/t/p/original${item.profile_path}`
                                                             : '/path-to-placeholder-image.jpg'
                                                     }
                                                     alt={item.name}
