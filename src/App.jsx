@@ -29,7 +29,6 @@ const App = () => {
                 <Routes>
                     <Route path='/player'>
                         <Route index element={<ContentPlayer />} />
-                        {/* <Route path=':name' element={<Project />} /> */}
                     </Route>
                     <Route path='/' element={<Layout />}>
                         <Route index element={<MainHome />} />
@@ -44,13 +43,10 @@ const App = () => {
                         <Route path='/profilesforedit' element={<ProfilesForEdit />} />
                         <Route path='/profileinfoedit' element={<ProfileInfoEdit />} />
                         <Route path='/mypage' element={<Mypage />} />
-                        <Route path='/detail/:id'>
-                            <Route index element={<ContentDetail />} />
-                            {/* <Route path=':name' element={<Project />} /> */}
-                        </Route>
+                        <Route path='/detail/series/:id' element={<ContentDetail contentType='series' />} />
+                        <Route path='/detail/movie/:id' element={<ContentDetail contentType='movie' />} />
                         <Route path='/contentlist'>
                             <Route index element={<ContentList />} />
-                            {/* <Route path=':name' element={<Project />} /> */}
                         </Route>
                         <Route path='/register' element={<Register />}></Route>
                         <Route path='/login' element={<Login />}></Route>
