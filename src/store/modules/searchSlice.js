@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { searchMulti } from '../../assets/api/searchThunk';
+import { searchMulti } from './getThunk';
 
 const initialState = {
     searchResults: [],
