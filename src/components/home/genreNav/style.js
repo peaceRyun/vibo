@@ -3,30 +3,26 @@ import styled from 'styled-components';
 export const GenreContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 3rem 10px;
+  gap: clamp(1rem, 3vw, 3rem) 10px;
 
   @media (max-width: 1024px) {
-    display: grid;
     grid-template-columns: repeat(2, 1fr);
-    align-items: center;
+    gap: clamp(1rem, 2vw, 1rem) 10px;
     justify-items: center;
-
-    gap: 1rem 10px;
   }
+
   @media (max-width: 600px) {
-    display: grid;
     grid-template-columns: repeat(1, 1fr);
-    align-items: center;
+    gap: clamp(1rem, 1.5vw, 1rem);
     justify-items: center;
-    /* gap: 1rem 10px; */
   }
 `;
 
 export const GenreItem = styled.div.withConfig({
   shouldForwardProp: (prop) => prop !== 'ishighlighted',
 })`
-  width: 27.1875rem;
-  height: 11.4375rem; /* 183px */
+  width: clamp(200px, 40vw, 435px);
+  height: clamp(120px, 20vw, 183px);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -60,5 +56,15 @@ export const GenreItem = styled.div.withConfig({
     @media (max-width: 1024px) {
       font-size: 17px;
     }
+  }
+  @media (max-width: 1024px) {
+    width: clamp(180px, 45vw, 380px);
+    /* height: clamp(100px, 18vw, 160px); */
+  }
+
+  @media (max-width: 600px) {
+    width: clamp(160px, 80vw, 340px);
+
+    /* height: clamp(90px, 25vw, 140px); */
   }
 `;
