@@ -12,6 +12,8 @@ export const WeeklyItemContainer = styled.div`
     height: 400px;
   }
   @media (max-width: 600px) {
+    width: 200px;
+    height: 300px;
   }
 `;
 

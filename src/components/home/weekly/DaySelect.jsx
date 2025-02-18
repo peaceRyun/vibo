@@ -58,8 +58,14 @@ const DayItem = styled.button`
     box-shadow: 0px 0px 15px rgba(7, 255, 230, 0.7);
   }
   @media (max-width: 1024px) {
-    width: 3rem;
-    height: 3rem;
+    width: 48px;
+    height: 48px;
+    font-size: 16px;
+  }
+  @media (max-width: 600px) {
+    width: 35px;
+    height: 35px;
+    font-size: 12px;
   }
 `;
 

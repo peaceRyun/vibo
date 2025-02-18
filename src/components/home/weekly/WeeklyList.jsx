@@ -184,8 +184,8 @@ const WeeklyList = () => {
     if (width <= 490) {
       setSlidesPerView(1.8);
     } else if (width <= 1024) {
-      setSlidesPerView(3.2);
-      setSlidesPerView(4.4);
+      setSlidesPerView(2.5);
+      setSlidesPerView(2.7);
     } else {
       setSlidesPerView(6.4);
     }
