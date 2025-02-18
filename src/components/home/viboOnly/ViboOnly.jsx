@@ -1,3 +1,5 @@
+// 이 페이지가 메인화면에 뿌려질 화면이고, 바이보 컴포넌트들 적용한것임.
+
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Only1 from './only1/Only1';
@@ -55,7 +57,7 @@ const ViboOnly = () => {
         <Underline2 />
       </Title>
       {isMobile ? (
-        <MobileOnly />
+        <MobileOnly content={[firstPlace, ...restPlaces]} />
       ) : (
         <ViboContainer>
           <Only1 content={firstPlace} />
