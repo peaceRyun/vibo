@@ -306,7 +306,10 @@ export const DropdownItem = styled.li`
     background-color: #07ffe6;
     color: #191919;
   }
-
+  &.noHover:hover {
+    background-color: transparent;
+    color: inherit;
+  }
   svg {
     color: #07ffe6;
   }

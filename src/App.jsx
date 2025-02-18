@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router';
 import GlobalStyle from './styled/GlobalStyle';
 import MainHome from './pages/home/main/MainHome';
-import AboutP from './pages/about/AboutP';
+// import AboutP from './pages/about/AboutP';
 import ContentDetail from './pages/contents/ContentDetail';
 import Layout from './common/Layout';
 import ContentList from './pages/contents/ContentList';
@@ -17,7 +17,9 @@ import ProfileForEdit from './components/member/mobileprofile/ProfileForEdit';
 import ProfilesForEdit from './components/member/mobileprofile/ProfilesForEdit';
 import ContentPlayer from './pages/contents/ContentPlayer';
 import ScrollToTop from './utils/routeUtils';
-
+import Register from './pages/member/Register';
+import Login from './pages/member/Login';
+import About from './pages/about/About';
 const App = () => {
     return (
         <>
@@ -35,7 +37,7 @@ const App = () => {
                         <Route path='/moviehome' element={<MovieHome />} />
                         <Route path='/serieshome' element={<SeriesHome />} />
                         <Route path='/livehome' element={<LiveHome />} />
-                        <Route path='/about' element={<AboutP />} />
+                        <Route path='/about' element={<About />} />
                         <Route path='/profileedit' element={<ProfileEdit />} />
                         <Route path='/profileselect' element={<ProfilesSelect />} />
                         <Route path='/profileforedit' element={<ProfileForEdit />} />
@@ -50,6 +52,8 @@ const App = () => {
                             <Route index element={<ContentList />} />
                             {/* <Route path=':name' element={<Project />} /> */}
                         </Route>
+                        <Route path='/register' element={<Register />}></Route>
+                        <Route path='/login' element={<Login />}></Route>
                     </Route>
                 </Routes>
             </BrowserRouter>

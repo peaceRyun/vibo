@@ -1,11 +1,14 @@
-import { Container, Poster, InfoSection, Title, Tags, Tag, Description } from './style';
+import { Container, Poster, InfoSection, Title, Tags, Tag, Description, Flex, Label } from './style';
 
 const Only1 = () => {
     return (
         <Container>
-            <Poster src="/mainhome/sample/Only1Sample.png" alt="파묘" />
+            <Poster src='/mainhome/sample/Only1Sample.png' alt='파묘' />
             <InfoSection>
-                <Title>파묘</Title>
+                <Flex $alignItems='flex-end' $gap='30px' $padding='20px 0'>
+                    <Label>1</Label>
+                    <Title>파묘</Title>
+                </Flex>
                 <Tags>
                     <Tag>2025</Tag>
                     <Tag>미스터리</Tag>
