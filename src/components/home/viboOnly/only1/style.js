@@ -9,11 +9,12 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  overflow: hidden;
 `;
 
 export const Poster = styled.img`
   width: 100%;
-  height: 25.125rem;
+  height: 22rem;
   object-fit: cover;
   border-radius: 0.5rem;
 `;
@@ -25,7 +26,7 @@ export const InfoSection = styled.div`
 `;
 
 export const Title = styled.h2`
-  font-size: 3.25rem;
+  font-size: 2.55rem;
   font-weight: 900;
   color: #fff;
   line-height: 100%;
@@ -51,7 +52,7 @@ export const Tag = styled.span`
   white-space: nowrap;
 `;
 export const Description = styled.p`
-  font-size: 1.25rem; /* 20px */
+  font-size: 1.1rem; /* 20px */
   color: #939598;
   line-height: 1.5;
   overflow: hidden;
@@ -76,16 +77,21 @@ export const Flex = styled.div`
 
   @media (max-width: 1024px) {
     display: flex;
-    align-items: flex-end;
+    align-items: flex-start;
     gap: 10px;
-    padding: 20px 0;
+    padding: 10px 0;
     width: 100%;
-    justify-content: space-between;
+    flex-direction: column;
   }
 `;
 
 export const Label = styled.span`
-  font-size: 4.25rem;
+  font-size: 6.75rem;
   font-weight: 900;
   line-height: 100%;
+  @media (max-width: 1024px) {
+    font-size: 30px;
+    font-weight: 900;
+    line-height: 100%;
+  }
 `;

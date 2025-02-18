@@ -158,7 +158,7 @@ import {
   MobileCardText,
   MobilePoster,
   MobileSlider,
-  MobileTitle,
+  // MobileTitle,
   Tag,
   Tags,
   Title,
@@ -193,17 +193,17 @@ const MobileOnly = ({ content }) => {
 
   return (
     <>
-      <MobileTitle>VIBO TOP 5</MobileTitle>
+      {/* <MobileTitle>VIBO TOP 5</MobileTitle> */}
 
       <MobileSlider>
         <Swiper
           spaceBetween={15}
           centeredSlides
           loop={true}
-          autoplay={{
-            delay: 3000,
-            disableOnInteraction: false,
-          }}
+          // autoplay={{
+          //   delay: 3000,
+          //   disableOnInteraction: false,
+          // }}
           modules={[Autoplay]}
           breakpoints={{
             320: { slidesPerView: 1.5, spaceBetween: 10 },
@@ -224,7 +224,7 @@ const MobileOnly = ({ content }) => {
                   />
                   <StyledMobileCardText>
                     <InfoSection>
-                      <Flex $alignItems="flex-end" $gap="20px" $padding="15px 0">
+                      <Flex $gap="10px" $padding="1px 0">
                         <Label>{index + 1}</Label>
                         <Title>{item.title}</Title>
                       </Flex>
@@ -264,15 +264,15 @@ const StyledMobileCard = styled(MobileCard)`
   overflow: hidden;
   flex-shrink: 0;
 
-  @media (max-width: 768px) {
+  @media (max-width: 1024px) {
     max-width: 250px;
     min-height: 350px;
   }
 
-  @media (max-width: 480px) {
+  /* @media (max-width: 480px) {
     max-width: 220px;
     min-height: 320px;
-  }
+  } */
 `;
 
 const StyledMobilePoster = styled(MobilePoster)`
@@ -281,13 +281,13 @@ const StyledMobilePoster = styled(MobilePoster)`
   object-fit: cover;
   border-radius: 10px;
 
-  @media (max-width: 768px) {
+  @media (max-width: 1024px) {
     height: 150px;
   }
 
-  @media (max-width: 480px) {
+  /* @media (max-width: 480px) {
     height: 120px;
-  }
+  } */
 `;
 
 const StyledMobileCardText = styled(MobileCardText)`
@@ -298,7 +298,7 @@ const StyledMobileCardText = styled(MobileCardText)`
   flex-direction: column;
   justify-content: space-between;
 
-  @media (max-width: 768px) {
+  @media (max-width: 1024px) {
     padding: 10px;
     font-size: 12px;
   }
