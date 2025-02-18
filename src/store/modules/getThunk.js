@@ -411,3 +411,49 @@ export const getAiringToday = createAsyncThunk('content/getAiringToday', async (
         return rejectWithValue(err.message);
     }
 });
+
+//바이보 TOP 5
+export const getTopRated = createAsyncThunk('topRated/getTopRated', async (_, { rejectWithValue }) => {
+    try {
+        const headers = {
+            accept: 'application/json',
+            Authorization:
+                'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJkZGY2NTIxYzQzYzJlMDNmNTlkMjc2N2YxMDlhYWFhNCIsIm5iZiI6MTczNzUxMDE4NS4yNjIsInN1YiI6IjY3OTA0ZDI5MmQ2MWMzM2U2M2RmZTVlNiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ._QJjWVEDYEcIfVZtQRYG0JSRb22Dit3HopPsNm8AILE',
+        };
+
+        const params = {
+            language: 'ko-KR',
+            page: '1',
+        };
+
+        // Fetch top rated movies and TV shows in parallel
+        const [movieResponse, tvResponse] = await Promise.all([
+            axios.get('https://api.themoviedb.org/3/movie/top_rated', { headers, params }),
+            axios.get('https://api.themoviedb.org/3/tv/top_rated', { headers, params }),
+        ]);
+
+        // Process and combine the results
+        const movies = movieResponse.data.results
+            .filter((movie) => movie.poster_path && movie.backdrop_path)
+            .slice(0, 5)
+            .map((movie) => ({
+                ...movie,
+                mediaType: 'movie',
+            }));
+
+        const tvShows = tvResponse.data.results
+            .filter((show) => show.poster_path && show.backdrop_path)
+            .slice(0, 5)
+            .map((show) => ({
+                ...show,
+                mediaType: 'tv',
+            }));
+
+        return {
+            movies,
+            tvShows,
+        };
+    } catch (error) {
+        return rejectWithValue(error.message);
+    }
+});
