@@ -457,3 +457,38 @@ export const getTopRated = createAsyncThunk('topRated/getTopRated', async (_, { 
         return rejectWithValue(error.message);
     }
 });
+
+const headers = {
+    accept: 'application/json',
+    Authorization:
+        'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJkZGY2NTIxYzQzYzJlMDNmNTlkMjc2N2YxMDlhYWFhNCIsIm5iZiI6MTczNzUxMDE4NS4yNjIsInN1YiI6IjY3OTA0ZDI5MmQ2MWMzM2U2M2RmZTVlNiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ._QJjWVEDYEcIfVZtQRYG0JSRb22Dit3HopPsNm8AILE',
+};
+
+export const searchMulti = createAsyncThunk('search/multi', async ({ query, page = 1 }, { rejectWithValue }) => {
+    try {
+        const response = await axios.get('https://api.themoviedb.org/3/search/multi', {
+            params: {
+                query,
+                language: 'ko-KR',
+                page,
+                include_adult: false,
+            },
+            headers,
+        });
+
+        // 각 결과에 mediaType 필드 추가
+        const results = response.data.results.map((item) => ({
+            ...item,
+            mediaType: item.media_type,
+        }));
+
+        return {
+            results,
+            page: response.data.page,
+            totalPages: response.data.total_pages,
+            totalResults: response.data.total_results,
+        };
+    } catch (error) {
+        return rejectWithValue(error.message);
+    }
+});
