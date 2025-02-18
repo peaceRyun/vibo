@@ -1,17 +1,23 @@
 import styled from 'styled-components';
 
 export const WeeklyItemContainer = styled.div`
-    width: 18.75rem;
-    height: 26.9375rem;
-    overflow: hidden;
-    border-radius: 0.5rem;
-    position: relative;
-    cursor: pointer;
+  width: 18.75rem;
+  height: 26.9375rem;
+  overflow: hidden;
+  border-radius: 0.5rem;
+  position: relative;
+  cursor: pointer;
+  @media (max-width: 1024px) {
+    width: 250px;
+    height: 400px;
+  }
+  @media (max-width: 600px) {
+  }
 `;
 
 export const WeeklyImg = styled.img`
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
 `;

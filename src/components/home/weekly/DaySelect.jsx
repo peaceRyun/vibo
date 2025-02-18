@@ -24,9 +24,10 @@ const DayContainer = styled.div`
   gap: 15px;
   padding: 15px 0;
 
-  @media (max-width: 480px) {
+  @media (max-width: 1024px) {
     flex-direction: column;
     align-items: center;
+    gap: 10px;
   }
 `;
 
@@ -56,7 +57,7 @@ const DayItem = styled.button`
     border-color: #07ffe6;
     box-shadow: 0px 0px 15px rgba(7, 255, 230, 0.7);
   }
-  @media (max-width: 480px) {
+  @media (max-width: 1024px) {
     width: 3rem;
     height: 3rem;
   }

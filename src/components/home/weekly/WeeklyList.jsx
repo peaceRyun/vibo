@@ -10,8 +10,8 @@ import { getAiringToday } from '../../../store/modules/getThunk';
 
 const WeeklyList = () => {
   const [activeDay, setActiveDay] = useState('월');
-  const [slidesPerView, setSlidesPerView] = useState(5.3);
-  const [isMobile, setIsMobile] = useState(window.innerWidth <= 480);
+  const [slidesPerView, setSlidesPerView] = useState(6.4);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 1024);
 
   const dispatch = useDispatch();
 
@@ -23,13 +23,13 @@ const WeeklyList = () => {
     const width = window.innerWidth;
     setIsMobile(width <= 480);
     if (width <= 490) {
-      setSlidesPerView(1.3);
-    } else if (width <= 768) {
-      setSlidesPerView(2.3);
+      setSlidesPerView(1.4);
     } else if (width <= 1024) {
-      setSlidesPerView(3.3);
+      setSlidesPerView(2.4);
+    } else if (width <= 1600) {
+      setSlidesPerView(4.4);
     } else {
-      setSlidesPerView(5.3);
+      setSlidesPerView(6.4);
     }
   };
 
@@ -80,7 +80,7 @@ const Section = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
-  @media (max-width: 480px) {
+  @media (max-width: 1024px) {
     padding: 30px 0 30px 30px;
   }
 `;
@@ -92,13 +92,6 @@ const WeeklyInfo = styled.div`
   padding: 10px;
   flex-direction: column;
   align-items: flex-start;
-  @media (max-width: 1024px) {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  @media (max-width: 480px) {
-    width: 120%;
-  }
 `;
 
 const DaySelectContainer = styled.div``;
