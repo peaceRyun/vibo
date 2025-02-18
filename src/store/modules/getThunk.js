@@ -457,17 +457,15 @@ const api = axios.create({
     },
 });
 
-// getThunk.ts
 export const fetchPopularContentThunk = createAsyncThunk('content/fetchPopular', async () => {
-    // Fetch both movies and TV shows in parallel with Korean parameters
     const [moviesResponse, tvResponse] = await Promise.all([
-        api.get('/movie/popular', {
+        api.get('/trending/movie/day', {
             params: {
                 language: 'ko-KR',
                 region: 'KR',
             },
         }),
-        api.get('/tv/popular', {
+        api.get('/trending/tv/day', {
             params: {
                 language: 'ko-KR',
                 region: 'KR',
