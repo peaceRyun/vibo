@@ -144,7 +144,6 @@
 
 // export default MobileOnly;
 
-import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/autoplay';
@@ -197,18 +196,20 @@ const MobileOnly = ({ content }) => {
 
       <MobileSlider>
         <Swiper
-          spaceBetween={15}
-          centeredSlides
+          spaceBetween={3}
+          centeredSlides={false}
+          // 슬라이드 요소 반응형시 중앙 안하도록 하기
           loop={true}
           // autoplay={{
           //   delay: 3000,
           //   disableOnInteraction: false,
           // }}
-          modules={[Autoplay]}
+          // modules={[Autoplay]}
           breakpoints={{
-            320: { slidesPerView: 1.5, spaceBetween: 10 },
-            768: { slidesPerView: 2, spaceBetween: 10 },
-            1024: { slidesPerView: 2.5, spaceBetween: 25 },
+            390: { slidesPerView: 1.3, spaceBetween: 10 },
+            600: { slidesPerView: 2.3, spaceBetween: 15 },
+            768: { slidesPerView: 2.3, spaceBetween: 15 },
+            1024: { slidesPerView: 3.3, spaceBetween: 15 },
             // 1280: { slidesPerView: 3, spaceBetween: 30 },
           }}
         >
@@ -224,7 +225,8 @@ const MobileOnly = ({ content }) => {
                   />
                   <StyledMobileCardText>
                     <InfoSection>
-                      <Flex $gap="10px" $padding="1px 0">
+                      <Flex>
+                        {/* $alignItems="flex-end" $gap="20px" $padding="15px 0" */}
                         <Label>{index + 1}</Label>
                         <Title>{item.title}</Title>
                       </Flex>
@@ -255,7 +257,7 @@ export default MobileOnly;
 
 // 스타일 조절
 const StyledMobileCard = styled(MobileCard)`
-  max-width: 280px;
+  max-width: 500px;
   min-height: 400px;
   display: flex;
   flex-direction: column;
@@ -263,16 +265,6 @@ const StyledMobileCard = styled(MobileCard)`
   border-radius: 15px;
   overflow: hidden;
   flex-shrink: 0;
-
-  @media (max-width: 1024px) {
-    max-width: 250px;
-    min-height: 350px;
-  }
-
-  /* @media (max-width: 480px) {
-    max-width: 220px;
-    min-height: 320px;
-  } */
 `;
 
 const StyledMobilePoster = styled(MobilePoster)`
@@ -280,14 +272,6 @@ const StyledMobilePoster = styled(MobilePoster)`
   height: 180px;
   object-fit: cover;
   border-radius: 10px;
-
-  @media (max-width: 1024px) {
-    height: 150px;
-  }
-
-  /* @media (max-width: 480px) {
-    height: 120px;
-  } */
 `;
 
 const StyledMobileCardText = styled(MobileCardText)`

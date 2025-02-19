@@ -32,7 +32,7 @@ const Only1 = ({ content }) => {
     <Container>
       <Poster src={`https://image.tmdb.org/t/p/original${content.posterPath}`} alt={content.title} />
       <InfoSection>
-        <Flex $alignItems="flex-end" $gap="20px" $padding="20px 0">
+        <Flex $alignItems="baseline" $gap="20px" $padding="15px 0">
           <Label>1</Label>
           <Title>{content.title}</Title>
         </Flex>

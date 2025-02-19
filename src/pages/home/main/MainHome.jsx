@@ -42,7 +42,9 @@ const MainHome = () => {
         <WeeklyList />
         <RateList />
         <GenreNav />
-        <AdBanner />
+      </MainContainer>
+      <AdBanner />
+      <MainContainer>
         <CommonList />
         <CommonList />
         <CommonList />

@@ -2,21 +2,16 @@ import styled from 'styled-components';
 import { Flex } from './style';
 
 const ReviewItem = ({ nickname, rating, content, date, imgurl }) => {
-    const ratingrefined = Math.floor((rating || 0) / 2);
     return (
         <li style={{ marginLeft: '107px' }}>
             <Flex $gap='17px' $alignItems='center'>
-                <img
-                    src={`https://image.tmdb.org/t/p/w185${imgurl}`}
-                    alt='샘플프로필'
-                    style={{ width: '40px', height: '40px', borderRadius: '50%' }}
-                />
+                <img src={imgurl} alt='샘플프로필' style={{ width: '40px', height: '40px', borderRadius: '50%' }} />
                 <Flex $flexDirection='column' $position='relative' style={{ width: '100%' }}>
                     <Flex $gap='15px' $alignItems='center' $justifyContent='space-between'>
                         <Flex $gap='15px' $alignItems='center'>
                             <span>{nickname}</span>
                             <Flex $gap='5px' $alignItems='center'>
-                                {Array(ratingrefined)
+                                {Array(rating || 0)
                                     .fill()
                                     .map((_, index) => (
                                         <img key={index} src='/contentdetail/ui/StarActive.png' alt='별' />

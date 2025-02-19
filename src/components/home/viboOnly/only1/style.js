@@ -26,7 +26,7 @@ export const InfoSection = styled.div`
 `;
 
 export const Title = styled.h2`
-  font-size: 2.55rem;
+  font-size: 2.5rem;
   font-weight: 900;
   color: #fff;
   line-height: 100%;
@@ -52,7 +52,7 @@ export const Tag = styled.span`
   white-space: nowrap;
 `;
 export const Description = styled.p`
-  font-size: 1.1rem; /* 20px */
+  font-size: 1.0625rem;
   color: #939598;
   line-height: 1.5;
   overflow: hidden;
@@ -77,21 +77,20 @@ export const Flex = styled.div`
 
   @media (max-width: 1024px) {
     display: flex;
-    align-items: flex-start;
-    gap: 10px;
-    padding: 10px 0;
-    width: 100%;
+    justify-content: space-between;
     flex-direction: column;
+    align-items: flex-start;
+    white-space: nowrap; /* 텍스트가 한 줄로 표시되도록 설정 */
+    overflow: hidden; /* 넘치는 텍스트는 보이지 않도록 숨김 */
   }
 `;
 
 export const Label = styled.span`
-  font-size: 6.75rem;
+  font-size: 6.25rem;
   font-weight: 900;
   line-height: 100%;
-  @media (max-width: 1024px) {
-    font-size: 30px;
-    font-weight: 900;
-    line-height: 100%;
+
+  @media (max-width: 600px) {
+    font-size: 48px;
   }
 `;
