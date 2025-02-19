@@ -6,8 +6,7 @@ export const Section = styled.div`
   margin-top: 60px;
   padding: 40px 40px;
   @media (max-width: 1024px) {
-    padding: 20px;
-    margin-top: 30px;
+    display: none;
   }
 `;
 

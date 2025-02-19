@@ -8,12 +8,14 @@ export const BannerWrapper = styled.div`
   align-items: center;
   overflow: hidden;
   position: relative;
-  @media (max-width: 768px) {
-    height: 20rem;
+  @media (max-width: 1024px) {
+    width: 100%;
+    height: 25rem;
   }
 
-  @media (max-width: 480px) {
-    height: 15rem;
+  @media (max-width: 600px) {
+    width: 100%;
+    height: 20rem;
   }
 `;
 
@@ -22,4 +24,13 @@ export const BannerImage = styled.img`
   height: 100%;
   object-fit: cover;
   object-position: center;
+  @media (max-width: 1024px) {
+    width: 100%;
+    height: 80%;
+  }
+
+  @media (max-width: 600px) {
+    width: 100%;
+    height: 50%;
+  }
 `;

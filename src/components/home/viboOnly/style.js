@@ -5,17 +5,19 @@ export const ViboContainer = styled.div`
   gap: 10px;
   justify-content: space-around;
   width: 1750px;
-  @media (max-width: 1200px) {
+  padding: 60px;
+
+  /* @media (max-width: 1024px) {
     max-width: 1000px;
     gap: 5px;
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: 600px) {
     flex-direction: column;
     align-items: center;
     gap: 15px;
     padding: 10px;
-  }
+  } */
 `;
 
 export const Title = styled.div`
@@ -26,6 +28,18 @@ export const Title = styled.div`
   margin-top: 40px;
   text-align: center;
   flex-direction: column;
+  @media (max-width: 1024px) {
+    white-space: nowrap;
+    overflow: hidden;
+    margin-top: 10px;
+    font-size: 38px;
+    text-align: 10px;
+    text-overflow: ellipsis;
+  }
+
+  @media (max-width: 600px) {
+    font-size: 17px;
+  }
 `;
 
 // export const Title = styled.div`
@@ -42,7 +56,7 @@ export const Underline2 = styled.div`
   width: 600px; /* 밑줄 길이 */
   height: 3px; /* 밑줄 두께 */
   background: white; /* 밑줄 색상 */
-  margin-top: 30px; /* H2와의 간격 */
+  margin-top: 30px;
   align-self: center;
 
   @media (max-width: 1024px) {
@@ -61,23 +75,31 @@ export const MobileSlider = styled.div`
   justify-content: center;
   align-items: center;
   overflow: hidden;
+  @media (max-width: 1024px) {
+    width: 100%;
+    height: 100vh;
+  }
 `;
 
 export const MobileCard = styled.div`
-  background: #222;
+  background: black;
   border-radius: 16px;
   padding: 16px;
-  display: flex;
+  /* display: flex
+; */
   justify-content: center;
   align-items: center;
-  width: 90%;
-  max-width: 320px;
+  width: 100%;
+  max-height: 800px;
   margin: 0 auto;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
   transition: transform 0.3s ease-in-out;
-
   &:hover {
     transform: scale(1.05);
+  }
+  @media (max-width: 1024px) {
+    width: 100%;
+    max-height: 100%;
   }
 `;
 
@@ -86,25 +108,53 @@ export const CardContainer = styled.div`
   flex-direction: column;
   align-items: center;
   text-align: center;
+  @media (max-width: 1024px) {
+    width: 100%;
+    max-height: 100%;
+  }
 `;
 
 export const Poster = styled.img`
   width: 100%;
-  max-width: 200px;
+  max-width: 300px;
   height: 200px;
   border-radius: 12px;
   object-fit: cover;
   margin-bottom: 12px;
 `;
 
+export const MobilePoster = styled.img`
+  width: 100%;
+  height: 100px;
+  border-radius: 12px;
+`;
+
 export const InfoSection = styled.div`
   color: #fff;
+  @media (max-width: 1024px) {
+    width: 300px;
+    max-height: 400px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+`;
+
+export const MobileCardText = styled.div`
+  /* width: 390px;
+  height: 400px;
+  display: flex; */
 `;
 
 export const ItemTitle = styled.h3`
   font-size: 18px;
   font-weight: bold;
   margin-bottom: 8px;
+  @media (max-width: 1024px) {
+    font-size: 15px;
+    font-weight: bold;
+  }
 `;
 
 export const Tags = styled.div`
@@ -112,6 +162,11 @@ export const Tags = styled.div`
   gap: 6px;
   justify-content: center;
   margin-bottom: 8px;
+
+  @media (max-width: 1024px) {
+    gap: 10px;
+    margin-bottom: 6px;
+  }
 `;
 
 export const Tag = styled.span`
@@ -119,12 +174,25 @@ export const Tag = styled.span`
   padding: 4px 8px;
   border-radius: 8px;
   font-size: 12px;
+  @media (max-width: 1024px) {
+    gap: 15px;
+    margin-bottom: 6px;
+    display: flex;
+  }
 `;
 
 export const Description = styled.p`
   font-size: 14px;
   color: #bbb;
-  max-width: 260px;
+  max-width: 400px;
+  height: auto;
+  @media (max-width: 1024px) {
+    display: -webkit-box;
+    -webkit-line-clamp: 3; /* 최대 3줄 표시 */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 `;
 
 export const MobileTitle = styled.div`
