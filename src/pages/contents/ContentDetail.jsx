@@ -12,6 +12,8 @@ import {
     getMovieRecommendations,
     getTVSeasons,
     getTVSeasonEpisodes,
+    getMovieDetail,
+    getMovie,
 } from '../../store/modules/getThunk';
 import ReviewList from '../../components/contents/ReviewList';
 import ContDetail from '../../components/contents/ContDetail';
@@ -28,9 +30,10 @@ const ContentDetail = ({ contentType }) => {
     const [isMobile, setIsMobile] = useState(window.innerWidth <= 1024);
     const isSeries = contentType === 'series';
 
+    // TV 관련 데이터 가져오기
     const {
-        contentDetail,
-        contentRating,
+        contentDetail: tvContentDetail,
+        contentRating: tvContentRating,
         TVRecommendData,
         recommendLoading,
         tvSeasons,
@@ -38,6 +41,13 @@ const ContentDetail = ({ contentType }) => {
         seasonsLoading,
         episodesLoading,
     } = useSelector((state) => state.tvSeriesR);
+
+    // 영화 관련 데이터 가져오기
+    const { movieDetail, movieData } = useSelector((state) => state.movieR);
+
+    // 컨텐츠 타입에 따라 적절한 데이터 선택
+    const contentDetail = isSeries ? tvContentDetail : movieDetail;
+    const contentRating = isSeries ? tvContentRating : tvContentRating; // 영화 레이팅으로 변경 필요
 
     useEffect(() => {
         const handleResize = () => {
@@ -58,7 +68,8 @@ const ContentDetail = ({ contentType }) => {
                 dispatch(getTVContentRating(id));
                 dispatch(getTVSeasons(id)); // 시즌 정보 가져오기
             } else if (contentType === 'movie') {
-                // dispatch(getMovieDetail(id));
+                dispatch(getMovie());
+                dispatch(getMovieDetail(id));
                 dispatch(getMovieContentRating(id));
             }
 
@@ -90,7 +101,7 @@ const ContentDetail = ({ contentType }) => {
                 <PcContainer>
                     <Inner>
                         <Flex $flexDirection='column' $position='relative' $gap='30px' $padding='0 50px'>
-                            <PlayBanner contentDetail={contentDetail} />
+                            <PlayBanner contentDetail={contentDetail} contentType={contentType} />
                             <div style={{ padding: '0 50px' }}>
                                 <ContDetail contentDetail={contentDetail} contentType={contentType} />
                                 {isSeries && (
@@ -126,7 +137,7 @@ const ContentDetail = ({ contentType }) => {
             {isMobile && (
                 <MobileInner>
                     <div>
-                        <PlayBanner contentDetail={contentDetail} />
+                        <PlayBanner contentDetail={contentDetail} contentType={contentType} />
                     </div>
                     <ContMobile contentDetail={contentDetail} />
                     <TabContainer>

@@ -316,13 +316,8 @@ export const EpListBgi = styled.img`
     right: ${(props) => props.$right};
     transform: ${(props) => props.$transform};
     z-index: ${(props) => props.$zIndex};
-    /* 이너 섀도우 (Inner shadow) 속성 */
-    box-shadow: inset 0px 0px 60px 50px var(--gray-900);
-    /* 레이어 블러 (Layer blur) 속성 */
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px); /* Safari를 위한 속성 */
-    /* 이미지 불투명도 40% */
-    opacity: 0.4;
+    filter: opacity(0.4) blur(3px);
+    box-shadow: inset -35px -35px 67px 15px #191919, inset 35px 35px 67px 15px #191919;
 `;
 
 export const EpItemsWrap = styled.div`
