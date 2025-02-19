@@ -11,7 +11,7 @@ import { AboutSwiperWrapper } from './style';
 import AboutMcard2 from './AboutMcard2';
 import AboutMcard1 from './AboutMcard1';
 import gsap from 'gsap';
-import AboutMacc from './AboutMacc';
+import AboutMlast from './AboutMlast';
 const AboutMswiper = ({ activeIndex, setActiveIndex }) => {
   const swiperRef = useRef(null);
   const wrapperRef = useRef(null);
@@ -21,7 +21,6 @@ const AboutMswiper = ({ activeIndex, setActiveIndex }) => {
       const swiper = swiperRef.current.swiper;
 
       swiper.on('slideChangeTransitionStart', () => {
-        
         gsap.to(wrapperRef.current, {
           opacity: 0,
           duration: 0.2,
@@ -44,7 +43,6 @@ const AboutMswiper = ({ activeIndex, setActiveIndex }) => {
         modules={[Pagination]}
         className="about-swiper"
         onSlideChange={(swiper) => setActiveIndex(swiper.activeIndex)}
-       
       >
         <SwiperSlide>
           <AboutMslide1 />
@@ -56,7 +54,7 @@ const AboutMswiper = ({ activeIndex, setActiveIndex }) => {
         </SwiperSlide>
         <SwiperSlide>
           <AboutMslide3 />
-          <AboutMacc />
+          {activeIndex === 2 && <AboutMlast activeIndex={activeIndex} />}
         </SwiperSlide>
       </Swiper>
     </AboutSwiperWrapper>
