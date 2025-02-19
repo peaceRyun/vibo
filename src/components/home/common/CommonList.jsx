@@ -69,9 +69,15 @@ const Section = styled.section`
     /* align-items: center; */
     position: relative;
     // gap: 5px;
+    padding: 60px 0 60px 0;
 
     @media (max-width: 1024px) {
         flex-direction: column;
+        padding: 40px 0 40px 0;
+    }
+    @media (max-width: 600px) {
+        flex-direction: column;
+        padding: 30px 0 30px 0;
     }
 `;
 
@@ -113,15 +119,21 @@ const CommonInfo = styled.div`
 
 const CommonTitle = styled.h3`
     color: white;
-    font-size: clamp(24px, 2.5vw, 32px);
-    font-weight: bold;
+
     line-height: 1.5;
     margin: 0;
     white-space: pre-line;
-
+    font-size: var(--title-xlarge-size); //32
+    font-weight: var(--title-xlarge-weight); //800
     @media (max-width: 1024px) {
+        font-size: var(--title-large-mobile); //24
+        font-weight: var(--title-large-weigh); //700
         text-align: left;
         white-space: normal;
+    }
+    @media (max-width: 600px) {
+        font-size: var(--title-small-mobile); //17
+        font-weight: var(--title-xsmall-weight); //700
     }
 `;
 

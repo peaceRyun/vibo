@@ -192,7 +192,7 @@ const MobileOnly = ({ content }) => {
 
   return (
     <>
-      <MobileTitle>VIBO TOP 5</MobileTitle>
+      {/* <MobileTitle>VIBO TOP 5</MobileTitle> */}
 
       <MobileSlider>
         <Swiper
@@ -207,6 +207,7 @@ const MobileOnly = ({ content }) => {
           // modules={[Autoplay]}
           breakpoints={{
             390: { slidesPerView: 1.3, spaceBetween: 10 },
+            600: { slidesPerView: 2.3, spaceBetween: 15 },
             768: { slidesPerView: 2.3, spaceBetween: 15 },
             1024: { slidesPerView: 3.3, spaceBetween: 15 },
             // 1280: { slidesPerView: 3, spaceBetween: 30 },
@@ -264,16 +265,6 @@ const StyledMobileCard = styled(MobileCard)`
   border-radius: 15px;
   overflow: hidden;
   flex-shrink: 0;
-
-  @media (max-width: 1024px) {
-    /* max-width: 250px; */
-    min-height: 350px;
-  }
-
-  @media (max-width: 390px) {
-    max-width: 220px;
-    min-height: 320px;
-  }
 `;
 
 const StyledMobilePoster = styled(MobilePoster)`
@@ -281,14 +272,6 @@ const StyledMobilePoster = styled(MobilePoster)`
   height: 180px;
   object-fit: cover;
   border-radius: 10px;
-
-  @media (max-width: 768px) {
-    height: 150px;
-  }
-
-  @media (max-width: 480px) {
-    height: 120px;
-  }
 `;
 
 const StyledMobileCardText = styled(MobileCardText)`
@@ -299,7 +282,7 @@ const StyledMobileCardText = styled(MobileCardText)`
   flex-direction: column;
   justify-content: space-between;
 
-  @media (max-width: 768px) {
+  @media (max-width: 1024px) {
     padding: 10px;
     font-size: 12px;
   }

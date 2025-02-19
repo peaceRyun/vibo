@@ -3,8 +3,8 @@ import styled from 'styled-components';
 export const Section = styled.div`
   background: black;
   text-align: center;
-  margin-top: 60px;
-  padding: 40px 40px;
+
+  padding: 60px 0 60px 0;
   @media (max-width: 1024px) {
     display: none;
   }
