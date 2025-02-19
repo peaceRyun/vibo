@@ -27,7 +27,7 @@ const WeeklyList = () => {
           1024: { slidesPerView: 4, spaceBetween: 30 } /* 태블릿 */,
           // 768: { slidesPerView: 2.5, spaceBetween: 20 } /* 작은 태블릿 */,
           600: { slidesPerView: 2.5, spaceBetween: 15 } /* 모바일 */,
-          400: { slidesPerView: 1.5, spaceBetween: 3 } /* 작은 모바일 */,
+          400: { slidesPerView: 1.5, spaceBetween: 1 } /* 작은 모바일 */,
         }}
       >
         {/* <WeeklySwiper spaceBetween={50} pagination={{ clickable: true }} slidesPerView={5.5}> */}
@@ -46,6 +46,13 @@ export default WeeklyList;
 const Section = styled.section`
   display: flex;
   flex-direction: column;
+  padding: 60px 0 60px 0;
+  @media (max-width: 1024px) {
+    padding: 40px 0 40px 0;
+  }
+  @media (max-width: 600px) {
+    padding: 30px 0 30px 0;
+  }
   /* align-items: center; */
 `;
 
@@ -60,14 +67,19 @@ const WeeklyInfo = styled.div`
 `;
 
 const UpdateText = styled.h3`
-  font-size: clamp(1.5rem, 3vw, 2rem); /* ✅ 반응형 폰트 크기 조정 */
   color: #fff;
   font-weight: 900;
   white-space: nowrap;
   padding: 0 10px;
-
-  @media (max-width: 768px) {
-    text-align: center;
+  font-size: var(--title-xlarge-size); //32
+  font-weight: var(--title-xlarge-weight); //800
+  @media (max-width: 1024px) {
+    font-size: var(--title-large-mobile); //24
+    font-weight: var(--title-large-weigh); //700
+  }
+  @media (max-width: 600px) {
+    font-size: var(--title-small-mobile); //17
+    font-weight: var(--title-xsmall-weight); //700
   }
 `;
 
