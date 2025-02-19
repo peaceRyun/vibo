@@ -494,10 +494,11 @@ export const Episode = styled.div`
 export const ContentWrapper = styled.div`
     display: grid;
     grid-template-columns: repeat(3, 1fr); /* ✅ 모바일 2열 그리드 */
-    gap: 10px;
+    gap: 20px;
 `;
 
 export const ContentCard = styled.div`
+    cursor: pointer;
     img {
         width: 100%;
         border-radius: 5px;

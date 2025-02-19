@@ -1,7 +1,9 @@
+import { useNavigate } from 'react-router';
 import { ContentCard, ContentWrapper, MReitemContainer } from './style';
 
 const MobileReItem = ({ recommendData, loading, contentType }) => {
     const fallbackImage = '/contentdetail/sample/sample-contentlsit.png';
+    const navigate = useNavigate();
 
     // 이미지 로드 오류 처리 함수
     const handleImageError = (e) => {
@@ -19,8 +21,12 @@ const MobileReItem = ({ recommendData, loading, contentType }) => {
         );
     }
 
-    // 데이터가 없을 경우 처리
-    if (!recommendData?.results || recommendData.results.length === 0) {
+    const onGo = (id) => {
+        navigate(`/detail/${contentType}/${id}`);
+    };
+
+    // ReList와 동일한 방식으로 데이터 확인
+    if (!recommendData || recommendData.length === 0) {
         return (
             <MReitemContainer>
                 <ContentWrapper>
@@ -33,16 +39,15 @@ const MobileReItem = ({ recommendData, loading, contentType }) => {
     return (
         <MReitemContainer>
             <ContentWrapper>
-                {recommendData.results.slice(0, 6).map((item) => (
-                    <ContentCard key={item.id}>
+                {recommendData.map((item) => (
+                    <ContentCard key={item.id} onClick={() => onGo(item.id)}>
                         <img
                             src={
-                                item.poster_path ? `https://image.tmdb.org/t/p/w200${item.poster_path}` : fallbackImage
+                                item.poster_path ? `https://image.tmdb.org/t/p/w780${item.poster_path}` : fallbackImage
                             }
                             alt={contentType === 'movie' ? item.title : item.name}
                             onError={handleImageError}
                         />
-                        <p>{contentType === 'movie' ? item.title : item.name}</p>
                     </ContentCard>
                 ))}
             </ContentWrapper>
