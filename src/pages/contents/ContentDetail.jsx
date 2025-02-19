@@ -14,6 +14,7 @@ import {
     getTVSeasonEpisodes,
     getMovieDetail,
     getMovie,
+    getTVRecommendations,
 } from '../../store/modules/getThunk';
 import ReviewList from '../../components/contents/ReviewList';
 import ContDetail from '../../components/contents/ContDetail';
@@ -30,24 +31,26 @@ const ContentDetail = ({ contentType }) => {
     const [isMobile, setIsMobile] = useState(window.innerWidth <= 1024);
     const isSeries = contentType === 'series';
 
-    // TV 관련 데이터 가져오기
+    // 영화일 때 가져오기
+    const { movieDetail, movieRecommendations, recommendLoading: movieLoading } = useSelector((state) => state.movieR);
+
+    // TV 시리즈일 때 가져오기 - TVDetail을 contentDetail로 변경
     const {
-        contentDetail: tvContentDetail,
+        TVDetail,
         contentRating: tvContentRating,
         TVRecommendData,
-        recommendLoading,
+        recommendLoading: tvLoading,
         tvSeasons,
         episodes,
         seasonsLoading,
         episodesLoading,
     } = useSelector((state) => state.tvSeriesR);
 
-    // 영화 관련 데이터 가져오기
-    const { movieDetail, movieData } = useSelector((state) => state.movieR);
-
     // 컨텐츠 타입에 따라 적절한 데이터 선택
-    const contentDetail = isSeries ? tvContentDetail : movieDetail;
+    const contentDetail = isSeries ? TVDetail : movieDetail;
     const contentRating = isSeries ? tvContentRating : tvContentRating; // 영화 레이팅으로 변경 필요
+    const recommendData = isSeries ? TVRecommendData : movieRecommendations;
+    const recommendLoading = isSeries ? tvLoading : movieLoading;
 
     useEffect(() => {
         const handleResize = () => {
@@ -66,15 +69,14 @@ const ContentDetail = ({ contentType }) => {
                 dispatch(getTVseries());
                 dispatch(getTVDetail(id));
                 dispatch(getTVContentRating(id));
-                dispatch(getTVSeasons(id)); // 시즌 정보 가져오기
+                dispatch(getTVSeasons(id));
+                dispatch(getTVRecommendations(id)); // TV 추천 사용
             } else if (contentType === 'movie') {
                 dispatch(getMovie());
                 dispatch(getMovieDetail(id));
                 dispatch(getMovieContentRating(id));
+                dispatch(getMovieRecommendations(id)); // 영화 추천 사용
             }
-
-            // 추천 데이터 가져오기 (공통)
-            dispatch(getMovieRecommendations(id));
         }
     }, [dispatch, id, contentType]);
 
@@ -116,7 +118,7 @@ const ContentDetail = ({ contentType }) => {
                                     />
                                 )}
                                 <ReList
-                                    TVRecommendData={TVRecommendData}
+                                    recommendData={recommendData}
                                     loading={recommendLoading}
                                     contentType={contentType}
                                 />
@@ -157,7 +159,7 @@ const ContentDetail = ({ contentType }) => {
                         />
                     )}
                     {activeTab === 'similar' && (
-                        <MobileReItem TVRecommendData={TVRecommendData} loading={recommendLoading} />
+                        <MobileReItem recommendData={recommendData} loading={recommendLoading} />
                     )}
                     <ReviewList />
                 </MobileInner>

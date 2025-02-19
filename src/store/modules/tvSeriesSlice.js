@@ -4,15 +4,15 @@ import {
     getTVDetail,
     getTVContentRating,
     getMovieContentRating,
-    getMovieRecommendations,
     getTVSeasonEpisodes,
     getTVSeasons,
+    getTVRecommendations,
 } from './getThunk';
 
 const initialState = {
     TVseriesData: [],
     TVRecommendData: [],
-    contentDetail: null,
+    TVDetail: null,
     contentRating: null,
     tvSeasons: [],
     currentSeasonData: null,
@@ -20,6 +20,7 @@ const initialState = {
     loading: true,
     seasonsLoading: false,
     episodesLoading: false,
+    recommendLoading: false,
     error: null,
     currentData: null,
 };
@@ -55,17 +56,17 @@ export const tvSeriesSlice = createSlice({
                 state.error = action.payload;
                 state.loading = false;
             })
-            // getMovieRecommendations 추가
-            .addCase(getMovieRecommendations.pending, (state) => {
-                state.loading = true;
+            // getTVRecommendations 추가
+            .addCase(getTVRecommendations.pending, (state) => {
+                state.recommendLoading = true;
             })
-            .addCase(getMovieRecommendations.fulfilled, (state, action) => {
+            .addCase(getTVRecommendations.fulfilled, (state, action) => {
                 state.TVRecommendData = action.payload;
-                state.loading = false;
+                state.recommendLoading = false;
             })
-            .addCase(getMovieRecommendations.rejected, (state, action) => {
+            .addCase(getTVRecommendations.rejected, (state, action) => {
                 state.error = action.payload;
-                state.loading = false;
+                state.recommendLoading = false;
             })
             // getTVContentRating
             .addCase(getTVContentRating.pending, (state) => {

@@ -880,3 +880,84 @@ export const getTVSeasons = createAsyncThunk('TVSeasons/getTVSeasons', async (tv
         return rejectWithValue(error.message);
     }
 });
+
+//TV시리즈 - 추천thunk
+const tvOptions = {
+    params: {
+        language: 'ko-KR',
+        page: '1',
+    },
+    headers: {
+        accept: 'application/json',
+        Authorization:
+            'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJkZGY2NTIxYzQzYzJlMDNmNTlkMjc2N2YxMDlhYWFhNCIsIm5iZiI6MTczNzUxMDE4NS4yNjIsInN1YiI6IjY3OTA0ZDI5MmQ2MWMzM2U2M2RmZTVlNiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ._QJjWVEDYEcIfVZtQRYG0JSRb22Dit3HopPsNm8AILE',
+    },
+};
+
+export const getTVRecommendations = createAsyncThunk('tv/getTVRecommendations', async (tvId, thunkAPI) => {
+    try {
+        let allResults = [];
+        let page = 1;
+        const seenIds = new Set(); // 이미 처리된 ID를 추적하기 위한 Set
+
+        while (allResults.length < 24) {
+            const response = await axios.get(`https://api.themoviedb.org/3/tv/${tvId}/recommendations`, {
+                ...tvOptions,
+                params: {
+                    ...tvOptions.params,
+                    page: page.toString(),
+                },
+            });
+
+            // 기본 필터링 + ID 중복 체크
+            const filteredResults = response.data.results.filter(
+                (tv) => tv.overview && tv.poster_path && tv.backdrop_path && !seenIds.has(tv.id) // 중복 ID 체크
+            );
+
+            // 각 TV 시리즈의 비디오 정보 확인
+            for (const tv of filteredResults) {
+                try {
+                    // 이미 충분한 결과를 얻었다면 중단
+                    if (allResults.length >= 24) {
+                        break;
+                    }
+
+                    // ID가 중복되지 않은 경우에만 처리
+                    if (!seenIds.has(tv.id)) {
+                        seenIds.add(tv.id); // ID를 Set에 추가
+
+                        const videoResponse = await axios.get(`https://api.themoviedb.org/3/tv/${tv.id}/videos`, {
+                            headers: tvOptions.headers,
+                        });
+
+                        const trailer = videoResponse.data.results.find(
+                            (video) =>
+                                video.site === 'YouTube' &&
+                                video.key &&
+                                (video.type === 'Trailer' || video.type === 'Teaser')
+                        );
+
+                        allResults.push({
+                            ...tv,
+                            videoKey: trailer ? trailer.key : null,
+                        });
+                    }
+                } catch (error) {
+                    console.error(`Error fetching videos for TV series ${tv.id}:`, error.message);
+                }
+            }
+
+            page++;
+
+            // 더 이상 결과가 없거나 10페이지까지 검색했다면 종료
+            if (!response.data.results.length || page > 10) {
+                break;
+            }
+        }
+
+        return allResults.slice(0, 24);
+    } catch (error) {
+        console.error('Main error:', error.message);
+        return thunkAPI.rejectWithValue(error.message);
+    }
+});
