@@ -1,91 +1,169 @@
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import EpList from '../../components/contents/EpList';
 import PlayBanner from '../../components/contents/PlayBanner';
 import ReList from '../../components/contents/ReList';
 import { Flex, Inner, MobileInner, PcContainer, TabButton, TabContainer } from '../../components/contents/style';
 import { useEffect, useState } from 'react';
-import { getTVseries } from '../../store/modules/getThunk';
-import { useParams } from 'react-router';
+import {
+    getMovieContentRating,
+    getTVContentRating,
+    getTVDetail,
+    getTVseries,
+    getMovieRecommendations,
+    getTVSeasons,
+    getTVSeasonEpisodes,
+    getMovieDetail,
+    getMovie,
+} from '../../store/modules/getThunk';
 import ReviewList from '../../components/contents/ReviewList';
 import ContDetail from '../../components/contents/ContDetail';
 import ContMoreDetail from '../../components/contents/ContMoreDetail';
 import EpListMobile from '../../components/contents/EpListMobile';
-
 import ContMobile from '../../components/contents/ContMobile';
 import MobileReItem from '../../components/contents/MobileReitem';
+import { useParams } from 'react-router';
 
-// 콘텐츠 상세
-const ContentDetail = () => {
+const ContentDetail = ({ contentType }) => {
     const dispatch = useDispatch();
     const { id } = useParams();
-
     const [activeTab, setActiveTab] = useState('episodes');
-    // 모바일 테스트 적용
     const [isMobile, setIsMobile] = useState(window.innerWidth <= 1024);
+    const isSeries = contentType === 'series';
+
+    // TV 관련 데이터 가져오기
+    const {
+        contentDetail: tvContentDetail,
+        contentRating: tvContentRating,
+        TVRecommendData,
+        recommendLoading,
+        tvSeasons,
+        episodes,
+        seasonsLoading,
+        episodesLoading,
+    } = useSelector((state) => state.tvSeriesR);
+
+    // 영화 관련 데이터 가져오기
+    const { movieDetail, movieData } = useSelector((state) => state.movieR);
+
+    // 컨텐츠 타입에 따라 적절한 데이터 선택
+    const contentDetail = isSeries ? tvContentDetail : movieDetail;
+    const contentRating = isSeries ? tvContentRating : tvContentRating; // 영화 레이팅으로 변경 필요
 
     useEffect(() => {
         const handleResize = () => {
-            setIsMobile(window.innerWidth <= 1024); // 모바일 기준을 1024px로 설정
+            setIsMobile(window.innerWidth <= 1024);
         };
 
         window.addEventListener('resize', handleResize);
-        handleResize(); // 초기화
+        handleResize();
 
         return () => window.removeEventListener('resize', handleResize);
     }, []);
 
     useEffect(() => {
-        dispatch(getTVseries());
-    }, []);
+        if (id) {
+            if (contentType === 'series') {
+                dispatch(getTVseries());
+                dispatch(getTVDetail(id));
+                dispatch(getTVContentRating(id));
+                dispatch(getTVSeasons(id)); // 시즌 정보 가져오기
+            } else if (contentType === 'movie') {
+                dispatch(getMovie());
+                dispatch(getMovieDetail(id));
+                dispatch(getMovieContentRating(id));
+            }
+
+            // 추천 데이터 가져오기 (공통)
+            dispatch(getMovieRecommendations(id));
+        }
+    }, [dispatch, id, contentType]);
+
+    // 시즌 선택 시 에피소드 가져오기
+    const handleSeasonSelect = (seasonNumber) => {
+        if (id && seasonNumber) {
+            dispatch(getTVSeasonEpisodes({ tvId: id, seasonNumber }));
+        }
+    };
+
+    const renderEpisodeTab = () => {
+        if (!isSeries) return null;
+
+        return (
+            <TabButton active={activeTab === 'episodes'} onClick={() => setActiveTab('episodes')}>
+                에피소드
+            </TabButton>
+        );
+    };
+
     return (
         <>
-            {/* 피씨 */}
             {!isMobile && (
                 <PcContainer>
                     <Inner>
                         <Flex $flexDirection='column' $position='relative' $gap='30px' $padding='0 50px'>
-                            <PlayBanner />
+                            <PlayBanner contentDetail={contentDetail} contentType={contentType} />
                             <div style={{ padding: '0 50px' }}>
-                                <ContDetail />
-                                <EpList />
-                                <ReList />
+                                <ContDetail contentDetail={contentDetail} contentType={contentType} />
+                                {isSeries && (
+                                    <EpList
+                                        seasons={tvSeasons || []}
+                                        episodes={episodes || []}
+                                        contentRating={contentRating}
+                                        seasonsLoading={seasonsLoading}
+                                        episodesLoading={episodesLoading}
+                                        onSeasonSelect={handleSeasonSelect}
+                                        posterPath={contentDetail?.poster_path} // poster_path 전달
+                                    />
+                                )}
+                                <ReList
+                                    TVRecommendData={TVRecommendData}
+                                    loading={recommendLoading}
+                                    contentType={contentType}
+                                />
                                 <ReviewList />
-                                <ContMoreDetail />
+                                <div id='cont-more-detail'>
+                                    <ContMoreDetail
+                                        contentDetail={contentDetail}
+                                        contentType={contentType}
+                                        contentRating={contentRating}
+                                    />
+                                </div>
                             </div>
                         </Flex>
                     </Inner>
                 </PcContainer>
             )}
-            {/* 모바일버전 */}
+
             {isMobile && (
                 <MobileInner>
                     <div>
-                        <PlayBanner />
+                        <PlayBanner contentDetail={contentDetail} contentType={contentType} />
                     </div>
-                    <ContMobile />
+                    <ContMobile contentDetail={contentDetail} />
                     <TabContainer>
-                        <TabButton active={activeTab === 'episodes'} onClick={() => setActiveTab('episodes')}>
-                            에피소드
-                        </TabButton>
-
+                        {renderEpisodeTab()}
                         <TabButton active={activeTab === 'similar'} onClick={() => setActiveTab('similar')}>
                             비슷한 콘텐츠
                         </TabButton>
                     </TabContainer>
-                    {/* 탭 활성화해야함 */}
-                    {activeTab === 'episodes' && <EpListMobile />}
-                    {activeTab === 'similar' && <MobileReItem />}
+                    {isSeries && activeTab === 'episodes' && (
+                        <EpListMobile
+                            seasons={tvSeasons || []}
+                            episodes={episodes || []}
+                            contentRating={contentRating}
+                            seasonsLoading={seasonsLoading}
+                            episodesLoading={episodesLoading}
+                            onSeasonSelect={handleSeasonSelect}
+                        />
+                    )}
+                    {activeTab === 'similar' && (
+                        <MobileReItem TVRecommendData={TVRecommendData} loading={recommendLoading} />
+                    )}
                     <ReviewList />
-                    {/* 리뷰 내역 입력 후 리스트 보이게? */}
                 </MobileInner>
             )}
-            {/* // {activeTab === 'episodes' ? <EpListMobile /> : <MobileReItem />} */}
         </>
     );
 };
 
 export default ContentDetail;
-
-// {activeTab === 'episodes' && <EpListMobile />}
-// {activeTab === 'episodes' && <EpItemMobile />}
-// {activeTab === 'similar' && <ContMobile />}

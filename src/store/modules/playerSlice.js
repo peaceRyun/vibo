@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { getTVVideos } from './getThunk';
+import { getTVVideos, getMovieVideos } from './getThunk';
 
 const initialState = {
     isPlaying: true,
@@ -34,6 +34,7 @@ export const playerSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder
+            // TV 비디오 관련 리듀서
             .addCase(getTVVideos.pending, (state) => {
                 console.log('getTVVideos.pending');
                 state.loading = true;
@@ -46,6 +47,23 @@ export const playerSlice = createSlice({
             })
             .addCase(getTVVideos.rejected, (state, action) => {
                 console.log('getTVVideos.rejected with error:', action.payload);
+                state.loading = false;
+                state.error = action.payload;
+                state.videoId = 'MkcqlqCfYcg';
+            })
+            // 영화 비디오 관련 리듀서 추가
+            .addCase(getMovieVideos.pending, (state) => {
+                console.log('getMovieVideos.pending');
+                state.loading = true;
+                state.error = null;
+            })
+            .addCase(getMovieVideos.fulfilled, (state, action) => {
+                console.log('getMovieVideos.fulfilled with payload:', action.payload);
+                state.loading = false;
+                state.videoId = action.payload;
+            })
+            .addCase(getMovieVideos.rejected, (state, action) => {
+                console.log('getMovieVideos.rejected with error:', action.payload);
                 state.loading = false;
                 state.error = action.payload;
                 state.videoId = 'MkcqlqCfYcg';
