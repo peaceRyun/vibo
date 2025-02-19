@@ -7,19 +7,6 @@ export const BannerWrapper = styled.div`
   // min-height: 600px;
   position: relative;
   overflow: hidden;
-
-  //   @media (max-width: 1600px) {
-  //     height: 100px;
-  //   }
-
-  //   @media (max-width: 1280px) {
-  //     height: 600px;
-  //   }
-
-  //   @media (max-width: 1024px) {
-  //     height: auto;
-  //   }
-  //
 `;
 
 export const SwiperContainer = styled.div`
@@ -34,6 +21,8 @@ export const SlideImage = styled.img`
   height: 100%;
   object-fit: cover;
   border-radius: 12px;
+  min-height: 600px;
+  max-height: 600px;
 `;
 
 export const SlideItem = styled.div`
@@ -69,14 +58,32 @@ export const Subtitle = styled.div`
 
 // ---------------------------MainBanner GSAP CSS
 /* GSAP Floating Images */
+// export const FloatingContainer = styled.div`
+
 export const FloatingContainer = styled.div`
   position: absolute;
-  top: 0;
+  top: -10px;
   left: 0;
   width: 100%;
   height: 100%;
   pointer-events: none;
-  z-index: 2;
+  z-index: 3;
+  overflow: visible;
+
+  @media (min-width: 1700px) {
+    top: 80px;
+    height: 100%;
+  }
+
+  @media (min-width: 1024px) and (max-width: 1450px) {
+    // height: calc(100% - ((1450px - 100vw) * 0.1));
+    top: calc(-100px + ((1450px - 100vw) * 0.1));
+  }
+
+  @media (max-width: 1219px) {
+    top: -60px;
+    height: 79%;
+  }
 `;
 
 export const FloatingImage = styled.img`
@@ -85,4 +92,25 @@ export const FloatingImage = styled.img`
   height: auto;
   opacity: 1;
   z-index: 300;
+`;
+export const OverlayFilter = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  min-width: 600px;
+  border-radius: 12px;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.1));
+  z-index: 2;
+
+  transition: opacity 1.5s ease;
+`;
+export const LogoImage = styled.img`
+  width: auto;
+  max-width: 600px;
+  height: auto;
+  margin: 0 auto;
+  display: block;
+  z-index: ;
 `;
