@@ -2,19 +2,89 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
 //영화 - 기본 정보 끌어오기 thunk
-const options = {
-    api_key: 'ddf6521c43c2e03f59d2767f109aaaa4',
-    lenguage: 'ko-KR',
-    genres: 28,
+// 영화 데이터 가져오기 thunk
+const moviesOptions = {
+    params: {
+        include_adult: 'false',
+        language: 'ko-KR',
+        page: '1',
+        sort_by: 'popularity.desc',
+    },
+    headers: {
+        accept: 'application/json',
+        Authorization:
+            'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJkZGY2NTIxYzQzYzJlMDNmNTlkMjc2N2YxMDlhYWFhNCIsIm5iZiI6MTczNzUxMDE4NS4yNjIsInN1YiI6IjY3OTA0ZDI5MmQ2MWMzM2U2M2RmZTVlNiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ._QJjWVEDYEcIfVZtQRYG0JSRb22Dit3HopPsNm8AILE',
+    },
 };
 
-export const getMovie = createAsyncThunk('movie/getMovie', async () => {
-    const url = `https://api.themoviedb.org/3/movie/now_playing?`;
+export const getMovie = createAsyncThunk('movie/getMovie', async (_, thunkAPI) => {
     try {
-        const res = await axios.get(url, { params: options });
-        return res.data.results;
+        let allResults = [];
+        let page = 1;
+        const seenIds = new Set(); // 이미 처리된 ID를 추적하기 위한 Set
+
+        while (allResults.length < 24) {
+            // 영화 기본 정보 가져오기
+            const response = await axios.get('https://api.themoviedb.org/3/discover/movie', {
+                ...moviesOptions,
+                params: {
+                    ...moviesOptions.params,
+                    page: page.toString(),
+                },
+            });
+
+            // 기본 필터링: overview, poster_path, backdrop_path가 있고 ID가 중복되지 않는 콘텐츠만
+            const filteredResults = response.data.results.filter(
+                (movie) => movie.overview && movie.poster_path && movie.backdrop_path && !seenIds.has(movie.id) // 중복 ID 체크
+            );
+
+            // 각 영화의 비디오 정보 확인
+            for (const movie of filteredResults) {
+                try {
+                    // 이미 충분한 결과를 얻었다면 중단
+                    if (allResults.length >= 24) {
+                        break;
+                    }
+
+                    // ID가 중복되지 않은 경우에만 처리
+                    if (!seenIds.has(movie.id)) {
+                        seenIds.add(movie.id); // ID를 Set에 추가
+
+                        const videoResponse = await axios.get(`https://api.themoviedb.org/3/movie/${movie.id}/videos`, {
+                            headers: moviesOptions.headers,
+                        });
+
+                        // 예고편이나 티저 찾기
+                        const trailer = videoResponse.data.results.find(
+                            (video) =>
+                                video.site === 'YouTube' &&
+                                video.key &&
+                                (video.type === 'Trailer' || video.type === 'Teaser')
+                        );
+
+                        // 모든 영화를 저장하되, videoKey의 유무로 구분
+                        allResults.push({
+                            ...movie,
+                            videoKey: trailer ? trailer.key : null,
+                        });
+                    }
+                } catch (error) {
+                    console.error(`Error fetching videos for movie ${movie.id}:`, error.message);
+                }
+            }
+
+            page++;
+
+            // 더 이상 결과가 없거나 10페이지까지 검색했다면 종료
+            if (!response.data.results.length || page > 10) {
+                break;
+            }
+        }
+
+        return allResults.slice(0, 24);
     } catch (error) {
-        console.log(error);
+        console.error('Main error:', error.message);
+        return thunkAPI.rejectWithValue(error.message);
     }
 });
 

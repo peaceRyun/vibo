@@ -4,12 +4,11 @@ import HoverItem from './HoverItem';
 import { useNavigate } from 'react-router';
 
 const CommonItem = ({ content }) => {
-    const { id, poster_path, title, name, videoKey, media_type } = content;
+    const { id, poster_path, title, name, media_type } = content;
     const [isHovered, setIsHovered] = useState(false);
     const navigate = useNavigate();
 
     const handleClick = () => {
-        // 모든 아이템 클릭 허용, videoKey 검사 제거
         const contentType = determineContentType();
         navigate(`/detail/${contentType}/${id}`);
     };
