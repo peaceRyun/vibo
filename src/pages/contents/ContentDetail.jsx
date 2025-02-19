@@ -27,9 +27,10 @@ import { useParams } from 'react-router';
 const ContentDetail = ({ contentType }) => {
     const dispatch = useDispatch();
     const { id } = useParams();
-    const [activeTab, setActiveTab] = useState('episodes');
     const [isMobile, setIsMobile] = useState(window.innerWidth <= 1024);
     const isSeries = contentType === 'series';
+    // 1. 초기 탭 설정 개선 (영화일 경우 '비슷한 콘텐츠' 탭을 기본으로)
+    const [activeTab, setActiveTab] = useState(isSeries ? 'episodes' : 'similar');
 
     // 영화일 때 가져오기
     const { movieDetail, movieRecommendations, recommendLoading: movieLoading } = useSelector((state) => state.movieR);
@@ -62,6 +63,12 @@ const ContentDetail = ({ contentType }) => {
 
         return () => window.removeEventListener('resize', handleResize);
     }, []);
+
+    useEffect(() => {
+        if (!isSeries) {
+            setActiveTab('similar'); // 영화일 경우 항상 '비슷한 콘텐츠' 탭으로
+        }
+    }, [isSeries]);
 
     useEffect(() => {
         if (id) {
@@ -144,7 +151,7 @@ const ContentDetail = ({ contentType }) => {
                     <ContMobile contentDetail={contentDetail} />
                     <TabContainer>
                         {renderEpisodeTab()}
-                        <TabButton active={activeTab === 'similar'} onClick={() => setActiveTab('similar')}>
+                        <TabButton $active={activeTab === 'similar'} onClick={() => setActiveTab('similar')}>
                             비슷한 콘텐츠
                         </TabButton>
                     </TabContainer>
@@ -159,7 +166,11 @@ const ContentDetail = ({ contentType }) => {
                         />
                     )}
                     {activeTab === 'similar' && (
-                        <MobileReItem recommendData={recommendData} loading={recommendLoading} />
+                        <MobileReItem
+                            recommendData={recommendData}
+                            loading={recommendLoading}
+                            contentType={contentType}
+                        />
                     )}
                     <ReviewList />
                 </MobileInner>

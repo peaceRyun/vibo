@@ -533,7 +533,7 @@ export const TabButton = styled.button`
     flex: 1;
     padding: 12px 0;
     font-size: 16px;
-    color: ${(props) => (props.active ? '#fff' : '#aaa')};
+    color: ${(props) => (props.$active ? '#fff' : '#aaa')};
     /* background: ${(props) => (props.active ? '#00c8ff' : 'transparent')}; */
     border: none;
     /* border-bottom: ${(props) => (props.active ? '3px solid #fff' : 'none')}; */
@@ -676,7 +676,7 @@ export const LikeIcon = styled.div`
     }
 `;
 
-export const RatingIcon = styled.p`
+export const RatingIcon = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -691,6 +691,13 @@ export const RatingNumber = styled.div`
     display: flex;
     flex-direction: row;
     align-items: flex-end;
+
+    .rating-value {
+        font-size: 16px;
+        font-weight: bold;
+    }
+
+    /* 기존 스타일 유지 */
     h2 {
         font-size: 16px;
     }
@@ -774,4 +781,11 @@ export const EpMobileList = styled.div`
     gap: 10px;
     flex-direction: row;
     justify-content: space-between;
+`;
+
+export const DescriptionText = styled.div`
+    font-size: 13px;
+    font-weight: bold;
+    color: #ddd;
+    margin-bottom: 10px;
 `;
