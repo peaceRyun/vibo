@@ -14,12 +14,20 @@ export const SlideImageContainer = styled.div`
   border-radius: ${({ $isMainSlide }) => ($isMainSlide ? '200px 200px 8px 8px' : '8px')};
   position: relative;
   transition: border-radius 1s ease;
+  @media (max-width: 1024px) {
+    width: 85%;
+    height: 85%;
+  }
 `;
 
 export const SlideImage = styled.img`
   width: 100%;
   height: 100%;
   object-fit: cover;
+  @media (max-width: 1024px) {
+    /* width: 80%;
+    height: 80%; */
+  }
 `;
 
 // export const RankNumber = styled.div`
@@ -71,9 +79,21 @@ export const RankNumber = styled.div`
         line-height: 400px;
         -webkit-text-stroke: 5px white; /* 🎯 메인 숫자는 더 굵은 테두리 적용 */
     `}
+  @media (max-width: 1024px) {
+    width: 90%;
+    top: 65%;
+    left: -150px;
+  }
+
+  @media (max-width: 600px) {
+    width: 60%;
+    top: 69%;
+    left: -119px;
+  }
+`;
 `;
 
-// export const RankNumber = styled.div`
+// export const RankNumber = styled.div`;
 //   position: absolute;
 //   bottom: 15px; /* 🎯 숫자를 이미지 하단에 정렬 */
 //   left: 10px; /* 🎯 숫자를 왼쪽 정렬 */

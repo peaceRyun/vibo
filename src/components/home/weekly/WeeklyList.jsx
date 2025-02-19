@@ -27,7 +27,7 @@ const WeeklyList = () => {
           1024: { slidesPerView: 4, spaceBetween: 30 } /* 태블릿 */,
           // 768: { slidesPerView: 2.5, spaceBetween: 20 } /* 작은 태블릿 */,
           600: { slidesPerView: 2.5, spaceBetween: 15 } /* 모바일 */,
-          400: { slidesPerView: 1.5, spaceBetween: 3 } /* 작은 모바일 */,
+          400: { slidesPerView: 1.5, spaceBetween: 1 } /* 작은 모바일 */,
         }}
       >
         {/* <WeeklySwiper spaceBetween={50} pagination={{ clickable: true }} slidesPerView={5.5}> */}

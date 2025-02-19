@@ -45,7 +45,7 @@ const RateList = () => {
           centeredSlides={false} /* 메인 슬라이드가 강조되도록 설정 */
           onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)}
           breakpoints={{
-            390: { slidesPerView: 1, spaceBetween: 10 },
+            390: { slidesPerView: 1, spaceBetween: 50 },
             600: { slidesPerView: 1.3, spaceBetween: 15 },
             768: { slidesPerView: 2.3, spaceBetween: 15 },
             1024: { slidesPerView: 3.3, spaceBetween: 15 },
@@ -76,6 +76,8 @@ const Section = styled.section`
   }
 
   @media (max-width: 600px) {
+    /* gap: 40px; */
+    height: 85vh;
   }
 `;
 
@@ -98,6 +100,9 @@ const RateTitle = styled.h3`
   font-weight: bold;
   line-height: 1.5;
   margin: 0;
+  @media (max-width: 1024px) {
+    padding: 20px;
+  }
 `;
 
 const RateSwiper = styled(Swiper)`
