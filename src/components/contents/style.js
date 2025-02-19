@@ -493,8 +493,15 @@ export const Episode = styled.div`
 // 비슷한 콘텐츠 섹션
 export const ContentWrapper = styled.div`
     display: grid;
-    grid-template-columns: repeat(3, 1fr); /* ✅ 모바일 2열 그리드 */
     gap: 20px;
+
+    /* 모바일 (작은 화면) */
+    grid-template-columns: repeat(2, 1fr);
+
+    /* 태블릿 (중간 화면) */
+    @media (min-width: 600px) {
+        grid-template-columns: repeat(3, 1fr);
+    }
 `;
 
 export const ContentCard = styled.div`
