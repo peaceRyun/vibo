@@ -200,11 +200,11 @@ const MobileOnly = ({ content }) => {
           centeredSlides={false}
           // 슬라이드 요소 반응형시 중앙 안하도록 하기
           loop={true}
-          // autoplay={{
-          //   delay: 3000,
-          //   disableOnInteraction: false,
-          // }}
-          // modules={[Autoplay]}
+          autoplay={{
+            delay: 3000,
+            disableOnInteraction: false,
+          }}
+          modules={[Autoplay]}
           breakpoints={{
             390: { slidesPerView: 1.3, spaceBetween: 10 },
             600: { slidesPerView: 2.3, spaceBetween: 15 },

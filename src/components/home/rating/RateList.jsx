@@ -41,8 +41,15 @@ const RateList = () => {
       <RightArea>
         <RateSwiper
           spaceBetween={60} /* 슬라이드 간의 간격을 넉넉하게 설정 */
-          slidesPerView={3.5} /* 메인 슬라이드가 강조되도록 설정 */
+          slidesPerView={3.5}
+          centeredSlides={false} /* 메인 슬라이드가 강조되도록 설정 */
           onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)}
+          breakpoints={{
+            390: { slidesPerView: 1, spaceBetween: 10 },
+            600: { slidesPerView: 1.3, spaceBetween: 15 },
+            768: { slidesPerView: 2.3, spaceBetween: 15 },
+            1024: { slidesPerView: 3.3, spaceBetween: 15 },
+          }}
         >
           {images.map((imgSrc, index) => (
             <SwiperSlide key={index}>
@@ -62,6 +69,14 @@ const Section = styled.section`
   flex-direction: row;
   gap: 40px;
   height: 65vh;
+  @media (max-width: 1024px) {
+    flex-direction: column;
+    /* gap: 40px; */
+    height: 90vh;
+  }
+
+  @media (max-width: 600px) {
+  }
 `;
 
 const LeftArea = styled.div`
