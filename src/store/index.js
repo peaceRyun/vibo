@@ -11,20 +11,22 @@ import profileR from './modules/profileSlice';
 import tvDetailR from './modules/tvDetailSlice';
 import topRatedR from './modules/topRatedSlice';
 import searchR from './modules/searchSlice';
+import filterR from './modules/filterSlice';
 
 export const store = configureStore({
-    reducer: {
-        // aboutR,
-        contentR,
-        memberR,
-        playerR,
-        movieR,
-        tvSeriesR,
-        contPlayerR,
-        // pagenationR,
-        profileR,
-        tvDetailR,
-        topRatedR,
-        searchR,
-    },
+  reducer: {
+    // aboutR,
+    contentR,
+    memberR,
+    playerR,
+    movieR,
+    tvSeriesR,
+    contPlayerR,
+    // pagenationR,
+    profileR,
+    tvDetailR,
+    topRatedR,
+    searchR,
+    filterR, //추가
+  },
 });

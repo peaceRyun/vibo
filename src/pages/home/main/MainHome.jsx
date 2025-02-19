@@ -17,6 +17,8 @@ import MenuSection from '../../../components/home/menubutton/MenuSection';
 import MainBanner from '../../../components/home/mainBanner/MainBanner';
 import { useDispatch } from 'react-redux';
 import { getAiringToday, getTopRated, getTVseries } from '../../../store/modules/getThunk';
+import { getAnimations } from '../../../store/modules/getThunkThree';
+import CommonList2 from '../../../components/home/common/CommonList2';
 // import { LiveContainer } from '../live/style';
 // import { Container } from '../../../components/home/viboOnly/only1/style';
 
@@ -28,7 +30,9 @@ const MainHome = () => {
     dispatch(getTVseries());
     dispatch(getAiringToday());
     dispatch(getTopRated());
+    dispatch(getAnimations());
   }, []);
+  // 디스패치 실행해서 데이터 redux스토어에 저장
   return (
     <MainContent>
       <MainBanner />
@@ -46,7 +50,7 @@ const MainHome = () => {
       <AdBanner />
       <MainContainer>
         <CommonList />
-        <CommonList />
+        <CommonList2 />
         <CommonList />
         <ViboOnly />
       </MainContainer>

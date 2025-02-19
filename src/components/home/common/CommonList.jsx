@@ -2,55 +2,74 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import styled from 'styled-components';
 // import { Pagination } from 'swiper/modules'; // 페이지네이션 모듈 주석 처리
-import { useNavigate } from 'react-router';
-import { useSelector } from 'react-redux';
+// import { useNavigate } from 'react-router';
+import { useDispatch, useSelector } from 'react-redux';
 import CommonItem from './CommonItem';
 
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router';
+import { getAnimations } from '../../../store/modules/getThunkThree';
+
 export const CommonList = () => {
+  const dispatch = useDispatch();
+  const animations = useSelector((state) => state.filterR.animations || []);
+  const loading = useSelector((state) => state.filterR.loading);
+
+  useEffect(() => {
+    console.log('📢 API 요청: getAnimations 실행!');
+    dispatch(getAnimations());
+  }, [dispatch]);
+
+  console.log('📌 Redux에서 가져온 animations:', animations);
+
+  // 데이터를 가져와서 필터링 적용해야함
   const navigate = useNavigate();
   const onGo = () => {
     navigate('/contentlist');
   };
-  const { TVseriesData } = useSelector((state) => state.tvSeriesR);
 
-  if (!TVseriesData) {
-    return <div>loading....</div>;
-  }
-  if (TVseriesData.length > 0) {
-    return (
-      <Section>
-        <CommonInfo>
-          <CommonTitle>
-            {`
-  XX님이
-  좋아할만 한
-  예능
+  // const { KoreanContent } = useSelector((state) => state.filterR);
+
+  // 기존 영역
+  // const { TVseriesData } = useSelector((state) => state.tvSeriesR);
+
+  // if (!TVseriesData) {
+  //   return <div>loading....</div>;
+  // }
+  // if (TVseriesData.length > 0) {
+  return (
+    <Section>
+      <CommonInfo>
+        <CommonTitle>
+          {`
+ 아이부터 어른까지
+ 애니타임
 `}
-            <VerticalText>TV</VerticalText>
-          </CommonTitle>
-          <MoreBtn onClick={onGo}>더보기</MoreBtn>
-        </CommonInfo>
-        <CommonSwiper
-          spaceBetween={30} /* 기본 간격 */
-          slidesPerView={5.5} /* 기본값 (데스크탑) */
-          breakpoints={{
-            // 1280: { slidesPerView: 5.5, spaceBetween: 30 },
-            1024: { slidesPerView: 4.2, spaceBetween: 15 },
-            // 768: { slidesPerView: 2.5, spaceBetween: 20 },
-            // 600: { slidesPerView: 1.5, spaceBetween: 15 },
-            400: { slidesPerView: 2.2, spaceBetween: 10 },
-          }}
-        >
-          {/* modules={[Pagination]} */}
-          {TVseriesData.map((content) => (
-            <SwiperSlide key={content.id}>
-              <CommonItem content={content} />
-            </SwiperSlide>
-          ))}
-        </CommonSwiper>
-      </Section>
-    );
-  }
+          <VerticalText>TV</VerticalText>
+        </CommonTitle>
+        <MoreBtn onClick={onGo}>더보기</MoreBtn>
+      </CommonInfo>
+      <CommonSwiper
+        spaceBetween={30} /* 기본 간격 */
+        slidesPerView={5.5} /* 기본값 (데스크탑) */
+        breakpoints={{
+          // 1280: { slidesPerView: 5.5, spaceBetween: 30 },
+          1024: { slidesPerView: 4.2, spaceBetween: 15 },
+          // 768: { slidesPerView: 2.5, spaceBetween: 20 },
+          // 600: { slidesPerView: 1.5, spaceBetween: 15 },
+          400: { slidesPerView: 2.2, spaceBetween: 10 },
+        }}
+      >
+        {/* modules={[Pagination]} */}
+        {animations?.map((content) => (
+          <SwiperSlide key={content.id}>
+            <CommonItem content={content} />
+          </SwiperSlide>
+        ))}
+      </CommonSwiper>
+    </Section>
+  );
+  // }
 };
 
 export default CommonList;
