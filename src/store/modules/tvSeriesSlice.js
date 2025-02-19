@@ -48,7 +48,7 @@ export const tvSeriesSlice = createSlice({
                 state.loading = true;
             })
             .addCase(getTVDetail.fulfilled, (state, action) => {
-                state.contentDetail = action.payload;
+                state.TVDetail = action.payload;
                 state.currentData = action.payload;
                 state.loading = false;
             })

@@ -19,7 +19,7 @@ const EpItem = ({ episode }) => {
                     <H4 $fontSize='15px' $fontWeight='700'>
                         {episode.name}
                     </H4>
-                    <P $fontSize='15px' $fontWeight='400' $padding='0'>
+                    <P $fontSize='15px' $fontWeight='400' $padding='0' $lineClamp='3'>
                         {episode.overview || '에피소드 설명이 없습니다.'}
                     </P>
                 </Flex>
