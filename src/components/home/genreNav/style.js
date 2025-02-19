@@ -32,7 +32,12 @@ export const GenreItem = styled.div.withConfig({
   border-radius: 0.75rem;
   cursor: pointer;
   transition: border-color 0.3s ease;
-  background-color: ${({ ishighlighted }) => (ishighlighted ? '#009c8c' : 'transparent')};
+
+  background-color: ${({ ishighlighted }) => (ishighlighted ? 'black' : 'black')};
+  &:hover {
+    background-color: #009c8c;
+    color: #191919;
+  }
   @media (max-width: 1024px) {
     width: 27.1875rem;
     height: 7.4375rem;
@@ -51,16 +56,18 @@ export const GenreItem = styled.div.withConfig({
 
   .ko {
     font-size: 1.5rem;
-    color: ${({ ishighlighted }) => (ishighlighted ? '#005B53' : '#939598')};
+    color: ${({ ishighlighted }) => (ishighlighted ? 'white' : 'white')};
     /* margin-top: 0.5rem; */
     @media (max-width: 1024px) {
       font-size: 17px;
     }
   }
+
   .GenreText {
     display: flex;
     flex-direction: column;
     align-items: center;
+
     @media (max-width: 600px) {
       width: 100%;
       flex-direction: row;
