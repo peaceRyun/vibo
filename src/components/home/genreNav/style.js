@@ -12,8 +12,8 @@ export const GenreContainer = styled.div`
   }
 
   @media (max-width: 600px) {
-    grid-template-columns: repeat(2, 1fr);
-    gap: clamp(1rem, 1.5vw, 1rem);
+    grid-template-columns: repeat(1, 1fr);
+    gap: 0px;
     justify-items: center;
   }
 `;
@@ -52,9 +52,20 @@ export const GenreItem = styled.div.withConfig({
   .ko {
     font-size: 1.5rem;
     color: ${({ ishighlighted }) => (ishighlighted ? '#005B53' : '#939598')};
-    margin-top: 0.5rem;
+    /* margin-top: 0.5rem; */
     @media (max-width: 1024px) {
       font-size: 17px;
+    }
+  }
+  .GenreText {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    @media (max-width: 600px) {
+      width: 100%;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-around;
     }
   }
   @media (max-width: 1024px) {
@@ -63,8 +74,9 @@ export const GenreItem = styled.div.withConfig({
   }
 
   @media (max-width: 600px) {
-    width: clamp(130px, 50vw, 250px);
-
+    width: 100%;
+    height: 70%;
+    padding: 15px;
     /* height: clamp(90px, 25vw, 140px); */
   }
 `;
