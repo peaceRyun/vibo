@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import styled from 'styled-components';
@@ -7,23 +7,6 @@ import RateItem from './RateItem';
 const RateList = () => {
   const [activeIndex, setActiveIndex] = useState(0);
 
-  const [slidesPerView, setSlidesPerView] = useState(4.5);
-
-  useEffect(() => {
-    const updateSlidesPerView = () => {
-      if (window.innerWidth < 768) {
-        setSlidesPerView(1.2);
-      } else if (window.innerWidth < 1024) {
-        setSlidesPerView(2.5);
-      } else {
-        setSlidesPerView(3.5);
-      }
-    };
-
-    updateSlidesPerView();
-    window.addEventListener('resize', updateSlidesPerView);
-    return () => window.removeEventListener('resize', updateSlidesPerView);
-  }, []);
   const images = [
     '/mainhome/weeklyitem_01.webp',
     '/mainhome/weeklyitem_02.webp',
@@ -58,9 +41,7 @@ const RateList = () => {
       <RightArea>
         <RateSwiper
           spaceBetween={60} /* 슬라이드 간의 간격을 넉넉하게 설정 */
-          slidesPerView={4.5} /* 메인 슬라이드가 강조되도록 설정 */
-          lidesPerView={slidesPerView}
-          centeredSlides
+          slidesPerView={3.5} /* 메인 슬라이드가 강조되도록 설정 */
           onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)}
         >
           {images.map((imgSrc, index) => (
@@ -81,10 +62,6 @@ const Section = styled.section`
   flex-direction: row;
   gap: 40px;
   height: 65vh;
-  @media (max-width: 1024px) {
-    flex-direction: column;
-    height: auto;
-  }
 `;
 
 const LeftArea = styled.div`
@@ -98,9 +75,6 @@ const RightArea = styled.div`
   padding-left: 85px;
   flex: 3;
   overflow: hidden; /* 왼쪽으로 넘치는 슬라이드를 숨김 */
-  @media (max-width: 1024px) {
-    padding-left: 0;
-  }
 `;
 
 const RateTitle = styled.h3`
@@ -109,10 +83,6 @@ const RateTitle = styled.h3`
   font-weight: bold;
   line-height: 1.5;
   margin: 0;
-  @media (max-width: 768px) {
-    font-size: 32px;
-    text-align: center;
-  }
 `;
 
 const RateSwiper = styled(Swiper)`
