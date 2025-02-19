@@ -4,55 +4,56 @@ import HoverItem from './HoverItem';
 import { useNavigate } from 'react-router';
 
 const CommonItem = ({ content }) => {
-  const { id, poster_path, title, name, videoKey } = content;
-  const [isHovered, setIsHovered] = useState(false);
-  const navigate = useNavigate();
+    const { id, poster_path, title, name, videoKey, media_type } = content;
+    const [isHovered, setIsHovered] = useState(false);
+    const navigate = useNavigate();
 
-  const handleClick = () => {
-    if (videoKey) {
-      navigate(`/detail/${id}`);
-    }
-  };
+    const handleClick = () => {
+        // 모든 아이템 클릭 허용, videoKey 검사 제거
+        const contentType = determineContentType();
+        navigate(`/detail/${contentType}/${id}`);
+    };
 
-  const imageUrl = poster_path ? `https://image.tmdb.org/t/p/w500/${poster_path}` : '/mainhome/sample/commonSample.png';
+    // 컨텐츠 타입 결정 함수
+    const determineContentType = () => {
+        // media_type이 명시적으로 제공된 경우 사용
+        if (media_type === 'movie' || media_type === 'series') {
+            return media_type;
+        }
 
-  return (
-    <CommonItemContainer
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-      onClick={handleClick}
-      style={{
-        cursor: videoKey ? 'pointer' : 'not-allowed',
-        opacity: videoKey ? 1 : 0.7,
-      }}
-    >
-      <CardInner $isHovered={isHovered}>
-        <CardFront>
-          <CommonImg src={imageUrl} alt={title || name || '이미지 없음'} />
-          {!videoKey && (
-            <div
-              style={{
-                position: 'absolute',
-                top: '50%',
-                left: '50%',
-                transform: 'translate(-50%, -50%)',
-                backgroundColor: 'rgba(0, 0, 0, 0.7)',
-                padding: '5px 10px',
-                borderRadius: '4px',
-                color: 'white',
-                fontSize: '12px',
-              }}
-            >
-              트레일러 없음
-            </div>
-          )}
-        </CardFront>
-        <CardBack>
-          <HoverItem content={content} />
-        </CardBack>
-      </CardInner>
-    </CommonItemContainer>
-  );
+        // media_type이 없는 경우, name과 title을 기준으로 판단
+        // TV 시리즈는 보통 'name' 속성을 가지고, 영화는 'title' 속성을 가짐
+        if (name && !title) {
+            return 'series';
+        } else {
+            return 'movie';
+        }
+    };
+
+    const imageUrl = poster_path
+        ? `https://image.tmdb.org/t/p/w500/${poster_path}`
+        : '/mainhome/sample/commonSample.png';
+
+    return (
+        <CommonItemContainer
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+            onClick={handleClick}
+            style={{
+                cursor: 'pointer',
+                opacity: 1,
+            }}
+        >
+            <CardInner $isHovered={isHovered}>
+                <CardFront>
+                    <CommonImg src={imageUrl} alt={title || name || '이미지 없음'} />
+                </CardFront>
+                <CardBack>
+                    <HoverItem content={content} />
+                </CardBack>
+            </CardInner>
+        </CommonItemContainer>
+    );
 };
 
 export default CommonItem;
