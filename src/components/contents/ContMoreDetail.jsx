@@ -1,15 +1,14 @@
 import { Flex, FlexUl, H3, SpanInfo, SpanInfoDim } from './style';
 
-const ContMoreDetail = ({ data, loading, contentType, contentRating }) => {
-    if (loading) return <div>Loading...</div>;
-    if (!data) return null;
+const ContMoreDetail = ({ contentDetail, contentType, contentRating }) => {
+    if (!contentDetail) return null;
 
     // 데이터 포맷팅
-    const creators = data.created_by?.map((creator) => creator.name).join(', ') || '정보 없음';
-    const cast = data.credits?.cast?.map((actor) => actor.name).join(', ') || '정보 없음';
-    const genres = data.genres?.map((genre) => genre.name).join(', ') || '정보 없음';
-    const keywords = data.keywords?.keywords?.map((k) => k.name).join(', ') || '정보 없음';
-    const title = contentType === 'series' ? data.name : data.title;
+    const creators = contentDetail.created_by?.map((creator) => creator.name).join(', ') || '정보 없음';
+    const cast = contentDetail.credits?.cast?.map((actor) => actor.name).join(', ') || '정보 없음';
+    const genres = contentDetail.genres?.map((genre) => genre.name).join(', ') || '정보 없음';
+    const keywords = contentDetail.keywords?.keywords?.map((k) => k.name).join(', ') || '정보 없음';
+    const title = contentType === 'series' ? contentDetail.name : contentDetail.title;
 
     // 관람등급 처리
     const certification = contentRating?.rating || '정보 없음';

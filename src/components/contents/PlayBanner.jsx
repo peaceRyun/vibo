@@ -6,15 +6,14 @@ import { Flex, GradientLayer, H2, PBuiWrap, PBWrap, VideoWrapper } from './style
 import LiLikeButton from '../../ui/lordicon/LiLikeButton';
 import { getTVDetail, getTVVideos } from '../../store/modules/getThunk';
 
-const PlayBanner = () => {
+const PlayBanner = ({ contentDetail }) => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const { id } = useParams();
     const iframeRef = useRef(null);
 
     // TVDetail 데이터와 player 상태 가져오기
-    const tvDetail = useSelector((state) => state.tvDetailR.data);
-    const videoId = useSelector((state) => state.playerR.videoId);
+    const { videoId } = useSelector((state) => state.playerR);
 
     // TV 시리즈 정보와 비디오 정보 가져오기
     useEffect(() => {
@@ -51,7 +50,7 @@ const PlayBanner = () => {
                 </VideoWrapper>
                 <PBuiWrap>
                     <Flex $gap='30px' $flexDirection='column' $position='relative'>
-                        <H2>{tvDetail?.name || '제목 로딩 중...'}</H2>
+                        <H2>{contentDetail?.name || '제목 로딩 중...'}</H2>
                         <Flex $gap='26px' $alignItems='center'>
                             <Button play onClick={handlePlayClick} color='var(--secondary-400)' fontSize='20px'>
                                 재생

@@ -1,24 +1,23 @@
 import { BadgeBlank } from '../../pages/contents/style';
 import { Flex, FlexUl } from './style';
 
-const ContDetail = ({ data, loading, contentType, onMoreClick }) => {
-    if (loading) return <div>Loading...</div>;
-    if (!data) return null;
+const ContDetail = ({ contentDetail, contentType, onMoreClick }) => {
+    if (!contentDetail) return null;
 
     // contentType에 따라 다른 데이터 포맷 처리
     const year =
         contentType === 'series'
-            ? new Date(data.first_air_date).getFullYear()
-            : new Date(data.release_date).getFullYear();
+            ? new Date(contentDetail.first_air_date).getFullYear()
+            : new Date(contentDetail.release_date).getFullYear();
 
-    const episodeCount = contentType === 'series' ? data.number_of_episodes : null;
-    const rating = data.vote_average ? data.vote_average.toFixed(1) : 'N/A';
+    const episodeCount = contentType === 'series' ? contentDetail.number_of_episodes : null;
+    const rating = contentDetail.vote_average ? contentDetail.vote_average.toFixed(1) : 'N/A';
     const cast =
-        data.credits?.cast
+        contentDetail.credits?.cast
             ?.slice(0, 3)
             .map((actor) => actor.name)
             .join(', ') || '정보 없음';
-    const genres = data.genres?.map((genre) => genre.name).join(', ') || '정보 없음';
+    const genres = contentDetail.genres?.map((genre) => genre.name).join(', ') || '정보 없음';
 
     const handleMoreClick = () => {
         const moreDetailElement = document.getElementById('cont-more-detail');
@@ -50,7 +49,7 @@ const ContDetail = ({ data, loading, contentType, onMoreClick }) => {
                         />
                         <BadgeBlank> 평점 {rating} / 10 </BadgeBlank>
                     </Flex>
-                    <p>{data.overview || '줄거리 정보가 없습니다.'}</p>
+                    <p>{contentDetail.overview || '줄거리 정보가 없습니다.'}</p>
                 </Flex>
                 <FlexUl $flexDirection='column' $gap='15px'>
                     <li>
@@ -74,7 +73,7 @@ const ContDetail = ({ data, loading, contentType, onMoreClick }) => {
                     <li>
                         <Flex $gap='8px' $whiteSpace='nowrap' $fontSize='16px'>
                             <strong style={{ color: 'var(--gray-600)' }}>콘텐츠 특징: </strong>
-                            <p>{data.keywords?.keywords?.map((k) => k.name).join(', ') || '정보 없음'}</p>
+                            <p>{contentDetail.keywords?.keywords?.map((k) => k.name).join(', ') || '정보 없음'}</p>
                             <span onClick={handleMoreClick} style={{ cursor: 'pointer' }}>
                                 더보기
                             </span>

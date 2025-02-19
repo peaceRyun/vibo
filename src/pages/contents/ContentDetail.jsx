@@ -25,8 +25,7 @@ const ContentDetail = ({ contentType }) => {
     const [activeTab, setActiveTab] = useState('episodes');
     const [isMobile, setIsMobile] = useState(window.innerWidth <= 1024);
     const isSeries = contentType === 'series';
-    const { data, loading } = useSelector((state) => state.tvDetailR);
-    const { contentRating, TVRecommendData, recommendLoading } = useSelector((state) => state.tvSeriesR);
+    const { contentDetail, contentRating, TVRecommendData, recommendLoading } = useSelector((state) => state.tvSeriesR);
 
     useEffect(() => {
         const handleResize = () => {
@@ -39,16 +38,10 @@ const ContentDetail = ({ contentType }) => {
         return () => window.removeEventListener('resize', handleResize);
     }, []);
 
-    // 콘텐츠 데이터 가져오기 (통합)
     useEffect(() => {
-        // TV 시리즈 공통 데이터
-        if (isSeries) {
-            dispatch(getTVseries());
-        }
-
-        // 콘텐츠 상세 정보 및 추천 데이터
         if (id) {
             if (contentType === 'series') {
+                dispatch(getTVseries());
                 dispatch(getTVDetail(id));
                 dispatch(getTVContentRating(id));
             } else if (contentType === 'movie') {
@@ -59,7 +52,7 @@ const ContentDetail = ({ contentType }) => {
             // 추천 데이터 가져오기 (공통)
             dispatch(getMovieRecommendations(id));
         }
-    }, [dispatch, id, contentType, isSeries]);
+    }, [dispatch, id, contentType]);
 
     const renderEpisodeTab = () => {
         if (!isSeries) return null;
@@ -77,9 +70,9 @@ const ContentDetail = ({ contentType }) => {
                 <PcContainer>
                     <Inner>
                         <Flex $flexDirection='column' $position='relative' $gap='30px' $padding='0 50px'>
-                            <PlayBanner />
+                            <PlayBanner contentDetail={contentDetail} />
                             <div style={{ padding: '0 50px' }}>
-                                <ContDetail data={data} loading={loading} contentType={contentType} />
+                                <ContDetail contentDetail={contentDetail} contentType={contentType} />
                                 {isSeries && <EpList />}
                                 <ReList
                                     TVRecommendData={TVRecommendData}
@@ -89,8 +82,7 @@ const ContentDetail = ({ contentType }) => {
                                 <ReviewList />
                                 <div id='cont-more-detail'>
                                     <ContMoreDetail
-                                        data={data}
-                                        loading={loading}
+                                        contentDetail={contentDetail}
                                         contentType={contentType}
                                         contentRating={contentRating}
                                     />

@@ -654,3 +654,5 @@ export const getMovieContentRating = createAsyncThunk(
         }
     }
 );
+
+//tv시리즈 에피소드 데이터 가져오기
