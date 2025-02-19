@@ -2,8 +2,8 @@
 // import Login from '../member/Login';
 // import Register from '../member/Register';
 
-import TestMainBanner from '../../components/home/mainBanner/TestMainBanner';
-import TestWatchingContent from '../../components/member/watch/TestWatchingContent';
+// import TestMainBanner from '../../components/home/mainBanner/TestMainBanner';
+// import TestWatchingContent from '../../components/member/watch/TestWatchingContent';
 // import AboutM from '../about/AboutM';
 
 const TestChoi = () => {
@@ -14,7 +14,7 @@ const TestChoi = () => {
       {/* <Register /> */}
       {/* <AboutM /> */}
       {/* <TestMainBanner /> */}
-      <TestWatchingContent />
+      {/* <TestWatchingContent /> */}
     </>
   );
 };
