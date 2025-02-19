@@ -4,7 +4,13 @@ import PlayBanner from '../../components/contents/PlayBanner';
 import ReList from '../../components/contents/ReList';
 import { Flex, Inner, MobileInner, PcContainer, TabButton, TabContainer } from '../../components/contents/style';
 import { useEffect, useState } from 'react';
-import { getMovieContentRating, getTVContentRating, getTVDetail, getTVseries } from '../../store/modules/getThunk';
+import {
+    getMovieContentRating,
+    getTVContentRating,
+    getTVDetail,
+    getTVseries,
+    getMovieRecommendations,
+} from '../../store/modules/getThunk';
 import ReviewList from '../../components/contents/ReviewList';
 import ContDetail from '../../components/contents/ContDetail';
 import ContMoreDetail from '../../components/contents/ContMoreDetail';
@@ -20,7 +26,7 @@ const ContentDetail = ({ contentType }) => {
     const [isMobile, setIsMobile] = useState(window.innerWidth <= 1024);
     const isSeries = contentType === 'series';
     const { data, loading } = useSelector((state) => state.tvDetailR);
-    const { contentRating } = useSelector((state) => state.tvSeriesR);
+    const { contentRating, TVRecommendData, recommendLoading } = useSelector((state) => state.tvSeriesR);
 
     useEffect(() => {
         const handleResize = () => {
@@ -33,15 +39,14 @@ const ContentDetail = ({ contentType }) => {
         return () => window.removeEventListener('resize', handleResize);
     }, []);
 
-    // TV 시리즈 데이터 가져오기
+    // 콘텐츠 데이터 가져오기 (통합)
     useEffect(() => {
+        // TV 시리즈 공통 데이터
         if (isSeries) {
             dispatch(getTVseries());
         }
-    }, [isSeries, dispatch]);
 
-    // 콘텐츠 상세 정보 가져오기
-    useEffect(() => {
+        // 콘텐츠 상세 정보 및 추천 데이터
         if (id) {
             if (contentType === 'series') {
                 dispatch(getTVDetail(id));
@@ -50,8 +55,11 @@ const ContentDetail = ({ contentType }) => {
                 // dispatch(getMovieDetail(id));
                 dispatch(getMovieContentRating(id));
             }
+
+            // 추천 데이터 가져오기 (공통)
+            dispatch(getMovieRecommendations(id));
         }
-    }, [dispatch, id, contentType]);
+    }, [dispatch, id, contentType, isSeries]);
 
     const renderEpisodeTab = () => {
         if (!isSeries) return null;
@@ -73,7 +81,11 @@ const ContentDetail = ({ contentType }) => {
                             <div style={{ padding: '0 50px' }}>
                                 <ContDetail data={data} loading={loading} contentType={contentType} />
                                 {isSeries && <EpList />}
-                                <ReList contentType={contentType} />
+                                <ReList
+                                    TVRecommendData={TVRecommendData}
+                                    loading={recommendLoading}
+                                    contentType={contentType}
+                                />
                                 <ReviewList />
                                 <div id='cont-more-detail'>
                                     <ContMoreDetail
@@ -102,7 +114,9 @@ const ContentDetail = ({ contentType }) => {
                         </TabButton>
                     </TabContainer>
                     {isSeries && activeTab === 'episodes' && <EpListMobile />}
-                    {activeTab === 'similar' && <MobileReItem />}
+                    {activeTab === 'similar' && (
+                        <MobileReItem TVRecommendData={TVRecommendData} loading={recommendLoading} />
+                    )}
                     <ReviewList />
                 </MobileInner>
             )}

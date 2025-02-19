@@ -2,22 +2,8 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import ReItem from './ReItem';
 import { Flex, H3 } from './style';
-import { useSelector, useDispatch } from 'react-redux';
-import { useEffect } from 'react';
-import { getMovieRecommendations } from '../../store/modules/getThunk';
-import { useParams } from 'react-router-dom';
 
-const ReList = ({ contentType }) => {
-    const dispatch = useDispatch();
-    const { id } = useParams();
-    const { TVRecommendData, loading } = useSelector((state) => state.tvSeriesR);
-
-    useEffect(() => {
-        if (id) {
-            dispatch(getMovieRecommendations(id));
-        }
-    }, [dispatch, id]);
-
+const ReList = ({ TVRecommendData, loading, contentType }) => {
     if (loading) {
         return <div>loading....</div>;
     }
