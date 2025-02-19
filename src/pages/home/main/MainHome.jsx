@@ -17,8 +17,7 @@ import MenuSection from '../../../components/home/menubutton/MenuSection';
 import MainBanner from '../../../components/home/mainBanner/MainBanner';
 import { useDispatch } from 'react-redux';
 import { getAiringToday, getTopRated, getTVseries } from '../../../store/modules/getThunk';
-import { getAnimations } from '../../../store/modules/getThunkThree';
-import CommonList2 from '../../../components/home/common/CommonList2';
+import { getAnimations, getDarkTheaterReleases } from '../../../store/modules/getThunkThree';
 // import { LiveContainer } from '../live/style';
 // import { Container } from '../../../components/home/viboOnly/only1/style';
 
@@ -49,8 +48,16 @@ const MainHome = () => {
       </MainContainer>
       <AdBanner />
       <MainContainer>
-        <CommonList />
-        <CommonList2 />
+        <CommonList
+          title="온가족이 함께! 애니타임"
+          fetchFunction={getAnimations}
+          stateSelector={(state) => state.filterR.animations}
+        />
+        <CommonList
+          title="긴장감 넘치는 극장 동시 상영작!"
+          fetchFunction={getDarkTheaterReleases}
+          stateSelector={(state) => state.filterR.darkTheaterReleases}
+        />
         <CommonList />
         <ViboOnly />
       </MainContainer>

@@ -8,19 +8,23 @@ import CommonItem from './CommonItem';
 
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router';
-import { getAnimations } from '../../../store/modules/getThunkThree';
 
-export const CommonList = () => {
+export const CommonList = ({ title, fetchFunction, stateSelector }) => {
   const dispatch = useDispatch();
-  const animations = useSelector((state) => state.filterR.animations || []);
+  const content = stateSelector ? useSelector(stateSelector) : [];
+  // const animations = useSelector((state) => state.filterR.animations || []);
   const loading = useSelector((state) => state.filterR.loading);
 
   useEffect(() => {
-    console.log('📢 API 요청: getAnimations 실행!');
-    dispatch(getAnimations());
-  }, [dispatch]);
+    if (fetchFunction) {
+      console.log(`📢 API 요청: ${title} 실행!`);
+      dispatch(fetchFunction());
+    } else {
+      console.error(`fetchFunction이 전달되지 않음: ${title}`);
+    }
+  }, [dispatch, fetchFunction]);
 
-  console.log('📌 Redux에서 가져온 animations:', animations);
+  console.log('📌 Redux에서 가져온 ${title}:', content);
 
   // 데이터를 가져와서 필터링 적용해야함
   const navigate = useNavigate();
@@ -41,10 +45,10 @@ export const CommonList = () => {
     <Section>
       <CommonInfo>
         <CommonTitle>
-          {`
- 아이부터 어른까지
- 애니타임
-`}
+          {/* {`
+{title}
+`} */}
+          {title}
           <VerticalText>TV</VerticalText>
         </CommonTitle>
         <MoreBtn onClick={onGo}>더보기</MoreBtn>
@@ -61,9 +65,9 @@ export const CommonList = () => {
         }}
       >
         {/* modules={[Pagination]} */}
-        {animations?.map((content) => (
-          <SwiperSlide key={content.id}>
-            <CommonItem content={content} />
+        {content?.map((item) => (
+          <SwiperSlide key={item.id}>
+            <CommonItem content={item} />
           </SwiperSlide>
         ))}
       </CommonSwiper>
