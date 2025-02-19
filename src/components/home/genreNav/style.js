@@ -3,20 +3,26 @@ import styled from 'styled-components';
 export const GenreContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 1rem 10px;
-  width: 1740px;
+  gap: clamp(1rem, 3vw, 3rem) 10px;
 
   @media (max-width: 1024px) {
     grid-template-columns: repeat(2, 1fr);
-    width: auto;
+    gap: clamp(1rem, 2vw, 1rem) 10px;
+    justify-items: center;
+  }
+
+  @media (max-width: 600px) {
+    grid-template-columns: repeat(2, 1fr);
+    gap: clamp(1rem, 1.5vw, 1rem);
+    justify-items: center;
   }
 `;
 
 export const GenreItem = styled.div.withConfig({
   shouldForwardProp: (prop) => prop !== 'ishighlighted',
 })`
-  width: 27.1875rem;
-  height: 11.4375rem; /* 183px */
+  width: clamp(200px, 40vw, 435px);
+  height: clamp(120px, 20vw, 183px);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -27,7 +33,10 @@ export const GenreItem = styled.div.withConfig({
   cursor: pointer;
   transition: border-color 0.3s ease;
   background-color: ${({ ishighlighted }) => (ishighlighted ? '#009c8c' : 'transparent')};
-
+  @media (max-width: 1024px) {
+    width: 27.1875rem;
+    height: 7.4375rem;
+  }
   .en {
     font-size: 2.5rem;
     font-weight: 700;
@@ -36,7 +45,7 @@ export const GenreItem = styled.div.withConfig({
     -webkit-text-fill-color: transparent;
     text-align: center;
     @media (max-width: 1024px) {
-      font-size: 17px;
+      font-size: 24px;
     }
   }
 
@@ -49,7 +58,13 @@ export const GenreItem = styled.div.withConfig({
     }
   }
   @media (max-width: 1024px) {
-    width: 200px;
-    height: 80px;
+    width: clamp(180px, 45vw, 380px);
+    /* height: clamp(100px, 18vw, 160px); */
+  }
+
+  @media (max-width: 600px) {
+    width: clamp(130px, 50vw, 250px);
+
+    /* height: clamp(90px, 25vw, 140px); */
   }
 `;
