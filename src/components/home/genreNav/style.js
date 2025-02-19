@@ -4,6 +4,7 @@ export const GenreContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: clamp(1rem, 3vw, 3rem) 10px;
+  padding: 0 20px 0 0;
 
   @media (max-width: 1024px) {
     grid-template-columns: repeat(2, 1fr);

@@ -81,11 +81,6 @@ export default LiveList;
 const LiveContainer = styled.section`
   width: 100%;
   margin: 0 auto;
-  padding: 0 20px; /* 작은 화면에서 여백 추가 */
-
-  @media (max-width: 600px) {
-    padding: 0 10px; /* 600px 이하에서 여백 축소 */
-  }
 `;
 
 const StyledTitle = styled.h3`

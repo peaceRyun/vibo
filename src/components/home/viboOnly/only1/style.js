@@ -75,7 +75,6 @@ export const Flex = styled.div`
   font-size: ${(props) => props.$fontSize};
 
   @media (max-width: 1024px) {
-    width: 250px;
     display: flex;
     justify-content: space-between;
     flex-direction: column;

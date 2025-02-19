@@ -21,13 +21,14 @@ export const Title = styled.div`
   margin-top: 40px;
   text-align: center;
   flex-direction: column;
+  /*text-overflow: ellipsis; 왜 안먹음.. */
+
   @media (max-width: 1024px) {
     white-space: nowrap;
     overflow: hidden;
     margin-top: 10px;
     font-size: var(--display-small-size);
     text-align: 10px;
-    text-overflow: ellipsis;
   }
 
   @media (max-width: 600px) {
@@ -84,7 +85,7 @@ export const MobileCard = styled.div`
   justify-content: center;
   align-items: center;
   width: 100%;
-  max-height: 800px;
+  /* max-height: 800px; */
   margin: 0 auto;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
   transition: transform 0.3s ease-in-out;
@@ -93,7 +94,7 @@ export const MobileCard = styled.div`
   }
   @media (max-width: 1024px) {
     width: 100%;
-    max-height: 100%;
+    /* max-height: 100%; */
   }
 `;
 
@@ -102,6 +103,7 @@ export const CardContainer = styled.div`
   flex-direction: column;
   align-items: center;
   text-align: center;
+
   @media (max-width: 1024px) {
     width: 100%;
     max-height: 100%;

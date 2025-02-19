@@ -11,13 +11,17 @@ export const MainContainer = styled.div`
   flex-direction: column;
   gap: 60px;
   @media (max-width: 1024px) {
-    padding: 0 20px; // 1024px 이하에서 좌우 패딩 조정
+    padding: 0 0 0 20px; // 1024px 이하에서 좌우 패딩 조정
     gap: 40px; // 간격 줄이기
   }
 
   @media (max-width: 600px) {
-    padding: 0 20px; // 600px 이하에서 더 작은 패딩 적용
+    padding: 0 0 0 20px; // 600px 이하에서 더 작은 패딩 적용
     gap: 20px; // 간격 더 줄이기
+    /* & > *:nth-child(1) {
+      margin: 1;
+    } */
+    // 첫 번째 컴포넌트만 margin 0
   }
   /* 
   @media (max-width: 1200px) {
