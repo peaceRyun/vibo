@@ -16,43 +16,42 @@ import ViboOnly from '../../../components/home/viboOnly/ViboOnly';
 import MenuSection from '../../../components/home/menubutton/MenuSection';
 import MainBanner from '../../../components/home/mainBanner/MainBanner';
 import { useDispatch } from 'react-redux';
-import { getAiringToday, getTopRated, getTVseries } from '../../../store/modules/getThunk';
+import { getAiringToday, getMovie, getTopRated, getTVseries } from '../../../store/modules/getThunk';
 // import { LiveContainer } from '../live/style';
 // import { Container } from '../../../components/home/viboOnly/only1/style';
 
 const liveTitles = [{ id: '1', title: '실시간 인기 LIVE' }];
 
 const MainHome = () => {
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(getTVseries());
-    dispatch(getAiringToday());
-    dispatch(getTopRated());
-  }, []);
-  return (
-    <MainContent>
-      <MainBanner />
-      <MainContainer>
-        <div>
-          {liveTitles.map((section) => (
-            <LiveList key={section.id} title={section.title} />
-          ))}
-        </div>
-        {/* <WatchingList /> */}
-        <WeeklyList />
-        <RateList />
-        <GenreNav />
-      </MainContainer>
-      <AdBanner />
-      <MainContainer>
-        <CommonList />
-        <CommonList />
-        <CommonList />
-        <ViboOnly />
-      </MainContainer>
-      <MenuSection />
-    </MainContent>
-  );
+    const dispatch = useDispatch();
+    useEffect(() => {
+        dispatch(getMovie());
+        dispatch(getTVseries());
+        dispatch(getAiringToday());
+        dispatch(getTopRated());
+    }, []);
+    return (
+        <MainContent>
+            <MainBanner />
+            <MainContainer>
+                <div>
+                    {liveTitles.map((section) => (
+                        <LiveList key={section.id} title={section.title} />
+                    ))}
+                </div>
+                {/* <WatchingList /> */}
+                <WeeklyList />
+                <RateList />
+                <GenreNav />
+                <AdBanner />
+                <CommonList type='series' />
+                <CommonList type='movie' />
+                <CommonList type='series' />
+                <ViboOnly />
+            </MainContainer>
+            <MenuSection />
+        </MainContent>
+    );
 };
 
 export default MainHome;

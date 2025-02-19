@@ -11,6 +11,8 @@ import profileR from './modules/profileSlice';
 import tvDetailR from './modules/tvDetailSlice';
 import topRatedR from './modules/topRatedSlice';
 import searchR from './modules/searchSlice';
+import popularR from './modules/popularSlice';
+import genreR from './modules/genreSlice';
 
 export const store = configureStore({
     reducer: {
@@ -26,5 +28,7 @@ export const store = configureStore({
         tvDetailR,
         topRatedR,
         searchR,
+        popularR,
+        genreR,
     },
 });

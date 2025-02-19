@@ -4,29 +4,37 @@ import { useNavigate, useParams } from 'react-router-dom';
 import Button from '../../ui/button/Button';
 import { Flex, GradientLayer, H2, PBuiWrap, PBWrap, VideoWrapper } from './style';
 import LiLikeButton from '../../ui/lordicon/LiLikeButton';
-import { getTVDetail, getTVVideos } from '../../store/modules/getThunk';
+import { getTVDetail, getTVVideos, getMovieDetail, getMovieVideos } from '../../store/modules/getThunk';
 
-const PlayBanner = () => {
+const PlayBanner = ({ contentDetail, contentType }) => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const { id } = useParams();
     const iframeRef = useRef(null);
+    const isSeries = contentType === 'series';
 
     // TVDetail 데이터와 player 상태 가져오기
-    const tvDetail = useSelector((state) => state.tvDetailR.data);
-    const videoId = useSelector((state) => state.playerR.videoId);
+    const { videoId } = useSelector((state) => state.playerR);
 
-    // TV 시리즈 정보와 비디오 정보 가져오기
+    // TV 시리즈 또는 영화 정보와 비디오 정보 가져오기
     useEffect(() => {
         if (id) {
-            dispatch(getTVDetail(id));
-            dispatch(getTVVideos(id));
+            if (isSeries) {
+                dispatch(getTVDetail(id));
+                dispatch(getTVVideos(id));
+            } else {
+                dispatch(getMovieDetail(id));
+                dispatch(getMovieVideos(id));
+            }
         }
-    }, [dispatch, id]);
+    }, [dispatch, id, isSeries]);
 
     const handlePlayClick = () => {
         navigate('/player');
     };
+
+    // 제목 표시 (TV 시리즈는 name, 영화는 title 속성 사용)
+    const title = contentDetail?.name || contentDetail?.title || '제목 로딩 중...';
 
     return (
         <section>
@@ -51,7 +59,7 @@ const PlayBanner = () => {
                 </VideoWrapper>
                 <PBuiWrap>
                     <Flex $gap='30px' $flexDirection='column' $position='relative'>
-                        <H2>{tvDetail?.name || '제목 로딩 중...'}</H2>
+                        <H2>{title}</H2>
                         <Flex $gap='26px' $alignItems='center'>
                             <Button play onClick={handlePlayClick} color='var(--secondary-400)' fontSize='20px'>
                                 재생
