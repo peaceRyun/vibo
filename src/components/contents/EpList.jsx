@@ -6,7 +6,15 @@ import { CloseButton, CRatingImg, EpItemsWrap, EpListBgi, Flex, FlexUl, H3, P20,
 import { useEpisodeAnimation } from '../../hooks/useGsap';
 import { IoClose } from 'react-icons/io5';
 
-const EpList = ({ seasons, episodes, contentRating, seasonsLoading, episodesLoading, onSeasonSelect }) => {
+const EpList = ({
+    seasons,
+    episodes,
+    contentRating,
+    seasonsLoading,
+    episodesLoading,
+    onSeasonSelect,
+    posterPath, // contentDetail에서 전달받은 poster_path
+}) => {
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const [selectedSeason, setSelectedSeason] = useState('');
     const episodeListRef = useEpisodeAnimation(!!selectedSeason);
@@ -34,6 +42,11 @@ const EpList = ({ seasons, episodes, contentRating, seasonsLoading, episodesLoad
         id: season.id,
         name: `시즌 ${season.season_number}`,
     }));
+
+    // 배경 이미지 URL 생성
+    const backgroundImage = posterPath
+        ? `https://image.tmdb.org/t/p/original${posterPath}`
+        : '/contentdetail/sample/EpList배경이미지.png';
 
     return (
         <section id='episode-list'>
@@ -100,7 +113,7 @@ const EpList = ({ seasons, episodes, contentRating, seasonsLoading, episodesLoad
                             </FlexUl>
                         )}
                         <EpListBgi
-                            src='/contentdetail/sample/EpList배경이미지.png'
+                            src={backgroundImage} // 동적 배경 이미지 사용
                             alt='에피배경이미지'
                             $position='absolute'
                             $top='0'

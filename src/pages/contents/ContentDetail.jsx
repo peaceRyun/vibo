@@ -101,6 +101,7 @@ const ContentDetail = ({ contentType }) => {
                                         seasonsLoading={seasonsLoading}
                                         episodesLoading={episodesLoading}
                                         onSeasonSelect={handleSeasonSelect}
+                                        posterPath={contentDetail?.poster_path} // poster_path 전달
                                     />
                                 )}
                                 <ReList
@@ -125,9 +126,9 @@ const ContentDetail = ({ contentType }) => {
             {isMobile && (
                 <MobileInner>
                     <div>
-                        <PlayBanner />
+                        <PlayBanner contentDetail={contentDetail} />
                     </div>
-                    <ContMobile />
+                    <ContMobile contentDetail={contentDetail} />
                     <TabContainer>
                         {renderEpisodeTab()}
                         <TabButton active={activeTab === 'similar'} onClick={() => setActiveTab('similar')}>
