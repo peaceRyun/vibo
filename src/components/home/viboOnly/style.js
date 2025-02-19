@@ -5,34 +5,44 @@ export const ViboContainer = styled.div`
   gap: 10px;
   justify-content: space-around;
   width: 1750px;
-  padding: 60px;
+  padding: 60px 0px 60px 0px;
 `;
 
 export const ViboAllContainer = styled.div`
   display: flex;
   flex-direction: column;
+  padding: 60px 0 60px 0;
+  @media (max-width: 1024px) {
+    padding: 40px 0 40px 0;
+  }
+  @media (max-width: 600px) {
+    padding: 30px 0 30px 0;
+  }
 `;
 
 export const Title = styled.div`
   display: flex;
   color: white;
-  font-size: var(--display-small-size);
-  font-weight: 800;
+
   margin-top: 40px;
   text-align: center;
   flex-direction: column;
+  font-size: var(--title-xlarge-size);
+  font-weight: var(--title-xlarge-weight); //800
   /*text-overflow: ellipsis; 왜 안먹음.. */
 
   @media (max-width: 1024px) {
     white-space: nowrap;
     overflow: hidden;
     margin-top: 10px;
-    font-size: var(--display-small-size);
+    font-size: var(--title-large-mobile); //24
+    font-weight: var(--title-large-weigh); //700
     text-align: 10px;
   }
 
   @media (max-width: 600px) {
-    font-size: var(--display-small-mobile);
+    font-size: var(--title-small-mobile); //17
+    font-weight: var(--title-xsmall-weight); //700
   }
 `;
 

@@ -4,18 +4,20 @@ export const GenreContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: clamp(1rem, 3vw, 3rem) 10px;
-  padding: 0 20px 0 0;
+  padding: 60px 20px 60px 0;
 
   @media (max-width: 1024px) {
     grid-template-columns: repeat(2, 1fr);
     gap: clamp(1rem, 2vw, 1rem) 10px;
     justify-items: center;
+    padding: 40px 20px 40px 0;
   }
 
   @media (max-width: 600px) {
     grid-template-columns: repeat(1, 1fr);
     gap: 0px;
     justify-items: center;
+    padding: 30px 20px 30px 0;
   }
 `;
 

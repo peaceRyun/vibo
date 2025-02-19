@@ -81,16 +81,27 @@ export default LiveList;
 const LiveContainer = styled.section`
   width: 100%;
   margin: 0 auto;
+  padding: 60px 0 60px 0;
+  @media (max-width: 1024px) {
+    padding: 40px 0 40px 0;
+  }
+  @media (max-width: 600px) {
+    padding: 30px 0 30px 0;
+  }
 `;
 
 const StyledTitle = styled.h3`
   color: white;
-  font-size: 24px;
-  font-weight: bold;
+  font-size: var(--title-xlarge-size); //32
+  font-weight: var(--title-xlarge-weight); //800
   margin-bottom: 10px;
-
+  @media (max-width: 1024px) {
+    font-size: var(--title-large-mobile); //24
+    font-weight: var(--title-large-weigh); //700
+  }
   @media (max-width: 600px) {
-    font-size: 20px;
+    font-size: var(--title-small-mobile); //17
+    font-weight: var(--title-xsmall-weight); //700
   }
 `;
 

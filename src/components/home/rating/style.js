@@ -18,16 +18,16 @@ export const SlideImageContainer = styled.div`
     width: 85%;
     height: 85%;
   }
+  @media (max-width: 600px) {
+    width: 65%;
+    height: 65%;
+  }
 `;
 
 export const SlideImage = styled.img`
   width: 100%;
   height: 100%;
   object-fit: cover;
-  @media (max-width: 1024px) {
-    /* width: 80%;
-    height: 80%; */
-  }
 `;
 
 // export const RankNumber = styled.div`
@@ -86,9 +86,10 @@ export const RankNumber = styled.div`
   }
 
   @media (max-width: 600px) {
+    font-size: 120px;
     width: 60%;
-    top: 69%;
-    left: -119px;
+    top: 50%;
+    left: -100px;
   }
 `;
 `;

@@ -33,9 +33,7 @@ const RateList = () => {
   return (
     <Section>
       <LeftArea>
-        <RateTitle>
-          20대 <br /> 인기 드라마
-        </RateTitle>
+        <RateTitle>인기 드라마</RateTitle>
       </LeftArea>
 
       <RightArea>
@@ -68,16 +66,17 @@ const Section = styled.section`
   display: flex;
   flex-direction: row;
   gap: 40px;
-  height: 65vh;
+  height: 75vh;
+  /* padding: 60px 0 60px 0; */
   @media (max-width: 1024px) {
     flex-direction: column;
     /* gap: 40px; */
-    height: 90vh;
+    height: 95vh;
+    padding: 40px 0 40px 0;
   }
-
   @media (max-width: 600px) {
-    /* gap: 40px; */
-    height: 85vh;
+    /* padding:0px 0 0px 0; */
+    height: 100vh;
   }
 `;
 
@@ -96,12 +95,18 @@ const RightArea = styled.div`
 
 const RateTitle = styled.h3`
   color: white;
-  font-size: 40px;
-  font-weight: bold;
   line-height: 1.5;
   margin: 0;
+  font-size: var(--title-xlarge-size); //32
+  font-weight: var(--title-xlarge-weight); //800
   @media (max-width: 1024px) {
     padding: 20px;
+    font-size: var(--title-large-mobile); //24
+    font-weight: var(--title-large-weigh); //700
+  }
+  @media (max-width: 600px) {
+    font-size: var(--title-small-mobile); //17
+    font-weight: var(--title-xsmall-weight); //700
   }
 `;
 

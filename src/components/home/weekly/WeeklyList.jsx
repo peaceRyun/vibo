@@ -46,6 +46,13 @@ export default WeeklyList;
 const Section = styled.section`
   display: flex;
   flex-direction: column;
+  padding: 60px 0 60px 0;
+  @media (max-width: 1024px) {
+    padding: 40px 0 40px 0;
+  }
+  @media (max-width: 600px) {
+    padding: 30px 0 30px 0;
+  }
   /* align-items: center; */
 `;
 
@@ -60,14 +67,19 @@ const WeeklyInfo = styled.div`
 `;
 
 const UpdateText = styled.h3`
-  font-size: clamp(1.5rem, 3vw, 2rem); /* ✅ 반응형 폰트 크기 조정 */
   color: #fff;
   font-weight: 900;
   white-space: nowrap;
   padding: 0 10px;
-
-  @media (max-width: 768px) {
-    text-align: center;
+  font-size: var(--title-xlarge-size); //32
+  font-weight: var(--title-xlarge-weight); //800
+  @media (max-width: 1024px) {
+    font-size: var(--title-large-mobile); //24
+    font-weight: var(--title-large-weigh); //700
+  }
+  @media (max-width: 600px) {
+    font-size: var(--title-small-mobile); //17
+    font-weight: var(--title-xsmall-weight); //700
   }
 `;
 
