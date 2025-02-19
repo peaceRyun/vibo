@@ -1,16 +1,15 @@
-// 비슷한 콘텐츠
-// 영화, 시리즈 콘텐츠 공통
 import { useNavigate } from 'react-router';
 import LiLikeButton from '../../ui/lordicon/LiLikeButton';
 import { Badge, Contour, Flex, H4, ItemImg, ItemWrap, P, PlayImg, Span } from './style';
 
-const ReItem = ({ content }) => {
-    const { id, name, backdrop_path, overview, videoKey } = content;
+const ReItem = ({ content, contentType }) => {
+    const { id, name, title, backdrop_path, overview, videoKey } = content;
     const navigate = useNavigate();
 
     const handleClick = () => {
         if (videoKey) {
-            navigate(`/detail/${id}`);
+            // contentType에 따라 경로 설정
+            navigate(`/detail/${contentType}/${id}`);
         }
     };
 
@@ -23,7 +22,7 @@ const ReItem = ({ content }) => {
             }}
         >
             <Flex $justifyCenter='center' $alignItems='center' $position='relative'>
-                <ItemImg src={`https://image.tmdb.org/t/p/w500/${backdrop_path}`} alt={name} />
+                <ItemImg src={`https://image.tmdb.org/t/p/w500/${backdrop_path}`} alt={title || name} />
                 <button>
                     <PlayImg src='/contentdetail/ui/carousel_action_atomic.png' alt='sample1' />
                 </button>
@@ -60,7 +59,7 @@ const ReItem = ({ content }) => {
                     <LiLikeButton width='30px' height='30px' />
                 </Flex>
                 <H4 $textAlign='left' $fontSize='20px'>
-                    {name}
+                    {title || name}
                 </H4>
                 <Contour />
             </Flex>

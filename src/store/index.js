@@ -8,9 +8,11 @@ import tvSeriesR from './modules/tvSeriesSlice';
 // import pagenationR from './modules/pagenationSlice';
 import contPlayerR from './modules/contPlayerSlice';
 import profileR from './modules/profileSlice';
-import reviewR from './modules/reviewSlice';
 import tvDetailR from './modules/tvDetailSlice';
 import topRatedR from './modules/topRatedSlice';
+import searchR from './modules/searchSlice';
+import popularR from './modules/popularSlice';
+import genreR from './modules/genreSlice';
 
 export const store = configureStore({
     reducer: {
@@ -23,8 +25,10 @@ export const store = configureStore({
         contPlayerR,
         // pagenationR,
         profileR,
-        reviewR,
         tvDetailR,
         topRatedR,
+        searchR,
+        popularR,
+        genreR,
     },
 });

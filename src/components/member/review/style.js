@@ -14,7 +14,7 @@ export const ReviewListContainer = styled.div`
 export const ReviewCard = styled.div`
   display: flex;
   align-items: flex-start;
-  gap: 15px;
+  gap: 40px;
   background: var(--gray-800);
   padding: 15px;
   border-radius: 10px;
@@ -23,13 +23,13 @@ export const ReviewCard = styled.div`
 
 // 영화 포스터
 export const MoviePoster = styled.div`
-  width: 127px;
+  /* width: 127px;
   height: 183px;
   background-size: cover;
   background-position: center;
   border-radius: 10px;
   flex-shrink: 0;
-  box-shadow: 15px 10px 10px rgba(0, 0, 0, 0.5);
+  box-shadow: 15px 10px 10px rgba(0, 0, 0, 0.5); */
 `;
 
 // 리뷰 내용 영역
