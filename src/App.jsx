@@ -21,45 +21,45 @@ import Register from './pages/member/Register';
 import Login from './pages/member/Login';
 import About from './pages/about/About';
 const App = () => {
-    return (
-        <>
-            <BrowserRouter>
-                <ScrollToTop />
-                <GlobalStyle />
-                <Routes>
-                    <Route path='/player'>
-                        <Route index element={<ContentPlayer />} />
-                    </Route>
-                    <Route path='/' element={<Layout />}>
-                        <Route index element={<MainHome />} />
-                        <Route path='/membership' element={<Membership />} />
-                        <Route path='/moviehome' element={<MovieHome />} />
-                        <Route path='/serieshome' element={<SeriesHome />} />
-                        <Route path='/livehome' element={<LiveHome />} />
-                        <Route path='/about' element={<About />} />
-                        <Route path='/profileedit' element={<ProfileEdit />} />
-                        <Route path='/profileselect' element={<ProfilesSelect />} />
-                        <Route path='/profileforedit' element={<ProfileForEdit />} />
-                        <Route path='/profilesforedit' element={<ProfilesForEdit />} />
-                        <Route path='/profileinfoedit' element={<ProfileInfoEdit />} />
-                        <Route path='/mypage' element={<Mypage />} />
-                        <Route path='/detail/series/:id' element={<ContentDetail contentType='series' />} />
-                        <Route path='/detail/movie/:id' element={<ContentDetail contentType='movie' />} />
-                        <Route path='/contentlist'>
-                            <Route index element={<ContentList />} />
-                        </Route>
-                        <Route path='/register' element={<Register />}></Route>
-                        <Route path='/login' element={<Login />}></Route>
-                    </Route>
-                </Routes>
-            </BrowserRouter>
-        </>
-    );
+  return (
+    <>
+      <BrowserRouter>
+        <ScrollToTop />
+        <GlobalStyle />
+        <Routes>
+          <Route path="/player">
+            <Route index element={<ContentPlayer />} />
+          </Route>
+          <Route path="/" element={<Layout />}>
+            <Route index element={<MainHome />} />
+            <Route path="/membership" element={<Membership />} />
+            <Route path="/moviehome" element={<MovieHome />} />
+            <Route path="/serieshome" element={<SeriesHome />} />
+            <Route path="/livehome" element={<LiveHome />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/profileedit" element={<ProfileEdit />} />
+            <Route path="/profileselect" element={<ProfilesSelect />} />
+            <Route path="/profileforedit" element={<ProfileForEdit />} />
+            <Route path="/profilesforedit" element={<ProfilesForEdit />} />
+            <Route path="/profileinfoedit" element={<ProfileInfoEdit />} />
+            <Route path="/mypage" element={<Mypage />} />
+            <Route path="/detail/series/:id" element={<ContentDetail contentType="series" />} />
+            <Route path="/detail/movie/:id" element={<ContentDetail contentType="movie" />} />
+            <Route path="/contentlist">
+              <Route index element={<ContentList />} />
+            </Route>
+            <Route path="/register" element={<Register />}></Route>
+            <Route path="/login" element={<Login />}></Route>
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </>
+  );
 };
 
 export default App;
 {
-    /* 
+  /* 
     첫번째 방법
     <Route path='/경로, 상대, 절대' element={컴포넌트} />
 
