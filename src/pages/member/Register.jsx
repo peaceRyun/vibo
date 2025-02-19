@@ -121,7 +121,7 @@ const Register = () => {
                             placeholder="비밀번호"
                             value={password}
                             onChange={handlePasswordChange}
-                            error={!!passwordError}
+                            $error={!!passwordError}
                         />
                         {passwordError && <ErrorText>{passwordError}</ErrorText>}
                     </InputGroup>
@@ -132,7 +132,7 @@ const Register = () => {
                             placeholder="비밀번호 확인"
                             value={confirmPassword}
                             onChange={handleConfirmPasswordChange}
-                            error={!!confirmPasswordError}
+                            $error={!!confirmPasswordError}
                         />
                         {confirmPasswordError && <ErrorText>{confirmPasswordError}</ErrorText>}
                     </InputGroup>
