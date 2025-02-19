@@ -75,12 +75,13 @@ export const Flex = styled.div`
   font-size: ${(props) => props.$fontSize};
 
   @media (max-width: 1024px) {
+    width: 250px;
     display: flex;
-    align-items: flex-end;
-    gap: 10px;
-    padding: 20px 0;
-    width: 100%;
     justify-content: space-between;
+    flex-direction: column;
+    align-items: flex-start;
+    white-space: nowrap; /* 텍스트가 한 줄로 표시되도록 설정 */
+    overflow: hidden; /* 넘치는 텍스트는 보이지 않도록 숨김 */
   }
 `;
 

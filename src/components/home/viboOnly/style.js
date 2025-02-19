@@ -31,8 +31,10 @@ export const Title = styled.div`
   @media (max-width: 1024px) {
     white-space: nowrap;
     overflow: hidden;
+    margin-top: 10px;
+    font-size: 38px;
+    text-align: 10px;
     text-overflow: ellipsis;
-    max-width: 90%;
   }
 
   @media (max-width: 600px) {
@@ -131,7 +133,11 @@ export const InfoSection = styled.div`
   color: #fff;
   @media (max-width: 1024px) {
     width: 300px;
-    max-height: 300px;
+    max-height: 400px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
   }
 `;
 
@@ -168,6 +174,11 @@ export const Tag = styled.span`
   padding: 4px 8px;
   border-radius: 8px;
   font-size: 12px;
+  @media (max-width: 1024px) {
+    gap: 15px;
+    margin-bottom: 6px;
+    display: flex;
+  }
 `;
 
 export const Description = styled.p`
