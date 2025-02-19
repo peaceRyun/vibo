@@ -38,7 +38,7 @@ export const Title = styled.div`
   }
 
   @media (max-width: 600px) {
-    font-size: 17px;
+    font-size: 24px;
   }
 `;
 
@@ -139,6 +139,15 @@ export const InfoSection = styled.div`
     flex-direction: column;
     gap: 15px;
   }
+
+  @media (max-width: 1024px) {
+    width: 266px;
+    max-height: 400px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
 `;
 
 export const MobileCardText = styled.div`
@@ -166,6 +175,7 @@ export const Tags = styled.div`
   @media (max-width: 1024px) {
     gap: 10px;
     margin-bottom: 6px;
+    justify-content: flex-start;
   }
 `;
 
@@ -175,9 +185,14 @@ export const Tag = styled.span`
   border-radius: 8px;
   font-size: 12px;
   @media (max-width: 1024px) {
+    font-size: 10px;
     gap: 15px;
     margin-bottom: 6px;
     display: flex;
+    justify-content: flex-start;
+  }
+  @media (max-width: 600px) {
+    font-size: 10px;
   }
 `;
 
@@ -188,7 +203,7 @@ export const Description = styled.p`
   height: auto;
   @media (max-width: 1024px) {
     display: -webkit-box;
-    -webkit-line-clamp: 3; /* 최대 3줄 표시 */
+    -webkit-line-clamp: 4; /* 최대 3줄 표시 */
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;

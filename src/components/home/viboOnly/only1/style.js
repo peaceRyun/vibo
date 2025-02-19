@@ -89,4 +89,8 @@ export const Label = styled.span`
   font-size: 4.25rem;
   font-weight: 900;
   line-height: 100%;
+
+  @media (max-width: 600px) {
+    font-size: 48px;
+  }
 `;
