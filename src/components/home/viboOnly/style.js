@@ -2,16 +2,19 @@ import styled from 'styled-components';
 
 export const ViboContainer = styled.div`
   display: flex;
-  gap: 10px;
+  gap: 20px;
+  align-items: center;
   justify-content: space-around;
   width: 1750px;
   padding: 60px 0px 60px 0px;
+  margin-left: -60px;
 `;
 
 export const ViboAllContainer = styled.div`
   display: flex;
+  align-items: center;
   flex-direction: column;
-  padding: 60px 0 60px 0;
+  /* padding: 60px 50px 60px 50px; */
   @media (max-width: 1024px) {
     padding: 40px 0 40px 0;
   }
