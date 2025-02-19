@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Only1 from './only1/Only1';
 import Only2 from './only2/Only2';
 import MobileOnly from './MobileOnly';
-import { Title, Underline2, ViboContainer } from './style';
+import { Title, Underline2, ViboAllContainer, ViboContainer } from './style';
 import { getTopRated } from '../../../store/modules/getThunk';
 
 const ViboOnly = () => {
@@ -52,18 +52,20 @@ const ViboOnly = () => {
 
   return (
     <>
-      <Title>
-        <h3>VIBO TOP 5</h3>
-        <Underline2 />
-      </Title>
-      {isMobile ? (
-        <MobileOnly content={[firstPlace, ...restPlaces]} />
-      ) : (
-        <ViboContainer>
-          <Only1 content={firstPlace} />
-          <Only2 content={restPlaces} />
-        </ViboContainer>
-      )}
+      <ViboAllContainer>
+        <Title>
+          <h3>VIBO TOP 5</h3>
+          <Underline2 />
+        </Title>
+        {isMobile ? (
+          <MobileOnly content={[firstPlace, ...restPlaces]} />
+        ) : (
+          <ViboContainer>
+            <Only1 content={firstPlace} />
+            <Only2 content={restPlaces} />
+          </ViboContainer>
+        )}
+      </ViboAllContainer>
     </>
   );
 };

@@ -25,7 +25,7 @@ export const InfoSection = styled.div`
 `;
 
 export const Title = styled.h2`
-  font-size: 3.25rem;
+  font-size: 2.5rem;
   font-weight: 900;
   color: #fff;
   line-height: 100%;
@@ -51,7 +51,7 @@ export const Tag = styled.span`
   white-space: nowrap;
 `;
 export const Description = styled.p`
-  font-size: 1.25rem; /* 20px */
+  font-size: 1.0625rem;
   color: #939598;
   line-height: 1.5;
   overflow: hidden;
@@ -86,7 +86,7 @@ export const Flex = styled.div`
 `;
 
 export const Label = styled.span`
-  font-size: 4.25rem;
+  font-size: 6.25rem;
   font-weight: 900;
   line-height: 100%;
 

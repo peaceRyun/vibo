@@ -6,24 +6,17 @@ export const ViboContainer = styled.div`
   justify-content: space-around;
   width: 1750px;
   padding: 60px;
+`;
 
-  /* @media (max-width: 1024px) {
-    max-width: 1000px;
-    gap: 5px;
-  }
-
-  @media (max-width: 600px) {
-    flex-direction: column;
-    align-items: center;
-    gap: 15px;
-    padding: 10px;
-  } */
+export const ViboAllContainer = styled.div`
+  display: flex;
+  flex-direction: column;
 `;
 
 export const Title = styled.div`
   display: flex;
   color: white;
-  font-size: 40px;
+  font-size: var(--display-small-size);
   font-weight: 800;
   margin-top: 40px;
   text-align: center;
@@ -32,13 +25,13 @@ export const Title = styled.div`
     white-space: nowrap;
     overflow: hidden;
     margin-top: 10px;
-    font-size: 38px;
+    font-size: var(--display-small-size);
     text-align: 10px;
     text-overflow: ellipsis;
   }
 
   @media (max-width: 600px) {
-    font-size: 24px;
+    font-size: var(--display-small-mobile);
   }
 `;
 
@@ -60,9 +53,10 @@ export const Underline2 = styled.div`
   align-self: center;
 
   @media (max-width: 1024px) {
-    width: 200px;
+    width: 80%;
     height: 2px;
     align-self: center;
+    margin-top: 20px;
   }
 `;
 
