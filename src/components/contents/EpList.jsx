@@ -6,7 +6,7 @@ import { CloseButton, CRatingImg, EpItemsWrap, EpListBgi, Flex, FlexUl, H3, P20,
 import { useEpisodeAnimation } from '../../hooks/useGsap';
 import { IoClose } from 'react-icons/io5';
 
-const EpList = () => {
+const EpList = ({ seasons, episodes, contentRating, seasonsLoading, episodesLoading, onSeasonSelect }) => {
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const [selectedSeason, setSelectedSeason] = useState('');
     const episodeListRef = useEpisodeAnimation(!!selectedSeason);
@@ -18,16 +18,22 @@ const EpList = () => {
     const handleSeasonSelect = (season) => {
         setSelectedSeason(season);
         setIsDropdownOpen(false);
+        // 시즌 번호 추출 (예: '시즌 1' -> 1)
+        const seasonNumber = season.split(' ')[1];
+        // 부모 컴포넌트의 핸들러 호출
+        onSeasonSelect(seasonNumber);
     };
 
     const handleClose = () => {
-        // 애니메이션이 완료된 후 상태를 리셋하기 위해 약간의 지연을 줍니다
         setSelectedSeason('');
         setIsDropdownOpen(false);
     };
 
-    // 선택된 시즌의 번호만 추출 (예: '시즌 1' -> 1)
-    const seasonNumber = selectedSeason ? selectedSeason.split(' ')[1] : '';
+    // 시즌 목록 형식 변환
+    const seasonOptions = seasons.map((season) => ({
+        id: season.id,
+        name: `시즌 ${season.season_number}`,
+    }));
 
     return (
         <section id='episode-list'>
@@ -40,14 +46,18 @@ const EpList = () => {
                 >
                     <Flex $flexDirection='column' $position='relative'>
                         <H3>에피소드</H3>
-                        {selectedSeason && (
+                        {selectedSeason && !episodesLoading && (
                             <Flex $justifyContent='space-between' $alignItems='center' $gap='20px'>
                                 <Flex $gap='10px' $justifyContent='space-between' $alignItems='center'>
                                     <P28>{selectedSeason}:</P28>
-                                    <CRatingImg
-                                        src='/contentdetail/contentrate/전체관람가 관람등급 1.png'
-                                        alt='전체관람가 관람등급'
-                                    />
+                                    {contentRating && (
+                                        <CRatingImg
+                                            src={`/contentdetail/contentrate/${
+                                                contentRating.rating || '전체관람가'
+                                            } 관람등급 1.png`}
+                                            alt={`${contentRating.rating || '전체관람가'} 관람등급`}
+                                        />
+                                    )}
                                     <CRatingImg
                                         src='/contentdetail/contentrate/내용정보-대사.png'
                                         alt='내용정보-대사'
@@ -73,16 +83,22 @@ const EpList = () => {
                         onToggle={handleToggle}
                         selectedSeason={selectedSeason}
                         onSelect={handleSeasonSelect}
+                        options={seasonOptions}
+                        loading={seasonsLoading}
                     />
                 </Flex>
 
                 {selectedSeason && (
                     <EpItemsWrap ref={episodeListRef}>
-                        <FlexUl $flexDirection='column'>
-                            {[...Array(4)].map((_, index) => (
-                                <EpItem key={index} number={seasonNumber} />
-                            ))}
-                        </FlexUl>
+                        {episodesLoading ? (
+                            <div>에피소드 로딩 중...</div>
+                        ) : (
+                            <FlexUl $flexDirection='column'>
+                                {episodes.map((episode) => (
+                                    <EpItem key={episode.id} episode={episode} />
+                                ))}
+                            </FlexUl>
+                        )}
                         <EpListBgi
                             src='/contentdetail/sample/EpList배경이미지.png'
                             alt='에피배경이미지'
@@ -102,78 +118,3 @@ const EpList = () => {
 };
 
 export default EpList;
-
-// import { useState } from 'react';
-// // import ToggleSwitch from '../../ui/toggle/Toggle';
-// import SeasonDropdown from './dropdown/SeasonDropDown';
-// import EpItem from './EpItem';
-// import { CloseButton, EpItemsWrap, EpListBgi, Flex, FlexUl, H3 } from './style';
-// import { useEpisodeAnimation } from '../../hooks/useGsap';
-// import { IoClose } from 'react-icons/io5';
-
-// const EpList = () => {
-//   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-//   const [selectedSeason, setSelectedSeason] = useState('');
-//   const episodeListRef = useEpisodeAnimation(!!selectedSeason);
-
-//   const handleToggle = () => {
-//     setIsDropdownOpen(!isDropdownOpen);
-//   };
-
-//   const handleSeasonSelect = (season) => {
-//     setSelectedSeason(season);
-//     setIsDropdownOpen(false);
-//   };
-
-//   const handleClose = () => {
-//     setSelectedSeason('');
-//     setIsDropdownOpen(false);
-//   };
-
-//   const seasonNumber = selectedSeason ? selectedSeason.split(' ')[1] : '';
-
-//   return (
-//     <section>
-//       <Flex $flexDirection="column" $gap="20px" $padding="20px 0">
-//         <Flex
-//           $justifyContent="space-between"
-//           $alignItems="center"
-//           $padding="10px 0"
-//           $borderTop="1px solid var(--secondary-300)"
-//         >
-//           <H3>에피소드</H3>
-//           <SeasonDropdown
-//             isOpen={isDropdownOpen}
-//             onToggle={handleToggle}
-//             selectedSeason={selectedSeason}
-//             onSelect={handleSeasonSelect}
-//           />
-//         </Flex>
-
-//         {selectedSeason && (
-//           <EpItemsWrap ref={episodeListRef}>
-//             <FlexUl $flexDirection="column">
-//               {[...Array(4)].map((_, index) => (
-//                 <EpItem key={index} number={seasonNumber} />
-//               ))}
-//             </FlexUl>
-//             <EpListBgi
-//               src="/contentdetail/sample/EpList배경이미지.png"
-//               alt="에피배경이미지"
-//               $position="absolute"
-//               $top="0"
-//               $right="0"
-//               $zIndex="-1"
-//             />
-
-//             <CloseButton onClick={handleClose}>
-//               <IoClose color="var(--white)" size="35" />
-//             </CloseButton>
-//           </EpItemsWrap>
-//         )}
-//       </Flex>
-//     </section>
-//   );
-// };
-
-// export default EpList;

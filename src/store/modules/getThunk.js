@@ -655,4 +655,138 @@ export const getMovieContentRating = createAsyncThunk(
     }
 );
 
-//tv시리즈 에피소드 데이터 가져오기
+// TV 시리즈 시즌별 에피소드 가져오기 thunk
+export const getTVSeasonEpisodes = createAsyncThunk(
+    'TVEpisodes/getTVSeasonEpisodes',
+    async ({ tvId, seasonNumber }, { rejectWithValue }) => {
+        try {
+            if (!tvId || seasonNumber === undefined) {
+                return rejectWithValue('TV ID and Season Number are required');
+            }
+
+            const response = await axios.get(`https://api.themoviedb.org/3/tv/${tvId}/season/${seasonNumber}`, {
+                params: {
+                    language: 'ko-KR',
+                },
+                headers: {
+                    accept: 'application/json',
+                    Authorization:
+                        'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJkZGY2NTIxYzQzYzJlMDNmNTlkMjc2N2YxMDlhYWFhNCIsIm5iZiI6MTczNzUxMDE4NS4yNjIsInN1YiI6IjY3OTA0ZDI5MmQ2MWMzM2U2M2RmZTVlNiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ._QJjWVEDYEcIfVZtQRYG0JSRb22Dit3HopPsNm8AILE',
+                },
+            });
+
+            const seasonData = response.data;
+
+            // 각 에피소드의 비디오 정보도 함께 가져오기
+            const episodesWithVideos = await Promise.all(
+                seasonData.episodes.map(async (episode) => {
+                    try {
+                        const videoResponse = await axios.get(
+                            `https://api.themoviedb.org/3/tv/${tvId}/season/${seasonNumber}/episode/${episode.episode_number}/videos`,
+                            {
+                                params: {
+                                    language: 'ko-KR',
+                                },
+                                headers: {
+                                    accept: 'application/json',
+                                    Authorization:
+                                        'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJkZGY2NTIxYzQzYzJlMDNmNTlkMjc2N2YxMDlhYWFhNCIsIm5iZiI6MTczNzUxMDE4NS4yNjIsInN1YiI6IjY3OTA0ZDI5MmQ2MWMzM2U2M2RmZTVlNiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ._QJjWVEDYEcIfVZtQRYG0JSRb22Dit3HopPsNm8AILE',
+                                },
+                            }
+                        );
+
+                        // 예고편이나 티저 찾기
+                        const videos = videoResponse.data.results;
+
+                        // 한국어 예고편 찾기
+                        let youtubeVideo = videos.find(
+                            (video) =>
+                                video.site === 'YouTube' &&
+                                video.key &&
+                                (video.type === 'Trailer' || video.type === 'Teaser' || video.type === 'Clip') &&
+                                video.iso_639_1 === 'ko'
+                        );
+
+                        // 한국어 예고편이 없으면 영어 예고편 찾기
+                        if (!youtubeVideo) {
+                            youtubeVideo = videos.find(
+                                (video) =>
+                                    video.site === 'YouTube' &&
+                                    video.key &&
+                                    (video.type === 'Trailer' || video.type === 'Teaser' || video.type === 'Clip')
+                            );
+                        }
+
+                        // 아무 YouTube 비디오나 찾기
+                        if (!youtubeVideo) {
+                            youtubeVideo = videos.find((video) => video.site === 'YouTube' && video.key);
+                        }
+
+                        // 썸네일 URL 구성
+                        const stillPath = episode.still_path
+                            ? `https://image.tmdb.org/t/p/w300${episode.still_path}`
+                            : '/contentdetail/sample/EpItemImgSample.png';
+
+                        return {
+                            ...episode,
+                            videoKey: youtubeVideo ? youtubeVideo.key : null,
+                            stillUrl: stillPath,
+                            runtime: episode.runtime ? `${episode.runtime}분` : '정보 없음',
+                        };
+                    } catch (error) {
+                        console.error(`Error fetching videos for episode ${episode.episode_number}:`, error);
+                        return {
+                            ...episode,
+                            videoKey: null,
+                            stillUrl: episode.still_path
+                                ? `https://image.tmdb.org/t/p/w300${episode.still_path}`
+                                : '/contentdetail/sample/EpItemImgSample.png',
+                            runtime: episode.runtime ? `${episode.runtime}분` : '정보 없음',
+                        };
+                    }
+                })
+            );
+
+            return {
+                seasonInfo: {
+                    air_date: seasonData.air_date,
+                    name: seasonData.name,
+                    overview: seasonData.overview,
+                    id: seasonData.id,
+                    poster_path: seasonData.poster_path,
+                    season_number: seasonData.season_number,
+                },
+                episodes: episodesWithVideos,
+            };
+        } catch (error) {
+            console.error('Error fetching TV season episodes:', error);
+            return rejectWithValue(error.message);
+        }
+    }
+);
+
+// TV 시리즈 모든 시즌 정보 가져오기 thunk
+export const getTVSeasons = createAsyncThunk('TVSeasons/getTVSeasons', async (tvId, { rejectWithValue }) => {
+    try {
+        if (!tvId) {
+            return rejectWithValue('TV ID is required');
+        }
+
+        const response = await axios.get(`https://api.themoviedb.org/3/tv/${tvId}`, {
+            params: {
+                language: 'ko-KR',
+            },
+            headers: {
+                accept: 'application/json',
+                Authorization:
+                    'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJkZGY2NTIxYzQzYzJlMDNmNTlkMjc2N2YxMDlhYWFhNCIsIm5iZiI6MTczNzUxMDE4NS4yNjIsInN1YiI6IjY3OTA0ZDI5MmQ2MWMzM2U2M2RmZTVlNiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ._QJjWVEDYEcIfVZtQRYG0JSRb22Dit3HopPsNm8AILE',
+            },
+        });
+
+        // 특별편(season_number=0)을 제외한 시즌 목록 반환
+        return response.data.seasons.filter((season) => season.season_number > 0);
+    } catch (error) {
+        console.error('Error fetching TV seasons:', error);
+        return rejectWithValue(error.message);
+    }
+});
