@@ -570,7 +570,7 @@ export const fetchPopularContentThunk = createAsyncThunk('content/fetchPopular',
 
     const tvShows = tvResponse.data.results.map((show) => ({
         ...show,
-        media_type: 'tv',
+        media_type: 'series',
         title: show.name,
         release_date: show.first_air_date,
     }));
@@ -604,6 +604,90 @@ export const fetchGenresThunk = createAsyncThunk('genres/fetch', async () => {
     // 처음 4개만 반환
     return shuffledGenres.slice(0, 4);
 });
+
+// 장르 8개 랜덤 선택 thunk (메인 장르 내비게이션용)
+export const fetchMainGenresThunk = createAsyncThunk('genres/fetchMain', async () => {
+    const [movieGenres, tvGenres] = await Promise.all([
+        api.get('/genre/movie/list', {
+            params: {
+                language: 'ko-KR',
+            },
+        }),
+        api.get('/genre/tv/list', {
+            params: {
+                language: 'ko-KR',
+            },
+        }),
+    ]);
+
+    // 모든 장르를 하나의 배열로 합치고 중복 제거
+    const allGenres = [
+        ...new Map([...movieGenres.data.genres, ...tvGenres.data.genres].map((item) => [item.id, item])).values(),
+    ];
+
+    // 배열을 무작위로 섞기
+    const shuffledGenres = allGenres.sort(() => Math.random() - 0.5);
+
+    // 처음 8개만 반환
+    return shuffledGenres.slice(0, 8);
+});
+
+// 선택한 장르의 데이터를 끌어오는 thunk (메인 장르 내비게이션용)
+export const getContentByGenreThunk = createAsyncThunk(
+    'genres/fetchByGenre',
+    async ({ genreId, contentType = 'all' }, { rejectWithValue }) => {
+        try {
+            let results = [];
+
+            // contentType에 따라 영화만, TV 시리즈만, 또는 둘 다 가져올 수 있습니다
+            if (contentType === 'all' || contentType === 'movie') {
+                const movieResponse = await api.get('/discover/movie', {
+                    params: {
+                        with_genres: genreId,
+                        language: 'ko-KR',
+                        sort_by: 'popularity.desc',
+                        page: 1,
+                    },
+                });
+                results = [
+                    ...results,
+                    ...movieResponse.data.results.map((item) => ({
+                        ...item,
+                        media_type: 'movie',
+                    })),
+                ];
+            }
+
+            if (contentType === 'all' || contentType === 'tv') {
+                const tvResponse = await api.get('/discover/tv', {
+                    params: {
+                        with_genres: genreId,
+                        language: 'ko-KR',
+                        sort_by: 'popularity.desc',
+                        page: 1,
+                    },
+                });
+                results = [
+                    ...results,
+                    ...tvResponse.data.results.map((item) => ({
+                        ...item,
+                        media_type: 'tv',
+                    })),
+                ];
+            }
+
+            // 결과를 인기도 순으로 정렬
+            results.sort((a, b) => b.popularity - a.popularity);
+
+            return {
+                genreId,
+                results,
+            };
+        } catch (error) {
+            return rejectWithValue(error.response?.data || error.message);
+        }
+    }
+);
 
 //영화 추천 thunk
 const movieOptions = {
@@ -878,5 +962,86 @@ export const getTVSeasons = createAsyncThunk('TVSeasons/getTVSeasons', async (tv
     } catch (error) {
         console.error('Error fetching TV seasons:', error);
         return rejectWithValue(error.message);
+    }
+});
+
+//TV시리즈 - 추천thunk
+const tvOptions = {
+    params: {
+        language: 'ko-KR',
+        page: '1',
+    },
+    headers: {
+        accept: 'application/json',
+        Authorization:
+            'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJkZGY2NTIxYzQzYzJlMDNmNTlkMjc2N2YxMDlhYWFhNCIsIm5iZiI6MTczNzUxMDE4NS4yNjIsInN1YiI6IjY3OTA0ZDI5MmQ2MWMzM2U2M2RmZTVlNiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ._QJjWVEDYEcIfVZtQRYG0JSRb22Dit3HopPsNm8AILE',
+    },
+};
+
+export const getTVRecommendations = createAsyncThunk('tv/getTVRecommendations', async (tvId, thunkAPI) => {
+    try {
+        let allResults = [];
+        let page = 1;
+        const seenIds = new Set(); // 이미 처리된 ID를 추적하기 위한 Set
+
+        while (allResults.length < 24) {
+            const response = await axios.get(`https://api.themoviedb.org/3/tv/${tvId}/recommendations`, {
+                ...tvOptions,
+                params: {
+                    ...tvOptions.params,
+                    page: page.toString(),
+                },
+            });
+
+            // 기본 필터링 + ID 중복 체크
+            const filteredResults = response.data.results.filter(
+                (tv) => tv.overview && tv.poster_path && tv.backdrop_path && !seenIds.has(tv.id) // 중복 ID 체크
+            );
+
+            // 각 TV 시리즈의 비디오 정보 확인
+            for (const tv of filteredResults) {
+                try {
+                    // 이미 충분한 결과를 얻었다면 중단
+                    if (allResults.length >= 24) {
+                        break;
+                    }
+
+                    // ID가 중복되지 않은 경우에만 처리
+                    if (!seenIds.has(tv.id)) {
+                        seenIds.add(tv.id); // ID를 Set에 추가
+
+                        const videoResponse = await axios.get(`https://api.themoviedb.org/3/tv/${tv.id}/videos`, {
+                            headers: tvOptions.headers,
+                        });
+
+                        const trailer = videoResponse.data.results.find(
+                            (video) =>
+                                video.site === 'YouTube' &&
+                                video.key &&
+                                (video.type === 'Trailer' || video.type === 'Teaser')
+                        );
+
+                        allResults.push({
+                            ...tv,
+                            videoKey: trailer ? trailer.key : null,
+                        });
+                    }
+                } catch (error) {
+                    console.error(`Error fetching videos for TV series ${tv.id}:`, error.message);
+                }
+            }
+
+            page++;
+
+            // 더 이상 결과가 없거나 10페이지까지 검색했다면 종료
+            if (!response.data.results.length || page > 10) {
+                break;
+            }
+        }
+
+        return allResults.slice(0, 24);
+    } catch (error) {
+        console.error('Main error:', error.message);
+        return thunkAPI.rejectWithValue(error.message);
     }
 });

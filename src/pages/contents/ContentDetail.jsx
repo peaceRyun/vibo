@@ -14,6 +14,7 @@ import {
     getTVSeasonEpisodes,
     getMovieDetail,
     getMovie,
+    getTVRecommendations,
 } from '../../store/modules/getThunk';
 import ReviewList from '../../components/contents/ReviewList';
 import ContDetail from '../../components/contents/ContDetail';
@@ -26,28 +27,31 @@ import { useParams } from 'react-router';
 const ContentDetail = ({ contentType }) => {
     const dispatch = useDispatch();
     const { id } = useParams();
-    const [activeTab, setActiveTab] = useState('episodes');
     const [isMobile, setIsMobile] = useState(window.innerWidth <= 1024);
     const isSeries = contentType === 'series';
+    // 1. 초기 탭 설정 개선 (영화일 경우 '비슷한 콘텐츠' 탭을 기본으로)
+    const [activeTab, setActiveTab] = useState(isSeries ? 'episodes' : 'similar');
 
-    // TV 관련 데이터 가져오기
+    // 영화일 때 가져오기
+    const { movieDetail, movieRecommendations, recommendLoading: movieLoading } = useSelector((state) => state.movieR);
+
+    // TV 시리즈일 때 가져오기 - TVDetail을 contentDetail로 변경
     const {
-        contentDetail: tvContentDetail,
+        TVDetail,
         contentRating: tvContentRating,
         TVRecommendData,
-        recommendLoading,
+        recommendLoading: tvLoading,
         tvSeasons,
         episodes,
         seasonsLoading,
         episodesLoading,
     } = useSelector((state) => state.tvSeriesR);
 
-    // 영화 관련 데이터 가져오기
-    const { movieDetail, movieData } = useSelector((state) => state.movieR);
-
     // 컨텐츠 타입에 따라 적절한 데이터 선택
-    const contentDetail = isSeries ? tvContentDetail : movieDetail;
+    const contentDetail = isSeries ? TVDetail : movieDetail;
     const contentRating = isSeries ? tvContentRating : tvContentRating; // 영화 레이팅으로 변경 필요
+    const recommendData = isSeries ? TVRecommendData : movieRecommendations;
+    const recommendLoading = isSeries ? tvLoading : movieLoading;
 
     useEffect(() => {
         const handleResize = () => {
@@ -61,20 +65,25 @@ const ContentDetail = ({ contentType }) => {
     }, []);
 
     useEffect(() => {
+        if (!isSeries) {
+            setActiveTab('similar'); // 영화일 경우 항상 '비슷한 콘텐츠' 탭으로
+        }
+    }, [isSeries]);
+
+    useEffect(() => {
         if (id) {
             if (contentType === 'series') {
                 dispatch(getTVseries());
                 dispatch(getTVDetail(id));
                 dispatch(getTVContentRating(id));
-                dispatch(getTVSeasons(id)); // 시즌 정보 가져오기
+                dispatch(getTVSeasons(id));
+                dispatch(getTVRecommendations(id)); // TV 추천 사용
             } else if (contentType === 'movie') {
                 dispatch(getMovie());
                 dispatch(getMovieDetail(id));
                 dispatch(getMovieContentRating(id));
+                dispatch(getMovieRecommendations(id)); // 영화 추천 사용
             }
-
-            // 추천 데이터 가져오기 (공통)
-            dispatch(getMovieRecommendations(id));
         }
     }, [dispatch, id, contentType]);
 
@@ -116,7 +125,7 @@ const ContentDetail = ({ contentType }) => {
                                     />
                                 )}
                                 <ReList
-                                    TVRecommendData={TVRecommendData}
+                                    recommendData={recommendData}
                                     loading={recommendLoading}
                                     contentType={contentType}
                                 />
@@ -142,7 +151,7 @@ const ContentDetail = ({ contentType }) => {
                     <ContMobile contentDetail={contentDetail} />
                     <TabContainer>
                         {renderEpisodeTab()}
-                        <TabButton active={activeTab === 'similar'} onClick={() => setActiveTab('similar')}>
+                        <TabButton $active={activeTab === 'similar'} onClick={() => setActiveTab('similar')}>
                             비슷한 콘텐츠
                         </TabButton>
                     </TabContainer>
@@ -157,7 +166,11 @@ const ContentDetail = ({ contentType }) => {
                         />
                     )}
                     {activeTab === 'similar' && (
-                        <MobileReItem TVRecommendData={TVRecommendData} loading={recommendLoading} />
+                        <MobileReItem
+                            recommendData={recommendData}
+                            loading={recommendLoading}
+                            contentType={contentType}
+                        />
                     )}
                     <ReviewList />
                 </MobileInner>

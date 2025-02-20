@@ -3,12 +3,12 @@ import 'swiper/css';
 import ReItem from './ReItem';
 import { Flex, H3 } from './style';
 
-const ReList = ({ TVRecommendData, loading, contentType }) => {
+const ReList = ({ recommendData, loading, contentType }) => {
     if (loading) {
         return <div>loading....</div>;
     }
 
-    if (!TVRecommendData || TVRecommendData.length === 0) {
+    if (!recommendData || recommendData.length === 0) {
         return null;
     }
 
@@ -26,7 +26,7 @@ const ReList = ({ TVRecommendData, loading, contentType }) => {
                     pagination={{ clickable: true }}
                     className='mySwiper'
                 >
-                    {TVRecommendData.map((content) => (
+                    {recommendData.map((content) => (
                         <SwiperSlide key={content.id}>
                             <ReItem content={content} contentType={contentType} />
                         </SwiperSlide>

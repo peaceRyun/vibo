@@ -19,6 +19,12 @@ export const ListWrapper = styled.div`
     transition: all 0.3s ease;
     overflow: visible !important;
   }
+
+  @media (max-width: 1024px) {
+    position: relative;
+    flex-direction: column;
+    align-items: flex-start;
+  }
 `;
 
 export const PopularSection = styled.div`
@@ -35,12 +41,24 @@ export const PopularSection = styled.div`
 export const PopularTitle = styled.div`
   color: white;
   /* width: 23rem; */
-  font-size: 40px;
+
   width: 465px;
-  font-weight: bold;
+
   line-height: 1.5;
   margin: 0;
   text-align: left;
+  font-size: var(--title-xlarge-size); //32
+  font-weight: var(--title-xlarge-weight); //800
+  @media (max-width: 1024px) {
+    font-size: var(--title-large-mobile); //24
+    font-weight: var(--title-large-weigh); //700
+    text-align: left;
+    white-space: normal;
+  }
+  @media (max-width: 600px) {
+    font-size: var(--title-small-mobile); //17
+    font-weight: var(--title-xsmall-weight); //700
+  }
 `;
 
 export const PopularInfo = styled.div`
@@ -70,6 +88,18 @@ export const RankingNumber = styled.span`
   background: linear-gradient(810deg, #3e3e3f, #a8a9ad, #d1d2d4); /* 부드러운 회색-흰색 그라데이션 */
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  @media (max-width: 1024px) {
+    width: 80%;
+    font-size: 100px;
+    font-weight: 900;
+  }
+  @media (max-width: 600px) {
+    width: 100%;
+    font-size: 90px;
+    font-weight: 900;
+    bottom: 4px;
+    left: 25%;
+  }
 `;
 export const ImageContainer = styled.div`
   border: 2px solid transparent;
@@ -78,5 +108,13 @@ export const ImageContainer = styled.div`
     width: 100%;
     height: auto;
     border-radius: 8px;
+
+    @media (max-width: 1024px) {
+      width: 80%;
+    }
+    @media (max-width: 600px) {
+      width: 70%;
+      margin-left: 30px;
+    }
   }
 `;

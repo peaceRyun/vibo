@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 // import aboutR from './modules/aboutSlice';
-import contentR from './modules/contentSlice';
+import weeklyR from './modules/weeklySlice';
 import memberR from './modules/memberSlice';
 import playerR from './modules/playerSlice';
 import movieR from './modules/movieSlice';
@@ -11,13 +11,14 @@ import profileR from './modules/profileSlice';
 import tvDetailR from './modules/tvDetailSlice';
 import topRatedR from './modules/topRatedSlice';
 import searchR from './modules/searchSlice';
+import filterR from './modules/filterSlice';
 import popularR from './modules/popularSlice';
 import genreR from './modules/genreSlice';
 
 export const store = configureStore({
     reducer: {
         // aboutR,
-        contentR,
+        weeklyR,
         memberR,
         playerR,
         movieR,
@@ -30,5 +31,6 @@ export const store = configureStore({
         searchR,
         popularR,
         genreR,
+        filterR, //추가
     },
 });
