@@ -25,11 +25,11 @@ const initialState = {
     srcNow: `${imgUrl}/profileIconV.png`,
     idNow: '',
     nameNow: '',
-    nickname: '바이보',
+    nickname: JSON.parse(localStorage.getItem('currentUser'))?.nickname || '',
 };
 
 export const profileSlice = createSlice({
-    name: 'profile',
+    name: 'profileR',
     initialState,
     reducers: {
         setIconNow: (state, action) => {
@@ -39,8 +39,14 @@ export const profileSlice = createSlice({
             state.nameNow = profileNow.name;
         },
         add: (state, action) => {
-            const recievednickname = action.payload;
-            state.nickname = recievednickname;
+            state.nickname = action.payload;
+            localStorage.setItem(
+                'currentUser',
+                JSON.stringify({
+                    ...JSON.parse(localStorage.getItem('currentUser')),
+                    nickname: action.payload,
+                })
+            );
         },
     },
 });
