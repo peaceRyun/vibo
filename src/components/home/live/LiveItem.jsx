@@ -1,7 +1,3 @@
-// Live 콘텐츠 스와이퍼
-// 메인홈, 라이브홈에만 있는 스와이퍼
-// 비슷한 콘텐츠
-// 영화, 시리즈 콘텐츠 공통
 import { useState, useRef, useEffect } from 'react';
 import { CardContainer, CardInfo, CardTitle, CardBcName, VideoWrapper, BadgeLive } from './style';
 
@@ -21,17 +17,37 @@ const LiveItem = ({ videoData }) => {
 
         video.addEventListener('error', handleError);
 
+        // 페이지 로드 시 비디오가 자동 재생되지 않도록 명시적으로 일시 정지
+        video.pause();
+
         return () => {
             video.removeEventListener('error', handleError);
         };
     }, []);
 
-    const handleMouseEnter = async () => {
+    const handleMouseEnter = () => {
         setIsHovered(true);
         const video = videoRef.current;
-        if (video && video.readyState >= 2) {
-            // 비디오가 재생 가능한 상태인지 확인
-            video.play();
+        if (video) {
+            // readyState 확인하여 메타데이터가 로드된 경우에만 재생
+            if (video.readyState >= 2) {
+                try {
+                    video.play().catch((error) => {
+                        console.log('비디오 재생 실패:', error);
+                    });
+                } catch (error) {
+                    console.log('비디오 재생 중 예외 발생:', error);
+                }
+            } else {
+                // 메타데이터가 로드되지 않은 경우, 로드 이벤트 리스너 추가
+                const handleLoadedData = () => {
+                    if (isHovered) {
+                        video.play().catch((err) => console.log('로드 후 재생 실패:', err));
+                    }
+                    video.removeEventListener('loadeddata', handleLoadedData);
+                };
+                video.addEventListener('loadeddata', handleLoadedData);
+            }
         }
     };
 
@@ -51,7 +67,6 @@ const LiveItem = ({ videoData }) => {
                     muted
                     loop
                     playsInline
-                    autoPlay
                     preload='metadata'
                     style={{
                         width: '100%',
