@@ -3,14 +3,14 @@ import { CommonItemContainer, CardInner, CardFront, CardBack, CommonImg } from '
 import HoverItem from './HoverItem';
 import { useNavigate } from 'react-router';
 
-const CommonItem = ({ content }) => {
+const CommonItem = ({ content, videoType }) => {
     const { id, poster_path, title, name, media_type } = content;
     const [isHovered, setIsHovered] = useState(false);
     const navigate = useNavigate();
 
     const handleClick = () => {
-        const contentType = determineContentType();
-        navigate(`/detail/${contentType}/${id}`);
+        const itemContentType = determineContentType();
+        navigate(`/detail/${itemContentType}/${id}`);
     };
 
     // 컨텐츠 타입 결정 함수
@@ -48,7 +48,7 @@ const CommonItem = ({ content }) => {
                     <CommonImg src={imageUrl} alt={title || name || '이미지 없음'} />
                 </CardFront>
                 <CardBack>
-                    <HoverItem content={content} />
+                    <HoverItem content={content} videoType={videoType} />
                 </CardBack>
             </CardInner>
         </CommonItemContainer>
