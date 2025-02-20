@@ -55,8 +55,6 @@ const MainCommonList = ({ fetchFunction, stateSelector }) => {
         {content?.contentlist?.length > 0 ? (
           content.contentlist.map((item, index) => (
             <SwiperSlide key={item.id || index}>
-              {' '}
-              {/* ✅ id가 없을 경우 index 사용하여 오류 방지 */}
               <CommonItem content={item} />
             </SwiperSlide>
           ))
@@ -84,22 +82,48 @@ const Section = styled.section`
     padding: 30px 0;
   }
 `;
-
 const VerticalText = styled.div`
   position: absolute;
-  left: 15.8%;
-  top: 46%;
-  transform: translateY(-50%) rotate(-270deg);
-  font-size: clamp(58px, 4vw, 55px);
+  left: 100%;
+  top: 0;
+  transform: rotate(90deg);
+  transform-origin: top left;
   font-weight: bold;
-  color: #5e5e5e;
+  color: var(--gray-700);
   letter-spacing: 5px;
   z-index: 800;
-
-  @media (max-width: 599px) {
-    display: none; /* ✅ 모바일에서는 숨김 */
+  font-size: var(--title-xlarge-size);
+  font-weight: var(--title-xlarge-weight);
+  @media (max-width: 1024px) {
+    display: none;
   }
 `;
+
+// const VerticalText = styled.div`
+//   position: absolute;
+//   left: 19.5%;
+//   /* font-size: 32px; */
+//   top: 37%;
+
+//   transform: translateY(-50%) rotate(-270deg);
+//   font-weight: bold;
+//   color: #5e5e5e;
+//   letter-spacing: 5px;
+//   z-index: 800;
+//   /* position: absolute;
+//   left: 15.8%;
+//   top: 46%;
+//   transform: translateY(-50%) rotate(-270deg); */
+//   /* font-size: clamp(58px, 4vw, 55px); */
+//   /* font-weight: bold;
+//   color: #5e5e5e;
+//   letter-spacing: 5px;
+//   z-index: 800; */
+
+//   /* @media (max-width: 599px) {
+//     display: none;
+//   } */
+// `;
 
 const CommonInfo = styled.div`
   flex: 1;
@@ -116,7 +140,8 @@ const CommonInfo = styled.div`
   }
 `;
 
-const CommonTitle = styled.h3`
+const CommonTitle = styled.div`
+  position: relative;
   color: white;
   line-height: 1.5;
   margin: 0;
@@ -150,6 +175,9 @@ const MoreBtn = styled.button`
 
   &:hover {
     background-color: var(--primary-base);
+  }
+  @media (max-width: 1024px) {
+    margin-right: 20px;
   }
 `;
 
