@@ -68,9 +68,19 @@ const Dropdown = ({ onClose }) => {
         }
     };
 
-    const handleItemClick = (id) => {
+    const handleItemClick = (id, mediaType) => {
         onClose();
-        navigate(`/detail/${id}`);
+        if (mediaType === 'movie') {
+            navigate(`/detail/movie/${id}`);
+        } else if (mediaType === 'tv') {
+            navigate(`/detail/series/${id}`);
+        } else if (mediaType === 'person') {
+            // 인물 ID에 대한 라우트가 아직 없으므로 임시로 /contents 경로로 이동
+            navigate('/contents');
+        } else {
+            // 기본값으로 기존 경로 사용
+            navigate(`/detail/${id}`);
+        }
     };
 
     return (
@@ -141,12 +151,7 @@ const Dropdown = ({ onClose }) => {
                                     <ResultsGrid>
                                         <h3>시리즈</h3>
                                         {categorizedResults.tv.map((item) => (
-                                            <ResultItem
-                                                key={item.id}
-                                                onClick={() => {
-                                                    handleItemClick(item.id);
-                                                }}
-                                            >
+                                            <ResultItem key={item.id} onClick={() => handleItemClick(item.id, 'tv')}>
                                                 <img
                                                     src={
                                                         item.poster_path
@@ -167,7 +172,7 @@ const Dropdown = ({ onClose }) => {
                                     <ResultsGrid>
                                         <h3>영화</h3>
                                         {categorizedResults.movie.map((item) => (
-                                            <ResultItem key={item.id} onClick={() => handleItemClick(item.id)}>
+                                            <ResultItem key={item.id} onClick={() => handleItemClick(item.id, 'movie')}>
                                                 <img
                                                     src={
                                                         item.poster_path
@@ -188,7 +193,10 @@ const Dropdown = ({ onClose }) => {
                                     <ResultsGrid>
                                         <h3>인물</h3>
                                         {categorizedResults.person.map((item) => (
-                                            <ResultItem key={item.id} onClick={() => handleItemClick(item.id)}>
+                                            <ResultItem
+                                                key={item.id}
+                                                onClick={() => handleItemClick(item.id, 'person')}
+                                            >
                                                 <img
                                                     src={
                                                         item.profile_path
