@@ -49,7 +49,9 @@ const MainHome = () => {
         <WeeklyList />
         <RateList />
         <GenreNav />
-        <AdBanner />
+      </MainContainer>
+      <AdBanner />
+      <MainContainer>
         {/* <CommonList type="series" />
         <CommonList type="movie" />
         <CommonList type="series" /> */}
