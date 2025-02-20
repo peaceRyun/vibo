@@ -29,13 +29,10 @@ const ContentDetail = ({ contentType }) => {
     const { id } = useParams();
     const [isMobile, setIsMobile] = useState(window.innerWidth <= 1024);
     const isSeries = contentType === 'series';
-    // 1. 초기 탭 설정 개선 (영화일 경우 '비슷한 콘텐츠' 탭을 기본으로)
     const [activeTab, setActiveTab] = useState(isSeries ? 'episodes' : 'similar');
 
-    // 영화일 때 가져오기
+    // Redux 상태 가져오기
     const { movieDetail, movieRecommendations, recommendLoading: movieLoading } = useSelector((state) => state.movieR);
-
-    // TV 시리즈일 때 가져오기 - TVDetail을 contentDetail로 변경
     const {
         TVDetail,
         contentRating: tvContentRating,
@@ -49,7 +46,7 @@ const ContentDetail = ({ contentType }) => {
 
     // 컨텐츠 타입에 따라 적절한 데이터 선택
     const contentDetail = isSeries ? TVDetail : movieDetail;
-    const contentRating = isSeries ? tvContentRating : tvContentRating; // 영화 레이팅으로 변경 필요
+    const contentRating = isSeries ? tvContentRating : tvContentRating;
     const recommendData = isSeries ? TVRecommendData : movieRecommendations;
     const recommendLoading = isSeries ? tvLoading : movieLoading;
 
@@ -66,7 +63,7 @@ const ContentDetail = ({ contentType }) => {
 
     useEffect(() => {
         if (!isSeries) {
-            setActiveTab('similar'); // 영화일 경우 항상 '비슷한 콘텐츠' 탭으로
+            setActiveTab('similar');
         }
     }, [isSeries]);
 
@@ -77,31 +74,20 @@ const ContentDetail = ({ contentType }) => {
                 dispatch(getTVDetail(id));
                 dispatch(getTVContentRating(id));
                 dispatch(getTVSeasons(id));
-                dispatch(getTVRecommendations(id)); // TV 추천 사용
+                dispatch(getTVRecommendations(id));
             } else if (contentType === 'movie') {
                 dispatch(getMovie());
                 dispatch(getMovieDetail(id));
                 dispatch(getMovieContentRating(id));
-                dispatch(getMovieRecommendations(id)); // 영화 추천 사용
+                dispatch(getMovieRecommendations(id));
             }
         }
     }, [dispatch, id, contentType]);
 
-    // 시즌 선택 시 에피소드 가져오기
     const handleSeasonSelect = (seasonNumber) => {
         if (id && seasonNumber) {
             dispatch(getTVSeasonEpisodes({ tvId: id, seasonNumber }));
         }
-    };
-
-    const renderEpisodeTab = () => {
-        if (!isSeries) return null;
-
-        return (
-            <TabButton active={activeTab === 'episodes'} onClick={() => setActiveTab('episodes')}>
-                에피소드
-            </TabButton>
-        );
     };
 
     return (
@@ -109,7 +95,7 @@ const ContentDetail = ({ contentType }) => {
             {!isMobile && (
                 <PcContainer>
                     <Inner>
-                        <Flex $flexDirection='column' $position='relative' $gap='30px' $padding='0 50px'>
+                        <Flex $flexDirection="column" $position="relative" $gap="30px" $padding="0 50px">
                             <PlayBanner contentDetail={contentDetail} contentType={contentType} />
                             <div style={{ padding: '0 50px' }}>
                                 <ContDetail contentDetail={contentDetail} contentType={contentType} />
@@ -121,7 +107,7 @@ const ContentDetail = ({ contentType }) => {
                                         seasonsLoading={seasonsLoading}
                                         episodesLoading={episodesLoading}
                                         onSeasonSelect={handleSeasonSelect}
-                                        posterPath={contentDetail?.poster_path} // poster_path 전달
+                                        posterPath={contentDetail?.poster_path}
                                     />
                                 )}
                                 <ReList
@@ -129,8 +115,8 @@ const ContentDetail = ({ contentType }) => {
                                     loading={recommendLoading}
                                     contentType={contentType}
                                 />
-                                <ReviewList />
-                                <div id='cont-more-detail'>
+                                <ReviewList contentDetail={contentDetail} />
+                                <div id="cont-more-detail">
                                     <ContMoreDetail
                                         contentDetail={contentDetail}
                                         contentType={contentType}
@@ -150,7 +136,11 @@ const ContentDetail = ({ contentType }) => {
                     </div>
                     <ContMobile contentDetail={contentDetail} />
                     <TabContainer>
-                        {renderEpisodeTab()}
+                        {isSeries && (
+                            <TabButton $active={activeTab === 'episodes'} onClick={() => setActiveTab('episodes')}>
+                                에피소드
+                            </TabButton>
+                        )}
                         <TabButton $active={activeTab === 'similar'} onClick={() => setActiveTab('similar')}>
                             비슷한 콘텐츠
                         </TabButton>
@@ -172,7 +162,8 @@ const ContentDetail = ({ contentType }) => {
                             contentType={contentType}
                         />
                     )}
-                    <ReviewList />
+                    {/* ✅ 모바일에도 리뷰 추가 */}
+                    <ReviewList contentDetail={contentDetail} />
                 </MobileInner>
             )}
         </>
