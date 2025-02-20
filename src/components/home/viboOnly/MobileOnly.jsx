@@ -157,7 +157,7 @@ import {
   MobileCardText,
   MobilePoster,
   MobileSlider,
-  MobileTitle,
+  // MobileTitle,
   Tag,
   Tags,
   Title,
