@@ -9,22 +9,31 @@ import CommonItem from './CommonItem';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router';
 
-export const CommonList = ({ title, fetchFunction, stateSelector }) => {
+export const CommonList = ({ fetchFunction, stateSelector }) => {
   const dispatch = useDispatch();
-  const content = stateSelector ? useSelector(stateSelector) : [];
+  // const content = stateSelector ? useSelector(stateSelector) : []; title값 부여 전
+  // const content = stateSelector ? useSelector(stateSelector) : { title: '', contentlist: [] };
   // const animations = useSelector((state) => state.filterR.animations || []);
+  const content = stateSelector
+    ? useSelector(stateSelector) ?? { title: '', option: '', contentlist: [] }
+    : { title: '', option: '', contentlist: [] };
+
   const loading = useSelector((state) => state.filterR.loading);
 
   useEffect(() => {
     if (fetchFunction) {
-      console.log(`📢 API 요청: ${title} 실행!`);
+      // console.log(`📢 API 요청: ${title} 실행!`);
       dispatch(fetchFunction());
-    } else {
-      console.error(`fetchFunction이 전달되지 않음: ${title}`);
     }
+    // else {
+    //   console.error(`fetchFunction이 전달되지 않음: ${title}`);
+    // }
   }, [dispatch, fetchFunction]);
 
-  console.log('📌 Redux에서 가져온 ${title}:', content);
+  console.log('📌 Redux에서 가져온 데이터:', content);
+  console.log('📌 Redux에서 가져온 title:', content?.title);
+  console.log('📌 Redux에서 가져온 contentlist:', content?.contentlist);
+  console.log('Redux에서 가져온 option', content?.option);
 
   // 데이터를 가져와서 필터링 적용해야함
   const navigate = useNavigate();
@@ -48,8 +57,9 @@ export const CommonList = ({ title, fetchFunction, stateSelector }) => {
           {/* {`
 {title}
 `} */}
-          {title}
-          <VerticalText>TV</VerticalText>
+          {/* {title} */}
+          {content.title}
+          <VerticalText>{content.option}</VerticalText>
         </CommonTitle>
         <MoreBtn onClick={onGo}>더보기</MoreBtn>
       </CommonInfo>
@@ -65,11 +75,20 @@ export const CommonList = ({ title, fetchFunction, stateSelector }) => {
         }}
       >
         {/* modules={[Pagination]} */}
-        {content?.map((item) => (
+        {/* {content.contentlist.map((item) => (
           <SwiperSlide key={item.id}>
             <CommonItem content={item} />
           </SwiperSlide>
-        ))}
+        ))} */}
+        {content?.contentlist?.length > 0 ? (
+          content.contentlist.map((item) => (
+            <SwiperSlide key={item.id}>
+              <CommonItem content={item} />
+            </SwiperSlide>
+          ))
+        ) : (
+          <p>콘텐츠를 불러오는 중...</p> // ✅ 데이터가 없을 경우 로딩 메시지 표시
+        )}
       </CommonSwiper>
     </Section>
   );
@@ -97,14 +116,24 @@ const Section = styled.section`
 
 const VerticalText = styled.div`
   position: absolute;
+  left: 15.8%;
+  top: 46%;
+  transform: translateY(-50%) rotate(-270deg);
+  font-size: clamp(58px, 4vw, 55px);
+  font-weight: bold;
+  color: #5e5e5e;
+  letter-spacing: 5px;
+  z-index: 800;
+  /* 아래내용은 기존꺼임 */
+  /* position: absolute;
   left: 19.8%;
   top: 21%;
   transform: translateY(-50%) rotate(-270deg);
   font-size: clamp(50px, 6vw, 80px);
   font-weight: bold;
   color: #5e5e5e;
-  letter-spacing: 5px;
-  @media (max-width: 1024px) {
+  letter-spacing: 5px; */
+  /* @media (max-width: 1024px) {
     font-size: clamp(40px, 5vw, 60px);
     left: 15%;
     top: 30%;
@@ -113,7 +142,7 @@ const VerticalText = styled.div`
     font-size: clamp(30px, 4vw, 50px);
     left: 10%;
     top: 35%;
-  }
+  } */
 `;
 
 const CommonInfo = styled.div`

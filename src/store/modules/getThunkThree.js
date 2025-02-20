@@ -40,10 +40,14 @@ export const getAnimations = createAsyncThunk('animations/getAnimations', async 
       }
     }
 
-    console.log(`✅ Final results: ${allResults.length} animations`);
-    return allResults.slice(0, 24);
+    console.log(` Final results: ${allResults.length} animations`);
+    return {
+      title: '온 가족 함께 애니타임', // 여기에 원하는 동적 타이틀을 설정 가능
+      option: 'ANIMATION',
+      contentlist: allResults.slice(0, 24),
+    };
   } catch (error) {
-    console.error('❌ Error fetching animations:', error.message);
+    console.error(' Error fetching animations:', error.message);
     return thunkAPI.rejectWithValue(error.message);
   }
 });
@@ -70,8 +74,9 @@ export const getDarkTheaterReleases = createAsyncThunk('movies/getDarkTheaterRel
         params: {
           api_key: API_KEY,
           primary_release_date_gte: new Date().toISOString().split('T')[0],
-          with_release_type: 2,
+          with_release_type: 3,
           include_adult: false,
+          sort_by: 'popularity.desc',
           page: page,
         },
       });
@@ -91,8 +96,56 @@ export const getDarkTheaterReleases = createAsyncThunk('movies/getDarkTheaterRel
       }
     }
 
-    console.log(`✅ Final results: ${allResults.length} movies`);
-    return allResults.slice(0, 24);
+    console.log(` Final results: ${allResults.length} movies`);
+    return {
+      title: '극장동시 다크영화',
+      option: 'MOVIE',
+      contentlist: allResults.slice(0, 24),
+    };
+  } catch (error) {
+    console.error(' Error fetching dark-themed theater releases:', error.message);
+    return thunkAPI.rejectWithValue(error.message);
+  }
+});
+
+export const getDramaTvs = createAsyncThunk('dramas/getDramaTvs', async (_, thunkAPI) => {
+  try {
+    let allResults = [];
+    let page = 1;
+
+    while (allResults.length < 400) {
+      console.log(`📢 Fetching page ${page} for currently airing dramas...`);
+
+      const response = await axios.get('https://api.themoviedb.org/3/tv/airing_today', {
+        params: {
+          api_key: API_KEY,
+
+          language: 'ko-KR',
+          page: page,
+        },
+      });
+
+      const dramaGenres = [18, 10749, 35, 10751, 10770];
+      const filteredResults = response.data.results.filter(
+        (drama) =>
+          drama.poster_path && drama.vote_average >= 6.0 && drama.genre_ids.some((genre) => dramaGenres.includes(genre))
+      );
+
+      allResults = [...allResults, ...filteredResults];
+
+      page++;
+
+      if (!response.data.results.length || page > 10) {
+        break;
+      }
+    }
+
+    console.log(` Final results: ${allResults.length} dramas`);
+    return {
+      title: '지금 방영중인 TV',
+      option: 'TV',
+      contentlist: allResults.slice(0, 24),
+    };
   } catch (error) {
     console.error(' Error fetching dark-themed theater releases:', error.message);
     return thunkAPI.rejectWithValue(error.message);

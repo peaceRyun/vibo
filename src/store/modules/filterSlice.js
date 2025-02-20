@@ -1,10 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { getAnimations, getDarkTheaterReleases } from './getThunkThree'; // ✅ 비동기 액션 가져오기
+import { getAnimations, getDarkTheaterReleases, getDramaTvs } from './getThunkThree'; // ✅ 비동기 액션 가져오기
 
 // ✅ 초기 상태 정의
 const initialState = {
-  animations: [],
-  darkTheaterReleases: [],
+  // animations: [],
+  // darkTheaterReleases: [],
+  animations: { title: '', option: '', contentlist: [] },
+  darkTheaterReleases: { title: '', option: '', contentlist: [] },
+  dramaTvs: { title: '', option: '', contentlist: [] },
   loading: false,
   error: null,
 };
@@ -38,6 +41,20 @@ export const filterSlice = createSlice({
         state.darkTheaterReleases = action.payload;
       })
       .addCase(getDarkTheaterReleases.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message;
+      })
+
+      // 3. 지금 방영중인 드라마 콘텐츠 관리
+      .addCase(getDramaTvs.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(getDramaTvs.fulfilled, (state, action) => {
+        state.loading = false;
+
+        state.dramaTvs = action.payload;
+      })
+      .addCase(getDramaTvs.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message;
       });
