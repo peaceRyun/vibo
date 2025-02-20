@@ -1,24 +1,79 @@
-// 주별 인기 콘텐츠 스와이퍼
-// 메인홈에만 있는 스와이퍼
+import styled from 'styled-components';
 
-// 주별 인기 있는 콘텐츠 탭 클릭시 다른 화면 보이도록 구현_0206
-import { WeeklyItemContainer, WeeklyImg } from './style';
+const WeeklyItem = ({ show }) => {
+    if (!show) {
+        return <EmptyItemContainer>콘텐츠 없음</EmptyItemContainer>;
+    }
 
-const dayContents = {
-  월: '/mainhome/weeklyitem_01.webp',
-  화: '/mainhome/weeklyitem_02.webp',
-  수: '/mainhome/weeklyitem_03.webp',
-  목: '/mainhome/weeklyitem_04.webp',
-  금: '/mainhome/weeklyitem_05.webp',
-  토: '/mainhome/weeklyitem_06.webp',
-  일: '/mainhome/weeklyitem_07.webp',
+    const posterUrl = show.poster_path
+        ? `https://image.tmdb.org/t/p/w500${show.poster_path}`
+        : '/mainhome/default_poster.webp';
+
+    return (
+        <WeeklyItemContainer>
+            <WeeklyImg src={posterUrl} alt={show.name || '콘텐츠 이미지'} />
+        </WeeklyItemContainer>
+    );
 };
-const WeeklyItem = ({ activeDay }) => {
-  //   const { activeDay } = useDay();
-  return (
-    <WeeklyItemContainer>
-      <WeeklyImg src={dayContents[activeDay]} alt={`${activeDay}요일 인기 콘텐츠`} />
-    </WeeklyItemContainer>
-  );
-};
+
 export default WeeklyItem;
+
+const WeeklyItemContainer = styled.div`
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s, box-shadow 0.3s;
+    height: 100%;
+    cursor: pointer;
+
+    &:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+    }
+
+    @media (max-width: 400px) {
+        height: auto;
+        width: 90%;
+        margin: 0 auto;
+        transform: scale(0.85);
+
+        &:hover {
+            transform: translateY(-3px) scale(0.85);
+        }
+    }
+`;
+
+const WeeklyImg = styled.img`
+    width: 100%;
+    height: 100%;
+    aspect-ratio: 2/3;
+    object-fit: cover;
+    transition: filter 0.3s;
+
+    ${WeeklyItemContainer}:hover & {
+        filter: brightness(0.7);
+    }
+
+    @media (max-width: 400px) {
+        max-height: 170px;
+        width: 85%;
+        margin: 0 auto;
+        display: block;
+    }
+`;
+
+const EmptyItemContainer = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #333;
+    border-radius: 8px;
+    height: 250px;
+    color: #999;
+    font-size: 0.9rem;
+
+    @media (max-width: 400px) {
+        height: 180px;
+    }
+`;

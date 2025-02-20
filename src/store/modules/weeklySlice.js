@@ -8,8 +8,8 @@ const initialState = {
     isComplete: false,
 };
 
-export const contentSlice = createSlice({
-    name: 'content',
+export const weeklySlice = createSlice({
+    name: 'weekly',
     initialState,
     reducers: {},
     extraReducers: (builder) => {
@@ -32,5 +32,5 @@ export const contentSlice = createSlice({
     },
 });
 
-export const contentActions = contentSlice.actions;
-export default contentSlice.reducer;
+export const weeklyActions = weeklySlice.actions;
+export default weeklySlice.reducer;

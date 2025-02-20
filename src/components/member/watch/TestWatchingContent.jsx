@@ -13,7 +13,7 @@ const colors = [
   '#E84393',
   '#FDCB6E',
   '#00CEC9',
-]; // 사용할 색상 배열
+]; // 10개 카드의 랜덤 색상에 사용할 색상 배열: 바꿔도됨
 
 const getRandomColor = () => colors[Math.floor(Math.random() * colors.length)];
 
@@ -21,26 +21,30 @@ const TestWatchingContent = () => {
   const movies = [
     { src: '/member/mypage_01.webp' },
     { src: '/member/mypage_02.webp' },
-    { src: '/member/mypage_03.webp' },
     { src: '/member/mypage_04.webp' },
   ];
   const cardsRef = useRef([]);
-  const coloredCardsRef = useRef(new Array(20).fill(null));
-  const coloredCardColors = useRef(Array.from({ length: 20 }, () => getRandomColor())); // 20개 카드의 랜덤 색상
+  const coloredCardsRef = useRef(new Array(10).fill(null));
+  const coloredCardColors = useRef(Array.from({ length: 10 }, () => getRandomColor())); // 10개 카드의 랜덤 색상
+
+  const coloredCardFinalPositions = useRef([
+    //x:숫자 클수록 오른쪽, y:숫자 클수록 위로
+    { x: 480, y: 180 }, //1번
+    { x: 670, y: 100 }, //2번
+    { x: 600, y: 150 }, //3번
+    { x: 100, y: 280 }, //4번
+    { x: 650, y: 290 }, //5번
+    { x: 400, y: 10 }, //6번
+    { x: 500, y: 80 }, //7번
+    { x: 430, y: 230 }, //8번
+    { x: 250, y: 250 }, //9번
+    { x: 400, y: 280 }, //10번
+  ]);
 
   const cardFinalPositions = useRef(
     Array.from({ length: movies.length }, () => ({
       x: 150,
       y: 10,
-      // rotationZ: Math.random() * 40 - 20,
-    }))
-  );
-
-  const coloredCardFinalPositions = useRef(
-    Array.from({ length: 20 }, () => ({
-      x: Math.random() * 200 - 150,
-      y: Math.random() * 200 - 100,
-      // rotationZ: Math.random() * 30 - 15,
     }))
   );
 
@@ -59,18 +63,17 @@ const TestWatchingContent = () => {
       y: window.innerHeight - 100, // 이미지 카드보다 더 아래에서 시작
       rotationX: 60,
       rotationY: 30,
-      opacity: 0.6, // 살짝 더 흐릿한 효과
+      opacity: 0.6, // 알록달록카드 흐릿하게 조정 여기서
     });
 
     cardsRef.current.forEach((card, index) => {
       if (card) {
-        const { x, y, rotationZ } = cardFinalPositions.current[index];
+        const { x, y } = cardFinalPositions.current[index];
 
         gsap.to(card, {
           x: index * 100 + x,
           y: -index * 70 + y,
           opacity: 1, // 완전히 선명하게
-          // duration: randomDuration,
           duration: 1.5,
           ease: 'power2.out',
         });
@@ -78,13 +81,12 @@ const TestWatchingContent = () => {
     });
     coloredCardsRef.current.forEach((card, index) => {
       if (card) {
-        const { x, y, rotationZ } = coloredCardFinalPositions.current[index];
+        const { x, y } = coloredCardFinalPositions.current[index];
 
         gsap.to(card, {
-          x: index * 100 + x,
-          y: index * 50 + y,
-          opacity: 0.6, // 살짝 덜 선명하게
-          // duration: randomDuration,
+          x,
+          y,
+          opacity: 0.6,
           duration: 1.5,
           ease: 'power2.out',
         });
@@ -98,18 +100,20 @@ const TestWatchingContent = () => {
         <p>다양한 콘텐츠를 시청해보세요.</p>
         <p>고객님의 취향에 맞추어 추천을 해드릴까요?</p>
 
-        {/* 추천 영화 카드 */}
         <RecommendedMovies>
           {/* {movies.map((movie, index) => (
             <MovieCard key={index} style={{ backgroundImage: `url(${movie.src})` }} />
           ))} */}
-          {/* 20개의 알록달록한 배경 카드 */}
-          {Array.from({ length: 20 }).map((_, index) => (
+
+          {Array.from({ length: 10 }).map((_, index) => (
             <ColoredCard
               key={`bg-${index}`}
               ref={(el) => (coloredCardsRef.current[index] = el)}
-              color={coloredCardColors.current[index]} // 개별 카드에 다른 색상 적용
-            />
+              color={coloredCardColors.current[index]} // 랜덤 컬러 지정
+            >
+              {index + 1}
+              {/* index: 알록달록 미니카드들에 번호 붙이는거. 나중에 지워주셍요. */}
+            </ColoredCard>
           ))}
           {movies.map((movie, index) => (
             <MovieCard
