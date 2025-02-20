@@ -605,6 +605,90 @@ export const fetchGenresThunk = createAsyncThunk('genres/fetch', async () => {
     return shuffledGenres.slice(0, 4);
 });
 
+// 장르 8개 랜덤 선택 thunk (메인 장르 내비게이션용)
+export const fetchMainGenresThunk = createAsyncThunk('genres/fetchMain', async () => {
+    const [movieGenres, tvGenres] = await Promise.all([
+        api.get('/genre/movie/list', {
+            params: {
+                language: 'ko-KR',
+            },
+        }),
+        api.get('/genre/tv/list', {
+            params: {
+                language: 'ko-KR',
+            },
+        }),
+    ]);
+
+    // 모든 장르를 하나의 배열로 합치고 중복 제거
+    const allGenres = [
+        ...new Map([...movieGenres.data.genres, ...tvGenres.data.genres].map((item) => [item.id, item])).values(),
+    ];
+
+    // 배열을 무작위로 섞기
+    const shuffledGenres = allGenres.sort(() => Math.random() - 0.5);
+
+    // 처음 8개만 반환
+    return shuffledGenres.slice(0, 8);
+});
+
+// 선택한 장르의 데이터를 끌어오는 thunk (메인 장르 내비게이션용)
+export const getContentByGenreThunk = createAsyncThunk(
+    'genres/fetchByGenre',
+    async ({ genreId, contentType = 'all' }, { rejectWithValue }) => {
+        try {
+            let results = [];
+
+            // contentType에 따라 영화만, TV 시리즈만, 또는 둘 다 가져올 수 있습니다
+            if (contentType === 'all' || contentType === 'movie') {
+                const movieResponse = await api.get('/discover/movie', {
+                    params: {
+                        with_genres: genreId,
+                        language: 'ko-KR',
+                        sort_by: 'popularity.desc',
+                        page: 1,
+                    },
+                });
+                results = [
+                    ...results,
+                    ...movieResponse.data.results.map((item) => ({
+                        ...item,
+                        media_type: 'movie',
+                    })),
+                ];
+            }
+
+            if (contentType === 'all' || contentType === 'tv') {
+                const tvResponse = await api.get('/discover/tv', {
+                    params: {
+                        with_genres: genreId,
+                        language: 'ko-KR',
+                        sort_by: 'popularity.desc',
+                        page: 1,
+                    },
+                });
+                results = [
+                    ...results,
+                    ...tvResponse.data.results.map((item) => ({
+                        ...item,
+                        media_type: 'tv',
+                    })),
+                ];
+            }
+
+            // 결과를 인기도 순으로 정렬
+            results.sort((a, b) => b.popularity - a.popularity);
+
+            return {
+                genreId,
+                results,
+            };
+        } catch (error) {
+            return rejectWithValue(error.response?.data || error.message);
+        }
+    }
+);
+
 //영화 추천 thunk
 const movieOptions = {
     params: {
