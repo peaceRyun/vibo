@@ -37,21 +37,21 @@ const Mypage = () => {
                         <UserInfo>
                             <UserName>
                                 <strong>{nickname}</strong>
-                                <p>님</p> <Link to="/profileforedit">✏️</Link>
+                                <p>님</p> <Link to='/profileforedit'>✏️</Link>
                             </UserName>
                             <button onClick={onGo}>프로필 전환</button>
                         </UserInfo>
                     </ProfileHeader>
                     <PassContainer>
                         <PassCard>
-                            <div className="PassTitle">
+                            <div className='PassTitle'>
                                 <strong>ViBo</strong>
                                 <span> 패스</span>
                                 <p>사용 중인 패스가 없습니다.</p>
                             </div>
                         </PassCard>
                         <PassButton onClick={onGo2}>
-                            <div className="PassTitle2">
+                            <div className='PassTitle2'>
                                 <strong>패스 구매하기 ▶ </strong>
                             </div>
                         </PassButton>
@@ -66,7 +66,7 @@ const Mypage = () => {
                     {/* 탭 메뉴 */}
                     <TabMenu>
                         {['시청내역', '구매내역', '찜', '나의 리뷰'].map((tab) => (
-                            <TabItem key={tab} active={activeTab === tab} onClick={() => setActiveTab(tab)}>
+                            <TabItem key={tab} $active={activeTab === tab} onClick={() => setActiveTab(tab)}>
                                 {tab}
                             </TabItem>
                         ))}
@@ -225,7 +225,7 @@ const TabItem = styled.div`
     font-weight: bold;
     cursor: pointer;
     padding-bottom: 5px;
-    color: ${(props) => (props.active ? '#68F5EB' : 'white')};
+    color: ${(props) => (props.$active ? '#68F5EB' : 'white')};
     position: relative;
     margin-bottom: 20px;
 
