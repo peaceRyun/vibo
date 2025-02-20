@@ -16,8 +16,7 @@ import ViboOnly from '../../../components/home/viboOnly/ViboOnly';
 import MenuSection from '../../../components/home/menubutton/MenuSection';
 import MainBanner from '../../../components/home/mainBanner/MainBanner';
 import { useDispatch } from 'react-redux';
-import { getAiringToday, getTopRated, getTVseries } from '../../../store/modules/getThunk';
-import { getAnimations, getDarkTheaterReleases, getDramaTvs } from '../../../store/modules/getThunkThree';
+import { getAiringToday, getMovie, getTopRated, getTVseries } from '../../../store/modules/getThunk';
 // import { LiveContainer } from '../live/style';
 // import { Container } from '../../../components/home/viboOnly/only1/style';
 
@@ -26,14 +25,11 @@ const liveTitles = [{ id: '1', title: '실시간 인기 LIVE' }];
 const MainHome = () => {
   const dispatch = useDispatch();
   useEffect(() => {
+    dispatch(getMovie());
     dispatch(getTVseries());
     dispatch(getAiringToday());
     dispatch(getTopRated());
-    dispatch(getAnimations());
-    dispatch(getDarkTheaterReleases());
-    dispatch(getDramaTvs());
   }, []);
-  // 디스패치 실행해서 데이터 redux스토어에 저장
   return (
     <MainContent>
       <MainBanner />
@@ -47,17 +43,10 @@ const MainHome = () => {
         <WeeklyList />
         <RateList />
         <GenreNav />
-      </MainContainer>
-      <AdBanner />
-      <MainContainer>
-        <CommonList fetchFunction={getAnimations} stateSelector={(state) => state.filterR.animations} />
-        <CommonList
-          fetchFunction={getDarkTheaterReleases}
-          stateSelector={(state) => state.filterR.darkTheaterReleases}
-        />
-        {/* <CommonList fetchFunction={getDramaTvs} stateSelector={(state) => state.filterR.DramaTvs} /> */}
-        {/* 헐 대소문자.. */}
-        <CommonList fetchFunction={getDramaTvs} stateSelector={(state) => state.filterR.dramaTvs} />
+        <AdBanner />
+        <CommonList type="series" />
+        <CommonList type="movie" />
+        <CommonList type="series" />
         <ViboOnly />
       </MainContainer>
       <MenuSection />

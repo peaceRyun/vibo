@@ -1,4 +1,4 @@
-import { SlideContainer, SlideTitle, ButtonWrapper } from './style';
+import { SlideContainer, SlideTitle, SlideSubtitle } from './style';
 
 const AboutMslide3 = () => {
   return (
@@ -6,8 +6,9 @@ const AboutMslide3 = () => {
       <div className="TitleBackground"></div>
       <SlideTitle>
         <div className="LastTitle">
-          <span className="bold">VIBO</span>
-          <span className="light">지금 시작해보세요</span>
+          {/* <span className="bold">VIBO</span> */}
+          <span className="light">VIBO 시작하기를 눌러</span>
+          <span className="BoldLight">지금 함께 하세요</span>
         </div>
       </SlideTitle>
     </SlideContainer>

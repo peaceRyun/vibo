@@ -12,6 +12,8 @@ import tvDetailR from './modules/tvDetailSlice';
 import topRatedR from './modules/topRatedSlice';
 import searchR from './modules/searchSlice';
 import filterR from './modules/filterSlice';
+import popularR from './modules/popularSlice';
+import genreR from './modules/genreSlice';
 
 export const store = configureStore({
   reducer: {
@@ -28,5 +30,21 @@ export const store = configureStore({
     topRatedR,
     searchR,
     filterR, //추가
+  },
+  reducer: {
+    // aboutR,
+    contentR,
+    memberR,
+    playerR,
+    movieR,
+    tvSeriesR,
+    contPlayerR,
+    // pagenationR,
+    profileR,
+    tvDetailR,
+    topRatedR,
+    searchR,
+    popularR,
+    genreR,
   },
 });

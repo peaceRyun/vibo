@@ -1,24 +1,114 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-//영화 - 기본 정보 끌어오기
-const options = {
-    api_key: 'ddf6521c43c2e03f59d2767f109aaaa4',
-    lenguage: 'ko-KR',
-    genres: 28,
+//영화 - 기본 정보 끌어오기 thunk
+// 영화 데이터 가져오기 thunk
+const moviesOptions = {
+    params: {
+        include_adult: 'false',
+        language: 'ko-KR',
+        page: '1',
+        sort_by: 'popularity.desc',
+    },
+    headers: {
+        accept: 'application/json',
+        Authorization:
+            'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJkZGY2NTIxYzQzYzJlMDNmNTlkMjc2N2YxMDlhYWFhNCIsIm5iZiI6MTczNzUxMDE4NS4yNjIsInN1YiI6IjY3OTA0ZDI5MmQ2MWMzM2U2M2RmZTVlNiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ._QJjWVEDYEcIfVZtQRYG0JSRb22Dit3HopPsNm8AILE',
+    },
 };
 
-export const getMovie = createAsyncThunk('movie/getMovie', async () => {
-    const url = `https://api.themoviedb.org/3/movie/now_playing?`;
+export const getMovie = createAsyncThunk('movie/getMovie', async (_, thunkAPI) => {
     try {
-        const res = await axios.get(url, { params: options });
-        return res.data.results;
+        let allResults = [];
+        let page = 1;
+        const seenIds = new Set(); // 이미 처리된 ID를 추적하기 위한 Set
+
+        while (allResults.length < 24) {
+            // 영화 기본 정보 가져오기
+            const response = await axios.get('https://api.themoviedb.org/3/discover/movie', {
+                ...moviesOptions,
+                params: {
+                    ...moviesOptions.params,
+                    page: page.toString(),
+                },
+            });
+
+            // 기본 필터링: overview, poster_path, backdrop_path가 있고 ID가 중복되지 않는 콘텐츠만
+            const filteredResults = response.data.results.filter(
+                (movie) => movie.overview && movie.poster_path && movie.backdrop_path && !seenIds.has(movie.id) // 중복 ID 체크
+            );
+
+            // 각 영화의 비디오 정보 확인
+            for (const movie of filteredResults) {
+                try {
+                    // 이미 충분한 결과를 얻었다면 중단
+                    if (allResults.length >= 24) {
+                        break;
+                    }
+
+                    // ID가 중복되지 않은 경우에만 처리
+                    if (!seenIds.has(movie.id)) {
+                        seenIds.add(movie.id); // ID를 Set에 추가
+
+                        const videoResponse = await axios.get(`https://api.themoviedb.org/3/movie/${movie.id}/videos`, {
+                            headers: moviesOptions.headers,
+                        });
+
+                        // 예고편이나 티저 찾기
+                        const trailer = videoResponse.data.results.find(
+                            (video) =>
+                                video.site === 'YouTube' &&
+                                video.key &&
+                                (video.type === 'Trailer' || video.type === 'Teaser')
+                        );
+
+                        // 모든 영화를 저장하되, videoKey의 유무로 구분
+                        allResults.push({
+                            ...movie,
+                            videoKey: trailer ? trailer.key : null,
+                        });
+                    }
+                } catch (error) {
+                    console.error(`Error fetching videos for movie ${movie.id}:`, error.message);
+                }
+            }
+
+            page++;
+
+            // 더 이상 결과가 없거나 10페이지까지 검색했다면 종료
+            if (!response.data.results.length || page > 10) {
+                break;
+            }
+        }
+
+        return allResults.slice(0, 24);
     } catch (error) {
-        console.log(error);
+        console.error('Main error:', error.message);
+        return thunkAPI.rejectWithValue(error.message);
     }
 });
 
-//영화 - 유튜브링크 가져오기
+//영화 - 상세정보 가져오기 thunk
+export const getMovieDetail = createAsyncThunk('movieDetail/getMovieDetail', async (movieId, { rejectWithValue }) => {
+    try {
+        const response = await axios.get(`https://api.themoviedb.org/3/movie/${movieId}`, {
+            params: {
+                language: 'ko-KR',
+            },
+            headers: {
+                accept: 'application/json',
+                Authorization:
+                    'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJkZGY2NTIxYzQzYzJlMDNmNTlkMjc2N2YxMDlhYWFhNCIsIm5iZiI6MTczNzUxMDE4NS4yNjIsInN1YiI6IjY3OTA0ZDI5MmQ2MWMzM2U2M2RmZTVlNiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ._QJjWVEDYEcIfVZtQRYG0JSRb22Dit3HopPsNm8AILE',
+            },
+        });
+
+        return response.data;
+    } catch (error) {
+        return rejectWithValue(error.message);
+    }
+});
+
+//영화 - 유튜브링크 가져오기 thunk
 const videoOptions = {
     params: {},
     headers: {
@@ -49,7 +139,7 @@ export const getMovieVideos = createAsyncThunk(
     }
 );
 
-// 영화 - 리뷰 데이터 끌어오기
+// 영화 - 리뷰 데이터 끌어오기 thunk
 const reviewOptions = {
     params: {
         language: 'ko-KR',
@@ -92,7 +182,7 @@ export const getMovieReviews = createAsyncThunk('reviews/getMovieReviews', async
     }
 });
 
-//TV시리즈 - 기본정보
+//TV시리즈 - 기본정보 thunk
 const TVoptions = {
     params: {
         include_adult: 'false',
@@ -112,10 +202,9 @@ export const getTVseries = createAsyncThunk('TVseries/getTVseries', async (_, th
     try {
         let allResults = [];
         let page = 1;
+        const seenIds = new Set(); // 이미 처리된 ID를 추적하기 위한 Set
 
         while (allResults.length < 24) {
-            console.log(`Fetching page ${page}`);
-
             // TV 시리즈 기본 정보 가져오기
             const response = await axios.get('https://api.themoviedb.org/3/discover/tv', {
                 ...TVoptions,
@@ -125,35 +214,40 @@ export const getTVseries = createAsyncThunk('TVseries/getTVseries', async (_, th
                 },
             });
 
-            // 기본 필터링: overview, poster_path, backdrop_path가 있는 콘텐츠만
+            // 기본 필터링: overview, poster_path, backdrop_path가 있고 ID가 중복되지 않는 콘텐츠만
             const filteredResults = response.data.results.filter(
-                (show) => show.overview && show.poster_path && show.backdrop_path
+                (show) => show.overview && show.poster_path && show.backdrop_path && !seenIds.has(show.id) // 중복 ID 체크
             );
 
             // 각 TV 시리즈의 비디오 정보 확인
             for (const show of filteredResults) {
                 try {
-                    const videoResponse = await axios.get(`https://api.themoviedb.org/3/tv/${show.id}/videos`, {
-                        headers: TVoptions.headers,
-                    });
-
-                    // 예고편이나 티저 찾기
-                    const trailer = videoResponse.data.results.find(
-                        (video) =>
-                            video.site === 'YouTube' &&
-                            video.key &&
-                            (video.type === 'Trailer' || video.type === 'Teaser')
-                    );
-
-                    // 모든 show를 저장하되, videoKey의 유무로 구분
-                    allResults.push({
-                        ...show,
-                        videoKey: trailer ? trailer.key : null,
-                    });
-
-                    // 24개를 채웠다면 종료
+                    // 이미 충분한 결과를 얻었다면 중단
                     if (allResults.length >= 24) {
                         break;
+                    }
+
+                    // ID가 중복되지 않은 경우에만 처리
+                    if (!seenIds.has(show.id)) {
+                        seenIds.add(show.id); // ID를 Set에 추가
+
+                        const videoResponse = await axios.get(`https://api.themoviedb.org/3/tv/${show.id}/videos`, {
+                            headers: TVoptions.headers,
+                        });
+
+                        // 예고편이나 티저 찾기
+                        const trailer = videoResponse.data.results.find(
+                            (video) =>
+                                video.site === 'YouTube' &&
+                                video.key &&
+                                (video.type === 'Trailer' || video.type === 'Teaser')
+                        );
+
+                        // 모든 show를 저장하되, videoKey의 유무로 구분
+                        allResults.push({
+                            ...show,
+                            videoKey: trailer ? trailer.key : null,
+                        });
                     }
                 } catch (error) {
                     console.error(`Error fetching videos for show ${show.id}:`, error.message);
@@ -168,7 +262,6 @@ export const getTVseries = createAsyncThunk('TVseries/getTVseries', async (_, th
             }
         }
 
-        console.log(`Final results: ${allResults.length} shows`);
         return allResults.slice(0, 24);
     } catch (error) {
         console.error('Main error:', error.message);
@@ -176,7 +269,7 @@ export const getTVseries = createAsyncThunk('TVseries/getTVseries', async (_, th
     }
 });
 
-//TV 시리즈 - 상세정보 가져오기
+//TV 시리즈 - 상세정보 가져오기 thunk
 export const getTVDetail = createAsyncThunk('TVDetail/getTVDetail', async (tvId, { rejectWithValue }) => {
     try {
         const response = await axios.get(`https://api.themoviedb.org/3/tv/${tvId}`, {
@@ -196,15 +289,13 @@ export const getTVDetail = createAsyncThunk('TVDetail/getTVDetail', async (tvId,
     }
 });
 
-//Tv시리즈 - 유튜브 링크 끌어오기
+//Tv시리즈 - 유튜브 링크 끌어오기 thunk
 export const getTVVideos = createAsyncThunk('player/getTVVideos', async (tvId = null, { rejectWithValue }) => {
     try {
         if (!tvId) {
             console.log('No tvId provided, returning default video');
             return 'MkcqlqCfYcg';
         }
-
-        console.log('Fetching videos for TV ID:', tvId);
 
         const response = await axios.get(`https://api.themoviedb.org/3/tv/${tvId}/videos`, {
             params: {
@@ -217,10 +308,7 @@ export const getTVVideos = createAsyncThunk('player/getTVVideos', async (tvId = 
             },
         });
 
-        console.log('API Response:', response.data);
-
         const videos = response.data.results;
-        console.log('Available videos:', videos);
 
         // 한국어 예고편 찾기
         let youtubeVideo = videos.find(
@@ -256,7 +344,7 @@ export const getTVVideos = createAsyncThunk('player/getTVVideos', async (tvId = 
     }
 });
 
-//메인홈 요일별 컴포넌트
+//메인홈 요일별 thunk
 export const getAiringToday = createAsyncThunk('content/getAiringToday', async (_, { rejectWithValue }) => {
     try {
         // 이번 주의 시작일과 종료일 계산
@@ -365,7 +453,7 @@ export const getAiringToday = createAsyncThunk('content/getAiringToday', async (
     }
 });
 
-//바이보 TOP 5
+//바이보 TOP 5 thunk
 export const getTopRated = createAsyncThunk('topRated/getTopRated', async (_, { rejectWithValue }) => {
     try {
         const headers = {
@@ -411,6 +499,7 @@ export const getTopRated = createAsyncThunk('topRated/getTopRated', async (_, { 
     }
 });
 
+//검색 thunk
 const headers = {
     accept: 'application/json',
     Authorization:
@@ -442,6 +531,352 @@ export const searchMulti = createAsyncThunk('search/multi', async ({ query, page
             totalResults: response.data.total_results,
         };
     } catch (error) {
+        return rejectWithValue(error.message);
+    }
+});
+
+// 인기 영화 top10(실시간 인기 검색어 관련) thunk
+const api = axios.create({
+    baseURL: 'https://api.themoviedb.org/3',
+    headers: {
+        accept: 'application/json',
+        Authorization:
+            'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJkZGY2NTIxYzQzYzJlMDNmNTlkMjc2N2YxMDlhYWFhNCIsIm5iZiI6MTczNzUxMDE4NS4yNjIsInN1YiI6IjY3OTA0ZDI5MmQ2MWMzM2U2M2RmZTVlNiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ._QJjWVEDYEcIfVZtQRYG0JSRb22Dit3HopPsNm8AILE',
+    },
+});
+
+export const fetchPopularContentThunk = createAsyncThunk('content/fetchPopular', async () => {
+    const [moviesResponse, tvResponse] = await Promise.all([
+        api.get('/trending/movie/day', {
+            params: {
+                language: 'ko-KR',
+                region: 'KR',
+            },
+        }),
+        api.get('/trending/tv/day', {
+            params: {
+                language: 'ko-KR',
+                region: 'KR',
+            },
+        }),
+    ]);
+
+    const movies = moviesResponse.data.results.map((movie) => ({
+        ...movie,
+        media_type: 'movie',
+        title: movie.title,
+        release_date: movie.release_date,
+    }));
+
+    const tvShows = tvResponse.data.results.map((show) => ({
+        ...show,
+        media_type: 'tv',
+        title: show.name,
+        release_date: show.first_air_date,
+    }));
+
+    return [...movies, ...tvShows].sort((a, b) => b.popularity - a.popularity).slice(0, 10);
+});
+
+//장르 4개 랜덤 thunk (검색창 장르 바로가기 관련)
+export const fetchGenresThunk = createAsyncThunk('genres/fetch', async () => {
+    const [movieGenres, tvGenres] = await Promise.all([
+        api.get('/genre/movie/list', {
+            params: {
+                language: 'ko-KR',
+            },
+        }),
+        api.get('/genre/tv/list', {
+            params: {
+                language: 'ko-KR',
+            },
+        }),
+    ]);
+
+    // 모든 장르를 하나의 배열로 합치고 중복 제거
+    const allGenres = [
+        ...new Map([...movieGenres.data.genres, ...tvGenres.data.genres].map((item) => [item.id, item])).values(),
+    ];
+
+    // 배열을 무작위로 섞기
+    const shuffledGenres = allGenres.sort(() => Math.random() - 0.5);
+
+    // 처음 4개만 반환
+    return shuffledGenres.slice(0, 4);
+});
+
+//영화 추천 thunk
+const movieOptions = {
+    params: {
+        language: 'ko-KR',
+        page: '1',
+    },
+    headers: {
+        accept: 'application/json',
+        Authorization:
+            'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJkZGY2NTIxYzQzYzJlMDNmNTlkMjc2N2YxMDlhYWFhNCIsIm5iZiI6MTczNzUxMDE4NS4yNjIsInN1YiI6IjY3OTA0ZDI5MmQ2MWMzM2U2M2RmZTVlNiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ._QJjWVEDYEcIfVZtQRYG0JSRb22Dit3HopPsNm8AILE',
+    },
+};
+
+export const getMovieRecommendations = createAsyncThunk('movies/getMovieRecommendations', async (movieId, thunkAPI) => {
+    try {
+        let allResults = [];
+        let page = 1;
+        const seenIds = new Set(); // 이미 처리된 ID를 추적하기 위한 Set
+
+        while (allResults.length < 24) {
+            const response = await axios.get(`https://api.themoviedb.org/3/movie/${movieId}/recommendations`, {
+                ...movieOptions,
+                params: {
+                    ...movieOptions.params,
+                    page: page.toString(),
+                },
+            });
+
+            // 기본 필터링 + ID 중복 체크
+            const filteredResults = response.data.results.filter(
+                (movie) => movie.overview && movie.poster_path && movie.backdrop_path && !seenIds.has(movie.id) // 중복 ID 체크
+            );
+
+            // 각 영화의 비디오 정보 확인
+            for (const movie of filteredResults) {
+                try {
+                    // 이미 충분한 결과를 얻었다면 중단
+                    if (allResults.length >= 24) {
+                        break;
+                    }
+
+                    // ID가 중복되지 않은 경우에만 처리
+                    if (!seenIds.has(movie.id)) {
+                        seenIds.add(movie.id); // ID를 Set에 추가
+
+                        const videoResponse = await axios.get(`https://api.themoviedb.org/3/movie/${movie.id}/videos`, {
+                            headers: movieOptions.headers,
+                        });
+
+                        const trailer = videoResponse.data.results.find(
+                            (video) =>
+                                video.site === 'YouTube' &&
+                                video.key &&
+                                (video.type === 'Trailer' || video.type === 'Teaser')
+                        );
+
+                        allResults.push({
+                            ...movie,
+                            videoKey: trailer ? trailer.key : null,
+                        });
+                    }
+                } catch (error) {
+                    console.error(`Error fetching videos for movie ${movie.id}:`, error.message);
+                }
+            }
+
+            page++;
+
+            // 더 이상 결과가 없거나 10페이지까지 검색했다면 종료
+            if (!response.data.results.length || page > 10) {
+                break;
+            }
+        }
+
+        return allResults.slice(0, 24);
+    } catch (error) {
+        console.error('Main error:', error.message);
+        return thunkAPI.rejectWithValue(error.message);
+    }
+});
+
+// TV 시리즈 관람등급 가져오기
+export const getTVContentRating = createAsyncThunk('TVDetail/getTVContentRating', async (tvId, { rejectWithValue }) => {
+    try {
+        const response = await axios.get(`https://api.themoviedb.org/3/tv/${tvId}/content_ratings`, {
+            headers: {
+                accept: 'application/json',
+                Authorization:
+                    'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJkZGY2NTIxYzQzYzJlMDNmNTlkMjc2N2YxMDlhYWFhNCIsIm5iZiI6MTczNzUxMDE4NS4yNjIsInN1YiI6IjY3OTA0ZDI5MmQ2MWMzM2U2M2RmZTVlNiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ._QJjWVEDYEcIfVZtQRYG0JSRb22Dit3HopPsNm8AILE',
+            },
+        });
+
+        // 한국 관람등급 찾기
+        const krRating = response.data.results.find((rating) => rating.iso_3166_1 === 'KR');
+
+        // 한국 관람등급이 없으면 미국 관람등급 사용
+        const usRating = response.data.results.find((rating) => rating.iso_3166_1 === 'US');
+
+        return {
+            rating: krRating?.rating || usRating?.rating || '정보 없음',
+            iso_3166_1: krRating ? 'KR' : usRating ? 'US' : null,
+        };
+    } catch (error) {
+        return rejectWithValue(error.message);
+    }
+});
+
+// 영화 관람등급 가져오기
+export const getMovieContentRating = createAsyncThunk(
+    'movies/getMovieContentRating',
+    async (movieId, { rejectWithValue }) => {
+        try {
+            const response = await axios.get(`https://api.themoviedb.org/3/movie/${movieId}/release_dates`, {
+                headers: {
+                    accept: 'application/json',
+                    Authorization:
+                        'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJkZGY2NTIxYzQzYzJlMDNmNTlkMjc2N2YxMDlhYWFhNCIsIm5iZiI6MTczNzUxMDE4NS4yNjIsInN1YiI6IjY3OTA0ZDI5MmQ2MWMzM2U2M2RmZTVlNiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ._QJjWVEDYEcIfVZtQRYG0JSRb22Dit3HopPsNm8AILE',
+                },
+            });
+
+            // 한국 관람등급 찾기
+            const krRelease = response.data.results.find((release) => release.iso_3166_1 === 'KR');
+
+            // 한국 관람등급이 없으면 미국 관람등급 사용
+            const usRelease = response.data.results.find((release) => release.iso_3166_1 === 'US');
+
+            // certification 찾기
+            const krCertification = krRelease?.release_dates[0]?.certification;
+            const usCertification = usRelease?.release_dates[0]?.certification;
+
+            return {
+                rating: krCertification || usCertification || '정보 없음',
+                iso_3166_1: krRelease ? 'KR' : usRelease ? 'US' : null,
+            };
+        } catch (error) {
+            return rejectWithValue(error.message);
+        }
+    }
+);
+
+// TV 시리즈 시즌별 에피소드 가져오기 thunk
+export const getTVSeasonEpisodes = createAsyncThunk(
+    'TVEpisodes/getTVSeasonEpisodes',
+    async ({ tvId, seasonNumber }, { rejectWithValue }) => {
+        try {
+            if (!tvId || seasonNumber === undefined) {
+                return rejectWithValue('TV ID and Season Number are required');
+            }
+
+            const response = await axios.get(`https://api.themoviedb.org/3/tv/${tvId}/season/${seasonNumber}`, {
+                params: {
+                    language: 'ko-KR',
+                },
+                headers: {
+                    accept: 'application/json',
+                    Authorization:
+                        'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJkZGY2NTIxYzQzYzJlMDNmNTlkMjc2N2YxMDlhYWFhNCIsIm5iZiI6MTczNzUxMDE4NS4yNjIsInN1YiI6IjY3OTA0ZDI5MmQ2MWMzM2U2M2RmZTVlNiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ._QJjWVEDYEcIfVZtQRYG0JSRb22Dit3HopPsNm8AILE',
+                },
+            });
+
+            const seasonData = response.data;
+
+            // 각 에피소드의 비디오 정보도 함께 가져오기
+            const episodesWithVideos = await Promise.all(
+                seasonData.episodes.map(async (episode) => {
+                    try {
+                        const videoResponse = await axios.get(
+                            `https://api.themoviedb.org/3/tv/${tvId}/season/${seasonNumber}/episode/${episode.episode_number}/videos`,
+                            {
+                                params: {
+                                    language: 'ko-KR',
+                                },
+                                headers: {
+                                    accept: 'application/json',
+                                    Authorization:
+                                        'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJkZGY2NTIxYzQzYzJlMDNmNTlkMjc2N2YxMDlhYWFhNCIsIm5iZiI6MTczNzUxMDE4NS4yNjIsInN1YiI6IjY3OTA0ZDI5MmQ2MWMzM2U2M2RmZTVlNiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ._QJjWVEDYEcIfVZtQRYG0JSRb22Dit3HopPsNm8AILE',
+                                },
+                            }
+                        );
+
+                        // 예고편이나 티저 찾기
+                        const videos = videoResponse.data.results;
+
+                        // 한국어 예고편 찾기
+                        let youtubeVideo = videos.find(
+                            (video) =>
+                                video.site === 'YouTube' &&
+                                video.key &&
+                                (video.type === 'Trailer' || video.type === 'Teaser' || video.type === 'Clip') &&
+                                video.iso_639_1 === 'ko'
+                        );
+
+                        // 한국어 예고편이 없으면 영어 예고편 찾기
+                        if (!youtubeVideo) {
+                            youtubeVideo = videos.find(
+                                (video) =>
+                                    video.site === 'YouTube' &&
+                                    video.key &&
+                                    (video.type === 'Trailer' || video.type === 'Teaser' || video.type === 'Clip')
+                            );
+                        }
+
+                        // 아무 YouTube 비디오나 찾기
+                        if (!youtubeVideo) {
+                            youtubeVideo = videos.find((video) => video.site === 'YouTube' && video.key);
+                        }
+
+                        // 썸네일 URL 구성
+                        const stillPath = episode.still_path
+                            ? `https://image.tmdb.org/t/p/w300${episode.still_path}`
+                            : '/contentdetail/sample/EpItemImgSample.png';
+
+                        return {
+                            ...episode,
+                            videoKey: youtubeVideo ? youtubeVideo.key : null,
+                            stillUrl: stillPath,
+                            runtime: episode.runtime ? `${episode.runtime}분` : '정보 없음',
+                        };
+                    } catch (error) {
+                        console.error(`Error fetching videos for episode ${episode.episode_number}:`, error);
+                        return {
+                            ...episode,
+                            videoKey: null,
+                            stillUrl: episode.still_path
+                                ? `https://image.tmdb.org/t/p/w300${episode.still_path}`
+                                : '/contentdetail/sample/EpItemImgSample.png',
+                            runtime: episode.runtime ? `${episode.runtime}분` : '정보 없음',
+                        };
+                    }
+                })
+            );
+
+            return {
+                seasonInfo: {
+                    air_date: seasonData.air_date,
+                    name: seasonData.name,
+                    overview: seasonData.overview,
+                    id: seasonData.id,
+                    poster_path: seasonData.poster_path,
+                    season_number: seasonData.season_number,
+                },
+                episodes: episodesWithVideos,
+            };
+        } catch (error) {
+            console.error('Error fetching TV season episodes:', error);
+            return rejectWithValue(error.message);
+        }
+    }
+);
+
+// TV 시리즈 모든 시즌 정보 가져오기 thunk
+export const getTVSeasons = createAsyncThunk('TVSeasons/getTVSeasons', async (tvId, { rejectWithValue }) => {
+    try {
+        if (!tvId) {
+            return rejectWithValue('TV ID is required');
+        }
+
+        const response = await axios.get(`https://api.themoviedb.org/3/tv/${tvId}`, {
+            params: {
+                language: 'ko-KR',
+            },
+            headers: {
+                accept: 'application/json',
+                Authorization:
+                    'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJkZGY2NTIxYzQzYzJlMDNmNTlkMjc2N2YxMDlhYWFhNCIsIm5iZiI6MTczNzUxMDE4NS4yNjIsInN1YiI6IjY3OTA0ZDI5MmQ2MWMzM2U2M2RmZTVlNiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ._QJjWVEDYEcIfVZtQRYG0JSRb22Dit3HopPsNm8AILE',
+            },
+        });
+
+        // 특별편(season_number=0)을 제외한 시즌 목록 반환
+        return response.data.seasons.filter((season) => season.season_number > 0);
+    } catch (error) {
+        console.error('Error fetching TV seasons:', error);
         return rejectWithValue(error.message);
     }
 });

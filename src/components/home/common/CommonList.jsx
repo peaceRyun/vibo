@@ -6,93 +6,60 @@ import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import CommonItem from './CommonItem';
 
-import { useEffect } from 'react';
-import { useNavigate } from 'react-router';
-
-export const CommonList = ({ fetchFunction, stateSelector }) => {
-  const dispatch = useDispatch();
-  // const content = stateSelector ? useSelector(stateSelector) : []; title값 부여 전
-  // const content = stateSelector ? useSelector(stateSelector) : { title: '', contentlist: [] };
-  // const animations = useSelector((state) => state.filterR.animations || []);
-  const content = stateSelector
-    ? useSelector(stateSelector) ?? { title: '', option: '', contentlist: [] }
-    : { title: '', option: '', contentlist: [] };
-
-  const loading = useSelector((state) => state.filterR.loading);
-
-  useEffect(() => {
-    if (fetchFunction) {
-      // console.log(`📢 API 요청: ${title} 실행!`);
-      dispatch(fetchFunction());
-    }
-    // else {
-    //   console.error(`fetchFunction이 전달되지 않음: ${title}`);
-    // }
-  }, [dispatch, fetchFunction]);
-
-  console.log('📌 Redux에서 가져온 데이터:', content);
-  console.log('📌 Redux에서 가져온 title:', content?.title);
-  console.log('📌 Redux에서 가져온 contentlist:', content?.contentlist);
-  console.log('Redux에서 가져온 option', content?.option);
-
-  // 데이터를 가져와서 필터링 적용해야함
+export const CommonList = ({ type = 'series' }) => {
   const navigate = useNavigate();
   const onGo = () => {
     navigate('/contentlist');
   };
 
-  // const { KoreanContent } = useSelector((state) => state.filterR);
+  // Redux에서 데이터 가져오기 (type에 따라 다른 데이터 사용)
+  const { TVseriesData } = useSelector((state) => state.tvSeriesR);
+  const { movieData } = useSelector((state) => state.movieR);
 
-  // 기존 영역
-  // const { TVseriesData } = useSelector((state) => state.tvSeriesR);
+  // type에 따라 적절한 데이터 선택
+  const contentData = type === 'series' ? TVseriesData : movieData;
 
-  // if (!TVseriesData) {
-  //   return <div>loading....</div>;
-  // }
-  // if (TVseriesData.length > 0) {
-  return (
-    <Section>
-      <CommonInfo>
-        <CommonTitle>
-          {/* {`
-{title}
-`} */}
-          {/* {title} */}
-          {content.title}
-          <VerticalText>{content.option}</VerticalText>
-        </CommonTitle>
-        <MoreBtn onClick={onGo}>더보기</MoreBtn>
-      </CommonInfo>
-      <CommonSwiper
-        spaceBetween={30} /* 기본 간격 */
-        slidesPerView={5.5} /* 기본값 (데스크탑) */
-        breakpoints={{
-          // 1280: { slidesPerView: 5.5, spaceBetween: 30 },
-          1024: { slidesPerView: 4.2, spaceBetween: 15 },
-          // 768: { slidesPerView: 2.5, spaceBetween: 20 },
-          // 600: { slidesPerView: 1.5, spaceBetween: 15 },
-          400: { slidesPerView: 2.2, spaceBetween: 10 },
-        }}
-      >
-        {/* modules={[Pagination]} */}
-        {/* {content.contentlist.map((item) => (
-          <SwiperSlide key={item.id}>
-            <CommonItem content={item} />
-          </SwiperSlide>
-        ))} */}
-        {content?.contentlist?.length > 0 ? (
-          content.contentlist.map((item) => (
-            <SwiperSlide key={item.id}>
-              <CommonItem content={item} />
+  // 타입에 따른 제목 설정
+  const contentTitle = type === 'series' ? 'TV' : '영화';
+
+  if (!contentData) {
+    return <div>loading....</div>;
+  }
+
+  if (contentData.length > 0) {
+    return (
+      <Section>
+        <CommonInfo>
+          <CommonTitle>
+            {`
+  XX님이
+  좋아할만 한
+  ${type === 'series' ? '예능' : '액션'}`}
+            <VerticalText>{contentTitle}</VerticalText>
+          </CommonTitle>
+          <MoreBtn onClick={onGo}>더보기</MoreBtn>
+        </CommonInfo>
+        <CommonSwiper
+          spaceBetween={30} /* 기본 간격 */
+          slidesPerView={5.5} /* 기본값 (데스크탑) */
+          breakpoints={{
+            // 1280: { slidesPerView: 5.5, spaceBetween: 30 },
+            1024: { slidesPerView: 4.2, spaceBetween: 15 },
+            // 768: { slidesPerView: 2.5, spaceBetween: 20 },
+            // 600: { slidesPerView: 1.5, spaceBetween: 15 },
+            400: { slidesPerView: 2.2, spaceBetween: 10 },
+          }}
+        >
+          {/* modules={[Pagination]} */}
+          {contentData.map((content) => (
+            <SwiperSlide key={content.id}>
+              <CommonItem content={{ ...content, media_type: type }} />
             </SwiperSlide>
-          ))
-        ) : (
-          <p>콘텐츠를 불러오는 중...</p> // ✅ 데이터가 없을 경우 로딩 메시지 표시
-        )}
-      </CommonSwiper>
-    </Section>
-  );
-  // }
+          ))}
+        </CommonSwiper>
+      </Section>
+    );
+  }
 };
 
 export default CommonList;
@@ -116,24 +83,14 @@ const Section = styled.section`
 
 const VerticalText = styled.div`
   position: absolute;
-  left: 15.8%;
-  top: 46%;
-  transform: translateY(-50%) rotate(-270deg);
-  font-size: clamp(58px, 4vw, 55px);
-  font-weight: bold;
-  color: #5e5e5e;
-  letter-spacing: 5px;
-  z-index: 800;
-  /* 아래내용은 기존꺼임 */
-  /* position: absolute;
   left: 19.8%;
   top: 21%;
   transform: translateY(-50%) rotate(-270deg);
   font-size: clamp(50px, 6vw, 80px);
   font-weight: bold;
   color: #5e5e5e;
-  letter-spacing: 5px; */
-  /* @media (max-width: 1024px) {
+  letter-spacing: 5px;
+  @media (max-width: 1024px) {
     font-size: clamp(40px, 5vw, 60px);
     left: 15%;
     top: 30%;
@@ -142,7 +99,7 @@ const VerticalText = styled.div`
     font-size: clamp(30px, 4vw, 50px);
     left: 10%;
     top: 35%;
-  } */
+  }
 `;
 
 const CommonInfo = styled.div`

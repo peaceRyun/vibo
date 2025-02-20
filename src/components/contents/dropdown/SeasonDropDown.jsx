@@ -1,27 +1,40 @@
 import { SDropdown, SDropdownButton, SDropdownContent, SDropdownItem, SIcon } from './style';
 
-const SeasonDropdown = ({ isOpen, onToggle, selectedSeason, onSelect }) => {
-    const seasons = ['시즌 1', '시즌 2', '시즌 3', '시즌 4'];
+const SeasonDropdown = ({ isOpen, onToggle, selectedSeason, onSelect, options = [], loading = false }) => {
     const hasSelection = selectedSeason !== '';
+
+    const handleSeasonSelect = (season) => {
+        // 시즌 선택 시 EpList로 스크롤
+        const epListElement = document.getElementById('episode-list');
+        if (epListElement) {
+            epListElement.scrollIntoView({ behavior: 'smooth' });
+        }
+        onSelect(season);
+    };
 
     return (
         <SDropdown>
-            <SDropdownButton onClick={onToggle}>
-                {hasSelection ? (
+            <SDropdownButton onClick={onToggle} disabled={loading}>
+                {loading ? (
+                    '로딩 중...'
+                ) : hasSelection ? (
                     <>
                         {selectedSeason}
                         <SIcon src='/contentdetail/ui/live area.png' alt='dropdownIcon' $isDropOpen={isOpen} />
                     </>
                 ) : (
-                    '시즌 클릭'
+                    <>
+                        시즌 클릭
+                        <SIcon src='/contentdetail/ui/live area.png' alt='dropdownIcon' $isDropOpen={isOpen} />
+                    </>
                 )}
             </SDropdownButton>
 
-            {isOpen && (
+            {isOpen && options.length > 0 && (
                 <SDropdownContent>
-                    {seasons.map((season) => (
-                        <SDropdownItem key={season} onClick={() => onSelect(season)}>
-                            {season}
+                    {options.map((season) => (
+                        <SDropdownItem key={season.id || season.name} onClick={() => handleSeasonSelect(season.name)}>
+                            {season.name}
                         </SDropdownItem>
                     ))}
                 </SDropdownContent>

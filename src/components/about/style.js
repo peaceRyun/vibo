@@ -1,5 +1,13 @@
-import styled from 'styled-components';
-
+// import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
+const gradientWave = keyframes`
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 200% 50%;
+  }
+`;
 export const AboutBanner = styled.div`
   position: relative;
   color: white;
@@ -362,16 +370,6 @@ export const FAQContainer = styled.div`
   text-align: center;
   background: #000;
 
-  // @media (max-width: 599px) {
-  //   max-width: calc(390px - var(--spacing-8));
-  // }
-  // @media (min-width: 600px) {
-  //   max-width: calc(var(--breakpoint-tablet) - var(--spacing-8));
-  // }
-  // @media (min-width: 1025px) {
-  //   max-width: calc(var(--breakpoint-desktop) - 100px);
-  // }
-
   .faq-title {
     font-size: 60px;
     font-weight: 800;
@@ -533,7 +531,7 @@ export const SlideContainer = styled.div`
   display: flex;
   flex-direction: column;
   // position: absolute;
-  bottom: 30px;
+  bottom: -100px;
   left: 0;
   gap: 30px;
   align-items: center;
@@ -546,11 +544,11 @@ export const SlideContainer = styled.div`
 
   .TitleBackground {
     position: absolute;
-    bottom: -250px;
+    bottom: -160px;
     left: 50%;
     transform: translateX(-50%);
     width: 100vw;
-    height: 500px;
+    height: 600px;
     background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, black 10%);
 
     z-index: 1;
@@ -564,7 +562,7 @@ export const SlideTitle = styled.h2`
   z-index: 10;
   left: 50%;
   transform: translateX(-50%);
-  bottom: 150px;
+  bottom: 220px;
 
   .LastTitle {
     display: flex;
@@ -573,17 +571,31 @@ export const SlideTitle = styled.h2`
     z-index: 10;
     left: 50%;
     transform: translateX(-50%);
-    bottom: -80px;
-    .bold {
+
+    // .bold {
+    //   position: absolute;
+    //   left: 50%;
+    //   transform: translateX(-50%);
+    //   top: -250px;
+    //   font-family: metrobarat;
+    //   font-size: 100px;
+    //   letter-spacing: 3px;
+    //   font-weight: 700;
+    // }
+    .light {
       position: absolute;
-      bottom: 30px;
+      bottom: 50px;
       left: 50%;
       transform: translateX(-50%);
-      font-size: 34px;
-      font-family: metrobarat;
-      font-size: 74px;
-      letter-spacing: 3px;
+      font-size: 24px;
       font-weight: 700;
+    }
+    .BoldLight {
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 40px;
     }
   }
 `;
@@ -592,7 +604,7 @@ export const SlideSubtitle = styled.p`
   font-size: 20px;
   font-weight: 700;
   color: #a8a9ad;
-  margin-bottom: 30px;
+  margin-bottom: 100px;
   position: absolute;
   z-index: 100;
 
@@ -608,36 +620,43 @@ export const ButtonWrapper = styled.div`
   align-items: center;
   gap: 10px;
 
-  .main-btn {
-    width: 346px;
-    height: 52px;
-    background: #06dbbf;
-    color: white;
-    font-weight: bold;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    position: absolute;
-    bottom: 100px;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 10;
-  }
-
+  .main-btn,
   .sub-btn {
     width: 346px;
     height: 52px;
-    background: none;
-    color: white;
     font-weight: bold;
-    border: 1px solid white;
     border-radius: 8px;
     cursor: pointer;
     position: absolute;
-    bottom: 30px;
     left: 50%;
     transform: translateX(-50%);
     z-index: 10;
+
+    @media (max-width: 600px) {
+      width: 346px;
+      height: 52px;
+      font-size: 16px;
+    }
+
+    @media (min-width: 601px) and (max-width: 1024px) {
+      width: 560px;
+      height: 52px;
+      font-size: 16px;
+    }
+  }
+
+  .main-btn {
+    background: #06dbbf;
+    color: white;
+    border: none;
+    bottom: 100px;
+  }
+
+  .sub-btn {
+    background: none;
+    color: white;
+    border: 1px solid white;
+    bottom: 30px;
   }
 `;
 
@@ -680,7 +699,46 @@ export const LiveImgContainer = styled.div`
 
   .live-slide {
     width: 700px;
-    height: 744px;
+    height: 830px;
     object-fit: contain;
   }
+`;
+
+export const LastContainer = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  width: 100vw;
+  height: 100vh;
+  background-color: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+`;
+export const ViboText = styled.div`
+  position: absolute;
+  font-size: 100px;
+  font-weight: 700;
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-family: 'metrobarat', sans-serif;
+  opacity: 0;
+`;
+export const FinalViboText = styled.div`
+  position: absolute;
+  font-size: 100px;
+  font-weight: 700;
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-family: 'metrobarat', sans-serif;
+  background: linear-gradient(90deg, #07ffe6, #ffffff, #07ffe6);
+  background-size: 400% 100%;
+  display: inline-block;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: ${gradientWave} 3s linear infinite;
 `;

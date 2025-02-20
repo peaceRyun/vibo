@@ -1,6 +1,6 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { searchMulti } from '../../../store/modules/getThunk';
+import { fetchGenresThunk, fetchPopularContentThunk, searchMulti } from '../../../store/modules/getThunk';
 import { searchActions } from '../../../store/modules/searchSlice';
 import {
     DropdownContainer,
@@ -19,6 +19,13 @@ const Dropdown = ({ onClose }) => {
     const dispatch = useDispatch();
     const { searchResults, status } = useSelector((state) => state.searchR);
     const [searchTerm, setSearchTerm] = useState('');
+    const { popularContent } = useSelector((state) => state.popularR);
+    const { genres } = useSelector((state) => state.genreR);
+
+    useEffect(() => {
+        dispatch(fetchPopularContentThunk());
+        dispatch(fetchGenresThunk());
+    }, []);
     // const dropdownRef = useRef(null);
 
     const categorizedResults = {
@@ -82,36 +89,18 @@ const Dropdown = ({ onClose }) => {
                     <div className='left-section'>
                         <h3>실시간 인기 검색어</h3>
                         <ul>
-                            <li>
-                                <span className='rank-number'>1</span> 환승연애, 또 다른 시작
-                            </li>
-                            <li>
-                                <span className='rank-number'>2</span> 환승연애 3
-                            </li>
-                            <li>
-                                <span className='rank-number'>3</span> 환승연애
-                            </li>
-                            <li>
-                                <span className='rank-number'>4</span> 명탐정 코난: 100만 달러의 펜타그램
-                            </li>
-                            <li>
-                                <span className='rank-number'>5</span> 짱구는 못말려 24
-                            </li>
-                            <li>
-                                <span className='rank-number'>6</span> 원경
-                            </li>
-                            <li>
-                                <span className='rank-number'>7</span> 히트맨
-                            </li>
-                            <li>
-                                <span className='rank-number'>8</span> 환승연애 2
-                            </li>
-                            <li>
-                                <span className='rank-number'>9</span> 현역가왕 2
-                            </li>
-                            <li>
-                                <span className='rank-number'>10</span> 임원희의 미식전파사
-                            </li>
+                            {status === 'loading' ? (
+                                <div>Loading...</div>
+                            ) : status === 'failed' ? (
+                                <div>Error: {error || 'Something went wrong'}</div>
+                            ) : (
+                                popularContent.map((content, index) => (
+                                    <li key={content.id}>
+                                        <span className='rank-number'>{index + 1}</span>
+                                        {content.title}
+                                    </li>
+                                ))
+                            )}
                         </ul>
                         <small>2025.01.22 오후 07:19 기준</small>
                     </div>
@@ -132,10 +121,9 @@ const Dropdown = ({ onClose }) => {
                                 장르 바로가기 <ActionText>더보기</ActionText>
                             </h3>
                             <div className='keywords'>
-                                <span># 키워드</span>
-                                <span># 키워드</span>
-                                <span># 키워드</span>
-                                <span># 키워드</span>
+                                {genres.map((item) => (
+                                    <span key={item.id}># {item.name}</span>
+                                ))}
                             </div>
                         </div>
                     </div>
