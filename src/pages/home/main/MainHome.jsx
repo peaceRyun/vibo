@@ -26,48 +26,48 @@ import MainCommonList from '../../../components/home/common/MainCommonList';
 const liveTitles = [{ id: '1', title: '실시간 인기 LIVE' }];
 
 const MainHome = () => {
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(getMovie());
-    dispatch(getTVseries());
-    dispatch(getAiringToday());
-    dispatch(getTopRated());
-    dispatch(getAnimations());
-    dispatch(getDarkTheaterReleases());
-    dispatch(getDramaTvs());
-  }, []);
-  return (
-    <MainContent>
-      <MainBanner />
-      <MainContainer>
-        <div>
-          {liveTitles.map((section) => (
-            <LiveList key={section.id} title={section.title} />
-          ))}
-        </div>
-        {/* <WatchingList /> */}
-        <WeeklyList />
-        <RateList />
-        <GenreNav />
-      </MainContainer>
-      <AdBanner />
-      <MainContainer>
-        {/* <CommonList type="series" />
+    const dispatch = useDispatch();
+    useEffect(() => {
+        dispatch(getMovie());
+        dispatch(getTVseries());
+        dispatch(getAiringToday());
+        dispatch(getTopRated());
+        dispatch(getAnimations());
+        dispatch(getDarkTheaterReleases());
+        dispatch(getDramaTvs());
+    }, []);
+    return (
+        <MainContent>
+            <MainBanner />
+            <MainContainer>
+                <div>
+                    {liveTitles.map((section) => (
+                        <LiveList key={section.id} title={section.title} />
+                    ))}
+                </div>
+                {/* <WatchingList /> */}
+                <WeeklyList />
+                <RateList />
+                <GenreNav />
+            </MainContainer>
+            <AdBanner />
+            <MainContainer>
+                {/* <CommonList type="series" />
         <CommonList type="movie" />
         <CommonList type="series" /> */}
-        <MainCommonList fetchFunction={getAnimations} stateSelector={(state) => state.filterR.animations} />
-        <MainCommonList
-          fetchFunction={getDarkTheaterReleases}
-          stateSelector={(state) => state.filterR.darkTheaterReleases}
-        />
-        {/* <CommonList fetchFunction={getDramaTvs} stateSelector={(state) => state.filterR.DramaTvs} /> */}
-        {/* 헐 대소문자.. */}
-        <MainCommonList fetchFunction={getDramaTvs} stateSelector={(state) => state.filterR.dramaTvs} />
-        <ViboOnly />
-      </MainContainer>
-      <MenuSection />
-    </MainContent>
-  );
+                <MainCommonList fetchFunction={getAnimations} stateSelector={(state) => state.filterR.animations} />
+                <MainCommonList
+                    fetchFunction={getDarkTheaterReleases}
+                    stateSelector={(state) => state.filterR.darkTheaterReleases}
+                />
+                {/* <CommonList fetchFunction={getDramaTvs} stateSelector={(state) => state.filterR.DramaTvs} /> */}
+                {/* 헐 대소문자.. */}
+                <MainCommonList fetchFunction={getDramaTvs} stateSelector={(state) => state.filterR.dramaTvs} />
+                <ViboOnly />
+            </MainContainer>
+            <MenuSection />
+        </MainContent>
+    );
 };
 
 export default MainHome;

@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { getMovie, getMovieDetail } from './getThunk';
+import { getMovie, getMovieDetail, getMovieRecommendations } from './getThunk';
 
 const initialState = {
     movieData: [],
@@ -10,6 +10,10 @@ const initialState = {
     movieDetail: null,
     detailLoading: false,
     detailError: null,
+    // 영화 추천 관련 상태 추가
+    movieRecommendations: [],
+    recommendLoading: false,
+    recommendError: null,
 };
 
 export const movieSlice = createSlice({
@@ -42,6 +46,19 @@ export const movieSlice = createSlice({
             .addCase(getMovieDetail.rejected, (state, action) => {
                 state.detailLoading = false;
                 state.detailError = action.payload;
+            })
+            // 영화 추천 관련 리듀서 추가
+            .addCase(getMovieRecommendations.pending, (state) => {
+                state.recommendLoading = true;
+                state.recommendError = null;
+            })
+            .addCase(getMovieRecommendations.fulfilled, (state, action) => {
+                state.movieRecommendations = action.payload;
+                state.recommendLoading = false;
+            })
+            .addCase(getMovieRecommendations.rejected, (state, action) => {
+                state.recommendLoading = false;
+                state.recommendError = action.payload;
             });
     },
 });

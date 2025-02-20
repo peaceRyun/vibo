@@ -1,129 +1,148 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import styled from 'styled-components';
-import { Pagination } from 'swiper/modules';
 import WeeklyItem from './WeeklyItem';
 import DaySelect from './DaySelect';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 const WeeklyList = () => {
-  const [activeDay, setActiveDay] = useState('월');
+    const [activeDay, setActiveDay] = useState('일');
+    const { weeklyContent, loading, isComplete } = useSelector((state) => state.weeklyR);
+    const [displayContent, setDisplayContent] = useState([]);
 
-  return (
-    <Section>
-      <WeeklyInfo>
-        <WeeklyTitle>
-          <UpdateText>VIBO 신작 업데이트</UpdateText>
-          <UploadNotice>업로드 공지</UploadNotice>
-        </WeeklyTitle>
-        <DaySelect activeDay={activeDay} setActiveDay={setActiveDay} />
-      </WeeklyInfo>
-      <WeeklySwiper
-        // modules={[Pagination]}
-        // spaceBetween={40} /* 기본 간격 */
-        // slidesPerView="auto"
-        breakpoints={{
-          1280: { slidesPerView: 5.5, spaceBetween: 40 } /* 데스크탑 */,
-          1024: { slidesPerView: 4, spaceBetween: 30 } /* 태블릿 */,
-          // 768: { slidesPerView: 2.5, spaceBetween: 20 } /* 작은 태블릿 */,
-          600: { slidesPerView: 2.5, spaceBetween: 15 } /* 모바일 */,
-          400: { slidesPerView: 1.5, spaceBetween: 1 } /* 작은 모바일 */,
-        }}
-      >
-        {/* <WeeklySwiper spaceBetween={50} pagination={{ clickable: true }} slidesPerView={5.5}> */}
-        {[...Array(10)].map((_, index) => (
-          <SwiperSlide key={index}>
-            <WeeklyItem activeDay={activeDay} />
-          </SwiperSlide>
-        ))}
-      </WeeklySwiper>
-    </Section>
-  );
+    useEffect(() => {
+        if (isComplete && weeklyContent && weeklyContent[activeDay]) {
+            setDisplayContent(weeklyContent[activeDay] || []);
+        }
+    }, [isComplete, weeklyContent, activeDay]);
+
+    return (
+        <Section>
+            <WeeklyInfo>
+                <WeeklyTitle>
+                    <UpdateText>VIBO 신작 업데이트</UpdateText>
+                </WeeklyTitle>
+                <DaySelect activeDay={activeDay} setActiveDay={setActiveDay} />
+            </WeeklyInfo>
+            {loading ? (
+                <LoadingMessage>콘텐츠를 로딩 중입니다...</LoadingMessage>
+            ) : (
+                <WeeklySwiper
+                    slidesPerView={1.25}
+                    spaceBetween={25}
+                    breakpoints={{
+                        1280: { slidesPerView: 5.5, spaceBetween: 40 },
+                        1024: { slidesPerView: 4, spaceBetween: 30 },
+                        600: { slidesPerView: 2.5, spaceBetween: 20 },
+                        400: { slidesPerView: 1.8, spaceBetween: 20 },
+                    }}
+                >
+                    {displayContent.length > 0 ? (
+                        displayContent.map((show) => (
+                            <SwiperSlide key={show.id}>
+                                <LinkWrapper>
+                                    <Link to={`/detail/series/${show.id}`}>
+                                        <WeeklyItem show={show} />
+                                    </Link>
+                                </LinkWrapper>
+                            </SwiperSlide>
+                        ))
+                    ) : (
+                        <SwiperSlide>
+                            <WeeklyItem />
+                        </SwiperSlide>
+                    )}
+                </WeeklySwiper>
+            )}
+        </Section>
+    );
 };
 
 export default WeeklyList;
 
 const Section = styled.section`
-  display: flex;
-  flex-direction: column;
-  padding: 60px 0 60px 0;
-  @media (max-width: 1024px) {
-    padding: 40px 0 40px 0;
-  }
-  @media (max-width: 600px) {
-    padding: 30px 0 30px 0;
-  }
-  /* align-items: center; */
+    display: flex;
+    flex-direction: column;
+    padding: 60px 0 60px 0;
+    @media (max-width: 1024px) {
+        padding: 40px 0 40px 0;
+    }
+    @media (max-width: 600px) {
+        padding: 30px 0 30px 0;
+    }
 `;
 
 const WeeklyInfo = styled.div`
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  width: 100%;
-  margin-bottom: 2.375rem;
-  gap: 0.5rem;
-  flex-direction: column;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 2.375rem;
+    gap: 0.5rem;
+    flex-direction: column;
 `;
 
 const UpdateText = styled.h3`
-  color: #fff;
-  font-weight: 900;
-  white-space: nowrap;
-  padding: 0 10px;
-  font-size: var(--title-xlarge-size); //32
-  font-weight: var(--title-xlarge-weight); //800
-  @media (max-width: 1024px) {
-    font-size: var(--title-large-mobile); //24
-    font-weight: var(--title-large-weigh); //700
-  }
-  @media (max-width: 600px) {
-    font-size: var(--title-small-mobile); //17
-    font-weight: var(--title-xsmall-weight); //700
-  }
+    color: #fff;
+    font-weight: 900;
+    white-space: nowrap;
+    padding: 0 10px;
+    font-size: var(--title-xlarge-size);
+    font-weight: var(--title-xlarge-weight);
+    @media (max-width: 1024px) {
+        font-size: var(--title-large-mobile);
+        font-weight: var(--title-large-weigh);
+    }
+    @media (max-width: 600px) {
+        font-size: var(--title-small-mobile);
+        font-weight: var(--title-xsmall-weight);
+    }
 `;
 
-const UploadNotice = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background-color: #1a1a1a;
-  color: #fff;
-  padding: clamp(0.4rem, 1vw, 0.5rem) clamp(0.8rem, 1.5vw, 1rem);
-  border-radius: 2rem;
-  font-size: clamp(0.75rem, 1vw, 0.875rem);
-  font-weight: 500;
-  border: 1px solid #009c8c;
-  white-space: nowrap;
-  @media (max-width: 768px) {
-    width: auto;
-    padding: 0.4rem 0.8rem;
-  }
-`;
 const WeeklySwiper = styled(Swiper)`
-  width: 100%;
-  max-width: 100%;
-  /* .swiper-slide {
-    display: flex;
-    justify-content: center;
-  } */
+    width: 100%;
+    max-width: 100%;
 
-  .swiper-pagination-bullet {
-    background-color: #fff;
-    opacity: 0.5;
-  }
+    .swiper-pagination-bullet {
+        background-color: #fff;
+        opacity: 0.5;
+    }
 
-  .swiper-pagination-bullet-active {
-    background-color: #1ee0b6;
-    opacity: 1;
-  }
-  @media (max-width: 1024px) {
-    overflow: hidden; /* ✅ 모바일에서 불필요한 여백 방지 */
-  }
+    .swiper-pagination-bullet-active {
+        background-color: #1ee0b6;
+        opacity: 1;
+    }
+
+    @media (max-width: 1024px) {
+        overflow: hidden;
+    }
+
+    @media (max-width: 400px) {
+        padding: 0 15px;
+        overflow: visible;
+    }
 `;
 
 const WeeklyTitle = styled.div`
-  display: flex;
-  flex-direction: row;
-  gap: 25px;
+    display: flex;
+    flex-direction: row;
+    gap: 25px;
+`;
+
+const LoadingMessage = styled.div`
+    color: white;
+    text-align: center;
+    padding: 20px;
+    font-size: 1.2rem;
+`;
+
+const LinkWrapper = styled.div`
+    width: 100%;
+
+    @media (max-width: 400px) {
+        width: 78%;
+        margin: 0 auto;
+    }
 `;

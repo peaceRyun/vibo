@@ -36,7 +36,6 @@ export const playerSlice = createSlice({
         builder
             // TV 비디오 관련 리듀서
             .addCase(getTVVideos.pending, (state) => {
-                console.log('getTVVideos.pending');
                 state.loading = true;
                 state.error = null;
             })
@@ -53,7 +52,6 @@ export const playerSlice = createSlice({
             })
             // 영화 비디오 관련 리듀서 추가
             .addCase(getMovieVideos.pending, (state) => {
-                console.log('getMovieVideos.pending');
                 state.loading = true;
                 state.error = null;
             })
