@@ -30,19 +30,23 @@ const WeeklyList = () => {
                 <LoadingMessage>콘텐츠를 로딩 중입니다...</LoadingMessage>
             ) : (
                 <WeeklySwiper
+                    slidesPerView={1.25}
+                    spaceBetween={25}
                     breakpoints={{
                         1280: { slidesPerView: 5.5, spaceBetween: 40 },
                         1024: { slidesPerView: 4, spaceBetween: 30 },
-                        600: { slidesPerView: 2.5, spaceBetween: 15 },
-                        400: { slidesPerView: 1.5, spaceBetween: 1 },
+                        600: { slidesPerView: 2.5, spaceBetween: 20 },
+                        400: { slidesPerView: 1.8, spaceBetween: 20 },
                     }}
                 >
                     {displayContent.length > 0 ? (
                         displayContent.map((show) => (
                             <SwiperSlide key={show.id}>
-                                <Link to={`/detail/series/${show.id}`}>
-                                    <WeeklyItem show={show} />
-                                </Link>
+                                <LinkWrapper>
+                                    <Link to={`/detail/series/${show.id}`}>
+                                        <WeeklyItem show={show} />
+                                    </Link>
+                                </LinkWrapper>
                             </SwiperSlide>
                         ))
                     ) : (
@@ -110,8 +114,14 @@ const WeeklySwiper = styled(Swiper)`
         background-color: #1ee0b6;
         opacity: 1;
     }
+
     @media (max-width: 1024px) {
-        overflow: hidden; /* ✅ 모바일에서 불필요한 여백 방지 */
+        overflow: hidden;
+    }
+
+    @media (max-width: 400px) {
+        padding: 0 15px;
+        overflow: visible;
     }
 `;
 
@@ -126,4 +136,13 @@ const LoadingMessage = styled.div`
     text-align: center;
     padding: 20px;
     font-size: 1.2rem;
+`;
+
+const LinkWrapper = styled.div`
+    width: 100%;
+
+    @media (max-width: 400px) {
+        width: 78%;
+        margin: 0 auto;
+    }
 `;

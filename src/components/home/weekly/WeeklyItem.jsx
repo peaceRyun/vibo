@@ -31,6 +31,17 @@ const WeeklyItemContainer = styled.div`
         transform: translateY(-5px);
         box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
     }
+
+    @media (max-width: 400px) {
+        height: auto;
+        width: 90%;
+        margin: 0 auto;
+        transform: scale(0.85);
+
+        &:hover {
+            transform: translateY(-3px) scale(0.85);
+        }
+    }
 `;
 
 const WeeklyImg = styled.img`
@@ -43,6 +54,13 @@ const WeeklyImg = styled.img`
     ${WeeklyItemContainer}:hover & {
         filter: brightness(0.7);
     }
+
+    @media (max-width: 400px) {
+        max-height: 170px;
+        width: 85%;
+        margin: 0 auto;
+        display: block;
+    }
 `;
 
 const EmptyItemContainer = styled.div`
@@ -54,4 +72,8 @@ const EmptyItemContainer = styled.div`
     height: 250px;
     color: #999;
     font-size: 0.9rem;
+
+    @media (max-width: 400px) {
+        height: 180px;
+    }
 `;
