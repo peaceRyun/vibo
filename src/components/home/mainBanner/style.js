@@ -14,6 +14,20 @@ export const SwiperContainer = styled.div`
   height: auto;
   min-height: 600px;
   overflow: visible;
+  //페이지 네비 스타일링 추가
+  .swiper-pagination-bullet {
+    background-color: white !important;
+  }
+  .swiper-pagination-bullet-active {
+    background-color: var(--primary-base) !important;
+  }
+
+  .swiper-button-prev,
+  .swiper-button-next {
+    color: var(--primary-base) !important;
+    font-size: 30px !important;
+    z-index: 11;
+  }
 `;
 
 export const SlideImage = styled.img`
