@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 // import aboutR from './modules/aboutSlice';
-import contentR from './modules/contentSlice';
+import weeklyR from './modules/weeklySlice';
 import memberR from './modules/memberSlice';
 import playerR from './modules/playerSlice';
 import movieR from './modules/movieSlice';
@@ -17,7 +17,7 @@ import genreR from './modules/genreSlice';
 export const store = configureStore({
     reducer: {
         // aboutR,
-        contentR,
+        weeklyR,
         memberR,
         playerR,
         movieR,
