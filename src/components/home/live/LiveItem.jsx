@@ -3,7 +3,7 @@
 // 비슷한 콘텐츠
 // 영화, 시리즈 콘텐츠 공통
 import { useState, useRef, useEffect } from 'react';
-import { CardContainer, CardInfo, CardTitle, CardBcName, VideoWrapper } from './style';
+import { CardContainer, CardInfo, CardTitle, CardBcName, VideoWrapper, BadgeLive } from './style';
 
 const LiveItem = ({ videoData }) => {
     const { url, title, broadcaster } = videoData;
@@ -63,6 +63,7 @@ const LiveItem = ({ videoData }) => {
                     height='100%'
                     src={url}
                 ></video>
+                <BadgeLive>LIVE</BadgeLive>
             </VideoWrapper>
             <CardInfo>
                 <CardTitle>{title}</CardTitle>
