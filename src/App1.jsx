@@ -4,7 +4,7 @@
 // import TestLee from './pages/test/TestLee';
 // import GlobalStyle from './styled/GlobalStyle';
 
-function App2() {
+function App1() {
   return (
     <>
       {/* <GlobalStyle /> */}
@@ -17,4 +17,4 @@ function App2() {
   );
 }
 
-export default App2;
+export default App1;

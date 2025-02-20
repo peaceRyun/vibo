@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { logout } from '../../store/modules/memberSlice';
+import thunkUsers from '../../store/modules/getThunkUser';
 import { ProfileDropdownContainer, DropdownItem, UserIconContainer, BorderLine, LogOut } from './style';
 import { FaUserCircle } from 'react-icons/fa';
 import { AiOutlineEdit } from 'react-icons/ai';
@@ -12,10 +12,9 @@ const ProfileDropdown = ({ onClose }) => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    // 로그아웃 버튼 클릭 시 실행
     const handleLogout = () => {
-        dispatch(logout()).then(() => {
-            navigate('/about'); // ✅ 로그아웃 후 '/about'으로 이동
+        dispatch(thunkUsers.logout()).then(() => {
+            navigate('/about');
         });
     };
 
