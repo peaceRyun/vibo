@@ -18,11 +18,12 @@ import {
 const MainBanner = () => {
   const containerRef = useRef(null);
   const floatingRefs = useRef([]);
-  const [isMobile, setIsMobile] = useState(window.innerWidth <= 1023.99);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
   const [yPosition, setYPosition] = useState(600);
   const [isOverlayVisible, setIsOverlayVisible] = useState(true);
   const [activeSlide, setActiveSlide] = useState(0);
-
+  // 타이틀
+  const [firstSlidePlayed, setFirstSlidePlayed] = useState(false);
   useEffect(() => {
     if (!containerRef.current || isMobile) return;
     const bannerHeight = containerRef.current.clientHeight;
@@ -30,8 +31,8 @@ const MainBanner = () => {
     const totalItems = 36;
     const floatingElements = [];
     //가로 아이템 영역을 잡아줌
-    const maxItemSize = 10;
-    const slideWidth = Math.min(1600, window.innerWidth);
+    const maxItemSize = 5;
+    const slideWidth = Math.min(1500, window.innerWidth);
 
     const balloonImages = [
       { src: 'https://raw.githubusercontent.com/peaceRyun/vibostatic/main/public/gsap/gsap_v.png', left: '15%' },
@@ -119,6 +120,21 @@ const MainBanner = () => {
     }, 2000);
   }, [isMobile, yPosition]);
 
+  /////////////////////////////// 타이틀로고명 효과
+  useEffect(() => {
+    if (!banners[activeSlide]) return;
+
+    const logo = document.querySelector(`.logo-${activeSlide}`);
+
+    if (logo) {
+      gsap.fromTo(
+        logo,
+        { opacity: 0, y: 30 },
+        { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out', delay: activeSlide === 0 ? 3 : 0.5 }
+      );
+    }
+  }, [activeSlide]);
+
   const banners = [
     {
       id: 1,
@@ -175,8 +191,8 @@ const MainBanner = () => {
           modules={[Navigation, Pagination, Autoplay]}
           navigation
           pagination={{ clickable: true }}
-          // autoplay={{ delay: 5000, disableOnInteraction: false }}
-          // loop={true}
+          autoplay={{ delay: 5000, disableOnInteraction: false }}
+          loop={true}
           slidesPerView={1.1}
           spaceBetween={20}
           onSlideChange={(swiper) => setActiveSlide(swiper.realIndex)}
@@ -200,7 +216,8 @@ const MainBanner = () => {
                   <SlideImage src={banner.image} alt={banner.title} />
                 </div>
                 <SlideContent>
-                  <LogoImage src={banner.logo} alt="배너 로고" />
+                  <LogoImage className={`logo-${index}`} src={banner.logo} alt="배너 로고" />
+                  {/* <LogoImage src={banner.logo} alt="배너 로고" /> */}
                   <Subtitle>{banner.subtitle}</Subtitle>
                 </SlideContent>
               </SlideItem>
