@@ -11,6 +11,7 @@ import profileR from './modules/profileSlice';
 import tvDetailR from './modules/tvDetailSlice';
 import topRatedR from './modules/topRatedSlice';
 import searchR from './modules/searchSlice';
+import filterR from './modules/filterSlice';
 import popularR from './modules/popularSlice';
 import genreR from './modules/genreSlice';
 
@@ -30,5 +31,6 @@ export const store = configureStore({
         searchR,
         popularR,
         genreR,
+        filterR, //추가
     },
 });

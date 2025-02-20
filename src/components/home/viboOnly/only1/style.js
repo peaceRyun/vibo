@@ -9,11 +9,12 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  overflow: hidden;
 `;
 
 export const Poster = styled.img`
   width: 100%;
-  height: 25.125rem;
+  height: 22rem;
   object-fit: cover;
   border-radius: 0.5rem;
 `;
@@ -22,10 +23,11 @@ export const InfoSection = styled.div`
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  padding: 0 13px;
 `;
 
 export const Title = styled.h2`
-  font-size: 2.5rem;
+  font-size: 50px;
   font-weight: 900;
   color: #fff;
   line-height: 100%;
@@ -34,11 +36,12 @@ export const Title = styled.h2`
 export const Tags = styled.div`
   display: flex;
   gap: 0.5rem;
+  margin-bottom: 15px;
 `;
 
 export const Tag = styled.span`
   font-size: 1.0625rem; /* 17px */
-  padding: 0.46875rem 0.625rem; /* 위아래 7.5px, 좌우 10px */
+  padding: 16px 16px; /* 위아래 7.5px, 좌우 10px */
   height: 1.6875rem; /* 27px */
   background-color: transparent;
   color: #fff;
@@ -85,9 +88,11 @@ export const Flex = styled.div`
 `;
 
 export const Label = styled.span`
-  font-size: 6.25rem;
+  font-size: 120px;
   font-weight: 900;
   line-height: 100%;
+  font-style: italic;
+  text-align: left;
 
   @media (max-width: 600px) {
     font-size: 48px;

@@ -51,7 +51,7 @@ export const Tags = styled.div`
 
 export const Tag = styled.div`
   font-size: 15px;
-  padding: 0.46875rem 0.625rem;
+  padding: 15px;
   height: 1.6875rem;
   background-color: transparent;
   color: #fff;
@@ -94,4 +94,5 @@ export const Label = styled.span`
   font-size: 6.25rem;
   font-weight: 900;
   line-height: 100%;
+  font-style: italic;
 `;

@@ -2,16 +2,19 @@ import styled from 'styled-components';
 
 export const ViboContainer = styled.div`
   display: flex;
-  gap: 10px;
+  gap: 20px;
+  align-items: center;
   justify-content: space-around;
   width: 1750px;
   padding: 60px 0px 60px 0px;
+  margin-left: -60px;
 `;
 
 export const ViboAllContainer = styled.div`
   display: flex;
+  align-items: center;
   flex-direction: column;
-  padding: 60px 0 60px 0;
+  /* padding: 60px 50px 60px 50px; */
   @media (max-width: 1024px) {
     padding: 40px 0 40px 0;
   }
@@ -157,9 +160,7 @@ export const InfoSection = styled.div`
 `;
 
 export const MobileCardText = styled.div`
-  /* width: 390px;
-  height: 400px;
-  display: flex; */
+  display: flex;
 `;
 
 export const ItemTitle = styled.h3`
@@ -167,7 +168,7 @@ export const ItemTitle = styled.h3`
   font-weight: bold;
   margin-bottom: 8px;
   @media (max-width: 1024px) {
-    font-size: 15px;
+    font-size: 12px;
     font-weight: bold;
   }
 `;
@@ -208,6 +209,7 @@ export const Description = styled.p`
   max-width: 400px;
   height: auto;
   @media (max-width: 1024px) {
+    font-size: 12px;
     display: -webkit-box;
     -webkit-line-clamp: 4; /* 최대 3줄 표시 */
     -webkit-box-orient: vertical;
@@ -216,8 +218,8 @@ export const Description = styled.p`
   }
 `;
 
-export const MobileTitle = styled.div`
-  font-size: 24px;
-  font-weight: 600;
-  text-align: center;
-`;
+// export const MobileTitle = styled.div`
+//   font-size: 12px;
+//   font-weight: 600;
+//   text-align: center;
+// `;
