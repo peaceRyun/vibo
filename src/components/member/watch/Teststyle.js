@@ -24,17 +24,6 @@ export const RecommendedMovies = styled.div`
 `;
 
 export const MovieCard = styled.div`
-  // width: 18.75rem;
-  // height: 380px;
-  // background-size: cover;
-  // background-position: center;
-  // border-radius: 8px;
-  // box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-  // transition: transform 0.3s ease;
-
-  // &:hover {
-  //   transform: scale(1.05);
-  // }
   width: 18.75rem;
   height: 380px;
   background-size: cover;
@@ -56,20 +45,19 @@ export const MovieCard = styled.div`
     left: 0;
     width: 100%;
     height: 100%;
-    box-shadow: inset 2px 2px 5px rgba(255, 255, 255, 0.6); // inner shadow 추가
-    // border: 1px solid rgba(255, 255, 255, 0.4); // stroke 효과
+    box-shadow: inset 2px 2px 5px rgba(255, 255, 255, 0.6); // inner shadow
     border-radius: 8px;
   }
 `;
 
 export const ColoredCard = styled.div`
-  width: 9.375rem; // 원본 카드의 50%
-  height: 190px; // 원본 카드의 50%
-  background-color: ${(props) => props.color}; // 개별 카드마다 다른 색 적용
+  width: 9.375rem;
+  height: 190px;
+  background-color: ${(props) => props.color};
   border-radius: 8px;
   position: absolute;
   transform-origin: bottom;
-  z-index: -2; // 원본 카드 아래로 배치
+  z-index: -2;
   opacity: 0.5;
   box-shadow: 0 30px 60px rgba(0, 0, 0, 0.2);
 `;

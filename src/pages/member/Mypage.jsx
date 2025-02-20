@@ -37,21 +37,21 @@ const Mypage = () => {
                         <UserInfo>
                             <UserName>
                                 <strong>{nickname}</strong>
-                                <p>님</p> <Link to='/profileforedit'>✏️</Link>
+                                <p>님</p> <Link to="/profileforedit">✏️</Link>
                             </UserName>
                             <button onClick={onGo}>프로필 전환</button>
                         </UserInfo>
                     </ProfileHeader>
                     <PassContainer>
                         <PassCard>
-                            <div className='PassTitle'>
+                            <div className="PassTitle">
                                 <strong>ViBo</strong>
                                 <span> 패스</span>
                                 <p>사용 중인 패스가 없습니다.</p>
                             </div>
                         </PassCard>
                         <PassButton onClick={onGo2}>
-                            <div className='PassTitle2'>
+                            <div className="PassTitle2">
                                 <strong>패스 구매하기 ▶ </strong>
                             </div>
                         </PassButton>
