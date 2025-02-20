@@ -29,6 +29,17 @@ export const SlideItem = styled.div`
   position: relative;
   width: 100%;
   height: 100%;
+  /* 슬라이드 마다 살짝 어둡게 적용해보기 */
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), transparent);
+    border-radius: 12px;
+  }
 `;
 
 export const SlideContent = styled.div`
@@ -41,6 +52,7 @@ export const SlideContent = styled.div`
   max-width: 50%;
   padding: 20px;
   margin-bottom: 40px;
+  z-index: 1000;
 `;
 
 export const Title = styled.div`
@@ -55,6 +67,7 @@ export const Subtitle = styled.div`
   opacity: 0.9;
   text-align: left;
   color: gray;
+  z-index: 1000;
 `;
 
 // ---------------------------MainBanner GSAP CSS
@@ -96,7 +109,6 @@ export const FloatingImage = styled.img`
 `;
 export const OverlayFilter = styled.div`
   /* position: absolute; */
-
   top: 0;
   left: 0;
   width: 100%;
@@ -105,7 +117,6 @@ export const OverlayFilter = styled.div`
   border-radius: 12px;
   background: linear-gradient(to top, rgba(0, 0, 0.3, 0.8), rgba(0, 0, 0, 0.1));
   z-index: 2;
-
   transition: opacity 1.5s ease;
 `;
 export const LogoImage = styled.img`
@@ -114,5 +125,5 @@ export const LogoImage = styled.img`
   height: auto;
   margin: 0 auto;
   display: block;
-  z-index: ;
+  z-index: 2;
 `;

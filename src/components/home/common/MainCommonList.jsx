@@ -116,7 +116,7 @@ const CommonInfo = styled.div`
   }
 `;
 
-const CommonTitle = styled.h3`
+const CommonTitle = styled.div`
   color: white;
   line-height: 1.5;
   margin: 0;

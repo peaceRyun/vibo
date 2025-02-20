@@ -11,7 +11,6 @@ import {
   SlideItem,
   Subtitle,
   SwiperContainer,
-  Title,
   LogoImage,
   OverlayFilter,
 } from './style';
@@ -167,8 +166,8 @@ const MainBanner = () => {
           modules={[Navigation, Pagination, Autoplay]}
           navigation
           pagination={{ clickable: true }}
-          autoplay={{ delay: 5000, disableOnInteraction: false }}
-          loop={true}
+          // autoplay={{ delay: 5000, disableOnInteraction: false }}
+          // loop={true}
           slidesPerView={1.1}
           spaceBetween={20}
           onSlideChange={(swiper) => setActiveSlide(swiper.realIndex)}
