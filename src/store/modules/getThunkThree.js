@@ -17,6 +17,7 @@ export const getAnimations = createAsyncThunk('animations/getAnimations', async 
       const response = await axios.get('https://api.themoviedb.org/3/discover/movie', {
         params: {
           api_key: API_KEY,
+          language: 'ko-KR',
           with_genres: 16, // 애니메이션 장르 ID
           include_adult: false, // 성인물 제외
           page: page,
@@ -25,8 +26,12 @@ export const getAnimations = createAsyncThunk('animations/getAnimations', async 
 
       // 필터링: overview, poster_path, backdrop_path가 있는 콘텐츠만
       const filteredResults = response.data.results.filter(
-        (animation) => animation.overview && animation.poster_path && animation.backdrop_path
+        (animation) =>
+          animation.overview && animation.overview.trim().length > 0 && animation.poster_path && animation.backdrop_path
       );
+
+      // drama.overview &&
+      // drama.overview.trim().length > 0 &&
 
       // 24개까지 채우기
       allResults = [...allResults, ...filteredResults];
@@ -73,6 +78,7 @@ export const getDarkTheaterReleases = createAsyncThunk('movies/getDarkTheaterRel
       const response = await axios.get('https://api.themoviedb.org/3/discover/movie', {
         params: {
           api_key: API_KEY,
+          language: 'ko-KR',
           primary_release_date_gte: new Date().toISOString().split('T')[0],
           with_release_type: 3,
           include_adult: false,
@@ -84,7 +90,11 @@ export const getDarkTheaterReleases = createAsyncThunk('movies/getDarkTheaterRel
       const darkGenres = [28, 53, 80, 27, 9648];
       const filteredResults = response.data.results.filter(
         (movie) =>
-          movie.poster_path && movie.vote_average >= 6.0 && movie.genre_ids.some((genre) => darkGenres.includes(genre))
+          movie.poster_path &&
+          movie.overview &&
+          movie.overview.trim().length > 0 &&
+          movie.vote_average >= 6.0 &&
+          movie.genre_ids.some((genre) => darkGenres.includes(genre))
       );
 
       allResults = [...allResults, ...filteredResults];
@@ -165,7 +175,7 @@ export const getDramaTvs = createAsyncThunk('dramas/getDramaTvs', async (_, thun
       contentlist: allResults.slice(0, 24),
     };
   } catch (error) {
-    console.error('❌ Error fetching drama TV shows:', error.response?.data || error.message);
+    console.error('Error fetching drama TV shows:', error.response?.data || error.message);
     return thunkAPI.rejectWithValue(error.message);
   }
 });
