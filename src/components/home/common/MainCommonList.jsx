@@ -55,8 +55,6 @@ const MainCommonList = ({ fetchFunction, stateSelector }) => {
         {content?.contentlist?.length > 0 ? (
           content.contentlist.map((item, index) => (
             <SwiperSlide key={item.id || index}>
-              {' '}
-              {/* ✅ id가 없을 경우 index 사용하여 오류 방지 */}
               <CommonItem content={item} />
             </SwiperSlide>
           ))
@@ -177,6 +175,9 @@ const MoreBtn = styled.button`
 
   &:hover {
     background-color: var(--primary-base);
+  }
+  @media (max-width: 1024px) {
+    margin-right: 20px;
   }
 `;
 
