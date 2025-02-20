@@ -84,10 +84,10 @@ export const FloatingContainer = styled.div`
   z-index: 3;
   overflow: visible;
 
-  @media (min-width: 1700px) {
+  /* @media (min-width: 1700px) {
     top: 80px;
     height: 100%;
-  }
+  } */
 
   @media (min-width: 1024px) and (max-width: 1450px) {
     // height: calc(100% - ((1450px - 100vw) * 0.1));
