@@ -155,7 +155,7 @@ const Dropdown = ({ onClose }) => {
                                                 <img
                                                     src={
                                                         item.poster_path
-                                                            ? `https://image.tmdb.org/t/p/w154${item.poster_path}`
+                                                            ? `https://image.tmdb.org/t/p/original${item.poster_path}`
                                                             : '/path-to-placeholder-image.jpg'
                                                     }
                                                     alt={item.name}
@@ -176,7 +176,7 @@ const Dropdown = ({ onClose }) => {
                                                 <img
                                                     src={
                                                         item.poster_path
-                                                            ? `https://image.tmdb.org/t/p/w154${item.poster_path}`
+                                                            ? `https://image.tmdb.org/t/p/original${item.poster_path}`
                                                             : '/path-to-placeholder-image.jpg'
                                                     }
                                                     alt={item.title}
