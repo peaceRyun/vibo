@@ -5,6 +5,7 @@ import styled from 'styled-components';
 // import { useNavigate } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 import CommonItem from './CommonItem';
+import { useNavigate } from 'react-router';
 
 export const CommonList = ({ type = 'series' }) => {
   const navigate = useNavigate();

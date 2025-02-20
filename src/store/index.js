@@ -29,22 +29,8 @@ export const store = configureStore({
     tvDetailR,
     topRatedR,
     searchR,
-    filterR, //추가
-  },
-  reducer: {
-    // aboutR,
-    contentR,
-    memberR,
-    playerR,
-    movieR,
-    tvSeriesR,
-    contPlayerR,
-    // pagenationR,
-    profileR,
-    tvDetailR,
-    topRatedR,
-    searchR,
     popularR,
     genreR,
+    filterR, //추가
   },
 });
