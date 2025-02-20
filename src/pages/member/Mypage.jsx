@@ -6,7 +6,7 @@ import ProfileInfoEdit from './ProfileInfoEdit';
 
 const Mypage = () => {
     const [activeTab, setActiveTab] = useState('시청내역');
-    const { nickname } = useSelector((state) => state.profileR);
+    const { nickname, srcNow } = useSelector((state) => state.profileR);
 
     const movies = [
         { src: '/member/mypage_01.webp' },
@@ -32,26 +32,25 @@ const Mypage = () => {
                 <Container />
                 <ProfileContainer>
                     <ProfileHeader>
-                        <ProfileImage src={userProfileImage} />
-                        {/* <ProfileImage /> */}
+                        <ProfileImage src={srcNow} />
                         <UserInfo>
                             <UserName>
                                 <strong>{nickname}</strong>
-                                <p>님</p> <Link to='/profileforedit'>✏️</Link>
+                                <p>님</p> <Link to="/profileforedit">✏️</Link>
                             </UserName>
                             <button onClick={onGo}>프로필 전환</button>
                         </UserInfo>
                     </ProfileHeader>
                     <PassContainer>
                         <PassCard>
-                            <div className='PassTitle'>
+                            <div className="PassTitle">
                                 <strong>ViBo</strong>
                                 <span> 패스</span>
                                 <p>사용 중인 패스가 없습니다.</p>
                             </div>
                         </PassCard>
                         <PassButton onClick={onGo2}>
-                            <div className='PassTitle2'>
+                            <div className="PassTitle2">
                                 <strong>패스 구매하기 ▶ </strong>
                             </div>
                         </PassButton>

@@ -22,7 +22,7 @@ export const basicIcons = [
 ];
 
 const initialState = {
-    srcNow: `${imgUrl}/profileIconV.png`,
+    srcNow: JSON.parse(localStorage.getItem('currentUser'))?.profileImg || `${imgUrl}/profileIconV.png`,
     idNow: '',
     nameNow: '',
     nickname: JSON.parse(localStorage.getItem('currentUser'))?.nickname || '',
@@ -37,6 +37,14 @@ export const profileSlice = createSlice({
             state.srcNow = profileNow.src;
             state.idNow = profileNow.id;
             state.nameNow = profileNow.name;
+
+            localStorage.setItem(
+                'currentUser',
+                JSON.stringify({
+                    ...JSON.parse(localStorage.getItem('currentUser')),
+                    profileImg: profileNow.src,
+                })
+            );
         },
         add: (state, action) => {
             state.nickname = action.payload;

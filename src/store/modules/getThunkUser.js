@@ -1,5 +1,8 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
+const defaultProfileImg =
+    'https://raw.githubusercontent.com/peaceRyun/vibostatic/refs/heads/main/public/profileIconV.png';
+
 // 회원가입 Thunk
 const register = createAsyncThunk('memberR/register', async ({ id, email, password, phone }, thunkAPI) => {
     const users = JSON.parse(localStorage.getItem('users')) || [];
@@ -10,8 +13,15 @@ const register = createAsyncThunk('memberR/register', async ({ id, email, passwo
         return thunkAPI.rejectWithValue({ success: false, message: '아이디 중복' });
     }
 
-    // 기본 닉네임 추가
-    const newUser = { id, email, password, phone, nickname: 'User01' };
+    const newUser = {
+        id,
+        email,
+        password,
+        phone,
+        nickname: 'User01',
+        profileImg: defaultProfileImg,
+    };
+
     users.push(newUser);
     localStorage.setItem('users', JSON.stringify(users));
 
