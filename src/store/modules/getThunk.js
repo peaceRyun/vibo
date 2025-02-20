@@ -570,7 +570,7 @@ export const fetchPopularContentThunk = createAsyncThunk('content/fetchPopular',
 
     const tvShows = tvResponse.data.results.map((show) => ({
         ...show,
-        media_type: 'tv',
+        media_type: 'series',
         title: show.name,
         release_date: show.first_air_date,
     }));
