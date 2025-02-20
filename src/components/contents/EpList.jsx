@@ -119,6 +119,8 @@ const EpList = ({
                             $top='0'
                             $right='0'
                             $zIndex='-1'
+                            $width='555px'
+                            $height='802px'
                         />
                         <CloseButton onClick={handleClose}>
                             <IoClose color='var(--white)' size='40' />
