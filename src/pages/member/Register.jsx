@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { register } from '../../store/modules/memberSlice'; // Redux 액션 가져오기
+import { useNavigate } from 'react-router-dom';
+import thunkUsers from '../../store/modules/getThunkUser';
 import {
     RegisterContainer,
     Form,
@@ -23,11 +24,10 @@ const Register = () => {
     const [isIdChecked, setIsIdChecked] = useState(false);
     const [isPhoneChecked, setIsPhoneChecked] = useState(false);
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
-    // Redux에서 사용자 목록 가져오기
     const users = useSelector((state) => state.memberR?.users || []);
 
-    // 비밀번호 유효성 검사 함수
     const validatePassword = (password) => {
         const regex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{6,12}$/;
         return regex.test(password);
@@ -55,7 +55,6 @@ const Register = () => {
         }
     };
 
-    // 아이디 중복 확인
     const handleIdCheck = () => {
         if (users.some((user) => user.id === id)) {
             alert('이미 사용 중인 아이디입니다.');
@@ -66,7 +65,6 @@ const Register = () => {
         }
     };
 
-    // 회원가입 처리 함수
     const handleSubmit = (e) => {
         e.preventDefault();
 
@@ -90,8 +88,12 @@ const Register = () => {
             return;
         }
 
-        dispatch(register({ id, email, password, phone }));
-        alert('회원가입이 완료되었습니다!');
+        dispatch(thunkUsers.register({ id, email, password, phone })).then((result) => {
+            if (result.payload?.success) {
+                alert('회원가입이 완료되었습니다!');
+                navigate('/login');
+            }
+        });
     };
 
     return (
@@ -119,7 +121,7 @@ const Register = () => {
                             placeholder="비밀번호"
                             value={password}
                             onChange={handlePasswordChange}
-                            error={!!passwordError}
+                            $error={!!passwordError}
                         />
                         {passwordError && <ErrorText>{passwordError}</ErrorText>}
                     </InputGroup>
@@ -130,7 +132,7 @@ const Register = () => {
                             placeholder="비밀번호 확인"
                             value={confirmPassword}
                             onChange={handleConfirmPasswordChange}
-                            error={!!confirmPasswordError}
+                            $error={!!confirmPasswordError}
                         />
                         {confirmPasswordError && <ErrorText>{confirmPasswordError}</ErrorText>}
                     </InputGroup>
