@@ -112,42 +112,60 @@ export const getDramaTvs = createAsyncThunk('dramas/getDramaTvs', async (_, thun
   try {
     let allResults = [];
     let page = 1;
+    const maxPages = 5;
 
-    while (allResults.length < 400) {
-      console.log(`📢 Fetching page ${page} for currently airing dramas...`);
+    while (allResults.length < 50) {
+      console.log(`📢 Fetching page ${page} for drama TV shows...`);
 
-      const response = await axios.get('https://api.themoviedb.org/3/tv/airing_today', {
+      const response = await axios.get('https://api.themoviedb.org/3/discover/tv', {
         params: {
           api_key: API_KEY,
-
           language: 'ko-KR',
+          sort_by: 'popularity.desc',
+          with_genres: '18,10749,35',
+          include_adult: false,
           page: page,
         },
       });
 
-      const dramaGenres = [18, 10749, 35, 10751, 10770];
+      console.log('🔍 API Response:', response.data);
+
+      if (!response.data.results || response.data.results.length === 0) {
+        console.warn('⚠️ No more results from API.');
+        break;
+      }
+
       const filteredResults = response.data.results.filter(
         (drama) =>
-          drama.poster_path && drama.vote_average >= 6.0 && drama.genre_ids.some((genre) => dramaGenres.includes(genre))
+          drama.poster_path &&
+          drama.name &&
+          drama.vote_average >= 6.0 &&
+          drama.overview &&
+          drama.overview.trim().length > 0 &&
+          drama.genre_ids &&
+          drama.genre_ids.length > 0
       );
+
+      console.log(` Filtered dramas from page ${page}:`, filteredResults);
 
       allResults = [...allResults, ...filteredResults];
 
       page++;
 
-      if (!response.data.results.length || page > 10) {
+      if (page > maxPages) {
+        console.log('⛔ Max page limit reached.');
         break;
       }
     }
 
-    console.log(` Final results: ${allResults.length} dramas`);
+    console.log(`🎬 Final results: ${allResults.length} dramas`);
     return {
-      title: '지금 방영중인 TV',
+      title: '감성터지는 드라마',
       option: 'TV',
       contentlist: allResults.slice(0, 24),
     };
   } catch (error) {
-    console.error(' Error fetching dark-themed theater releases:', error.message);
+    console.error('❌ Error fetching drama TV shows:', error.response?.data || error.message);
     return thunkAPI.rejectWithValue(error.message);
   }
 });
