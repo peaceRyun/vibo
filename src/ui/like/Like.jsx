@@ -21,9 +21,11 @@ const LikeButton = ({ size = 32, onClick }) => {
     };
 
     const getHeartImage = () => {
-        if (isLiked) return '/contentdetail/ui/하트active.png';
-        if (isHovered) return '/contentdetail/ui/하트hover.png';
-        return '/contentdetail/ui/하트default.png';
+        if (isLiked)
+            return 'https://raw.githubusercontent.com/peaceRyun/vibostatic/refs/heads/main/public/mockup/contentdetail/ui/하트active.png';
+        if (isHovered)
+            return 'https://raw.githubusercontent.com/peaceRyun/vibostatic/refs/heads/main/public/mockup/contentdetail/ui/하트hover.png';
+        return 'https://raw.githubusercontent.com/peaceRyun/vibostatic/refs/heads/main/public/mockup/contentdetail/ui/하트default.png';
     };
 
     return (
@@ -33,7 +35,12 @@ const LikeButton = ({ size = 32, onClick }) => {
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
         >
-            {showRipple && <RippleEffect src='/contentdetail/ui/하트pressed.png' alt='ripple' />}
+            {showRipple && (
+                <RippleEffect
+                    src='https://raw.githubusercontent.com/peaceRyun/vibostatic/refs/heads/main/public/mockup/contentdetail/ui/하트pressed.png'
+                    alt='ripple'
+                />
+            )}
             <HeartImage src={getHeartImage()} alt='heart' />
         </LikeButtonWrapper>
     );
