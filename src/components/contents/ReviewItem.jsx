@@ -1,20 +1,27 @@
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { Flex } from './style';
 
 const ReviewItem = ({ nickname, rating, content, date, imgurl }) => {
+    const { srcNow } = useSelector((state) => state.profileR); // ✅ Redux에서 현재 유저 프로필 사진 가져오기
+
     return (
         <li style={{ marginLeft: '107px' }}>
-            <Flex $gap='17px' $alignItems='center'>
-                <img src={imgurl} alt='샘플프로필' style={{ width: '40px', height: '40px', borderRadius: '50%' }} />
-                <Flex $flexDirection='column' $position='relative' style={{ width: '100%' }}>
-                    <Flex $gap='15px' $alignItems='center' $justifyContent='space-between'>
-                        <Flex $gap='15px' $alignItems='center'>
+            <Flex $gap="17px" $alignItems="center">
+                <img
+                    src={imgurl || srcNow || '/contentdetail/sample/SampleProfile.png'} // ✅ Redux 프로필 적용
+                    alt="프로필"
+                    style={{ width: '40px', height: '40px', borderRadius: '50%' }}
+                />
+                <Flex $flexDirection="column" $position="relative" style={{ width: '100%' }}>
+                    <Flex $gap="15px" $alignItems="center" $justifyContent="space-between">
+                        <Flex $gap="15px" $alignItems="center">
                             <span>{nickname}</span>
-                            <Flex $gap='5px' $alignItems='center'>
+                            <Flex $gap="5px" $alignItems="center">
                                 {Array(rating || 0)
                                     .fill()
                                     .map((_, index) => (
-                                        <img key={index} src='/contentdetail/ui/StarActive.png' alt='별' />
+                                        <img key={index} src="/contentdetail/ui/StarActive.png" alt="별" />
                                     ))}
                             </Flex>
                         </Flex>
