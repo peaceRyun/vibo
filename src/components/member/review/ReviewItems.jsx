@@ -30,7 +30,7 @@ const ReviewItems = () => {
                                 style={{ backgroundImage: `url(${review.moviePoster || '/default-movie-poster.jpg'})` }}
                             />
                             <ReviewContent>
-                                <div className="reviwText">
+                                <div className='reviwText'>
                                     <UserInfo>
                                         <UserName>{review.author}</UserName>
                                         <ReviewDate>{review.created_at.split('T')[0]}</ReviewDate>
@@ -38,7 +38,10 @@ const ReviewItems = () => {
                                     <RatingStars>
                                         {[...Array(5)].map((_, index) => (
                                             <Star key={index} $filled={index < (review.author_details?.rating || 0)}>
-                                                <img src="/contentdetail/ui/StarActive.png" alt="별" />
+                                                <img
+                                                    src='https://raw.githubusercontent.com/peaceRyun/vibostatic/refs/heads/main/public/mockup/contentdetail/ui/StarActive.png'
+                                                    alt='별'
+                                                />
                                             </Star>
                                         ))}
                                     </RatingStars>

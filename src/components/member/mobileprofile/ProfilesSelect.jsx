@@ -23,7 +23,7 @@ const ProfilesSelect = () => {
                                         <ProfileImg
                                             $width='200px'
                                             $height='200px'
-                                            src='/contentdetail/sample프아.png'
+                                            src='https://raw.githubusercontent.com/peaceRyun/vibostatic/refs/heads/main/public/profileIconI.png'
                                             alt='샘플프아'
                                         />
                                     </ProfileImgWrap>
@@ -36,7 +36,7 @@ const ProfilesSelect = () => {
                                         <ProfileImg
                                             $width='200px'
                                             $height='200px'
-                                            src='/contentdetail/sample프아.png'
+                                            src='https://raw.githubusercontent.com/peaceRyun/vibostatic/refs/heads/main/public/profileIconV.png'
                                             alt='샘플프아'
                                         />
                                     </ProfileImgWrap>

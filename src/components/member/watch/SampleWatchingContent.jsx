@@ -3,10 +3,18 @@ import { ContentSection, MovieCard, RecommendedMovies } from './samplestyle';
 
 const SampleWatchingContent = () => {
     const movies = [
-        { src: '/member/mypage_01.webp' },
-        { src: '/member/mypage_02.webp' },
-        { src: '/member/mypage_03.webp' },
-        { src: '/member/mypage_04.webp' },
+        {
+            src: 'https://raw.githubusercontent.com/peaceRyun/vibostatic/refs/heads/main/public/mockup/member/mypage_01.webp',
+        },
+        {
+            src: 'https://raw.githubusercontent.com/peaceRyun/vibostatic/refs/heads/main/public/mockup/member/mypage_02.webp',
+        },
+        {
+            src: 'https://raw.githubusercontent.com/peaceRyun/vibostatic/refs/heads/main/public/mockup/member/mypage_03.webp',
+        },
+        {
+            src: 'https://raw.githubusercontent.com/peaceRyun/vibostatic/refs/heads/main/public/mockup/member/mypage_04.webp',
+        },
     ];
 
     return (
