@@ -61,3 +61,23 @@ export const ColoredCard = styled.div`
   opacity: 0.5;
   box-shadow: 0 30px 60px rgba(0, 0, 0, 0.2);
 `;
+
+// 버튼 추가 스타일링
+export const WatchingButton = styled.div`
+  display: flex;
+  width: 150px;
+  height: 45px;
+  border-radius: 10px;
+  background-color: var(--primary-base);
+  justify-content: center;
+  align-items: center;
+  margin-top: 15px;
+
+  p {
+    display: flex;
+    text-align: center;
+    font-size: var(--label-medium-size);
+    font-weight: var(--display-small-weight);
+    color: var(--black);
+  }
+`;

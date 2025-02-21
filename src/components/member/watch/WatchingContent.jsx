@@ -1,7 +1,9 @@
 // 사용자 시청내역
 import React, { useEffect, useRef } from 'react';
-import { ColoredCard, ContentSection, MovieCard, RecommendedMovies } from './style';
+import { ColoredCard, ContentSection, MovieCard, RecommendedMovies, WatchingButton } from './style';
 import { gsap } from 'gsap';
+import { useNavigate } from 'react-router';
+
 const colors = [
   '#FF6B6B',
   '#FFCC5C',
@@ -26,6 +28,9 @@ const TestWatchingContent = () => {
   const cardsRef = useRef([]);
   const coloredCardsRef = useRef(new Array(10).fill(null));
   const coloredCardColors = useRef(Array.from({ length: 10 }, () => getRandomColor())); // 10개 카드의 랜덤 색상
+
+  //버튼 클릭시 메인 홈 이동
+  const navigate = useNavigate();
 
   const coloredCardFinalPositions = useRef([
     //x:숫자 클수록 오른쪽, y:숫자 클수록 위로
@@ -99,6 +104,11 @@ const TestWatchingContent = () => {
         <h3>시청하신 콘텐츠가 없습니다.</h3>
         <p>다양한 콘텐츠를 시청해보세요.</p>
         <p>고객님의 취향에 맞추어 추천을 해드릴까요?</p>
+        <div>
+          <WatchingButton onClick={() => navigate('/')}>
+            <p>콘텐츠 추천받기</p>
+          </WatchingButton>
+        </div>
 
         <RecommendedMovies>
           {/* {movies.map((movie, index) => (
@@ -112,7 +122,7 @@ const TestWatchingContent = () => {
                 color={coloredCardColors.current[index]} // 랜덤 컬러 지정
               >
                 {index + 1}
-                {/* index: 알록달록 미니카드들에 번호 붙이는거. 나중에 지워주셍요.ㅇ ㅖ썰*/}
+                {/* 삭제예정 */}
               </ColoredCard>
             ))}
           </div>
