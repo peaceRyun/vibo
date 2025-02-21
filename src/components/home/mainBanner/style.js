@@ -14,6 +14,20 @@ export const SwiperContainer = styled.div`
   height: auto;
   min-height: 600px;
   overflow: visible;
+  //페이지 네비 스타일링 추가
+  .swiper-pagination-bullet {
+    background-color: white !important;
+  }
+  .swiper-pagination-bullet-active {
+    background-color: var(--primary-base) !important;
+  }
+
+  .swiper-button-prev,
+  .swiper-button-next {
+    color: var(--primary-base) !important;
+    font-size: 30px !important;
+    z-index: 11;
+  }
 `;
 
 export const SlideImage = styled.img`
@@ -84,19 +98,19 @@ export const FloatingContainer = styled.div`
   z-index: 3;
   overflow: visible;
 
-  @media (min-width: 1700px) {
+  /* @media (min-width: 1700px) {
     top: 80px;
     height: 100%;
-  }
+  } */
 
   @media (min-width: 1024px) and (max-width: 1450px) {
     // height: calc(100% - ((1450px - 100vw) * 0.1));
-    top: calc(-100px + ((1450px - 100vw) * 0.1));
+    /* top: calc(-100px + ((1450px - 100vw) * 0.1)); */
   }
 
-  @media (max-width: 1219px) {
-    top: -60px;
-    height: 79%;
+  @media (max-width: 1450px) {
+    /* top: -60px;
+    height: 79%; */
   }
 `;
 

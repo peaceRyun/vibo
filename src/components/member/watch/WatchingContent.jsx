@@ -1,7 +1,9 @@
 // 사용자 시청내역
 import React, { useEffect, useRef } from 'react';
-import { ColoredCard, ContentSection, MovieCard, RecommendedMovies } from './style';
+import { ColoredCard, ContentSection, MovieCard, RecommendedMovies, WatchingButton } from './style';
 import { gsap } from 'gsap';
+import { useNavigate } from 'react-router';
+
 const colors = [
     '#FF6B6B',
     '#FFCC5C',
@@ -17,7 +19,7 @@ const colors = [
 
 const getRandomColor = () => colors[Math.floor(Math.random() * colors.length)];
 
-const WatchingContent = () => {
+const TestWatchingContent = () => {
     const movies = [
         { src: '/member/mypage_01.webp' },
         { src: '/member/mypage_02.webp' },
@@ -27,12 +29,15 @@ const WatchingContent = () => {
     const coloredCardsRef = useRef(new Array(10).fill(null));
     const coloredCardColors = useRef(Array.from({ length: 10 }, () => getRandomColor())); // 10개 카드의 랜덤 색상
 
+    //버튼 클릭시 메인 홈 이동
+    const navigate = useNavigate();
+
     const coloredCardFinalPositions = useRef([
         //x:숫자 클수록 오른쪽, y:숫자 클수록 위로
         { x: 480, y: 180 }, //1번
         { x: 670, y: 100 }, //2번
         { x: 600, y: 150 }, //3번
-        { x: 100, y: 280 }, //4번
+        { x: 160, y: 280 }, //4번
         { x: 650, y: 290 }, //5번
         { x: 400, y: 10 }, //6번
         { x: 500, y: 80 }, //7번
@@ -99,22 +104,28 @@ const WatchingContent = () => {
                 <h3>시청하신 콘텐츠가 없습니다.</h3>
                 <p>다양한 콘텐츠를 시청해보세요.</p>
                 <p>고객님의 취향에 맞추어 추천을 해드릴까요?</p>
+                <div>
+                    <WatchingButton onClick={() => navigate('/')}>
+                        <p>콘텐츠 추천받기</p>
+                    </WatchingButton>
+                </div>
 
                 <RecommendedMovies>
                     {/* {movies.map((movie, index) => (
             <MovieCard key={index} style={{ backgroundImage: `url(${movie.src})` }} />
           ))} */}
-
-                    {Array.from({ length: 10 }).map((_, index) => (
-                        <ColoredCard
-                            key={`bg-${index}`}
-                            ref={(el) => (coloredCardsRef.current[index] = el)}
-                            color={coloredCardColors.current[index]} // 랜덤 컬러 지정
-                        >
-                            {index + 1}
-                            {/* index: 알록달록 미니카드들에 번호 붙이는거. 나중에 지워주셍요. */}
-                        </ColoredCard>
-                    ))}
+                    <div>
+                        {Array.from({ length: 10 }).map((_, index) => (
+                            <ColoredCard
+                                key={`bg-${index}`}
+                                ref={(el) => (coloredCardsRef.current[index] = el)}
+                                color={coloredCardColors.current[index]} // 랜덤 컬러 지정
+                            >
+                                {index + 1}
+                                {/* 삭제예정 */}
+                            </ColoredCard>
+                        ))}
+                    </div>
                     {movies.map((movie, index) => (
                         <MovieCard
                             key={index}
@@ -128,4 +139,4 @@ const WatchingContent = () => {
     );
 };
 
-export default WatchingContent;
+export default TestWatchingContent;
