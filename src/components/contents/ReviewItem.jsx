@@ -7,21 +7,29 @@ const ReviewItem = ({ nickname, rating, content, date, imgurl }) => {
 
     return (
         <li style={{ marginLeft: '107px' }}>
-            <Flex $gap="17px" $alignItems="center">
+            <Flex $gap='17px' $alignItems='center'>
                 <img
-                    src={imgurl || srcNow || '/contentdetail/sample/SampleProfile.png'} // ✅ Redux 프로필 적용
-                    alt="프로필"
+                    src={
+                        imgurl ||
+                        srcNow ||
+                        'https://raw.githubusercontent.com/peaceRyun/vibostatic/refs/heads/main/public/mockup/contentdetail/sample/SampleProfile.png'
+                    } // ✅ Redux 프로필 적용
+                    alt='프로필'
                     style={{ width: '40px', height: '40px', borderRadius: '50%' }}
                 />
-                <Flex $flexDirection="column" $position="relative" style={{ width: '100%' }}>
-                    <Flex $gap="15px" $alignItems="center" $justifyContent="space-between">
-                        <Flex $gap="15px" $alignItems="center">
+                <Flex $flexDirection='column' $position='relative' style={{ width: '100%' }}>
+                    <Flex $gap='15px' $alignItems='center' $justifyContent='space-between'>
+                        <Flex $gap='15px' $alignItems='center'>
                             <span>{nickname}</span>
-                            <Flex $gap="5px" $alignItems="center">
+                            <Flex $gap='5px' $alignItems='center'>
                                 {Array(rating || 0)
                                     .fill()
                                     .map((_, index) => (
-                                        <img key={index} src="/contentdetail/ui/StarActive.png" alt="별" />
+                                        <img
+                                            key={index}
+                                            src='https://raw.githubusercontent.com/peaceRyun/vibostatic/refs/heads/main/public/mockup/contentdetail/ui/StarActive.png'
+                                            alt='별'
+                                        />
                                     ))}
                             </Flex>
                         </Flex>

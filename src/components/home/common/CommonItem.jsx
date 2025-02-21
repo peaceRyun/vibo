@@ -31,7 +31,7 @@ const CommonItem = ({ content, videoType }) => {
 
     const imageUrl = poster_path
         ? `https://image.tmdb.org/t/p/w500/${poster_path}`
-        : '/mainhome/sample/commonSample.png';
+        : 'https://raw.githubusercontent.com/peaceRyun/vibostatic/refs/heads/main/public/mockup/mainhome/sample/commonSample.png';
 
     return (
         <CommonItemContainer

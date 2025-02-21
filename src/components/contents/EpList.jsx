@@ -46,7 +46,7 @@ const EpList = ({
     // 배경 이미지 URL 생성
     const backgroundImage = posterPath
         ? `https://image.tmdb.org/t/p/original${posterPath}`
-        : '/contentdetail/sample/EpList배경이미지.png';
+        : 'https://raw.githubusercontent.com/peaceRyun/vibostatic/refs/heads/main/public/mockup/contentdetail/sample/EpListBackgroudImg.png';
 
     return (
         <section id='episode-list'>
@@ -65,22 +65,22 @@ const EpList = ({
                                     <P28>{selectedSeason}:</P28>
                                     {contentRating && (
                                         <CRatingImg
-                                            src={`/contentdetail/contentrate/${
+                                            src={`https://raw.githubusercontent.com/peaceRyun/vibostatic/refs/heads/main/public/mockup/contentdetail/contentrate/${
                                                 contentRating.rating || '전체관람가'
                                             } 관람등급 1.png`}
                                             alt={`${contentRating.rating || '전체관람가'} 관람등급`}
                                         />
                                     )}
                                     <CRatingImg
-                                        src='/contentdetail/contentrate/내용정보-대사.png'
+                                        src='https://raw.githubusercontent.com/peaceRyun/vibostatic/refs/heads/main/public/mockup/contentdetail/contentrate/내용정보-대사.png'
                                         alt='내용정보-대사'
                                     />
                                     <CRatingImg
-                                        src='/contentdetail/contentrate/내용정보-선정성.png'
+                                        src='https://raw.githubusercontent.com/peaceRyun/vibostatic/refs/heads/main/public/mockup/contentdetail/contentrate/내용정보-선정성.png'
                                         alt='내용정보-선정성'
                                     />
                                     <CRatingImg
-                                        src='/contentdetail/contentrate/내용정보-주제.png'
+                                        src='https://raw.githubusercontent.com/peaceRyun/vibostatic/refs/heads/main/public/mockup/contentdetail/contentrate/내용정보-주제.png'
                                         alt='내용정보-주제'
                                     />
                                 </Flex>

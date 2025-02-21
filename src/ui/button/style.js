@@ -34,7 +34,7 @@ export const ButtonB = styled.button`
         `
         &::before {
             content: ' ';
-            background-image: url('/contentdetail/ui/playicon.png');
+            background-image: url('https://raw.githubusercontent.com/peaceRyun/vibostatic/refs/heads/main/public/mockup/contentdetail/ui/playicon.png');
             width: 18px;
             height: 20px;
             margin-right: 10px;

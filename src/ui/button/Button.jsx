@@ -37,7 +37,12 @@ export const ButtonBlank = ({
 }) => {
     return (
         <ButtonA $type={type} $fontSize={fontSize} $width={width} $height={height} onClick={onClick}>
-            {review && <img src='/contentdetail/ui/reviewIcon.png' alt='리뷰 아이콘' />}
+            {review && (
+                <img
+                    src='https://raw.githubusercontent.com/peaceRyun/vibostatic/refs/heads/main/public/mockup/contentdetail/ui/reviewIcon.png'
+                    alt='리뷰 아이콘'
+                />
+            )}
             {children}
             <FaAngleRight />
         </ButtonA>

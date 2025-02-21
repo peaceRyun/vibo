@@ -99,7 +99,10 @@ const ContMobile = ({ contentDetail, contentType }) => {
                     </Description>
                     <IconSection>
                         <LikeIcon>
-                            <img src='/contentdetail/ui/하트active.png' alt='하트' />
+                            <img
+                                src='https://raw.githubusercontent.com/peaceRyun/vibostatic/refs/heads/main/public/mockup/contentdetail/ui/하트active.png'
+                                alt='하트'
+                            />
                             <p>좋아요</p>
                         </LikeIcon>
                         <RatingIcon>
