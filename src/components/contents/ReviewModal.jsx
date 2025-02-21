@@ -30,6 +30,9 @@ const ReviewModal = ({ isOpen, onClose, contentDetail }) => {
             return;
         }
 
+        // 디버깅을 위한 로그 추가
+        console.log('contentDetail:', contentDetail);
+
         const newReview = {
             id: Date.now(),
             author: nickname,
@@ -39,6 +42,13 @@ const ReviewModal = ({ isOpen, onClose, contentDetail }) => {
                 rating: 5,
                 avatar_path: srcNow,
             },
+            // 디버깅용 로그 추가
+            moviePoster: contentDetail?.poster_path
+                ? `https://image.tmdb.org/t/p/w500${contentDetail.poster_path}`
+                : contentDetail?.backdrop_path
+                ? `https://image.tmdb.org/t/p/w500${contentDetail.backdrop_path}`
+                : '/default-movie-poster.jpg',
+            movieTitle: contentDetail?.title || '',
         };
 
         dispatch(addReview(newReview));
