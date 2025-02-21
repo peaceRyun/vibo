@@ -14,26 +14,26 @@ const RateList = () => {
 
     // 기존 이미지 배열 (백업용)
     const images = [
-        '/mainhome/weeklyitem_01.webp',
-        '/mainhome/weeklyitem_02.webp',
-        '/mainhome/weeklyitem_03.webp',
-        '/mainhome/weeklyitem_04.webp',
-        '/mainhome/weeklyitem_05.webp',
-        '/mainhome/weeklyitem_01.webp',
-        '/mainhome/weeklyitem_02.webp',
-        '/mainhome/weeklyitem_03.webp',
-        '/mainhome/weeklyitem_04.webp',
-        '/mainhome/weeklyitem_05.webp',
-        '/mainhome/weeklyitem_01.webp',
-        '/mainhome/weeklyitem_02.webp',
-        '/mainhome/weeklyitem_03.webp',
-        '/mainhome/weeklyitem_04.webp',
-        '/mainhome/weeklyitem_05.webp',
-        '/mainhome/weeklyitem_01.webp',
-        '/mainhome/weeklyitem_02.webp',
-        '/mainhome/weeklyitem_03.webp',
-        '/mainhome/weeklyitem_04.webp',
-        '/mainhome/weeklyitem_05.webp',
+        'https://raw.githubusercontent.com/peaceRyun/vibostatic/refs/heads/main/public/mockup/mainhome/weeklyitem_01.webp',
+        'https://raw.githubusercontent.com/peaceRyun/vibostatic/refs/heads/main/public/mockup/mainhome/weeklyitem_02.webp',
+        'https://raw.githubusercontent.com/peaceRyun/vibostatic/refs/heads/main/public/mockup/mainhome/weeklyitem_03.webp',
+        'https://raw.githubusercontent.com/peaceRyun/vibostatic/refs/heads/main/public/mockup/mainhome/weeklyitem_04.webp',
+        'https://raw.githubusercontent.com/peaceRyun/vibostatic/refs/heads/main/public/mockup/mainhome/weeklyitem_05.webp',
+        'https://raw.githubusercontent.com/peaceRyun/vibostatic/refs/heads/main/public/mockup/mainhome/weeklyitem_01.webp',
+        'https://raw.githubusercontent.com/peaceRyun/vibostatic/refs/heads/main/public/mockup/mainhome/weeklyitem_02.webp',
+        'https://raw.githubusercontent.com/peaceRyun/vibostatic/refs/heads/main/public/mockup/mainhome/weeklyitem_03.webp',
+        'https://raw.githubusercontent.com/peaceRyun/vibostatic/refs/heads/main/public/mockup/mainhome/weeklyitem_04.webp',
+        'https://raw.githubusercontent.com/peaceRyun/vibostatic/refs/heads/main/public/mockup/mainhome/weeklyitem_05.webp',
+        'https://raw.githubusercontent.com/peaceRyun/vibostatic/refs/heads/main/public/mockup/mainhome/weeklyitem_01.webp',
+        'https://raw.githubusercontent.com/peaceRyun/vibostatic/refs/heads/main/public/mockup/mainhome/weeklyitem_02.webp',
+        'https://raw.githubusercontent.com/peaceRyun/vibostatic/refs/heads/main/public/mockup/mainhome/weeklyitem_03.webp',
+        'https://raw.githubusercontent.com/peaceRyun/vibostatic/refs/heads/main/public/mockup/mainhome/weeklyitem_04.webp',
+        'https://raw.githubusercontent.com/peaceRyun/vibostatic/refs/heads/main/public/mockup/mainhome/weeklyitem_05.webp',
+        'https://raw.githubusercontent.com/peaceRyun/vibostatic/refs/heads/main/public/mockup/mainhome/weeklyitem_01.webp',
+        'https://raw.githubusercontent.com/peaceRyun/vibostatic/refs/heads/main/public/mockup/mainhome/weeklyitem_02.webp',
+        'https://raw.githubusercontent.com/peaceRyun/vibostatic/refs/heads/main/public/mockup/mainhome/weeklyitem_03.webp',
+        'https://raw.githubusercontent.com/peaceRyun/vibostatic/refs/heads/main/public/mockup/mainhome/weeklyitem_04.webp',
+        'https://raw.githubusercontent.com/peaceRyun/vibostatic/refs/heads/main/public/mockup/mainhome/weeklyitem_05.webp',
     ];
 
     useEffect(() => {
@@ -78,7 +78,7 @@ const RateList = () => {
                         if (status === 'succeeded' && popularContent.length > 0) {
                             const imagePath = content.poster_path
                                 ? `https://image.tmdb.org/t/p/w500${content.poster_path}`
-                                : '/mainhome/weeklyitem_01.webp'; // 폴백 이미지
+                                : 'https://raw.githubusercontent.com/peaceRyun/vibostatic/refs/heads/main/public/mockup/mainhome/weeklyitem_01.webp'; // 폴백 이미지
 
                             return (
                                 <SwiperSlide key={content.id || index}>

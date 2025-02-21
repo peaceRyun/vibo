@@ -84,13 +84,19 @@ const HoverItem = ({ content, videoType = 'drama' }) => {
                 </Video>
 
                 <button>
-                    <PlayImg src='/contentdetail/ui/carousel_action_atomic.png' alt='play' />
+                    <PlayImg
+                        src='https://raw.githubusercontent.com/peaceRyun/vibostatic/refs/heads/main/public/mockup/contentdetail/ui/carousel_action_atomic.png'
+                        alt='play'
+                    />
                 </button>
             </Flex>
             <Flex $flexDirection='column' $padding='35px 20px 6px' $gap='8px'>
                 <Flex $justifyContent='space-between' $alignItems='center'>
                     <Flex $justifyContent='space-between' $alignItems='center' $gap='10px'>
-                        <img src='/contentdetail/contentrate/전체관람가 관람등급 1.png' alt='rateAll' />
+                        <img
+                            src='https://raw.githubusercontent.com/peaceRyun/vibostatic/refs/heads/main/public/mockup/contentdetail/contentrate/전체관람가 관람등급 1.png'
+                            alt='rateAll'
+                        />
                         <Badge $br='4px' $padding='3.5px 5px' fontSize='12px'>
                             HD
                         </Badge>
