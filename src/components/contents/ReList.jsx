@@ -1,46 +1,39 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
-import ReItem from './reItem';
-import { FlexCol, H3 } from './style';
-import { Pagination } from 'swiper/modules';
+import ReItem from './ReItem';
+import { Flex, H3 } from './style';
 
-const ReList = () => {
+const ReList = ({ recommendData, loading, contentType }) => {
+    if (loading) {
+        return <div>loading....</div>;
+    }
+
+    if (!recommendData || recommendData.length === 0) {
+        return null;
+    }
+
     return (
-        <>
-            <section>
-                <FlexCol gap='40px'>
-                    <H3>비슷한 콘텐츠</H3>
-                    <Swiper
-                        slidesPerView={5.5}
-                        spaceBetween={30}
-                        pagination={{
-                            clickable: true,
-                        }}
-                        modules={[Pagination]}
-                        className='mySwiper'
-                    >
-                        <SwiperSlide>
-                            <ReItem />
+        <section>
+            <Flex $flexDirection='column' $position='relative' $gap='40px' $padding='30px 0 60px'>
+                <H3>비슷한 콘텐츠</H3>
+                <Swiper
+                    key={window.location.pathname}
+                    breakpoints={{
+                        599: { slidesPerView: 2, spaceBetween: 10 },
+                        600: { slidesPerView: 3, spaceBetween: 20 },
+                        1025: { slidesPerView: 6, spaceBetween: 30 },
+                    }}
+                    pagination={{ clickable: true }}
+                    className='mySwiper'
+                >
+                    {recommendData.map((content) => (
+                        <SwiperSlide key={content.id}>
+                            <ReItem content={content} contentType={contentType} />
                         </SwiperSlide>
-                        <SwiperSlide>
-                            <ReItem />
-                        </SwiperSlide>
-                        <SwiperSlide>
-                            <ReItem />
-                        </SwiperSlide>
-                        <SwiperSlide>
-                            <ReItem />
-                        </SwiperSlide>
-                        <SwiperSlide>
-                            <ReItem />
-                        </SwiperSlide>
-                        <SwiperSlide>
-                            <ReItem />
-                        </SwiperSlide>
-                    </Swiper>
-                </FlexCol>
-            </section>
-        </>
+                    ))}
+                </Swiper>
+            </Flex>
+        </section>
     );
 };
 

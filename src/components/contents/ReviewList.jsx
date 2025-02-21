@@ -1,49 +1,75 @@
 import { useState } from 'react';
-import Button from '../../ui/button/Button';
+import { useDispatch, useSelector } from 'react-redux';
+import { ButtonBlank } from '../../ui/button/Button';
 import ReviewItem from './ReviewItem';
-import { Badge, FlexCol, FlexColUl, FlexNone, H3 } from './style';
+import { Badge, Flex, FlexUl, H3, Line, LoadMoreBtn, LoadMoreBtnWrapper } from './style';
 import ReviewModal from './ReviewModal';
 
-// 입력 받은 댓글 영역
-// 영화, 시리즈 콘텐츠 공통
-const ReviewList = () => {
+const ReviewList = ({ contentDetail }) => {
     const [openModal, setOpenModal] = useState(false);
-    const sample = Array(5).fill({
-        title: '환승연애',
-        image: '/contentdetail/sample/sample-contentlsit.png',
-    });
+    const [visibleItems, setVisibleItems] = useState(5);
+
+    const reviews = useSelector((state) => state.reviewR.reviews); // ✅ Redux에서 리뷰 가져오기
+    const { nickname, srcNow } = useSelector((state) => state.profileR); // ✅ 로그인한 유저 닉네임 & 프로필 사진 가져오기
+
     const handleOpenModal = () => {
         setOpenModal(true);
-        console.log(openModal);
     };
 
     const handleCloseModal = () => {
         setOpenModal(false);
     };
+
+    const handleLoadMore = () => {
+        setVisibleItems((prev) => Math.min(prev + 5, reviews.length));
+    };
+
     return (
-        <>
-            <section>
-                <FlexCol gap='20px'>
-                    <FlexNone gap='15px'>
-                        <H3>사용자 평</H3>
-                        <Badge br='20px' p='5px 8px' fontSize='14px'>
-                            5
-                        </Badge>
-                    </FlexNone>
-                    <FlexNone gap='15px'>
-                        <img src='/contentdetail/sample/SampleProfile.png' alt='샘플프로필' />
-                        <span style={{ fontSize: '17px' }}>홍길동</span>
-                        <Button onClick={handleOpenModal}>등록</Button>
-                    </FlexNone>
-                    <FlexColUl gap='50px'>
-                        {sample.map((item, index) => (
-                            <ReviewItem key={index} />
-                        ))}
-                    </FlexColUl>
-                </FlexCol>
-                <ReviewModal isOpen={openModal} onClose={handleCloseModal} />
-            </section>
-        </>
+        <section>
+            <Flex $flexDirection='column' $position='relative' $gap='20px' $padding='0 0 30px'>
+                <Flex $gap='15px' $alignItems='center'>
+                    <H3>사용자 평</H3>
+                    <Badge $br='20px' $padding='5px 8px' fontSize='14px'>
+                        {reviews.length}
+                    </Badge>
+                </Flex>
+                <Flex $gap='15px' $alignItems='center'>
+                    <img
+                        src={
+                            srcNow ||
+                            'https://raw.githubusercontent.com/peaceRyun/vibostatic/refs/heads/main/public/mockup/contentdetail/sample/SampleProfile.png'
+                        }
+                        alt='사용자 프로필'
+                        style={{ width: '40px', height: '40px', borderRadius: '50%' }}
+                    />
+                    <span style={{ fontSize: '17px' }}>{nickname}</span>
+                    <ButtonBlank review width='173px' height='46px' onClick={handleOpenModal}>
+                        리뷰 작성하기
+                    </ButtonBlank>
+                </Flex>
+                <FlexUl $flexDirection='column' $gap='50px'>
+                    {reviews.slice(0, visibleItems).map((review) => (
+                        <ReviewItem
+                            key={review.id}
+                            nickname={review.author}
+                            rating={review.author_details?.rating || 0}
+                            content={review.content}
+                            date={review.created_at.split('T')[0]}
+                            imgurl={review.author_details.avatar_path || srcNow} // ✅ 리뷰에도 사용자 프로필 이미지 적용
+                        />
+                    ))}
+                </FlexUl>
+                {visibleItems < reviews.length && (
+                    <LoadMoreBtnWrapper>
+                        <Line />
+                        <LoadMoreBtn onClick={handleLoadMore}>
+                            <img src='/contentdetail/ui/loadMoreBtnIcon.png' alt='더보기아이콘' />
+                        </LoadMoreBtn>
+                    </LoadMoreBtnWrapper>
+                )}
+            </Flex>
+            <ReviewModal isOpen={openModal} onClose={handleCloseModal} contentDetail={contentDetail} />
+        </section>
     );
 };
 

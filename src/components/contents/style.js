@@ -1,18 +1,80 @@
 import styled from 'styled-components';
 
+export const Container = styled.div`
+    position: relative;
+    padding: 0 var(--spacing-5);
+    @media (min-width: 1025px) {
+        padding: 0 50px;
+    }
+`;
+export const Inner = styled.div`
+    margin: 0 auto;
+    @media (max-width: 599px) {
+        max-width: calc(390px - var(--spacing-8));
+    }
+    @media (min-width: 600px) {
+        max-width: calc(var(--breakpoint-tablet) - var(--spacing-8));
+    }
+    @media (min-width: 1025px) {
+        max-width: calc(var(--breakpoint-desktop) - 100px);
+    }
+`;
+
 export const PBWrap = styled.div`
     margin-top: 100px;
-    height: 600px;
-    background-image: url('/contentdetail/sample/Slide 16_9 - 2.png');
+    max-width: 1820px;
+    width: 100%;
     position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    height: auto;
+    overflow: hidden;
+
+    @media (max-width: 590px) {
+        margin-top: 50px;
+        max-width: 100%;
+    }
+`;
+
+// 16:9 비율을 유지하기 위한 새로운 wrapper 컴포넌트
+export const VideoWrapper = styled.div`
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%; /* 16:9 비율 */
+    height: 0;
+`;
+
+export const StyledIframe = styled.iframe`
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+`;
+
+export const GradientLayer = styled.div`
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    background: linear-gradient(to bottom, transparent 0%, transparent 50%, rgba(25, 25, 25, 0.8) 75%, #191919 100%);
+
+    @media (max-width: 590px) {
+        height: 80%;
+    }
 `;
 
 export const PBuiWrap = styled.div`
     position: absolute;
     bottom: 0;
     left: 0;
-    width: 80%;
-    margin: 0px 150px 63px;
+    width: 90%;
+    margin: 0px 50px 63px;
+    @media (max-width: 1024px) {
+        display: none;
+    }
 `;
 
 export const ItemWrap = styled.div`
@@ -23,6 +85,11 @@ export const ItemWrap = styled.div`
     border-radius: 8px;
     overflow: hidden;
     margin: 0 auto;
+
+    @media (max-width: 590px) {
+        max-width: 320px;
+        height: 300px;
+    }
 `;
 
 export const SDrop = styled.div`
@@ -36,6 +103,12 @@ export const SDrop = styled.div`
     padding: 0 30px;
     gap: 10px;
     margin-right: 150px;
+
+    @media (max-width: 590px) {
+        width: 100px;
+        padding: 0 20px;
+        /* margin-right: 0; */
+    }
 `;
 
 export const ItemImg = styled.img`
@@ -45,8 +118,8 @@ export const ItemImg = styled.img`
 
 export const PlayImg = styled.img`
     position: absolute;
-    width: 45px !important;
-    height: 45px !important;
+    width: 67.5px !important;
+    height: 67.5px !important;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -62,60 +135,27 @@ export const CRatingImg = styled.img`
     height: 34px;
 `;
 
-export const FlexNone = styled.div`
+export const FlexUl = styled.ul`
     display: flex;
-    align-items: center;
-    gap: ${(props) => props.gap};
-`;
+    flex-direction: ${(props) => props.$flexDirection};
+    align-items: ${(props) => props.$alignItems};
+    justify-content: ${(props) => props.$justifyContent};
+    gap: ${(props) => props.$gap};
+    padding: ${(props) => (props.$padding ? props.$padding : '')};
+    position: ${(props) => props.$position};
+    width: ${(props) => props.$width || 'auto'};
 
-export const FlexCenter = styled.div`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-`;
-
-export const FlexSB = styled.div`
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: ${(props) => props.gap};
-`;
-
-export const FlexBadgeWrap = styled.div`
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px 20px;
-    gap: ${(props) => props.gap};
-`;
-
-export const FlexCol = styled.div`
-    display: flex;
-    flex-direction: column;
-    gap: ${(props) => props.gap};
-    margin-top: ${(props) => `${props.mt}`};
-    margin-bottom: ${(props) => `${props.mb}`};
-`;
-
-export const FlexEnd = styled.div`
-    display: flex;
-    justify-content: flex-end;
-    gap: 10px;
-`;
-
-export const FlexColUl = styled.ul`
-    display: flex;
-    flex-direction: column;
-    gap: ${(props) => props.gap};
+    @media (max-width: 590px) {
+        gap: 20px;
+    }
 `;
 
 export const Badge = styled.div`
-    border-radius: ${(props) => props.br};
+    border-radius: ${(props) => props.$br};
     border: 1px solid var(--primary-base);
     color: var(--primary-base);
     background-color: var(--gray-900);
-    padding: ${(props) => props.p};
+    padding: ${(props) => props.$padding};
     height: 18px;
     display: flex;
     justify-content: center;
@@ -125,7 +165,10 @@ export const Badge = styled.div`
 `;
 
 export const Span = styled.span`
-    font-size: 12px;
+    font-weight: ${(props) => props.$fontWeight};
+    font-size: ${(props) => (props.$fontSize ? props.$fontSize : '12px')};
+    padding: ${(props) => props.$padding};
+    white-space: ${(props) => props.$whiteSpace};
 `;
 
 export const SpanInfoDim = styled.span`
@@ -138,21 +181,49 @@ export const SpanInfo = styled.span`
     color: var(--white);
 `;
 
+export const Contour = styled.div`
+    margin: 5px 0 10px;
+    height: 1px;
+    background-color: var(--secondary-base);
+`;
+
 export const H2 = styled.h2`
     font-size: 40px;
     font-weight: 700;
+    line-height: 100%;
+    @media (max-width: 1024px) {
+        display: none;
+    }
 `;
 
 export const H3 = styled.h3`
-    font-size: 28px;
-    font-weight: 800;
+    font-size: ${(props) => (props.fontSize ? props.fontSize : '28px')};
+    font-weight: ${(props) => (props.fontWeight ? props.fontWeight : '800')};
+`;
+
+export const H4 = styled.h4`
+    font-size: ${(props) => (props.$fontSize ? props.$fontSize : '28px')};
+    font-weight: ${(props) => (props.$fontWeight ? props.$fontWeight : '800')};
+    text-align: ${(props) => props.$textAlign};
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: calc(200px * 0.08); /* 컨테이너 너비의 8% */
 `;
 
 export const P = styled.p`
-    padding: 7px 20px 0px;
-    font-size: 13px;
-    font-weight: 400;
+    padding: ${(props) => (props.$padding ? props.$padding : '7px 20px 0px')};
+    font-size: ${(props) => (props.$fontSize ? props.$fontSize : '13px')};
+    font-weight: ${(props) => (props.$fontWeight ? props.$fontWeight : '400')};
     text-align: start;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: ${(props) => props.$lineClamp}; /* 원하는 줄 수 */
+    overflow: hidden;
+
+    @media (max-width: 590px) {
+        padding: 10px 0;
+    }
 `;
 
 export const P28 = styled.p`
@@ -165,11 +236,12 @@ export const P20 = styled.p`
     font-size: 20px;
     font-weight: 400;
     text-align: start;
-`;
 
-export const BarDemo = styled.div`
-    height: 5px;
-    background-color: var(--primary-base);
+    @media (max-width: 590px) {
+        font-size: 16px;
+        font-weight: 400;
+        text-align: center;
+    }
 `;
 
 export const ModalOverlay = styled.div`
@@ -188,7 +260,540 @@ export const ModalOverlay = styled.div`
 export const ModalContent = styled.div`
     background-color: var(--gray-900);
     padding: var(--spacing-6) var(--spacing-9);
-    border-radius: 8px;
-    width: 500px;
+    border-radius: 10px;
+    width: 518px;
+    height: 441px;
     border: 2px solid var(--primary-base);
+`;
+
+export const LoadMoreBtnWrapper = styled.div`
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+`;
+
+export const LoadMoreBtn = styled.button`
+    background: #1d1d1d;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    z-index: 2;
+`;
+
+export const Line = styled.div`
+    width: 100%;
+    height: 1px;
+    background: var(--secondary-300);
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1;
+`;
+export const EpItemContImg = styled.img`
+    width: ${(props) => props.$width};
+    height: ${(props) => props.$height};
+
+    @media (max-width: 590px) {
+        width: 150px; /* 📌 기존 150px에서 더 줄이기 */
+        height: 100px;
+    }
+    /* @media (max-width: 590px) {
+    width: ${(props) => props.$mobileWidth || '150px'};
+    height: ${(props) => props.$mobileHeight || '90px'};
+  } */
+`;
+
+export const EpListBgi = styled.img`
+    width: ${(props) => props.$width};
+    height: ${(props) => props.$height};
+    position: ${(props) => props.$position};
+    top: ${(props) => props.$top};
+    right: ${(props) => props.$right};
+    transform: ${(props) => props.$transform};
+    z-index: ${(props) => props.$zIndex};
+    filter: opacity(0.4) blur(3px);
+    box-shadow: inset -35px -35px 67px 15px #191919, inset 35px 35px 67px 15px #191919;
+`;
+
+export const EpItemsWrap = styled.div`
+    position: relative;
+    overflow: hidden;
+    // 초기 높이를 auto로 설정
+    height: auto;
+
+    @media (max-width: 590px) {
+        max-width: 100%;
+        /* padding: 10px; */
+    }
+`;
+
+export const CloseButton = styled.button`
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    @media (max-width: 590px) {
+        top: 5px; /* 📌 모바일에서 버튼 위치 조정 */
+        right: 5px;
+    }
+`;
+
+// 반응형
+export const ListWrapper = styled.div`
+    display: flex;
+    flex-direction: column;
+    @media (max-width: 590px) {
+        margin-top: 20px;
+    }
+`;
+
+export const PlayBannerWrapper = styled.div`
+    width: 100%;
+
+    &.mobile-only {
+        display: none; // 기본적으로 숨김
+
+        @media (max-width: 590px) {
+            margin-top: 0;
+            height: auto;
+            /* display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 10; */
+        }
+    }
+
+    &.pc-only {
+        display: block;
+
+        @media (max-width: 590px) {
+            display: none;
+        }
+    }
+`;
+export const PageWrapper = styled.div`
+    width: 100%;
+    padding: 20px;
+
+    @media (max-width: 590px) {
+        padding: 10px;
+    }
+`;
+
+export const Flex = styled.div`
+    display: flex;
+    flex-direction: ${(props) => props.$flexDirection};
+    align-items: ${(props) => props.$alignItems};
+    justify-content: ${(props) => props.$justifyContent};
+    gap: ${(props) => props.$gap};
+    padding: ${(props) => (props.$padding ? props.$padding : '')};
+    position: ${(props) => props.$position};
+    width: ${(props) => props.$width || 'auto'};
+    border-top: ${(props) => props.$borderTop};
+    white-space: ${(props) => props.$whiteSpace};
+    font-size: ${(props) => props.$fontSize};
+`;
+
+export const PcContainer = styled.div``;
+
+export const MobileInner = styled.div`
+    padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 17px;
+`;
+
+export const FlexMobile = styled.div`
+    display: flex;
+    width: auto;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+`;
+
+export const SwiperContainer = styled.div`
+    width: 100%;
+    overflow: hidden;
+`;
+
+// ////////////모바일버전 비슷한 콘테츠 컴포넌트 스타일링
+
+// 전체 컨테이너
+export const MReitemContainer = styled.div`
+    margin-top: 20px;
+    padding: 16px;
+`;
+
+// 비디오 섹션
+export const VideoSection = styled.div`
+    video {
+        width: 100%;
+        border-radius: 10px;
+    }
+`;
+
+// 정보 섹션
+export const InfoSection = styled.div`
+    text-align: center;
+`;
+
+export const TagContainer = styled.div`
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 10px 0;
+`;
+
+export const Tag = styled.span`
+    background: #333;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+`;
+
+// 재생 버튼
+export const PlayButton = styled.button`
+    width: 100%;
+    padding: 10px;
+    background: #00c8ff;
+    color: white;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+`;
+
+// 에피소드 섹션
+export const EpisodesSection = styled.div`
+    margin-top: 20px;
+`;
+
+export const EpisodeList = styled.div`
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+
+    @media (max-width: 768px) {
+        flex-direction: column;
+    }
+`;
+
+export const Episode = styled.div`
+    img {
+        width: 100%;
+        border-radius: 5px;
+    }
+`;
+
+// 비슷한 콘텐츠 섹션
+export const ContentWrapper = styled.div`
+    display: grid;
+    gap: 20px;
+
+    /* 모바일 (작은 화면) */
+    grid-template-columns: repeat(2, 1fr);
+
+    /* 태블릿 (중간 화면) */
+    @media (min-width: 600px) {
+        grid-template-columns: repeat(3, 1fr);
+    }
+`;
+
+export const ContentCard = styled.div`
+    cursor: pointer;
+    img {
+        width: 100%;
+        border-radius: 5px;
+    }
+`;
+
+// 사용자 리뷰 섹션
+// export const ReviewsSection = styled.div`
+//   margin-top: 20px;
+// `;
+
+export const Review = styled.div`
+    background: #222;
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 5px;
+`;
+
+export const TabContainer = styled.div`
+    display: flex;
+    justify-content: space-around;
+    background-color: #222;
+    /* padding: 10px 0; */
+    /* border-radius: 8px; */
+    /* margin-bottom: 10px; */
+    position: relative;
+    @media (min-width: 1024px) {
+        display: none; // 화면이 768px 이하일 때 이 컴포넌트 숨기기
+    }
+`;
+
+export const TabButton = styled.button`
+    flex: 1;
+    padding: 12px 0;
+    font-size: 16px;
+    color: ${(props) => (props.$active ? '#fff' : '#aaa')};
+    /* background: ${(props) => (props.active ? '#00c8ff' : 'transparent')}; */
+    border: none;
+    /* border-bottom: ${(props) => (props.active ? '3px solid #fff' : 'none')}; */
+    cursor: pointer;
+    transition: 0.3s;
+    position: relative;
+
+    &:hover {
+        color: #fff;
+    }
+    /* 위에 클릭하면 컬러 보이게 해야함 */
+    &::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100%;
+        height: 4px;
+        background-color: ${(props) => (props.active ? '#07FFE6' : 'transparent')};
+        border-radius: 4px;
+    }
+`;
+
+export const TabHeader = styled.div`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 10px 0;
+    border-bottom: 1px solid #444;
+`;
+
+// //////모바일 버전
+export const ContMobileContainer = styled.div`
+    /* padding: 20px; */
+    /* background-color: #000;
+  color: #fff; */
+`;
+
+export const Header = styled.div`
+    display: flex;
+    gap: 15px;
+    flex-direction: column;
+    margin-bottom: 16px;
+`;
+
+export const playbar = styled.div`
+    /* width: 100%;
+  background-color: red; */
+`;
+export const SeasonInfo = styled.p`
+    font-size: 14px;
+    color: #888;
+`;
+
+export const SeasonTitle = styled.div`
+    font-size: 30px;
+    font-weight: 600;
+    line-height: 100%;
+`;
+
+export const EpisodeInfo = styled.p`
+    font-size: 18px;
+    font-weight: bold;
+`;
+
+export const TimeRemaining = styled.p`
+    font-size: 12px;
+    color: #888;
+`;
+
+export const ButtonContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 16px;
+`;
+
+export const PlayMobileButton = styled.button`
+    width: 100%;
+    height: 50px;
+    padding: 8px 16px;
+    background-color: var(--primary-base);
+    color: var(--black);
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+`;
+
+export const SaveButton = styled.button`
+    width: 100%;
+    height: 50px;
+    padding: 8px 16px;
+    background-color: var(--gray-700);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+`;
+
+export const Content = styled.div`
+    margin-bottom: 16px;
+`;
+
+export const Description = styled.div`
+    margin-bottom: 16px;
+
+    h4 {
+        font-size: 13px;
+        color: #ddd;
+    }
+    p {
+        font-size: 10px;
+    }
+`;
+
+export const IconSection = styled.div`
+    display: flex;
+    gap: 16px;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+`;
+
+export const LikeIcon = styled.div`
+    img {
+        width: 30px;
+    }
+    p {
+        color: white;
+        margin-top: 6px;
+        font-size: 12px;
+    }
+`;
+
+export const RatingIcon = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    p {
+        color: white;
+        margin-top: 6px;
+        font-size: 12px;
+    }
+`;
+
+export const RatingNumber = styled.div`
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+
+    .rating-value {
+        font-size: 16px;
+        font-weight: bold;
+    }
+
+    /* 기존 스타일 유지 */
+    h2 {
+        font-size: 16px;
+    }
+    span {
+        font-size: 12px;
+    }
+`;
+
+export const ShareIcon = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    p {
+        color: white;
+        margin-top: 6px;
+        font-size: 12px;
+    }
+`;
+
+export const DownloadButton = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    p {
+        color: white;
+        margin-top: 6px;
+        font-size: 12px;
+    }
+`;
+
+export const ProgressBar = styled.progress`
+    width: 80%;
+    height: 6px;
+    -webkit-appearance: none;
+    appearance: none;
+    border-radius: 10px;
+    background-color: #444;
+
+    &::-webkit-progress-bar {
+        background-color: #444;
+        border-radius: 10px;
+    }
+
+    &::-webkit-progress-value {
+        background-color: var(--primary-base);
+        border-radius: 10px;
+    }
+
+    &::-moz-progress-bar {
+        background-color: var(--primary-base);
+        border-radius: 10px;
+    }
+`;
+
+export const PlayBar = styled.div`
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    /* flexdirection="row" justifycontent="spacebetween" alignitem="center" */
+`;
+
+export const EpMobileText = styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+`;
+
+export const EpMobileTitle = styled.div`
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 10px;
+`;
+
+export const EpMobileList = styled.div`
+    display: flex;
+    width: 100%;
+    gap: 10px;
+    flex-direction: row;
+    justify-content: space-between;
+`;
+
+export const DescriptionText = styled.div`
+    font-size: 13px;
+    font-weight: bold;
+    color: #ddd;
+    margin-bottom: 10px;
 `;

@@ -1,62 +1,171 @@
-import { Container } from '../../common/style';
+import { useDispatch, useSelector } from 'react-redux';
 import EpList from '../../components/contents/EpList';
 import PlayBanner from '../../components/contents/PlayBanner';
 import ReList from '../../components/contents/ReList';
+import { Flex, Inner, MobileInner, PcContainer, TabButton, TabContainer } from '../../components/contents/style';
+import { useEffect, useState } from 'react';
+import {
+    getMovieContentRating,
+    getTVContentRating,
+    getTVDetail,
+    getTVseries,
+    getMovieRecommendations,
+    getTVSeasons,
+    getTVSeasonEpisodes,
+    getMovieDetail,
+    getMovie,
+    getTVRecommendations,
+} from '../../store/modules/getThunk';
 import ReviewList from '../../components/contents/ReviewList';
-import { FlexCol, FlexColUl, H3, SpanInfo, SpanInfoDim } from '../../components/contents/style';
+import ContDetail from '../../components/contents/ContDetail';
+import ContMoreDetail from '../../components/contents/ContMoreDetail';
+import EpListMobile from '../../components/contents/EpListMobile';
+import ContMobile from '../../components/contents/ContMobile';
+import MobileReItem from '../../components/contents/MobileReitem';
+import { useParams } from 'react-router';
 
-// 콘텐츠 상세
-const ContentDetail = () => {
+const ContentDetail = ({ contentType }) => {
+    const dispatch = useDispatch();
+    const { id } = useParams();
+    const [isMobile, setIsMobile] = useState(window.innerWidth <= 1024);
+    const isSeries = contentType === 'series';
+    const [activeTab, setActiveTab] = useState(isSeries ? 'episodes' : 'similar');
+
+    // Redux 상태 가져오기
+    const { movieDetail, movieRecommendations, recommendLoading: movieLoading } = useSelector((state) => state.movieR);
+    const {
+        TVDetail,
+        contentRating: tvContentRating,
+        TVRecommendData,
+        recommendLoading: tvLoading,
+        tvSeasons,
+        episodes,
+        seasonsLoading,
+        episodesLoading,
+    } = useSelector((state) => state.tvSeriesR);
+
+    // 컨텐츠 타입에 따라 적절한 데이터 선택
+    const contentDetail = isSeries ? TVDetail : movieDetail;
+    const contentRating = isSeries ? tvContentRating : tvContentRating;
+    const recommendData = isSeries ? TVRecommendData : movieRecommendations;
+    const recommendLoading = isSeries ? tvLoading : movieLoading;
+
+    useEffect(() => {
+        const handleResize = () => {
+            setIsMobile(window.innerWidth <= 1024);
+        };
+
+        window.addEventListener('resize', handleResize);
+        handleResize();
+
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
+
+    useEffect(() => {
+        if (!isSeries) {
+            setActiveTab('similar');
+        }
+    }, [isSeries]);
+
+    useEffect(() => {
+        if (id) {
+            if (contentType === 'series') {
+                dispatch(getTVseries());
+                dispatch(getTVDetail(id));
+                dispatch(getTVContentRating(id));
+                dispatch(getTVSeasons(id));
+                dispatch(getTVRecommendations(id));
+            } else if (contentType === 'movie') {
+                dispatch(getMovie());
+                dispatch(getMovieDetail(id));
+                dispatch(getMovieContentRating(id));
+                dispatch(getMovieRecommendations(id));
+            }
+        }
+    }, [dispatch, id, contentType]);
+
+    const handleSeasonSelect = (seasonNumber) => {
+        if (id && seasonNumber) {
+            dispatch(getTVSeasonEpisodes({ tvId: id, seasonNumber }));
+        }
+    };
+
     return (
         <>
-            <Container>
-                <FlexCol gap='30px'>
-                    <PlayBanner />
-                    <section>
-                        <FlexCol gap='15px'>
-                            <span>2024년</span>
-                            <div>
-                                <img src='/contentdetail/contentrate/전체관람가 관람등급 1.png' alt='rateAll' />
+            {!isMobile && (
+                <PcContainer>
+                    <Inner>
+                        <Flex $flexDirection="column" $position="relative" $gap="30px" $padding="0 50px">
+                            <PlayBanner contentDetail={contentDetail} contentType={contentType} />
+                            <div style={{ padding: '0 50px' }}>
+                                <ContDetail contentDetail={contentDetail} contentType={contentType} />
+                                {isSeries && (
+                                    <EpList
+                                        seasons={tvSeasons || []}
+                                        episodes={episodes || []}
+                                        contentRating={contentRating}
+                                        seasonsLoading={seasonsLoading}
+                                        episodesLoading={episodesLoading}
+                                        onSeasonSelect={handleSeasonSelect}
+                                        posterPath={contentDetail?.poster_path}
+                                    />
+                                )}
+                                <ReList
+                                    recommendData={recommendData}
+                                    loading={recommendLoading}
+                                    contentType={contentType}
+                                />
+                                <ReviewList contentDetail={contentDetail} />
+                                <div id="cont-more-detail">
+                                    <ContMoreDetail
+                                        contentDetail={contentDetail}
+                                        contentType={contentType}
+                                        contentRating={contentRating}
+                                    />
+                                </div>
                             </div>
-                            <span>13화</span>
-                            <p>
-                                태영(임지연)이 구덕이가 틀림없다고 확신하는 소혜(하율리)는 청수현 여기저기를 들쑤시고
-                                다닌다. 정체가 탄로 날 위기에 처한 태영...
-                            </p>
-                        </FlexCol>
-                    </section>
-                    <EpList />
-                    <ReList />
-                    <ReviewList />
-                    <section>
-                        <FlexCol gap='15px' mb='100px'>
-                            <H3>옥씨부인전 상세 정보</H3>
-                            <FlexColUl gap='5px'>
-                                <li>
-                                    <SpanInfoDim>크리에이터: </SpanInfoDim>
-                                    <SpanInfo>진혁, 박지숙</SpanInfo>
-                                </li>
-                                <li>
-                                    <SpanInfoDim>출연: </SpanInfoDim>
-                                    <SpanInfo>임지연, 추영우, 김재원, 연우, 이재원, 김재화, 오대환</SpanInfo>
-                                </li>
-                                <li>
-                                    <SpanInfoDim>장르: </SpanInfoDim>
-                                    <SpanInfo>로멘스, 한국</SpanInfo>
-                                </li>
-                                <li>
-                                    <SpanInfoDim>시리즈 특징: </SpanInfoDim>
-                                    <SpanInfo>로멘틱, 법정 시리즈, 시대물, </SpanInfo>
-                                </li>
-                                <li>
-                                    <SpanInfoDim>관람등급: </SpanInfoDim>
-                                    <SpanInfo>15세이상 관람가</SpanInfo>
-                                </li>
-                            </FlexColUl>
-                        </FlexCol>
-                    </section>
-                </FlexCol>
-            </Container>
+                        </Flex>
+                    </Inner>
+                </PcContainer>
+            )}
+
+            {isMobile && (
+                <MobileInner>
+                    <div>
+                        <PlayBanner contentDetail={contentDetail} contentType={contentType} />
+                    </div>
+                    <ContMobile contentDetail={contentDetail} />
+                    <TabContainer>
+                        {isSeries && (
+                            <TabButton $active={activeTab === 'episodes'} onClick={() => setActiveTab('episodes')}>
+                                에피소드
+                            </TabButton>
+                        )}
+                        <TabButton $active={activeTab === 'similar'} onClick={() => setActiveTab('similar')}>
+                            비슷한 콘텐츠
+                        </TabButton>
+                    </TabContainer>
+                    {isSeries && activeTab === 'episodes' && (
+                        <EpListMobile
+                            seasons={tvSeasons || []}
+                            episodes={episodes || []}
+                            contentRating={contentRating}
+                            seasonsLoading={seasonsLoading}
+                            episodesLoading={episodesLoading}
+                            onSeasonSelect={handleSeasonSelect}
+                        />
+                    )}
+                    {activeTab === 'similar' && (
+                        <MobileReItem
+                            recommendData={recommendData}
+                            loading={recommendLoading}
+                            contentType={contentType}
+                        />
+                    )}
+                    {/* ✅ 모바일에도 리뷰 추가 */}
+                    <ReviewList contentDetail={contentDetail} />
+                </MobileInner>
+            )}
         </>
     );
 };
