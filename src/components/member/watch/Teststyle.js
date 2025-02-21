@@ -19,8 +19,7 @@ export const RecommendedMovies = styled.div`
   display: flex;
   gap: 15px;
   justify-content: center;
-  margin-top: 50px;
-  position: relative;
+  margin-top: 30px;
 `;
 
 export const MovieCard = styled.div`
@@ -29,35 +28,10 @@ export const MovieCard = styled.div`
   background-size: cover;
   background-position: center;
   border-radius: 8px;
-  position: absolute;
-  transform-origin: bottom;
-  box-shadow: 0 50px 100px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
   transition: transform 0.3s ease;
 
   &:hover {
     transform: scale(1.05);
   }
-
-  &::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    box-shadow: inset 2px 2px 5px rgba(255, 255, 255, 0.6); // inner shadow
-    border-radius: 8px;
-  }
-`;
-
-export const ColoredCard = styled.div`
-  width: 9.375rem;
-  height: 190px;
-  background-color: ${(props) => props.color};
-  border-radius: 8px;
-  position: absolute;
-  transform-origin: bottom;
-  z-index: -2;
-  opacity: 0.5;
-  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.2);
 `;
