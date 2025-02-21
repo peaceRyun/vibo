@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from 'react-router';
+import { HashRouter, Routes, Route } from 'react-router-dom';
 import GlobalStyle from './styled/GlobalStyle';
 import MainHome from './pages/home/main/MainHome';
 // import AboutP from './pages/about/AboutP';
@@ -23,7 +23,7 @@ import About from './pages/about/About';
 const App = () => {
     return (
         <>
-            <BrowserRouter>
+            <HashRouter>
                 <ScrollToTop />
                 <GlobalStyle />
                 <Routes>
@@ -55,7 +55,7 @@ const App = () => {
                         <Route path='/contentlist' element={<ContentList contentType='all' />} />
                     </Route>
                 </Routes>
-            </BrowserRouter>
+            </HashRouter>
         </>
     );
 };
