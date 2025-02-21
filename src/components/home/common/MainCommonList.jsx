@@ -6,7 +6,6 @@ import CommonItem from './CommonItem';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router';
 
-// 각 fetch 함수에 직접 비디오 타입 매핑
 const fetchFunctionToVideoType = {
     getAnimations: 'drama',
     getDarkTheaterReleases: 'horror',
@@ -15,27 +14,29 @@ const fetchFunctionToVideoType = {
 
 const MainCommonList = ({ fetchFunction, stateSelector }) => {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
-    // ✅ Redux에서 데이터 가져올 때 기본값 설정 (undefined 방지)
     const content = stateSelector
         ? useSelector(stateSelector) ?? { title: '', option: '', contentlist: [] }
         : { title: '', option: '', contentlist: [] };
 
     const loading = useSelector((state) => state.filterR.loading);
 
-    // 함수 이름으로 비디오 타입 결정 (단순화)
     const videoType = fetchFunction ? fetchFunctionToVideoType[fetchFunction.name] || 'drama' : 'drama';
 
     useEffect(() => {
         if (fetchFunction && typeof fetchFunction === 'function') {
-            // ✅ 함수인지 확인 후 실행
             dispatch(fetchFunction());
         }
     }, [dispatch, fetchFunction]);
 
-    const navigate = useNavigate();
     const onGo = () => {
-        navigate('/contentlist');
+        navigate(`/contentlist/${videoType}`, {
+            state: {
+                contentData: content,
+                videoType: videoType,
+            },
+        });
     };
 
     return (
@@ -49,12 +50,12 @@ const MainCommonList = ({ fetchFunction, stateSelector }) => {
             </CommonInfo>
 
             <CommonSwiper
-                spaceBetween={30} /* 기본 간격 */
-                slidesPerView={5.5} /* 기본값 (데스크탑) */
+                spaceBetween={30}
+                slidesPerView={5.5}
                 breakpoints={{
                     1024: { slidesPerView: 4.2, spaceBetween: 15 },
-                    600: { slidesPerView: 2.5, spaceBetween: 10 }, // ✅ 모바일에서 2.5개 보이도록 변경
-                    400: { slidesPerView: 1.5, spaceBetween: 5 }, // ✅ 작은 모바일 화면에서 1.5개 보이도록 변경
+                    600: { slidesPerView: 2.5, spaceBetween: 10 },
+                    400: { slidesPerView: 1.5, spaceBetween: 5 },
                 }}
             >
                 {content?.contentlist?.length > 0 ? (
@@ -64,14 +65,12 @@ const MainCommonList = ({ fetchFunction, stateSelector }) => {
                         </SwiperSlide>
                     ))
                 ) : (
-                    <p>콘텐츠를 불러오는 중...</p> // ✅ 데이터가 없을 경우 로딩 메시지 표시
+                    <p>콘텐츠를 불러오는 중...</p>
                 )}
             </CommonSwiper>
         </Section>
     );
 };
-
-export default MainCommonList;
 
 const Section = styled.section`
     display: flex;
@@ -87,6 +86,7 @@ const Section = styled.section`
         padding: 30px 0;
     }
 `;
+
 const VerticalText = styled.div`
     position: absolute;
     left: 100%;
@@ -172,3 +172,5 @@ const CommonSwiper = styled(Swiper)`
         border-radius: 8px;
     }
 `;
+
+export default MainCommonList;
