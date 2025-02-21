@@ -1,3 +1,4 @@
+
 import { HashRouter, Routes, Route } from 'react-router-dom';
 import GlobalStyle from './styled/GlobalStyle';
 import MainHome from './pages/home/main/MainHome';
