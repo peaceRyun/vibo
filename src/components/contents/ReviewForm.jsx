@@ -1,32 +1,8 @@
 import { useState } from 'react';
-import { useSelector } from 'react-redux';
 
-const ReviewForm = ({ addReview, onClose }) => {
-    const { nickname } = useSelector((state) => state.profileR);
-    const [content, setContent] = useState('');
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        if (!content.trim()) return alert('리뷰 내용을 입력해주세요.');
-
-        const newReview = {
-            id: Date.now(),
-            author: nickname || '익명',
-            content,
-            created_at: new Date().toISOString(),
-            author_details: {
-                rating: 5,
-                avatar_path: '/contentdetail/sample/SampleProfile.png',
-            },
-        };
-
-        addReview(newReview);
-        setContent('');
-        onClose();
-    };
-
+const ReviewForm = ({ value, onChange }) => {
     return (
-        <form style={{ padding: '10px 0 0' }} onSubmit={handleSubmit}>
+        <form style={{ padding: '10px 0 0' }} onSubmit={(e) => e.preventDefault()}>
             <textarea
                 style={{
                     width: '100%',
@@ -38,12 +14,10 @@ const ReviewForm = ({ addReview, onClose }) => {
                     color: 'white',
                 }}
                 placeholder="리뷰를 작성해주세요 (50자 이내)"
-                value={content}
-                onChange={(e) => setContent(e.target.value)}
+                value={value}
+                maxLength={50}
+                onChange={onChange} // ✅ 수정: 기존 `e.target.value`를 전달하도록 변경
             ></textarea>
-            <button type="submit" style={{ marginTop: '10px' }}>
-                등록
-            </button>
         </form>
     );
 };
