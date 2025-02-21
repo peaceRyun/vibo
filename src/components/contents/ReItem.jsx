@@ -20,13 +20,19 @@ const ReItem = ({ content, contentType }) => {
             <Flex $justifyCenter='center' $alignItems='center' $position='relative'>
                 <ItemImg src={`https://image.tmdb.org/t/p/w500/${backdrop_path}`} alt={title || name} />
                 <button>
-                    <PlayImg src='/contentdetail/ui/carousel_action_atomic.png' alt='sample1' />
+                    <PlayImg
+                        src='https://raw.githubusercontent.com/peaceRyun/vibostatic/refs/heads/main/public/mockup/contentdetail/ui/carousel_action_atomic.png'
+                        alt='sample1'
+                    />
                 </button>
             </Flex>
             <Flex $flexDirection='column' $padding='15px 20px 6px' $gap='8px'>
                 <Flex $justifyContent='space-between' $alignItems='center'>
                     <Flex $justifyContent='space-between' $alignItems='center' $gap='10px'>
-                        <img src='/contentdetail/contentrate/전체관람가 관람등급 1.png' alt='rateAll' />
+                        <img
+                            src='https://raw.githubusercontent.com/peaceRyun/vibostatic/refs/heads/main/public/mockup/contentdetail/contentrate/전체관람가 관람등급 1.png'
+                            alt='rateAll'
+                        />
                         <Badge $br='4px' $padding='3.5px 5px' fontSize='12px'>
                             HD
                         </Badge>

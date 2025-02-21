@@ -2,7 +2,8 @@ import { useNavigate } from 'react-router';
 import { ContentCard, ContentWrapper, MReitemContainer } from './style';
 
 const MobileReItem = ({ recommendData, loading, contentType }) => {
-    const fallbackImage = '/contentdetail/sample/sample-contentlsit.png';
+    const fallbackImage =
+        'https://raw.githubusercontent.com/peaceRyun/vibostatic/refs/heads/main/public/mockup/contentdetail/sample/sample-contentlsit.png';
     const navigate = useNavigate();
 
     // 이미지 로드 오류 처리 함수

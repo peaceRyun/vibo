@@ -26,25 +26,28 @@ const ReviewList = ({ contentDetail }) => {
 
     return (
         <section>
-            <Flex $flexDirection="column" $position="relative" $gap="20px" $padding="0 0 30px">
-                <Flex $gap="15px" $alignItems="center">
+            <Flex $flexDirection='column' $position='relative' $gap='20px' $padding='0 0 30px'>
+                <Flex $gap='15px' $alignItems='center'>
                     <H3>사용자 평</H3>
-                    <Badge $br="20px" $padding="5px 8px" fontSize="14px">
+                    <Badge $br='20px' $padding='5px 8px' fontSize='14px'>
                         {reviews.length}
                     </Badge>
                 </Flex>
-                <Flex $gap="15px" $alignItems="center">
+                <Flex $gap='15px' $alignItems='center'>
                     <img
-                        src={srcNow || '/contentdetail/sample/SampleProfile.png'}
-                        alt="사용자 프로필"
+                        src={
+                            srcNow ||
+                            'https://raw.githubusercontent.com/peaceRyun/vibostatic/refs/heads/main/public/mockup/contentdetail/sample/SampleProfile.png'
+                        }
+                        alt='사용자 프로필'
                         style={{ width: '40px', height: '40px', borderRadius: '50%' }}
                     />
                     <span style={{ fontSize: '17px' }}>{nickname}</span>
-                    <ButtonBlank review width="173px" height="46px" onClick={handleOpenModal}>
+                    <ButtonBlank review width='173px' height='46px' onClick={handleOpenModal}>
                         리뷰 작성하기
                     </ButtonBlank>
                 </Flex>
-                <FlexUl $flexDirection="column" $gap="50px">
+                <FlexUl $flexDirection='column' $gap='50px'>
                     {reviews.slice(0, visibleItems).map((review) => (
                         <ReviewItem
                             key={review.id}
@@ -60,7 +63,7 @@ const ReviewList = ({ contentDetail }) => {
                     <LoadMoreBtnWrapper>
                         <Line />
                         <LoadMoreBtn onClick={handleLoadMore}>
-                            <img src="/contentdetail/ui/loadMoreBtnIcon.png" alt="더보기아이콘" />
+                            <img src='/contentdetail/ui/loadMoreBtnIcon.png' alt='더보기아이콘' />
                         </LoadMoreBtn>
                     </LoadMoreBtnWrapper>
                 )}

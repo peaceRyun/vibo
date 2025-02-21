@@ -38,12 +38,12 @@ const ContDetail = ({ contentDetail, contentType, onMoreClick }) => {
                     </Flex>
                     <Flex $gap='10px'>
                         <img
-                            src='/contentdetail/contentrate/전체관람가 관람등급 1.png'
+                            src='https://raw.githubusercontent.com/peaceRyun/vibostatic/refs/heads/main/public/mockup/contentdetail/contentrate/전체관람가 관람등급 1.png'
                             alt='rateAll'
                             style={{ width: '24px' }}
                         />
                         <img
-                            src='/contentdetail/contentrate/내용정보-선정성.png'
+                            src='https://raw.githubusercontent.com/peaceRyun/vibostatic/refs/heads/main/public/mockup/contentdetail/contentrate/내용정보-선정성.png'
                             alt='rateAll'
                             style={{ width: '24px' }}
                         />
