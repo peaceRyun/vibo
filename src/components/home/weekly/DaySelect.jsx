@@ -25,7 +25,7 @@ const DaySelect = ({ activeDay, setActiveDay }) => {
                             className={day === activeDay ? 'active' : ''}
                             onClick={() => setActiveDay(day)}
                             disabled={!hasContent && isComplete}
-                            hasContent={hasContent || !isComplete}
+                            $hasContent={hasContent || !isComplete}
                         >
                             {day}
                         </DayItem>
@@ -61,21 +61,21 @@ const DayItem = styled.button`
     width: clamp(50px, 3.5vw, 56px);
     height: clamp(50px, 3.5vw, 56px);
     border-radius: 50%;
-    border: 2px solid ${(props) => (props.hasContent ? '#a8a9ad' : '#555')};
-    background-color: ${(props) => (props.hasContent ? '#333' : '#222')};
-    color: ${(props) => (props.hasContent ? 'white' : '#666')};
+    border: 2px solid ${(props) => (props.$hasContent ? '#a8a9ad' : '#555')};
+    background-color: ${(props) => (props.$hasContent ? '#333' : '#222')};
+    color: ${(props) => (props.$hasContent ? 'white' : '#666')};
     font-size: clamp(1rem, 1vw, 1rem);
     font-weight: bold;
     display: flex;
     align-items: center;
     justify-content: center;
-    cursor: ${(props) => (props.hasContent ? 'pointer' : 'not-allowed')};
+    cursor: ${(props) => (props.$hasContent ? 'pointer' : 'not-allowed')};
     transition: all 0.3s ease-in-out;
-    opacity: ${(props) => (props.hasContent ? 1 : 0.7)};
+    opacity: ${(props) => (props.$hasContent ? 1 : 0.7)};
 
     &:hover {
-        border-color: ${(props) => (props.hasContent ? '#07ffe6' : '#555')};
-        color: ${(props) => (props.hasContent ? '#07ffe6' : '#666')};
+        border-color: ${(props) => (props.$hasContent ? '#07ffe6' : '#555')};
+        color: ${(props) => (props.$hasContent ? '#07ffe6' : '#666')};
     }
 
     &.active {

@@ -5,6 +5,7 @@ import Button from '../../ui/button/Button';
 import { Flex, GradientLayer, H2, PBuiWrap, PBWrap, VideoWrapper } from './style';
 import LiLikeButton from '../../ui/lordicon/LiLikeButton';
 import { getTVDetail, getTVVideos, getMovieDetail, getMovieVideos } from '../../store/modules/getThunk';
+import { contPlayerActions } from '../../store/modules/contPlayerSlice';
 
 const PlayBanner = ({ contentDetail, contentType }) => {
     const navigate = useNavigate();
@@ -30,6 +31,13 @@ const PlayBanner = ({ contentDetail, contentType }) => {
     }, [dispatch, id, isSeries]);
 
     const handlePlayClick = () => {
+        // Set the current videoId to the ContentPlayer
+        dispatch(contPlayerActions.setVideoId(videoId));
+
+        // Set the player to start playing when navigated
+        dispatch(contPlayerActions.setPlaying(true));
+
+        // Navigate to the player page
         navigate('/player');
     };
 

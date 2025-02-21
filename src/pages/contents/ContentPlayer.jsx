@@ -18,7 +18,6 @@ import { contPlayerActions } from '../../store/modules/contPlayerSlice';
 import { FaPause, FaVolumeHigh, FaVolumeXmark } from 'react-icons/fa6';
 import { IoPlayOutline } from 'react-icons/io5';
 import { FiMaximize, FiMinimize } from 'react-icons/fi';
-import { getMovieVideos } from '../../store/modules/getThunk';
 
 const ContentPlayer = () => {
     const dispatch = useDispatch();
@@ -33,10 +32,37 @@ const ContentPlayer = () => {
     const iframeRef = useRef(null);
     const [isDragging, setIsDragging] = useState(false);
 
+    // 컴포넌트 마운트 시 isPlaying 상태를 true로 설정
     useEffect(() => {
-        const movieId = '693134';
-        dispatch(getMovieVideos(movieId));
+        dispatch(contPlayerActions.setPlaying(true));
     }, [dispatch]);
+
+    // 자동 재생 설정
+    useEffect(() => {
+        const autoPlayVideo = () => {
+            if (iframeRef.current) {
+                iframeRef.current.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
+            }
+        };
+
+        // iframe이 로드된 후 실행
+        const iframe = iframeRef.current;
+        if (iframe) {
+            iframe.addEventListener('load', autoPlayVideo);
+            return () => iframe.removeEventListener('load', autoPlayVideo);
+        }
+    }, []);
+
+    useEffect(() => {
+        // 상태 변경 시 재생 상태 적용
+        if (iframeRef.current) {
+            if (isPlaying) {
+                iframeRef.current.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
+            } else {
+                iframeRef.current.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
+            }
+        }
+    }, [isPlaying]);
 
     useEffect(() => {
         let progressInterval;
@@ -197,10 +223,13 @@ const ContentPlayer = () => {
                     <IframeContainer>
                         <VideoIframe
                             ref={iframeRef}
-                            src={`https://www.youtube.com/embed/${videoId}?enablejsapi=1&controls=0&disablekb=1&fs=0&modestbranding=1&rel=0&showinfo=0&iv_load_policy=3&origin=${window.location.origin}&playerapiid=ytplayer`}
+                            src={`https://www.youtube.com/embed/${videoId}?enablejsapi=1&controls=0&disablekb=1&fs=0&modestbranding=1&rel=0&showinfo=0&iv_load_policy=3&origin=${window.location.origin}&playerapiid=ytplayer&autoplay=1&mute=0&loop=0&playlist=${videoId}`}
                             title='YouTube video player'
                             allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
                             allowFullScreen
+                            style={{
+                                pointerEvents: 'none', // 유튜브 UI와의 상호작용 차단
+                            }}
                         />
                     </IframeContainer>
                 )}

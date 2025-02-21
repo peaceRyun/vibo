@@ -29,7 +29,7 @@ const genreIdToName = {
     37: { en: 'WESTERN', ko: '서부' },
 };
 
-const ContentList = ({ contentType = 'all' }) => {
+const MainContentList = ({ contentType = 'all' }) => {
     const dispatch = useDispatch();
     const { genreId } = useParams();
 
@@ -169,4 +169,4 @@ const ContentList = ({ contentType = 'all' }) => {
     );
 };
 
-export default ContentList;
+export default MainContentList;
