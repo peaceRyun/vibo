@@ -14,9 +14,11 @@ import searchR from './modules/searchSlice';
 import filterR from './modules/filterSlice';
 import popularR from './modules/popularSlice';
 import genreR from './modules/genreSlice';
+import reviewR from './modules/reviewSlice';
 
 export const store = configureStore({
     reducer: {
+        reviewR,
         // aboutR,
         weeklyR,
         memberR,
