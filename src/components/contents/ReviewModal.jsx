@@ -13,7 +13,6 @@ const ReviewModal = ({ isOpen, onClose, contentDetail }) => {
 
     const [reviewText, setReviewText] = useState('');
 
-    // ✅ 모달이 닫힐 때 상태 초기화
     useEffect(() => {
         if (!isOpen) {
             setReviewText('');
@@ -21,11 +20,14 @@ const ReviewModal = ({ isOpen, onClose, contentDetail }) => {
     }, [isOpen]);
 
     const handleContentClick = (e) => {
-        e.stopPropagation(); // 이벤트 전파 중단
+        e.stopPropagation();
     };
 
     const handleReviewSubmit = () => {
-        if (!reviewText.trim()) return alert('리뷰를 입력해주세요.');
+        if (!reviewText.trim()) {
+            alert('리뷰를 입력해주세요.');
+            return;
+        }
 
         const newReview = {
             id: Date.now(),
@@ -43,8 +45,7 @@ const ReviewModal = ({ isOpen, onClose, contentDetail }) => {
         onClose();
     };
 
-    // ✅ `null` 반환 대신 빈 JSX 반환
-    if (!isOpen) return <></>;
+    if (!isOpen) return null;
 
     return (
         <ModalOverlay onClick={onClose}>
@@ -66,6 +67,7 @@ const ReviewModal = ({ isOpen, onClose, contentDetail }) => {
                         <span style={{ fontSize: '17px' }}>{nickname}</span>
                     </Flex>
 
+                    {/* ✅ 수정: 이벤트 객체에서 value만 전달하도록 변경 */}
                     <ReviewForm value={reviewText} onChange={(e) => setReviewText(e.target.value)} />
 
                     <Flex $justifyContent="center" $alignItems="center" $position="relative" $gap="60px">
