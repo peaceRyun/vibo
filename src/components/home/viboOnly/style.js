@@ -12,7 +12,7 @@ export const ViboContainer = styled.div`
 
 export const ViboAllContainer = styled.div`
   display: flex;
-  align-items: center;
+  align-items: left;
   flex-direction: column;
   /* padding: 60px 50px 60px 50px; */
   @media (max-width: 1024px) {
@@ -107,7 +107,7 @@ export const MobileCard = styled.div`
   }
   @media (max-width: 1024px) {
     width: 100%;
-    /* max-height: 100%; */
+    max-height: 100%;
   }
 `;
 
@@ -119,7 +119,7 @@ export const CardContainer = styled.div`
 
   @media (max-width: 1024px) {
     width: 100%;
-    max-height: 100%;
+    /* max-height: 100%; */
   }
 `;
 

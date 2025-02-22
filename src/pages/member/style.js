@@ -103,7 +103,7 @@ export const PlanWrapper = styled.div`
         right: 0;
         width: 0.0625rem;
         height: 90%;
-        background: gray;
+        // background: gray;
     }
 `;
 
