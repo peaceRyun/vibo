@@ -59,7 +59,7 @@ const Header = () => {
     const hideNavPages = ['/profilesforedit', '/profileinfoedit', '/profileselect', '/profileforedit'];
     const isNavHidden = hideNavPages.includes(location.pathname);
 
-    const isAboutPage = ['/about', '/register', '/login'].includes(location.pathname);
+    const isAboutPage = ['/', '/register', '/login'].includes(location.pathname);
 
     const toggleSearchDropdown = () => setSearchOpen((prev) => !prev);
     const toggleProfileDropdown = () => setProfileOpen((prev) => !prev);
