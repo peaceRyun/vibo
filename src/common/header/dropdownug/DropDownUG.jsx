@@ -13,10 +13,13 @@ import {
     LoadingText,
     ActionText,
     Flex,
+    SearchInputWrapper,
+    ClearButton,
 } from './style';
 import NoSearchResults from './NoSearchResults';
 import { RiExternalLinkLine } from 'react-icons/ri';
 import { FaTrashAlt } from 'react-icons/fa';
+import { IoClose } from 'react-icons/io5';
 
 const Dropdown = ({ onClose }) => {
     const navigate = useNavigate();
@@ -32,6 +35,12 @@ const Dropdown = ({ onClose }) => {
         dispatch(fetchPopularContentThunk());
         dispatch(fetchGenresThunk());
     }, [dispatch]);
+
+    // 검색어 초기화 함수 추가
+    const handleClearSearch = () => {
+        setSearchTerm('');
+        dispatch(searchActions.setQuery(''));
+    };
 
     // 검색 결과 카테고리별 분류
     const categorizedResults = {
@@ -174,7 +183,14 @@ const Dropdown = ({ onClose }) => {
 
     return (
         <DropdownContainer>
-            <SearchInput type='text' placeholder='제목, 인물 검색' value={searchTerm} onChange={handleSearch} />
+            <SearchInputWrapper>
+                <SearchInput type='text' placeholder='제목, 인물 검색' value={searchTerm} onChange={handleSearch} />
+                {searchTerm && (
+                    <ClearButton onClick={handleClearSearch}>
+                        <IoClose size={20} />
+                    </ClearButton>
+                )}
+            </SearchInputWrapper>
 
             {!searchTerm ? (
                 <div className='content-wrapper'>

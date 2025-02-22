@@ -1,4 +1,27 @@
 import styled from 'styled-components';
+
+export const SearchInputWrapper = styled.div`
+    position: relative;
+    width: 100%;
+`;
+
+export const ClearButton = styled.button`
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    color: var(--gray-100);
+
+    &:hover {
+        color: var(--gray-200);
+    }
+`;
 // 기존 스타일 컴포넌트들...
 export const ActionText = styled.span`
     font-size: 0.875rem;
