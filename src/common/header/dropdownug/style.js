@@ -198,3 +198,68 @@ export const LoadingText = styled.div`
     color: #ffffff;
     font-size: 1rem;
 `;
+
+export const Container = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 4rem 1rem;
+    background-color: #121212;
+    color: #ffffff;
+`;
+
+export const Title = styled.h3`
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: #ffffff;
+    margin-bottom: 0.5rem;
+
+    span {
+        color: #9ca3af;
+    }
+`;
+
+export const Description = styled.p`
+    color: #9ca3af;
+    text-align: center;
+    max-width: 28rem;
+`;
+
+export const TipsContainer = styled.div`
+    margin-top: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    text-align: center;
+`;
+
+export const TipsTitle = styled.p`
+    font-size: 0.875rem;
+    color: #6b7280;
+`;
+
+export const TipsList = styled.ul`
+    font-size: 0.875rem;
+    color: #9ca3af;
+    list-style-type: disc;
+    /* padding-left: 1.25rem; */
+
+    li {
+        margin-bottom: 0.25rem;
+    }
+`;
+
+export const Flex = styled.div`
+    display: flex;
+    flex-direction: ${(props) => props.$flexDirection};
+    align-items: ${(props) => props.$alignItems};
+    justify-content: ${(props) => props.$justifyContent};
+    gap: ${(props) => props.$gap};
+    padding: ${(props) => (props.$padding ? props.$padding : '')};
+    position: ${(props) => props.$position};
+    width: ${(props) => props.$width || 'auto'};
+    border-top: ${(props) => props.$borderTop};
+    white-space: ${(props) => props.$whiteSpace};
+    font-size: ${(props) => props.$fontSize};
+`;
