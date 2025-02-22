@@ -152,7 +152,7 @@ export const FlexUl = styled.ul`
 
 export const Badge = styled.div`
     border-radius: ${(props) => props.$br};
-    border: 1px solid var(--primary-base);
+    border: ${(props) => (props.$border ? props.$border : '1px solid var(--primary-base)')};
     color: var(--primary-base);
     background-color: var(--gray-900);
     padding: ${(props) => props.$padding};

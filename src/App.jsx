@@ -1,4 +1,3 @@
-
 import { HashRouter, Routes, Route } from 'react-router-dom';
 import GlobalStyle from './styled/GlobalStyle';
 import MainHome from './pages/home/main/MainHome';
@@ -32,12 +31,13 @@ const App = () => {
                         <Route index element={<ContentPlayer />} />
                     </Route>
                     <Route path='/' element={<Layout />}>
-                        <Route index element={<MainHome />} />
+                        <Route index element={<About />} />
+                        <Route path='/mainhome' element={<MainHome />} />
                         <Route path='/membership' element={<Membership />} />
                         <Route path='/moviehome' element={<MovieHome />} />
                         <Route path='/serieshome' element={<SeriesHome />} />
                         <Route path='/livehome' element={<LiveHome />} />
-                        <Route path='/about' element={<About />} />
+
                         <Route path='/profileedit' element={<ProfileEdit />} />
                         <Route path='/profileselect' element={<ProfilesSelect />} />
                         <Route path='/profileforedit' element={<ProfileForEdit />} />
@@ -62,22 +62,3 @@ const App = () => {
 };
 
 export default App;
-{
-    /* 
-    첫번째 방법
-    <Route path='/경로, 상대, 절대' element={컴포넌트} />
-
-    두번째 방법
-    <Route path='/경로, 상대, 절대' element={컴포넌트} ></Route> 
-    
-    세번째 방법
-    <Route>
-        <Route/>
-        <Route/>
-    </Route>
-
-    <Route path='/profile' element={<Profile />} />
-    <Route path='/profile/:name' element={<Project />} />
-    <Route path='/profile/:사용자정의동적변수' element={<Project />} />
-    */
-}

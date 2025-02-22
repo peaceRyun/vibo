@@ -1,4 +1,5 @@
 import { BadgeBlank } from '../../pages/contents/style';
+import StarRating from './StarRating';
 import { Flex, FlexUl } from './style';
 
 const ContDetail = ({ contentDetail, contentType, onMoreClick }) => {
@@ -29,14 +30,14 @@ const ContDetail = ({ contentDetail, contentType, onMoreClick }) => {
 
     return (
         <section>
-            <Flex $gap='15px' $padding='30px 0 30px' $justifyContent='space-between'>
+            <Flex $gap='15px' $padding='30px 0 30px' $justifyContent='space-between' $width='80%'>
                 <Flex $flexDirection='column' $gap='15px'>
                     <Flex $gap='15px' $alignItems='center'>
                         <span>{year}년</span>
                         {contentType === 'series' && <span>에피소드 {episodeCount}화</span>}
                         <BadgeBlank>FHD</BadgeBlank>
                     </Flex>
-                    <Flex $gap='10px'>
+                    <Flex $gap='10px' $alignItems='center'>
                         <img
                             src='https://raw.githubusercontent.com/peaceRyun/vibostatic/refs/heads/main/public/mockup/contentdetail/contentrate/전체관람가 관람등급 1.png'
                             alt='rateAll'
@@ -47,11 +48,11 @@ const ContDetail = ({ contentDetail, contentType, onMoreClick }) => {
                             alt='rateAll'
                             style={{ width: '24px' }}
                         />
-                        <BadgeBlank> 평점 {rating} / 10 </BadgeBlank>
+                        <StarRating rating={rating} />
                     </Flex>
                     <p>{contentDetail.overview || '줄거리 정보가 없습니다.'}</p>
                 </Flex>
-                <FlexUl $flexDirection='column' $gap='15px'>
+                {/* <FlexUl $flexDirection='column' $gap='15px'>
                     <li>
                         <Flex $gap='8px' $whiteSpace='nowrap' $fontSize='16px'>
                             <strong style={{ color: 'var(--gray-600)' }}>출연: </strong>
@@ -79,7 +80,7 @@ const ContDetail = ({ contentDetail, contentType, onMoreClick }) => {
                             </span>
                         </Flex>
                     </li>
-                </FlexUl>
+                </FlexUl> */}
             </Flex>
         </section>
     );

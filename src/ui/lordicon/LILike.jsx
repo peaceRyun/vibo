@@ -18,6 +18,7 @@ const StyledLordIcon = styled('lord-icon')`
 const LiLike = ({
     src = 'https://cdn.lordicon.com/ulnswmkk.json',
     colors = 'primary:#e8308c',
+    stroke = 'light',
     isLiked,
     onClick,
     width,
@@ -64,6 +65,7 @@ const LiLike = ({
             <StyledLordIcon
                 src={src}
                 colors={colors}
+                stroke={stroke}
                 trigger={isLiked ? 'in' : trigger}
                 state={isLiked ? 'in-heart' : 'morph-heart'}
                 onClick={handleClick}

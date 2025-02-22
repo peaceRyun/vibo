@@ -1,4 +1,27 @@
 import styled from 'styled-components';
+
+export const SearchInputWrapper = styled.div`
+    position: relative;
+    width: 100%;
+`;
+
+export const ClearButton = styled.button`
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    color: var(--gray-100);
+
+    &:hover {
+        color: var(--gray-200);
+    }
+`;
 // 기존 스타일 컴포넌트들...
 export const ActionText = styled.span`
     font-size: 0.875rem;
@@ -6,7 +29,7 @@ export const ActionText = styled.span`
     color: #7e7e7e;
     cursor: pointer;
     transition: color 0.3s ease;
-
+    line-height: 100%;
     &:hover {
         color: #1ee0b6;
     }
@@ -29,7 +52,7 @@ export const SearchInput = styled.input`
 
 export const DropdownContainer = styled.div`
     position: absolute;
-    top: 5rem;
+    top: 6.25rem;
     left: 50%;
     transform: translateX(-50%);
     width: 100%;
@@ -69,6 +92,7 @@ export const DropdownContainer = styled.div`
                     line-height: 1.5rem;
                     color: #939598;
                     margin-bottom: 0.5rem;
+                    font-weight: 100;
                 }
 
                 .rank-number {
@@ -80,7 +104,8 @@ export const DropdownContainer = styled.div`
             small {
                 display: block;
                 margin-top: 1rem;
-                font-size: 0.938rem;
+                font-size: 0.8rem;
+                font-weight: 100;
                 color: #ccc;
             }
         }
@@ -197,4 +222,69 @@ export const LoadingText = styled.div`
     padding: 2rem;
     color: #ffffff;
     font-size: 1rem;
+`;
+
+export const Container = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 4rem 1rem;
+    background-color: #121212;
+    color: #ffffff;
+`;
+
+export const Title = styled.h3`
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: #ffffff;
+    margin-bottom: 0.5rem;
+
+    span {
+        color: #9ca3af;
+    }
+`;
+
+export const Description = styled.p`
+    color: #9ca3af;
+    text-align: center;
+    max-width: 28rem;
+`;
+
+export const TipsContainer = styled.div`
+    margin-top: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    text-align: center;
+`;
+
+export const TipsTitle = styled.p`
+    font-size: 0.875rem;
+    color: #6b7280;
+`;
+
+export const TipsList = styled.ul`
+    font-size: 0.875rem;
+    color: #9ca3af;
+    list-style-type: disc;
+    /* padding-left: 1.25rem; */
+
+    li {
+        margin-bottom: 0.25rem;
+    }
+`;
+
+export const Flex = styled.div`
+    display: flex;
+    flex-direction: ${(props) => props.$flexDirection};
+    align-items: ${(props) => props.$alignItems};
+    justify-content: ${(props) => props.$justifyContent};
+    gap: ${(props) => props.$gap};
+    padding: ${(props) => (props.$padding ? props.$padding : '')};
+    position: ${(props) => props.$position};
+    width: ${(props) => props.$width || 'auto'};
+    border-top: ${(props) => props.$borderTop};
+    white-space: ${(props) => props.$whiteSpace};
+    font-size: ${(props) => props.$fontSize};
 `;
