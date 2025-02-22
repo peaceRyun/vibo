@@ -12,8 +12,11 @@ import {
     ResultItem,
     LoadingText,
     ActionText,
+    Flex,
 } from './style';
 import NoSearchResults from './NoSearchResults';
+import { RiExternalLinkLine } from 'react-icons/ri';
+import { FaTrashAlt } from 'react-icons/fa';
 
 const Dropdown = ({ onClose }) => {
     const navigate = useNavigate();
@@ -92,15 +95,27 @@ const Dropdown = ({ onClose }) => {
     const renderRightSection = () => (
         <div className='right-section'>
             <div className='section'>
-                <h3>
-                    최근 검색어 <ActionText>모두 지우기</ActionText>
-                </h3>
+                <Flex $alignItems='center' $justifyContent='space-between'>
+                    <h3>최근 검색어</h3>
+                    <h3>
+                        <Flex $alignItems='center' $gap='5px'>
+                            <FaTrashAlt color='var(--gray-100)' size='15' />
+                            <ActionText>모두 지우기</ActionText>
+                        </Flex>
+                    </h3>
+                </Flex>
                 <p>최근 검색한 내역이 없습니다.</p>
             </div>
             <div className='section'>
-                <h3>
-                    장르 바로가기 <ActionText>더보기</ActionText>
-                </h3>
+                <Flex $alignItems='center' $justifyContent='space-between'>
+                    <h3>장르 바로가기</h3>
+                    <h3>
+                        <Flex $alignItems='center' $gap='5px'>
+                            <RiExternalLinkLine color='var(--gray-100)' />
+                            <ActionText>더보기</ActionText>
+                        </Flex>
+                    </h3>
+                </Flex>
                 <div className='keywords'>
                     {genres.map((item) => (
                         <span key={item.id}># {item.name}</span>

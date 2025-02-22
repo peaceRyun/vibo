@@ -6,7 +6,7 @@ export const ActionText = styled.span`
     color: #7e7e7e;
     cursor: pointer;
     transition: color 0.3s ease;
-
+    line-height: 100%;
     &:hover {
         color: #1ee0b6;
     }
@@ -29,7 +29,7 @@ export const SearchInput = styled.input`
 
 export const DropdownContainer = styled.div`
     position: absolute;
-    top: 5rem;
+    top: 6.25rem;
     left: 50%;
     transform: translateX(-50%);
     width: 100%;
@@ -69,6 +69,7 @@ export const DropdownContainer = styled.div`
                     line-height: 1.5rem;
                     color: #939598;
                     margin-bottom: 0.5rem;
+                    font-weight: 100;
                 }
 
                 .rank-number {
@@ -80,7 +81,8 @@ export const DropdownContainer = styled.div`
             small {
                 display: block;
                 margin-top: 1rem;
-                font-size: 0.938rem;
+                font-size: 0.8rem;
+                font-weight: 100;
                 color: #ccc;
             }
         }
