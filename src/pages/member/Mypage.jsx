@@ -228,6 +228,7 @@ const TabMenu = styled.div`
     gap: 60px;
     margin-top: 90px;
     border-bottom: 4px solid #444;
+    position: relative; 
 `;
 
 const TabItem = styled.div`
@@ -241,9 +242,9 @@ const TabItem = styled.div`
     &::after {
         content: '';
         position: absolute;
-        bottom: 0;
+        bottom: -4px; 
         left: 0;
-        width: ${(props) => (props.active ? '100%' : '0')};
+        width: ${(props) => (props.$active ? '100%' : '0')}; 
         height: 3px;
         background-color: #68f5eb;
         transition: width 0.3s ease;
