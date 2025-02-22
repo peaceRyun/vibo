@@ -29,7 +29,7 @@ export const ContentCard = styled.div`
 export const CategoryFilter = styled.div`
   display: flex;
   gap: 15px;
-  margin: 20px 0;
+  margin: 50px 0;
   /* margin-bottom: 20px; */
   justify-content: left;
 `;

@@ -3,7 +3,7 @@ import { Container } from '../../common/style';
 import ProfileEdit from './ProfileEdit';
 import ProfileSwitch from './ProfileSwitch';
 import ProfileInfoEdit from './ProfileInfoEdit';
-
+import { FaPen } from 'react-icons/fa';
 const Mypage = () => {
     const [activeTab, setActiveTab] = useState('시청내역');
     const { nickname, srcNow } = useSelector((state) => state.profileR);
@@ -45,9 +45,9 @@ const Mypage = () => {
                         <UserInfo>
                             <UserName>
                                 <strong>{nickname}</strong>
-                                <p>님</p> <Link to='/profileforedit'>✏️</Link>
+                                <p>님</p> <Link to='/profileforedit'><FaPen size='21px' color='white' /></Link>
                             </UserName>
-                            <button onClick={onGo}>프로필 전환</button>
+                            <button onClick={onGo}>계정 전환</button>
                         </UserInfo>
                     </ProfileHeader>
                     <PassContainer>
@@ -147,14 +147,18 @@ export const UserName = styled.h2`
         font-size: 48px;
     }
     p {
-        font-size: 32px;
+        font-size: 28px;
+        margin-top:14px;
     }
+        a {
+         margin-top:20px;
+        }
 `;
 
 export const PassContainer = styled.div`
     display: flex;
     justify-content: flex-start;
-    gap: 40px;
+    gap: 30px;
 `;
 
 export const PassCard = styled.div`
@@ -211,7 +215,7 @@ export const PassCard2 = styled.div`
     padding: 25px 20px;
     border-radius: 8px;
     margin-bottom: 20px;
-    width: 51.5625rem;
+    width: 51.09rem;
     height: 6.875rem;
     text-align: left;
     strong {
@@ -222,10 +226,9 @@ export const PassCard2 = styled.div`
 const TabMenu = styled.div`
     display: flex;
     gap: 60px;
-    gap: 60px;
     margin-top: 90px;
-    border-bottom: 2px solid #444;
-    padding-bottom: 10px;
+    border-bottom: 4px solid #444;
+    position: relative; 
 `;
 
 const TabItem = styled.div`
@@ -235,14 +238,13 @@ const TabItem = styled.div`
     padding-bottom: 5px;
     color: ${(props) => (props.$active ? '#68F5EB' : 'white')};
     position: relative;
-    margin-bottom: 20px;
 
     &::after {
         content: '';
         position: absolute;
-        bottom: 0;
+        bottom: -4px; 
         left: 0;
-        width: ${(props) => (props.active ? '100%' : '0')};
+        width: ${(props) => (props.$active ? '100%' : '0')}; 
         height: 3px;
         background-color: #68f5eb;
         transition: width 0.3s ease;
