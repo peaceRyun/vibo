@@ -133,6 +133,12 @@ export const ButtonLight = styled.button`
 
 export const NickNameInput = styled.input`
     background-color: var(--gray-500);
+    &:hover {
+        background-color: var(--gray-100);
+    }
+    &:focus {
+        background-color: var(--gray-100);
+    }
     border: none;
     border-radius: 5px;
     outline: none;

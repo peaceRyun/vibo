@@ -79,17 +79,6 @@ const ProfileForEdit = () => {
                         </Flex>
 
                         <Flex $gap='15px'>
-                            <ButtonLight
-                                type='submit'
-                                $padding='1.675rem'
-                                $border='1px solid var(--gray-500)'
-                                $borderRadius='5px'
-                                $color='var(--black)'
-                                $width='15.5rem'
-                                $backgroundColor='var(--gray-300)'
-                            >
-                                확인
-                            </ButtonLight>
                             <ButtonDark
                                 type='button'
                                 onClick={onGo}
@@ -101,6 +90,17 @@ const ProfileForEdit = () => {
                             >
                                 취소
                             </ButtonDark>
+                            <ButtonLight
+                                type='submit'
+                                $padding='1.675rem'
+                                $border='1px solid var(--gray-500)'
+                                $borderRadius='5px'
+                                $color='var(--black)'
+                                $width='15.5rem'
+                                $backgroundColor='var(--gray-300)'
+                            >
+                                확인
+                            </ButtonLight>
                         </Flex>
                     </Flex>
                 </EditForm>
