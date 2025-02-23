@@ -199,6 +199,7 @@ export const H2 = styled.h2`
 export const H3 = styled.h3`
     font-size: ${(props) => (props.fontSize ? props.fontSize : '28px')};
     font-weight: ${(props) => (props.fontWeight ? props.fontWeight : '800')};
+    align-self: ${(props) => props.$alignSelf};
 `;
 
 export const H4 = styled.h4`
@@ -220,7 +221,8 @@ export const P = styled.p`
     -webkit-box-orient: vertical;
     -webkit-line-clamp: ${(props) => props.$lineClamp}; /* 원하는 줄 수 */
     overflow: hidden;
-
+    align-self: ${(props) => props.$alignSelf};
+    color: ${(props) => props.$color};
     @media (max-width: 590px) {
         padding: 10px 0;
     }
