@@ -14,7 +14,7 @@ const ProfileDropdown = ({ onClose }) => {
 
     const handleLogout = () => {
         dispatch(thunkUsers.logout()).then(() => {
-            navigate('/about');
+            navigate('/');
         });
     };
 
@@ -44,25 +44,25 @@ const ProfileDropdown = ({ onClose }) => {
 
             {/* 메뉴 항목 */}
             <ul>
-                <Link to="/mypage" onClick={onClose}>
+                <Link to='/mypage' onClick={onClose}>
                     <DropdownItem>
                         <AiOutlineEdit size={30} />
                         마이페이지
                     </DropdownItem>
                 </Link>
-                <Link to="/profilesforedit" onClick={onClose}>
+                <Link to='/profilesforedit' onClick={onClose}>
                     <DropdownItem>
                         <AiOutlineEdit size={30} />
                         프로필관리
                     </DropdownItem>
                 </Link>
-                <Link to="/profileinfoedit" onClick={onClose}>
+                <Link to='/profileinfoedit' onClick={onClose}>
                     <DropdownItem>
                         <AiOutlineEdit size={30} />
                         회원정보수정
                     </DropdownItem>
                 </Link>
-                <DropdownItem className="noHover">
+                <DropdownItem className='noHover'>
                     <BorderLine />
                 </DropdownItem>
 
