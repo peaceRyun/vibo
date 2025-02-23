@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const BannerWrapper = styled.div`
   width: 100%;
-  height: 28.6875rem;
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
