@@ -83,7 +83,11 @@ const ReviewModal = ({ isOpen, onClose, contentDetail }) => {
                         />
                         <Flex $flexDirection='column' $gap='10px'>
                             <P $fontSize='20px' $padding='0' $fontWeight='600'>
-                                {contentDetail?.title || '제목 없음'}
+                                {contentDetail?.name ||
+                                    contentDetail?.original_name ||
+                                    contentDetail?.title ||
+                                    contentDetail?.original_title ||
+                                    '제목 없음'}
                             </P>
                             <Flex $gap='5px'>
                                 {[1, 2, 3, 4, 5].map((star) => (
