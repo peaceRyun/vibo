@@ -4,7 +4,6 @@ const SeasonDropdown = ({ isOpen, onToggle, selectedSeason, onSelect, options = 
     const hasSelection = selectedSeason !== '';
 
     const handleSeasonSelect = (season) => {
-        // 시즌 선택 시 EpList로 스크롤
         const epListElement = document.getElementById('episode-list');
         if (epListElement) {
             epListElement.scrollIntoView({ behavior: 'smooth' });
@@ -39,7 +38,7 @@ const SeasonDropdown = ({ isOpen, onToggle, selectedSeason, onSelect, options = 
             </SDropdownButton>
 
             {isOpen && options.length > 0 && (
-                <SDropdownContent>
+                <SDropdownContent className='custom-scrollbar' $maxHeight={options.length > 5 ? '250px' : 'auto'}>
                     {options.map((season) => (
                         <SDropdownItem key={season.id || season.name} onClick={() => handleSeasonSelect(season.name)}>
                             {season.name}

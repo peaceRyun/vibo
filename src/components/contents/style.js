@@ -797,3 +797,22 @@ export const DescriptionText = styled.div`
     color: #ddd;
     margin-bottom: 10px;
 `;
+
+export const LoadMoreButton = styled.button`
+    width: 100%;
+    padding: 15px;
+    background-color: transparent;
+    border: none;
+    color: var(--secondary-300);
+    font-size: 15px;
+    cursor: pointer;
+    transition: color 0.2s ease;
+
+    &:hover {
+        color: var(--white);
+    }
+
+    &:focus {
+        outline: none;
+    }
+`;
