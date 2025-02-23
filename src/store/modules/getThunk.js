@@ -456,6 +456,8 @@ export const getAiringToday = createAsyncThunk('content/getAiringToday', async (
                 ...show,
                 airDate: show.next_air_date,
                 dayOfWeek: koreanDay,
+                // 고유한 key 추가
+                uniqueKey: `${show.id}_${koreanDay}_${show.next_air_date}`,
             });
 
             return acc;
