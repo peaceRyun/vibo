@@ -17,7 +17,10 @@ const ReviewModal = ({ isOpen, onClose, contentDetail }) => {
     const [rating, setRating] = useState(5);
 
     useEffect(() => {
-        if (!isOpen) {
+        if (isOpen) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = 'unset';
             setReviewText('');
         }
     }, [isOpen]);
