@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Swiper } from 'swiper/react';
 
 export const ModalContainer = styled.div`
     position: absolute;
@@ -150,6 +151,7 @@ export const ModalBackdrop = styled.div`
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
     z-index: 1;
 `;
 
@@ -159,7 +161,7 @@ export const HeaderContainer = styled.div`
     left: 0;
     right: 0;
     background-color: black;
-    padding: 75px 75px 0px 75px;
+    padding: 75px 75px 40px 75px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -176,4 +178,15 @@ export const CloseButton = styled.div`
 
 export const ModalCotent = styled.div`
     padding-top: 5rem;
+`;
+
+export const StyledSwiper = styled(Swiper)`
+    .swiper-button-next,
+    .swiper-button-prev {
+        color: var(--primary-base); // 원하는 색상으로 변경
+
+        &:hover {
+            color: var(--primary-600); // hover 시 색상
+        }
+    }
 `;

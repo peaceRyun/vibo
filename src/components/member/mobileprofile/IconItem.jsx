@@ -7,6 +7,11 @@ const IconItem = ({ item = { src: '', name: '' }, handleIcon, handleModalOpen })
     return (
         <>
             <button
+                style={{
+                    width: '100%',
+                    height: '100%',
+                    padding: 0, // 버튼의 기본 패딩 제거
+                }}
                 onClick={(e) => {
                     handleIcon(item);
                     handleModalOpen(e);
