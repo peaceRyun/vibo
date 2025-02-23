@@ -91,18 +91,29 @@ export const getMovie = createAsyncThunk('movie/getMovie', async (_, thunkAPI) =
 //영화 - 상세정보 가져오기 thunk
 export const getMovieDetail = createAsyncThunk('movieDetail/getMovieDetail', async (movieId, { rejectWithValue }) => {
     try {
-        const response = await axios.get(`https://api.themoviedb.org/3/movie/${movieId}`, {
-            params: {
-                language: 'ko-KR',
-            },
-            headers: {
-                accept: 'application/json',
-                Authorization:
-                    'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJkZGY2NTIxYzQzYzJlMDNmNTlkMjc2N2YxMDlhYWFhNCIsIm5iZiI6MTczNzUxMDE4NS4yNjIsInN1YiI6IjY3OTA0ZDI5MmQ2MWMzM2U2M2RmZTVlNiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ._QJjWVEDYEcIfVZtQRYG0JSRb22Dit3HopPsNm8AILE',
-            },
-        });
+        const [detailResponse, creditResponse] = await Promise.all([
+            axios.get(`https://api.themoviedb.org/3/movie/${movieId}`, {
+                params: { language: 'ko-KR' },
+                headers: {
+                    accept: 'application/json',
+                    Authorization:
+                        'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJkZGY2NTIxYzQzYzJlMDNmNTlkMjc2N2YxMDlhYWFhNCIsIm5iZiI6MTczNzUxMDE4NS4yNjIsInN1YiI6IjY3OTA0ZDI5MmQ2MWMzM2U2M2RmZTVlNiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ._QJjWVEDYEcIfVZtQRYG0JSRb22Dit3HopPsNm8AILE',
+                },
+            }),
+            axios.get(`https://api.themoviedb.org/3/movie/${movieId}/credits`, {
+                params: { language: 'ko-KR' },
+                headers: {
+                    accept: 'application/json',
+                    Authorization:
+                        'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJkZGY2NTIxYzQzYzJlMDNmNTlkMjc2N2YxMDlhYWFhNCIsIm5iZiI6MTczNzUxMDE4NS4yNjIsInN1YiI6IjY3OTA0ZDI5MmQ2MWMzM2U2M2RmZTVlNiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ._QJjWVEDYEcIfVZtQRYG0JSRb22Dit3HopPsNm8AILE',
+                },
+            }),
+        ]);
 
-        return response.data;
+        return {
+            ...detailResponse.data,
+            credits: creditResponse.data,
+        };
     } catch (error) {
         return rejectWithValue(error.message);
     }
@@ -272,18 +283,29 @@ export const getTVseries = createAsyncThunk('TVseries/getTVseries', async (_, th
 //TV 시리즈 - 상세정보 가져오기 thunk
 export const getTVDetail = createAsyncThunk('TVDetail/getTVDetail', async (tvId, { rejectWithValue }) => {
     try {
-        const response = await axios.get(`https://api.themoviedb.org/3/tv/${tvId}`, {
-            params: {
-                language: 'ko-KR',
-            },
-            headers: {
-                accept: 'application/json',
-                Authorization:
-                    'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJkZGY2NTIxYzQzYzJlMDNmNTlkMjc2N2YxMDlhYWFhNCIsIm5iZiI6MTczNzUxMDE4NS4yNjIsInN1YiI6IjY3OTA0ZDI5MmQ2MWMzM2U2M2RmZTVlNiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ._QJjWVEDYEcIfVZtQRYG0JSRb22Dit3HopPsNm8AILE',
-            },
-        });
+        const [detailResponse, creditResponse] = await Promise.all([
+            axios.get(`https://api.themoviedb.org/3/tv/${tvId}`, {
+                params: { language: 'ko-KR' },
+                headers: {
+                    accept: 'application/json',
+                    Authorization:
+                        'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJkZGY2NTIxYzQzYzJlMDNmNTlkMjc2N2YxMDlhYWFhNCIsIm5iZiI6MTczNzUxMDE4NS4yNjIsInN1YiI6IjY3OTA0ZDI5MmQ2MWMzM2U2M2RmZTVlNiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ._QJjWVEDYEcIfVZtQRYG0JSRb22Dit3HopPsNm8AILE',
+                },
+            }),
+            axios.get(`https://api.themoviedb.org/3/tv/${tvId}/credits`, {
+                params: { language: 'ko-KR' },
+                headers: {
+                    accept: 'application/json',
+                    Authorization:
+                        'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJkZGY2NTIxYzQzYzJlMDNmNTlkMjc2N2YxMDlhYWFhNCIsIm5iZiI6MTczNzUxMDE4NS4yNjIsInN1YiI6IjY3OTA0ZDI5MmQ2MWMzM2U2M2RmZTVlNiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ._QJjWVEDYEcIfVZtQRYG0JSRb22Dit3HopPsNm8AILE',
+                },
+            }),
+        ]);
 
-        return response.data;
+        return {
+            ...detailResponse.data,
+            credits: creditResponse.data,
+        };
     } catch (error) {
         return rejectWithValue(error.message);
     }
