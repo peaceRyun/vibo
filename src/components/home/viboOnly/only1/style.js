@@ -45,7 +45,7 @@ export const Tag = styled.span`
   height: 1.6875rem; /* 27px */
   background-color: transparent;
   color: #fff;
-  border: 1px solid #fff;
+  border: 0.6px solid #fff;
   border-radius: 0.25rem;
   display: flex;
   align-items: center;

@@ -60,9 +60,9 @@ export const Title = styled.div`
 // `;
 
 export const Underline2 = styled.div`
-  width: 600px; /* 밑줄 길이 */
-  height: 3px; /* 밑줄 두께 */
-  background: white; /* 밑줄 색상 */
+  width: 600px;
+  height: 1.5px;
+  background: white;
   margin-top: 30px;
   align-self: center;
 
