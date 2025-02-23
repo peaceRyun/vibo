@@ -93,7 +93,7 @@ const ProfileForEdit = () => {
                             <ButtonLight
                                 type='submit'
                                 $padding='1.675rem'
-                                $border='1px solid var(--gray-500)'
+                                // $border='1px solid var(--gray-500)'
                                 $borderRadius='5px'
                                 $color='var(--black)'
                                 $width='15.5rem'

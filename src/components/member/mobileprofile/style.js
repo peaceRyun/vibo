@@ -119,6 +119,10 @@ export const ButtonDark = styled.button`
     padding: ${(props) => props.$padding};
     color: ${(props) => props.$color};
     width: ${(props) => props.$width};
+    &:hover {
+        border: 1px solid var(--gray-100);
+        color: var(--gray-100);
+    }
 `;
 
 export const ButtonLight = styled.button`
@@ -129,6 +133,9 @@ export const ButtonLight = styled.button`
     color: ${(props) => props.$color};
     width: ${(props) => props.$width};
     font-weight: 800;
+    &:hover {
+        background-color: var(--gray-100);
+    }
 `;
 
 export const NickNameInput = styled.input`
