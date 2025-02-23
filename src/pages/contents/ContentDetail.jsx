@@ -55,7 +55,6 @@ const ContentDetail = ({ contentType }) => {
     const recommendData = isSeries ? TVRecommendData : movieRecommendations;
     const recommendLoading = isSeries ? tvLoading : movieLoading;
 
-    console.log(contentDetail);
     useEffect(() => {
         const handleResize = () => {
             setIsMobile(window.innerWidth <= 1024);

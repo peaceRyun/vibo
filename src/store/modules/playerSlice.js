@@ -56,12 +56,10 @@ export const playerSlice = createSlice({
                 state.error = null;
             })
             .addCase(getMovieVideos.fulfilled, (state, action) => {
-                console.log('getMovieVideos.fulfilled with payload:', action.payload);
                 state.loading = false;
                 state.videoId = action.payload;
             })
             .addCase(getMovieVideos.rejected, (state, action) => {
-                console.log('getMovieVideos.rejected with error:', action.payload);
                 state.loading = false;
                 state.error = action.payload;
                 state.videoId = 'MkcqlqCfYcg';
