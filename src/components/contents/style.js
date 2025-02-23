@@ -677,6 +677,11 @@ export const IconSection = styled.div`
 `;
 
 export const LikeIcon = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    gap: 6px;
     img {
         width: 30px;
     }
@@ -721,6 +726,7 @@ export const ShareIcon = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
+    cursor: pointer;
     p {
         color: white;
         margin-top: 6px;
