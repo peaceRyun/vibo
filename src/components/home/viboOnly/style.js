@@ -14,6 +14,7 @@ export const ViboAllContainer = styled.div`
   display: flex;
   align-items: left;
   flex-direction: column;
+  margin: 0 90px;
   /* padding: 60px 50px 60px 50px; */
   @media (max-width: 1024px) {
     padding: 40px 0 40px 0;
@@ -60,9 +61,9 @@ export const Title = styled.div`
 // `;
 
 export const Underline2 = styled.div`
-  width: 600px; /* 밑줄 길이 */
-  height: 3px; /* 밑줄 두께 */
-  background: white; /* 밑줄 색상 */
+  width: 600px;
+  height: 1.5px;
+  background: white;
   margin-top: 30px;
   align-self: center;
 

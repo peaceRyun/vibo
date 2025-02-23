@@ -7,6 +7,7 @@ export const BannerWrapper = styled.div`
   // min-height: 600px;
   position: relative;
   overflow: hidden;
+  padding-left: 50px;
 `;
 
 export const SwiperContainer = styled.div`
@@ -20,6 +21,7 @@ export const SwiperContainer = styled.div`
   }
   .swiper-pagination-bullet-active {
     background-color: var(--primary-base) !important;
+    bottom: var(--swiper-pagination-bottom, 50px);
   }
 
   .swiper-button-prev,
@@ -27,6 +29,9 @@ export const SwiperContainer = styled.div`
     color: var(--primary-base) !important;
     font-size: 30px !important;
     z-index: 11;
+    top: var(--swiper-navigation-top-offset, 45%);
+    padding: 0 35px;
+    /* margin: 50px; */
   }
 `;
 

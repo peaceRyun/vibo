@@ -72,6 +72,7 @@ export const GenreItem = styled(Link).withConfig({
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     text-align: center;
+
     @media (max-width: 1024px) {
       font-size: 24px;
     }
@@ -94,7 +95,7 @@ export const GenreItem = styled(Link).withConfig({
     @media (max-width: 600px) {
       width: 100%;
       flex-direction: row;
-      align-items: center;
+      align-items: left;
       justify-content: space-around;
       margin-top: 5px;
     }
