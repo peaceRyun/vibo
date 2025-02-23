@@ -41,7 +41,7 @@ export const CommonList = ({ type = 'series' }) => {
           <MoreBtn onClick={onGo}>더보기</MoreBtn>
         </CommonInfo>
         <CommonSwiper
-          spaceBetween={30} /* 기본 간격 */
+          spaceBetween={40} /* 기본 간격 */
           slidesPerView={5.5} /* 기본값 (데스크탑) */
           breakpoints={{
             // 1280: { slidesPerView: 5.5, spaceBetween: 30 },

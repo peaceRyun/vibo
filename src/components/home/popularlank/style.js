@@ -77,7 +77,7 @@ export const ItemWrapper = styled.div`
 `;
 export const RankingNumber = styled.span`
   position: absolute;
-  bottom: -3 px;
+  bottom: -3px;
   left: 15%;
   transform: translate(-67%, 15%);
   font-size: 130px;
