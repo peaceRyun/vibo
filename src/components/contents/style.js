@@ -182,7 +182,7 @@ export const SpanInfo = styled.span`
 `;
 
 export const Contour = styled.div`
-    margin: 5px 0 10px;
+    margin: 7px 0;
     height: 1px;
     background-color: var(--secondary-base);
 `;

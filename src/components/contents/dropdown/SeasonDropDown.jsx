@@ -27,7 +27,7 @@ const SeasonDropdown = ({ isOpen, onToggle, selectedSeason, onSelect, options = 
                     </>
                 ) : (
                     <>
-                        시즌 클릭
+                        시즌
                         <SIcon
                             src='https://raw.githubusercontent.com/peaceRyun/vibostatic/refs/heads/main/public/mockup/contentdetail/ui/live area.png'
                             alt='dropdownIcon'

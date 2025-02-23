@@ -29,7 +29,7 @@ export const SDropdownContent = styled.div`
     top: 100%;
     left: 0;
     background-color: var(--gray-900);
-    /* border: 1px solid var(--primary-base); */
+    border: 1px solid var(--gray-500);
     border-radius: 4px;
     width: 100%;
     max-height: ${(props) => props.$maxHeight || 'auto'};

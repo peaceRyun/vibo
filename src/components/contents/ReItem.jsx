@@ -28,7 +28,7 @@ const ReItem = ({ content, contentType }) => {
             </Flex>
             <Flex $flexDirection='column' $padding='15px 20px 6px' $gap='8px'>
                 <Flex $justifyContent='space-between' $alignItems='center'>
-                    <Flex $justifyContent='space-between' $alignItems='center' $gap='10px'>
+                    <Flex $justifyContent='space-between' $alignItems='center' $gap='10px' $width='18px'>
                         <img
                             src='https://raw.githubusercontent.com/peaceRyun/vibostatic/refs/heads/main/public/mockup/contentdetail/contentrate/전체관람가 관람등급 1.png'
                             alt='rateAll'
