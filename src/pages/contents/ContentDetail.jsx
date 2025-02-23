@@ -32,7 +32,12 @@ const ContentDetail = ({ contentType }) => {
     const [activeTab, setActiveTab] = useState(isSeries ? 'episodes' : 'similar');
 
     // Redux 상태 가져오기
-    const { movieDetail, movieRecommendations, recommendLoading: movieLoading } = useSelector((state) => state.movieR);
+    const {
+        movieDetail,
+        movieRecommendations,
+        recommendLoading: movieLoading,
+        contentRating: movieContentRating,
+    } = useSelector((state) => state.movieR);
     const {
         TVDetail,
         contentRating: tvContentRating,
@@ -46,7 +51,7 @@ const ContentDetail = ({ contentType }) => {
 
     // 컨텐츠 타입에 따라 적절한 데이터 선택
     const contentDetail = isSeries ? TVDetail : movieDetail;
-    const contentRating = isSeries ? tvContentRating : tvContentRating;
+    const contentRating = isSeries ? tvContentRating : movieContentRating;
     const recommendData = isSeries ? TVRecommendData : movieRecommendations;
     const recommendLoading = isSeries ? tvLoading : movieLoading;
 
@@ -95,10 +100,14 @@ const ContentDetail = ({ contentType }) => {
             {!isMobile && (
                 <PcContainer>
                     <Inner>
-                        <Flex $flexDirection="column" $position="relative" $gap="30px" $padding="0 50px">
+                        <Flex $flexDirection='column' $position='relative' $gap='30px' $padding='0 50px'>
                             <PlayBanner contentDetail={contentDetail} contentType={contentType} />
                             <div style={{ padding: '0 50px' }}>
-                                <ContDetail contentDetail={contentDetail} contentType={contentType} />
+                                <ContDetail
+                                    contentDetail={contentDetail}
+                                    contentType={contentType}
+                                    contentRating={contentRating}
+                                />
                                 {isSeries && (
                                     <EpList
                                         seasons={tvSeasons || []}
@@ -114,9 +123,10 @@ const ContentDetail = ({ contentType }) => {
                                     recommendData={recommendData}
                                     loading={recommendLoading}
                                     contentType={contentType}
+                                    contentRating={contentRating}
                                 />
                                 <ReviewList contentDetail={contentDetail} />
-                                <div id="cont-more-detail">
+                                <div id='cont-more-detail'>
                                     <ContMoreDetail
                                         contentDetail={contentDetail}
                                         contentType={contentType}

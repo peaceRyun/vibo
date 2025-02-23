@@ -3,7 +3,7 @@ import 'swiper/css';
 import ReItem from './ReItem';
 import { Flex, H3 } from './style';
 
-const ReList = ({ recommendData, loading, contentType }) => {
+const ReList = ({ recommendData, loading, contentType, contentRating }) => {
     if (loading) {
         return <div>loading....</div>;
     }
@@ -28,7 +28,7 @@ const ReList = ({ recommendData, loading, contentType }) => {
                 >
                     {recommendData.map((content) => (
                         <SwiperSlide key={content.id}>
-                            <ReItem content={content} contentType={contentType} />
+                            <ReItem content={content} contentType={contentType} contentRating={contentRating} />
                         </SwiperSlide>
                     ))}
                 </Swiper>

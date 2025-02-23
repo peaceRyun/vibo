@@ -783,14 +783,35 @@ export const getTVContentRating = createAsyncThunk('TVDetail/getTVContentRating'
 
         // 한국 관람등급 찾기
         const krRating = response.data.results.find((rating) => rating.iso_3166_1 === 'KR');
-
         // 한국 관람등급이 없으면 미국 관람등급 사용
         const usRating = response.data.results.find((rating) => rating.iso_3166_1 === 'US');
 
-        return {
-            rating: krRating?.rating || usRating?.rating || '정보 없음',
-            iso_3166_1: krRating ? 'KR' : usRating ? 'US' : null,
-        };
+        let rating = '정보 없음';
+        const country = krRating ? 'KR' : usRating ? 'US' : null;
+
+        if (krRating) {
+            // 한국 관람등급 매핑
+            const krRatingMap = {
+                전체관람가: 'ALL',
+                12: '12',
+                15: '15',
+                19: '19',
+            };
+            rating = krRatingMap[krRating.rating] || krRating.rating;
+        } else if (usRating) {
+            // 미국 관람등급 매핑
+            const usRatingMap = {
+                'TV-Y': 'ALL',
+                'TV-Y7': 'ALL',
+                'TV-G': 'ALL',
+                'TV-PG': '12',
+                'TV-14': '15',
+                'TV-MA': '19',
+            };
+            rating = usRatingMap[usRating.rating] || usRating.rating;
+        }
+
+        return { rating, iso_3166_1: country };
     } catch (error) {
         return rejectWithValue(error.message);
     }
@@ -809,26 +830,42 @@ export const getMovieContentRating = createAsyncThunk(
                 },
             });
 
-            // 한국 관람등급 찾기
             const krRelease = response.data.results.find((release) => release.iso_3166_1 === 'KR');
-
-            // 한국 관람등급이 없으면 미국 관람등급 사용
             const usRelease = response.data.results.find((release) => release.iso_3166_1 === 'US');
 
-            // certification 찾기
-            const krCertification = krRelease?.release_dates[0]?.certification;
-            const usCertification = usRelease?.release_dates[0]?.certification;
+            let rating = '정보 없음';
+            const country = krRelease ? 'KR' : usRelease ? 'US' : null;
 
-            return {
-                rating: krCertification || usCertification || '정보 없음',
-                iso_3166_1: krRelease ? 'KR' : usRelease ? 'US' : null,
-            };
+            if (krRelease && krRelease.release_dates[0]) {
+                // 한국 관람등급 매핑
+                const krRatingMap = {
+                    All: 'ALL',
+                    12: '12',
+                    15: '15',
+                    18: '19',
+                    청소년관람불가: '19',
+                };
+                rating =
+                    krRatingMap[krRelease.release_dates[0].certification] || krRelease.release_dates[0].certification;
+            } else if (usRelease && usRelease.release_dates[0]) {
+                // 미국 관람등급 매핑
+                const usRatingMap = {
+                    G: 'ALL',
+                    PG: 'ALL',
+                    'PG-13': '12',
+                    R: '15',
+                    'NC-17': '19',
+                };
+                rating =
+                    usRatingMap[usRelease.release_dates[0].certification] || usRelease.release_dates[0].certification;
+            }
+
+            return { rating, iso_3166_1: country };
         } catch (error) {
             return rejectWithValue(error.message);
         }
     }
 );
-
 // TV 시리즈 시즌별 에피소드 가져오기 thunk
 export const getTVSeasonEpisodes = createAsyncThunk(
     'TVEpisodes/getTVSeasonEpisodes',
