@@ -92,7 +92,7 @@ const ReviewModal = ({ isOpen, onClose, contentDetail }) => {
                                         onClick={() => setRating(star)}
                                         style={{
                                             fontSize: '24px',
-                                            color: 'var(--primary-base)',
+                                            color: 'yellow',
                                             background: 'none',
                                             border: 'none',
                                             cursor: 'pointer',
@@ -107,7 +107,13 @@ const ReviewModal = ({ isOpen, onClose, contentDetail }) => {
 
                     <ReviewForm value={reviewText} onChange={(e) => setReviewText(e.target.value)} />
 
-                    <Flex $justifyContent='center' $alignItems='center' $position='relative' $gap='8px'>
+                    <Flex
+                        $justifyContent='center'
+                        $alignItems='center'
+                        $position='relative'
+                        $gap='8px'
+                        $padding='10px 0 0'
+                    >
                         <Button
                             width='100%'
                             height='34px'

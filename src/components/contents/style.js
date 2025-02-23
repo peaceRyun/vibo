@@ -261,10 +261,10 @@ export const ModalOverlay = styled.div`
 
 export const ModalContent = styled.div`
     background-color: var(--gray-900);
-    padding: var(--spacing-6) var(--spacing-9);
+    padding: var(--spacing-6) var(--spacing-9) var(--spacing-8);
     border-radius: 10px;
-    width: 518px;
-    height: 441px;
+    width: 541px;
+    height: 470px;
     border: 2px solid var(--primary-base);
 `;
 
