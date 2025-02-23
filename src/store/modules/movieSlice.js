@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { getMovie, getMovieDetail, getMovieRecommendations } from './getThunk';
+import { getMovie, getMovieDetail, getMovieRecommendations, getMovieContentRating } from './getThunk';
 
 const initialState = {
     movieData: [],
@@ -14,6 +14,10 @@ const initialState = {
     movieRecommendations: [],
     recommendLoading: false,
     recommendError: null,
+    // 영화 관람등급 관련 상태 추가
+    contentRating: null,
+    ratingLoading: false,
+    ratingError: null,
 };
 
 export const movieSlice = createSlice({
@@ -22,6 +26,7 @@ export const movieSlice = createSlice({
     reducers: {},
     extraReducers: (builder) => {
         builder
+            // 기존 리듀서들...
             .addCase(getMovie.pending, (state) => {
                 state.loading = true;
                 state.error = null;
@@ -34,7 +39,7 @@ export const movieSlice = createSlice({
                 state.loading = false;
                 state.error = action.payload;
             })
-            // 영화 상세 정보 관련 리듀서 추가
+            // 영화 상세 정보 관련 리듀서
             .addCase(getMovieDetail.pending, (state) => {
                 state.detailLoading = true;
                 state.detailError = null;
@@ -47,7 +52,7 @@ export const movieSlice = createSlice({
                 state.detailLoading = false;
                 state.detailError = action.payload;
             })
-            // 영화 추천 관련 리듀서 추가
+            // 영화 추천 관련 리듀서
             .addCase(getMovieRecommendations.pending, (state) => {
                 state.recommendLoading = true;
                 state.recommendError = null;
@@ -59,6 +64,19 @@ export const movieSlice = createSlice({
             .addCase(getMovieRecommendations.rejected, (state, action) => {
                 state.recommendLoading = false;
                 state.recommendError = action.payload;
+            })
+            // 영화 관람등급 관련 리듀서 추가
+            .addCase(getMovieContentRating.pending, (state) => {
+                state.ratingLoading = true;
+                state.ratingError = null;
+            })
+            .addCase(getMovieContentRating.fulfilled, (state, action) => {
+                state.contentRating = action.payload;
+                state.ratingLoading = false;
+            })
+            .addCase(getMovieContentRating.rejected, (state, action) => {
+                state.ratingLoading = false;
+                state.ratingError = action.payload;
             });
     },
 });

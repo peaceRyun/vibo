@@ -3,7 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import Button from '../../ui/button/Button';
 import ReviewForm from './ReviewForm';
 import { addReview } from '../../store/modules/reviewSlice';
-import { Flex, H3, ModalContent, ModalOverlay, P } from './style';
+import { Flex, H3, ModalContent, ModalOverlay, P, EpItemContImg } from './style';
+import { IoClose } from 'react-icons/io5';
 
 const ReviewModal = ({ isOpen, onClose, contentDetail }) => {
     const dispatch = useDispatch();
@@ -13,9 +14,13 @@ const ReviewModal = ({ isOpen, onClose, contentDetail }) => {
     } = useSelector((state) => state.profileR);
 
     const [reviewText, setReviewText] = useState('');
+    const [rating, setRating] = useState(5);
 
     useEffect(() => {
-        if (!isOpen) {
+        if (isOpen) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = 'unset';
             setReviewText('');
         }
     }, [isOpen]);
@@ -30,19 +35,15 @@ const ReviewModal = ({ isOpen, onClose, contentDetail }) => {
             return;
         }
 
-        // 디버깅을 위한 로그 추가
-        console.log('contentDetail:', contentDetail);
-
         const newReview = {
             id: Date.now(),
             author: nickname,
             content: reviewText,
             created_at: new Date().toISOString(),
             author_details: {
-                rating: 5,
+                rating: rating,
                 avatar_path: srcNow,
             },
-            // 디버깅용 로그 추가
             moviePoster: contentDetail?.poster_path
                 ? `https://image.tmdb.org/t/p/w500${contentDetail.poster_path}`
                 : contentDetail?.backdrop_path
@@ -61,31 +62,76 @@ const ReviewModal = ({ isOpen, onClose, contentDetail }) => {
     return (
         <ModalOverlay onClick={onClose}>
             <ModalContent onClick={handleContentClick}>
-                <Flex $flexDirection='column' $position='relative' $gap='20px'>
-                    <H3 fontSize='19px' fontWeight='700'>
-                        {contentDetail?.title || '리뷰 작성'}
+                <Flex $flexDirection='column' $position='relative' $gap='20px' $padding='24px 0 0'>
+                    <button style={{ position: 'absolute', top: '0', right: '0' }} onClick={onClose}>
+                        <IoClose size='30' color='white' />
+                    </button>
+                    <H3 fontSize='25px' fontWeight='700' $alignSelf='center'>
+                        리뷰 작성하기
                     </H3>
-                    <P $fontSize='17px' $padding='0px'>
+                    <P $fontSize='17px' $padding='0px' $alignSelf='center' $color='var(--gray-500)'>
                         이 콘텐츠에 대해서 얼마나 만족하셨나요?
                     </P>
 
-                    <Flex $gap='15px' $alignItems='center'>
-                        <img
-                            src={srcNow}
-                            alt='유저 프로필'
-                            style={{ width: '40px', height: '40px', borderRadius: '50%' }}
+                    <Flex $gap='20px' $padding='0 20px'>
+                        <EpItemContImg
+                            src={
+                                contentDetail?.backdrop_path
+                                    ? `https://image.tmdb.org/t/p/w500${contentDetail.backdrop_path}`
+                                    : '/placeholder.jpg'
+                            }
+                            alt={contentDetail?.title}
+                            $width='200px'
+                            $height='120px'
                         />
-                        <span style={{ fontSize: '17px' }}>{nickname}</span>
+                        <Flex $flexDirection='column' $gap='10px'>
+                            <P $fontSize='20px' $padding='0' $fontWeight='600'>
+                                {contentDetail?.name ||
+                                    contentDetail?.original_name ||
+                                    contentDetail?.title ||
+                                    contentDetail?.original_title ||
+                                    '제목 없음'}
+                            </P>
+                            <Flex $gap='5px'>
+                                {[1, 2, 3, 4, 5].map((star) => (
+                                    <button
+                                        key={star}
+                                        onClick={() => setRating(star)}
+                                        style={{
+                                            fontSize: '24px',
+                                            color: 'yellow',
+                                            background: 'none',
+                                            border: 'none',
+                                            cursor: 'pointer',
+                                        }}
+                                    >
+                                        {star <= rating ? '★' : '☆'}
+                                    </button>
+                                ))}
+                            </Flex>
+                        </Flex>
                     </Flex>
 
-                    {/* ✅ 수정: 이벤트 객체에서 value만 전달하도록 변경 */}
                     <ReviewForm value={reviewText} onChange={(e) => setReviewText(e.target.value)} />
 
-                    <Flex $justifyContent='center' $alignItems='center' $position='relative' $gap='60px'>
-                        <Button width='99px' height='34px' fontSize='12px' fontWeight='400' onClick={onClose}>
+                    <Flex
+                        $justifyContent='center'
+                        $alignItems='center'
+                        $position='relative'
+                        $gap='8px'
+                        $padding='10px 0 0'
+                    >
+                        <Button
+                            width='100%'
+                            height='34px'
+                            fontSize='12px'
+                            fontWeight='400'
+                            onClick={onClose}
+                            type='disabled'
+                        >
                             취소
                         </Button>
-                        <Button width='99px' height='34px' fontSize='12px' onClick={handleReviewSubmit}>
+                        <Button width='100%' height='34px' fontSize='12px' onClick={handleReviewSubmit}>
                             확인
                         </Button>
                     </Flex>

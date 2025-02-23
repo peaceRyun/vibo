@@ -182,7 +182,7 @@ export const SpanInfo = styled.span`
 `;
 
 export const Contour = styled.div`
-    margin: 5px 0 10px;
+    margin: 7px 0;
     height: 1px;
     background-color: var(--secondary-base);
 `;
@@ -199,6 +199,7 @@ export const H2 = styled.h2`
 export const H3 = styled.h3`
     font-size: ${(props) => (props.fontSize ? props.fontSize : '28px')};
     font-weight: ${(props) => (props.fontWeight ? props.fontWeight : '800')};
+    align-self: ${(props) => props.$alignSelf};
 `;
 
 export const H4 = styled.h4`
@@ -220,7 +221,8 @@ export const P = styled.p`
     -webkit-box-orient: vertical;
     -webkit-line-clamp: ${(props) => props.$lineClamp}; /* 원하는 줄 수 */
     overflow: hidden;
-
+    align-self: ${(props) => props.$alignSelf};
+    color: ${(props) => props.$color};
     @media (max-width: 590px) {
         padding: 10px 0;
     }
@@ -251,6 +253,7 @@ export const ModalOverlay = styled.div`
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -259,10 +262,10 @@ export const ModalOverlay = styled.div`
 
 export const ModalContent = styled.div`
     background-color: var(--gray-900);
-    padding: var(--spacing-6) var(--spacing-9);
+    padding: var(--spacing-6) var(--spacing-9) var(--spacing-8);
     border-radius: 10px;
-    width: 518px;
-    height: 441px;
+    width: 541px;
+    height: 470px;
     border: 2px solid var(--primary-base);
 `;
 
@@ -674,6 +677,11 @@ export const IconSection = styled.div`
 `;
 
 export const LikeIcon = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    gap: 6px;
     img {
         width: 30px;
     }
@@ -718,6 +726,7 @@ export const ShareIcon = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
+    cursor: pointer;
     p {
         color: white;
         margin-top: 6px;
@@ -796,4 +805,23 @@ export const DescriptionText = styled.div`
     font-weight: bold;
     color: #ddd;
     margin-bottom: 10px;
+`;
+
+export const LoadMoreButton = styled.button`
+    width: 100%;
+    padding: 15px;
+    background-color: transparent;
+    border: none;
+    color: var(--secondary-300);
+    font-size: 15px;
+    cursor: pointer;
+    transition: color 0.2s ease;
+
+    &:hover {
+        color: var(--white);
+    }
+
+    &:focus {
+        outline: none;
+    }
 `;

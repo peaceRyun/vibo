@@ -2,10 +2,21 @@ import { BadgeBlank } from '../../pages/contents/style';
 import StarRating from './StarRating';
 import { Flex, FlexUl } from './style';
 
-const ContDetail = ({ contentDetail, contentType, onMoreClick }) => {
+const ContDetail = ({ contentDetail, contentType, contentRating, onMoreClick }) => {
     if (!contentDetail) return null;
 
-    // contentType에 따라 다른 데이터 포맷 처리
+    const ratingImageMap = {
+        19: 'https://raw.githubusercontent.com/peaceRyun/vibostatic/refs/heads/main/public/mockup/contentdetail/contentrate/19.svg',
+        15: 'https://raw.githubusercontent.com/peaceRyun/vibostatic/refs/heads/main/public/mockup/contentdetail/contentrate/15.svg',
+        12: 'https://raw.githubusercontent.com/peaceRyun/vibostatic/refs/heads/main/public/mockup/contentdetail/contentrate/12.svg',
+        ALL: 'https://raw.githubusercontent.com/peaceRyun/vibostatic/refs/heads/main/public/mockup/contentdetail/contentrate/전체관람가 관람등급 1.png',
+    };
+
+    const getRatingImage = (contentRating) => {
+        const ratingValue = contentRating?.rating || contentRating;
+        return ratingImageMap[ratingValue] || ratingImageMap['ALL'];
+    };
+
     const year =
         contentType === 'series'
             ? new Date(contentDetail.first_air_date).getFullYear()
@@ -13,20 +24,22 @@ const ContDetail = ({ contentDetail, contentType, onMoreClick }) => {
 
     const episodeCount = contentType === 'series' ? contentDetail.number_of_episodes : null;
     const rating = contentDetail.vote_average ? contentDetail.vote_average.toFixed(1) : 'N/A';
-    const cast =
-        contentDetail.credits?.cast
-            ?.slice(0, 3)
-            .map((actor) => actor.name)
-            .join(', ') || '정보 없음';
-    const genres = contentDetail.genres?.map((genre) => genre.name).join(', ') || '정보 없음';
 
-    const handleMoreClick = () => {
-        const moreDetailElement = document.getElementById('cont-more-detail');
-        if (moreDetailElement) {
-            moreDetailElement.scrollIntoView({ behavior: 'smooth' });
-        }
-        onMoreClick?.();
-    };
+    //상세정보 간략 표시 부분 관련
+    // const cast =
+    //     contentDetail.credits?.cast
+    //         ?.slice(0, 3)
+    //         .map((actor) => actor.name)
+    //         .join(', ') || '정보 없음';
+    // const genres = contentDetail.genres?.map((genre) => genre.name).join(', ') || '정보 없음';
+
+    // const handleMoreClick = () => {
+    //     const moreDetailElement = document.getElementById('cont-more-detail');
+    //     if (moreDetailElement) {
+    //         moreDetailElement.scrollIntoView({ behavior: 'smooth' });
+    //     }
+    //     onMoreClick?.();
+    // };
 
     return (
         <section>
@@ -39,8 +52,8 @@ const ContDetail = ({ contentDetail, contentType, onMoreClick }) => {
                     </Flex>
                     <Flex $gap='10px' $alignItems='center'>
                         <img
-                            src='https://raw.githubusercontent.com/peaceRyun/vibostatic/refs/heads/main/public/mockup/contentdetail/contentrate/전체관람가 관람등급 1.png'
-                            alt='rateAll'
+                            src={getRatingImage(contentRating)}
+                            alt={`Rating ${contentRating?.rating || contentRating}`}
                             style={{ width: '24px' }}
                         />
                         <img
@@ -52,35 +65,7 @@ const ContDetail = ({ contentDetail, contentType, onMoreClick }) => {
                     </Flex>
                     <p>{contentDetail.overview || '줄거리 정보가 없습니다.'}</p>
                 </Flex>
-                {/* <FlexUl $flexDirection='column' $gap='15px'>
-                    <li>
-                        <Flex $gap='8px' $whiteSpace='nowrap' $fontSize='16px'>
-                            <strong style={{ color: 'var(--gray-600)' }}>출연: </strong>
-                            <p>{cast}</p>
-                            <span onClick={handleMoreClick} style={{ cursor: 'pointer' }}>
-                                더보기
-                            </span>
-                        </Flex>
-                    </li>
-                    <li>
-                        <Flex $gap='8px' $whiteSpace='nowrap' $fontSize='16px'>
-                            <strong style={{ color: 'var(--gray-600)' }}>장르: </strong>
-                            <p>{genres}</p>
-                            <span onClick={handleMoreClick} style={{ cursor: 'pointer' }}>
-                                더보기
-                            </span>
-                        </Flex>
-                    </li>
-                    <li>
-                        <Flex $gap='8px' $whiteSpace='nowrap' $fontSize='16px'>
-                            <strong style={{ color: 'var(--gray-600)' }}>콘텐츠 특징: </strong>
-                            <p>{contentDetail.keywords?.keywords?.map((k) => k.name).join(', ') || '정보 없음'}</p>
-                            <span onClick={handleMoreClick} style={{ cursor: 'pointer' }}>
-                                더보기
-                            </span>
-                        </Flex>
-                    </li>
-                </FlexUl> */}
+                {/* 주석 처리된 FlexUl 부분은 그대로 유지 */}
             </Flex>
         </section>
     );

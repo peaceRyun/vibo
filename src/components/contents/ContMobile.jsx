@@ -6,6 +6,7 @@ import {
     Description,
     DescriptionText, // 새로 추가된 스타일 컴포넌트 임포트
     EpisodeInfo,
+    Flex,
     Header,
     IconSection,
     LikeIcon,
@@ -22,10 +23,12 @@ import {
 import { FaPlay } from 'react-icons/fa';
 import { IoShareSocial } from 'react-icons/io5';
 import MoreFilter from './MoreFilter';
+import LiLike from '../../ui/lordicon/LILike';
 
 const ContMobile = ({ contentDetail, contentType }) => {
     // 기존 코드 유지...
     const [progress, setProgress] = useState(0);
+    const [showMoreFilter, setShowMoreFilter] = useState(false);
     const isSeries = contentType === 'series';
 
     useEffect(() => {
@@ -38,8 +41,14 @@ const ContMobile = ({ contentDetail, contentType }) => {
     }, [progress]);
 
     // 기존 데이터 처리 로직 유지...
-    const title = isSeries ? contentDetail?.name : contentDetail?.title;
-    const releaseDate = isSeries ? contentDetail?.first_air_date : contentDetail?.release_date;
+    const title =
+        contentDetail?.name ||
+        contentDetail?.original_name ||
+        contentDetail?.title ||
+        contentDetail?.original_title ||
+        '제목 로딩 중...';
+
+    const releaseDate = contentDetail?.first_air_date || contentDetail?.release_date || '';
     const releaseYear = releaseDate ? new Date(releaseDate).getFullYear() : '';
     const genres = contentDetail?.genres?.map((genre) => genre.name).join(', ') || '';
     const seasonCount = contentDetail?.number_of_seasons || 0;
@@ -84,25 +93,24 @@ const ContMobile = ({ contentDetail, contentType }) => {
                             {overview.length > 100 ? `${overview.substring(0, 100)}...` : overview}
                         </DescriptionText>
                         <div>
-                            <p>
-                                출연 : {cast || '정보 없음'}
-                                <button
-                                    onClick={() => {
-                                        return <MoreFilter />;
-                                    }}
-                                >
-                                    더보기
-                                </button>
-                            </p>
+                            <Flex $alignItems='center' $justifyContent='space-between'>
+                                <p>출연 : {cast || '정보 없음'}</p>
+                                <p>
+                                    <button
+                                        onClick={() => setShowMoreFilter(true)}
+                                        style={{ color: 'var(--gray-300)' }}
+                                    >
+                                        더보기
+                                    </button>
+                                </p>
+                            </Flex>
+                            {showMoreFilter && <MoreFilter onClose={() => setShowMoreFilter(false)} />}
                             <p>크리에이터 : {creators || '정보 없음'}</p>
                         </div>
                     </Description>
                     <IconSection>
                         <LikeIcon>
-                            <img
-                                src='https://raw.githubusercontent.com/peaceRyun/vibostatic/refs/heads/main/public/mockup/contentdetail/ui/하트active.png'
-                                alt='하트'
-                            />
+                            <LiLike width='30px' height='30px' />
                             <p>좋아요</p>
                         </LikeIcon>
                         <RatingIcon>
