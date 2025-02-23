@@ -29,14 +29,16 @@ const WeeklyItemContainer = styled.div`
   position: relative;
   overflow: hidden;
   border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   transition: transform 0.3s, box-shadow 0.3s;
-  height: 100%;
+  /* width: 260px; */
+  height: 375px;
   cursor: pointer;
+  margin: 10px 10px;
 
   &:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
   }
 
   @media (max-width: 400px) {
@@ -71,23 +73,19 @@ const WeeklyImg = styled.img`
 `;
 
 const EmptyItemContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  border-radius: 8px;
-  width: 500px;
-  height: 250px;
   color: white;
+  text-align: center;
+  padding: 20px;
   font-size: 1.2rem;
-  gap: 8px;
-  padding: 50px 0;
-  align-content: center;
-  justify-content: center;
+  display: flex;
   align-items: center;
+  flex-direction: column;
+
   p {
     font-size: 12px;
     color: #a8a9ad;
   }
-  @media (max-width: 400px) {
+  /* @media (max-width: 400px) {
     height: 180px;
-  }
+  } */
 `;

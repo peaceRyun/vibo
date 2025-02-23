@@ -53,9 +53,9 @@ const MainCommonList = ({ fetchFunction, stateSelector }) => {
         spaceBetween={30}
         slidesPerView={5.5}
         breakpoints={{
-          1024: { slidesPerView: 4.2, spaceBetween: 15 },
-          600: { slidesPerView: 2.5, spaceBetween: 10 },
-          400: { slidesPerView: 1.5, spaceBetween: 5 },
+          1024: { slidesPerView: 4.2, spaceBetween: 20 },
+          600: { slidesPerView: 2.5, spaceBetween: 0 },
+          300: { slidesPerView: 1.5, spaceBetween: 0 },
         }}
       >
         {content?.contentlist?.length > 0 ? (
@@ -157,7 +157,17 @@ const MoreBtn = styled.button`
     color: white;
   }
   @media (max-width: 1024px) {
-    margin-right: 20px;
+    background-color: var(--primary-base);
+    color: black;
+    font-size: clamp(12px, 1.2vw, 17px);
+    padding: 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: clamp(84px, 7vw, 155px);
+    height: 32px;
+    font-weight: bold;
+    margin: 0 15px;
   }
 `;
 

@@ -14,6 +14,7 @@ export const ViboAllContainer = styled.div`
   display: flex;
   align-items: left;
   flex-direction: column;
+  margin: 0 90px;
   /* padding: 60px 50px 60px 50px; */
   @media (max-width: 1024px) {
     padding: 40px 0 40px 0;

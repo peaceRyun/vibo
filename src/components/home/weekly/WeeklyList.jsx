@@ -31,12 +31,12 @@ const WeeklyList = () => {
       ) : (
         <WeeklySwiper
           slidesPerView={1.25}
-          spaceBetween={25}
+          spaceBetween={0}
           breakpoints={{
-            1280: { slidesPerView: 5.5, spaceBetween: 40 },
-            1024: { slidesPerView: 4, spaceBetween: 30 },
+            1280: { slidesPerView: 5.5, spaceBetween: 0 },
+            1024: { slidesPerView: 4, spaceBetween: 20 },
             600: { slidesPerView: 2.5, spaceBetween: 20 },
-            400: { slidesPerView: 1.8, spaceBetween: 20 },
+            400: { slidesPerView: 1.5, spaceBetween: 20 },
           }}
         >
           {displayContent.length > 0 ? (
@@ -103,7 +103,6 @@ const UpdateText = styled.h3`
 
 const WeeklySwiper = styled(Swiper)`
   width: 100%;
-  max-width: 100%;
 
   .swiper-pagination-bullet {
     background-color: #fff;
@@ -139,7 +138,7 @@ const LoadingMessage = styled.div`
 `;
 
 const LinkWrapper = styled.div`
-  width: 100%;
+  width: 90%;
 
   @media (max-width: 400px) {
     width: 78%;
