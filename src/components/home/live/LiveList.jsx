@@ -1,13 +1,11 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import styled from 'styled-components';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import LiveItem from './LiveItem';
 
 const LiveList = ({ title }) => {
-    const [visibleSlides, setVisibleSlides] = useState(new Set());
-    const observerRef = useRef(null);
-    const slideRefs = useRef({});
+    const [isLoading, setIsLoading] = useState(true);
 
     const videoData = [
         {
@@ -43,66 +41,45 @@ const LiveList = ({ title }) => {
     ];
 
     useEffect(() => {
-        observerRef.current = new IntersectionObserver(
-            (entries) => {
-                entries.forEach((entry) => {
-                    const slideId = entry.target.dataset.slideId;
-                    if (entry.isIntersecting) {
-                        setVisibleSlides((prev) => new Set([...prev, slideId]));
-                    } else {
-                        setVisibleSlides((prev) => {
-                            const newSet = new Set(prev);
-                            newSet.delete(slideId);
-                            return newSet;
-                        });
-                    }
-                });
-            },
-            {
-                root: null,
-                rootMargin: '50px',
-                threshold: 0.1,
-            }
-        );
+        const timer = setTimeout(() => {
+            setIsLoading(false);
+        }, 2000);
 
-        Object.values(slideRefs.current).forEach((ref) => {
-            if (ref) {
-                observerRef.current.observe(ref);
-            }
-        });
-
-        return () => {
-            if (observerRef.current) {
-                observerRef.current.disconnect();
-            }
-        };
+        return () => clearTimeout(timer);
     }, []);
 
     return (
         <LiveContainer>
             <StyledTitle>{title}</StyledTitle>
-            <StyledSwiper
-                breakpoints={{
-                    1024: {
-                        slidesPerView: 4.2,
-                        spaceBetween: 16,
-                    },
-                    600: {
-                        slidesPerView: 2.2,
-                        spaceBetween: 14,
-                    },
-                    0: {
-                        slidesPerView: 1.2,
-                        spaceBetween: 8,
-                    },
-                }}
-            >
-                {videoData.map((item) => (
-                    <SwiperSlide key={item.id} ref={(el) => (slideRefs.current[item.id] = el)} data-slide-id={item.id}>
-                        <LiveItem videoData={item} isVisible={visibleSlides.has(item.id.toString())} />
-                    </SwiperSlide>
-                ))}
-            </StyledSwiper>
+            <SwiperContainer>
+                <StyledSwiper
+                    breakpoints={{
+                        1024: {
+                            slidesPerView: 4.2,
+                            spaceBetween: 16,
+                        },
+                        600: {
+                            slidesPerView: 2.2,
+                            spaceBetween: 14,
+                        },
+                        0: {
+                            slidesPerView: 1.2,
+                            spaceBetween: 8,
+                        },
+                    }}
+                >
+                    {videoData.map((item) => (
+                        <SwiperSlide key={item.id}>
+                            <LiveItem videoData={item} isVisible={!isLoading} />
+                        </SwiperSlide>
+                    ))}
+                </StyledSwiper>
+                {isLoading && (
+                    <LoadingOverlay>
+                        <LoadingSpinner />
+                    </LoadingOverlay>
+                )}
+            </SwiperContainer>
         </LiveContainer>
     );
 };
@@ -136,6 +113,10 @@ const StyledTitle = styled.h3`
     }
 `;
 
+const SwiperContainer = styled.div`
+    position: relative;
+`;
+
 const StyledSwiper = styled(Swiper)`
     padding-bottom: 20px;
 
@@ -143,5 +124,35 @@ const StyledSwiper = styled(Swiper)`
         border-radius: 8px;
         width: auto;
         flex-shrink: 0;
+    }
+`;
+
+const LoadingOverlay = styled.div`
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+`;
+
+const LoadingSpinner = styled.div`
+    width: 48px;
+    height: 48px;
+    border: 4px solid #fff;
+    border-top-color: transparent;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+
+    @keyframes spin {
+        from {
+            transform: rotate(0deg);
+        }
+        to {
+            transform: rotate(360deg);
+        }
     }
 `;
