@@ -17,6 +17,7 @@ import genreR from './modules/genreSlice';
 import reviewR from './modules/reviewSlice';
 import likeR from './modules/likeSlice';
 import watchR from './modules/watchSlice';
+import userR from './modules/userSlice';
 export const store = configureStore({
     reducer: {
         reviewR,
@@ -37,5 +38,6 @@ export const store = configureStore({
         filterR, //추가
         likeR,
         watchR,
+        userR,
     },
 });

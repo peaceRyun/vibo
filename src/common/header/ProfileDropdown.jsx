@@ -1,3 +1,4 @@
+// ProfileDropdown.jsx
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -6,6 +7,7 @@ import { ProfileDropdownContainer, DropdownItem, BorderLine, LogOut, ProfileLogo
 import { AiOutlineEdit } from 'react-icons/ai';
 import { FiLogOut } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
+import { userActions } from '../../store/modules/userSlice';
 
 const ProfileDropdown = ({ onClose }) => {
     const dispatch = useDispatch();
@@ -17,31 +19,36 @@ const ProfileDropdown = ({ onClose }) => {
         });
     };
 
+    const handleProfileChange = (imageUrl) => {
+        dispatch(userActions.setProfileImage(imageUrl));
+        onClose();
+    };
+
+    const profiles = [
+        {
+            image: 'https://raw.githubusercontent.com/peaceRyun/vibostatic/refs/heads/main/public/profileIconV.png',
+            name: '사용자1',
+        },
+        {
+            image: 'https://raw.githubusercontent.com/peaceRyun/vibostatic/refs/heads/main/public/profileIconI.png',
+            name: '사용자2',
+        },
+        {
+            image: 'https://raw.githubusercontent.com/peaceRyun/vibostatic/refs/heads/main/public/profileIconO.png',
+            name: '사용자3',
+        },
+    ];
+
     return (
         <ProfileDropdownContainer>
             {/* 사용자 목록 */}
-            <ul onClick={onClose}>
-                <DropdownItem>
-                    <ProfileLogoContainerB
-                        src='https://raw.githubusercontent.com/peaceRyun/vibostatic/refs/heads/main/public/profileIconV.png'
-                        alt='프로필'
-                    />
-                    사용자1
-                </DropdownItem>
-                <DropdownItem>
-                    <ProfileLogoContainerB
-                        src='https://raw.githubusercontent.com/peaceRyun/vibostatic/refs/heads/main/public/profileIconI.png'
-                        alt='프로필'
-                    />
-                    사용자2
-                </DropdownItem>
-                <DropdownItem>
-                    <ProfileLogoContainerB
-                        src='https://raw.githubusercontent.com/peaceRyun/vibostatic/refs/heads/main/public/profileIconO.png'
-                        alt='프로필'
-                    />
-                    사용자3
-                </DropdownItem>
+            <ul>
+                {profiles.map((profile, index) => (
+                    <DropdownItem key={index} onClick={() => handleProfileChange(profile.image)}>
+                        <ProfileLogoContainerB src={profile.image} alt='프로필' />
+                        {profile.name}
+                    </DropdownItem>
+                ))}
             </ul>
 
             {/* 메뉴 항목 */}
