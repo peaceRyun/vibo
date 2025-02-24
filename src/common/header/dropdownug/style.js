@@ -93,6 +93,11 @@ export const DropdownContainer = styled.div`
                     color: #939598;
                     margin-bottom: 0.5rem;
                     font-weight: 100;
+                    cursor: pointer;
+                    transition: color 0.3s ease;
+                    &:hover {
+                        color: white;
+                    }
                 }
 
                 .rank-number {

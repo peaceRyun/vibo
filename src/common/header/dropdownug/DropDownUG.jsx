@@ -33,6 +33,12 @@ const Dropdown = ({ onClose }) => {
     const { popularContent } = useSelector((state) => state.popularR);
     const { genres } = useSelector((state) => state.genreR);
 
+    const handlePopularClick = (content) => {
+        onClose();
+        const path = content.media_type === 'series' ? `/detail/series/${content.id}` : `/detail/movie/${content.id}`;
+        navigate(path);
+    };
+
     // 로컬스토리지에서 최근 검색어 불러오기
     useEffect(() => {
         const savedSearches = localStorage.getItem('recentSearches');
@@ -46,6 +52,8 @@ const Dropdown = ({ onClose }) => {
         dispatch(fetchPopularContentThunk());
         dispatch(fetchGenresThunk());
     }, [dispatch]);
+
+    console.log(popularContent);
 
     // 최근 검색어 저장 함수
     const saveRecentSearch = (term) => {
@@ -148,7 +156,7 @@ const Dropdown = ({ onClose }) => {
                     <div>Error: {error || 'Something went wrong'}</div>
                 ) : (
                     popularContent.map((content, index) => (
-                        <li key={content.id}>
+                        <li key={content.id} onClick={() => handlePopularClick(content)}>
                             <span className='rank-number'>{index + 1}</span>
                             {content.title}
                         </li>
