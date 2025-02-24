@@ -15,14 +15,22 @@ const ReviewModal = ({ isOpen, onClose, contentDetail, existingReview }) => {
 
     const [reviewText, setReviewText] = useState(existingReview?.content || '');
     const [rating, setRating] = useState(existingReview?.author_details?.rating || 5);
-    const [moviePoster, setMoviePoster] = useState(
+
+    const moviePoster =
         existingReview?.moviePoster ||
-            (contentDetail?.poster_path
-                ? `https://image.tmdb.org/t/p/w500${contentDetail.poster_path}`
-                : contentDetail?.backdrop_path
-                ? `https://image.tmdb.org/t/p/w500${contentDetail.backdrop_path}`
-                : '/default-movie-poster.jpg')
-    );
+        (contentDetail?.poster_path
+            ? `https://image.tmdb.org/t/p/w500${contentDetail.poster_path}`
+            : contentDetail?.backdrop_path
+            ? `https://image.tmdb.org/t/p/w500${contentDetail.backdrop_path}`
+            : '/default-movie-poster.jpg');
+
+    const movieTitle =
+        existingReview?.movieTitle ||
+        contentDetail?.name ||
+        contentDetail?.original_name ||
+        contentDetail?.title ||
+        contentDetail?.original_title ||
+        '제목 없음';
 
     useEffect(() => {
         if (isOpen) {
@@ -30,21 +38,13 @@ const ReviewModal = ({ isOpen, onClose, contentDetail, existingReview }) => {
             if (existingReview) {
                 setReviewText(existingReview.content);
                 setRating(existingReview.author_details?.rating || 5);
-                setMoviePoster(existingReview.moviePoster);
             }
         } else {
             document.body.style.overflow = 'unset';
             setReviewText('');
             setRating(5);
-            setMoviePoster(
-                contentDetail?.poster_path
-                    ? `https://image.tmdb.org/t/p/w500${contentDetail.poster_path}`
-                    : contentDetail?.backdrop_path
-                    ? `https://image.tmdb.org/t/p/w500${contentDetail.backdrop_path}`
-                    : '/default-movie-poster.jpg'
-            );
         }
-    }, [isOpen, existingReview, contentDetail]);
+    }, [isOpen, existingReview]);
 
     const handleReviewSubmit = () => {
         if (!reviewText.trim()) {
@@ -57,7 +57,6 @@ const ReviewModal = ({ isOpen, onClose, contentDetail, existingReview }) => {
                 ...existingReview,
                 content: reviewText,
                 author_details: { ...existingReview?.author_details, rating },
-                moviePoster,
             };
             dispatch(updateReview(updatedReview));
         } else {
@@ -68,7 +67,7 @@ const ReviewModal = ({ isOpen, onClose, contentDetail, existingReview }) => {
                 created_at: new Date().toISOString(),
                 author_details: { rating, avatar_path: srcNow },
                 moviePoster,
-                movieTitle: contentDetail?.title || '',
+                movieTitle,
             };
             dispatch(addReview(newReview));
         }
@@ -99,14 +98,10 @@ const ReviewModal = ({ isOpen, onClose, contentDetail, existingReview }) => {
                     </P>
 
                     <Flex $gap="20px" $padding="0 20px">
-                        <EpItemContImg src={moviePoster} alt={contentDetail?.title} $width="200px" $height="120px" />
+                        <EpItemContImg src={moviePoster} alt={movieTitle} $width="200px" $height="120px" />
                         <Flex $flexDirection="column" $gap="10px">
                             <P $fontSize="20px" $padding="0" $fontWeight="600">
-                                {contentDetail?.name ||
-                                    contentDetail?.original_name ||
-                                    contentDetail?.title ||
-                                    contentDetail?.original_title ||
-                                    '제목 없음'}
+                                {movieTitle}
                             </P>
                             <Flex $gap="5px">
                                 {[1, 2, 3, 4, 5].map((star) => (
