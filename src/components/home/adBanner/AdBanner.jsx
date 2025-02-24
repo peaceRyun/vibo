@@ -5,8 +5,7 @@ const AdBanner = () => {
   return (
     <BannerWrapper>
       <BannerImage
-        src="public/vibo_banner.jpg"
-        // src='https://raw.githubusercontent.com/peaceRyun/vibostatic/refs/heads/main/public/mockup/mainhome/sample/adBannerSample.png'
+        src="https://raw.githubusercontent.com/peaceRyun/vibostatic/refs/heads/main/public/mockup/mainhome/vibo_addbanner.jpg"
         alt="광고배너1"
       />
     </BannerWrapper>
