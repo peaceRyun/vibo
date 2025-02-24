@@ -5,8 +5,8 @@ const LiLikeButton = ({ memberId, width, height }) => {
     const [isLiked, setIsLiked] = useState(false);
 
     const handleLike = (event) => {
-        // event.preventDefault();
-        // event.stopPropagation();
+        event.preventDefault();
+        event.stopPropagation();
         setIsLiked(!isLiked);
         console.log(`Member ${memberId} like status: ${!isLiked}`);
     };
