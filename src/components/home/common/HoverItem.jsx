@@ -70,7 +70,7 @@ const HoverItem = ({ content, videoType = 'drama' }) => {
 
     return (
         <ItemWrap onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
-            <Flex $justifyCenter='center' $alignItems='center' $position='relative'>
+            <Flex $justifyContent='space-between' $alignItems='center' $position='relative'>
                 <ItemImg
                     src={
                         backdrop_path
@@ -195,7 +195,7 @@ const Flex = styled.div`
     display: flex;
     flex-direction: ${(props) => props.$flexDirection};
     align-items: ${(props) => props.$alignItems};
-    justify-content: ${(props) => props.$justifyCenter};
+    justify-content: ${(props) => props.$justifyContent};
     gap: ${(props) => props.$gap};
     padding: ${(props) => props.$padding || '0'};
     position: ${(props) => props.$position};
