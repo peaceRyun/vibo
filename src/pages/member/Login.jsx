@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import thunkUsers from '../../store/modules/getThunkUser';
 import {
     LoginContainer,
@@ -79,11 +79,11 @@ const Login = () => {
                         로그인
                     </StyledButton>
                     <StyledLinks>
-                        <a href='/find-id'>아이디 찾기</a>
+                        <Link to='/find-id'>아이디 찾기</Link>
                         <span>|</span>
-                        <a href='/find-password'>비밀번호 찾기</a>
+                        <Link to='/find-password'>비밀번호 찾기</Link>
                         <span>|</span>
-                        <a href='/register'>회원가입</a>
+                        <Link to='/register'>회원가입</Link>
                     </StyledLinks>
                 </Fieldset>
             </Form>
