@@ -2,8 +2,7 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import thunkUsers from '../../store/modules/getThunkUser';
-import { ProfileDropdownContainer, DropdownItem, UserIconContainer, BorderLine, LogOut } from './style';
-import { FaUserCircle } from 'react-icons/fa';
+import { ProfileDropdownContainer, DropdownItem, BorderLine, LogOut, ProfileLogoContainerB } from './style';
 import { AiOutlineEdit } from 'react-icons/ai';
 import { FiLogOut } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
@@ -23,21 +22,24 @@ const ProfileDropdown = ({ onClose }) => {
             {/* 사용자 목록 */}
             <ul onClick={onClose}>
                 <DropdownItem>
-                    <UserIconContainer>
-                        <FaUserCircle size={30} />
-                    </UserIconContainer>
+                    <ProfileLogoContainerB
+                        src='https://raw.githubusercontent.com/peaceRyun/vibostatic/refs/heads/main/public/profileIconV.png'
+                        alt='프로필'
+                    />
                     사용자1
                 </DropdownItem>
                 <DropdownItem>
-                    <UserIconContainer>
-                        <FaUserCircle size={30} />
-                    </UserIconContainer>
+                    <ProfileLogoContainerB
+                        src='https://raw.githubusercontent.com/peaceRyun/vibostatic/refs/heads/main/public/profileIconI.png'
+                        alt='프로필'
+                    />
                     사용자2
                 </DropdownItem>
                 <DropdownItem>
-                    <UserIconContainer>
-                        <FaUserCircle size={30} />
-                    </UserIconContainer>
+                    <ProfileLogoContainerB
+                        src='https://raw.githubusercontent.com/peaceRyun/vibostatic/refs/heads/main/public/profileIconO.png'
+                        alt='프로필'
+                    />
                     사용자3
                 </DropdownItem>
             </ul>

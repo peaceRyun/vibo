@@ -98,7 +98,18 @@ export const SearchContainer = styled.div`
 export const ProfileLogoContainer = styled.img`
     width: 2.5rem;
     height: 2.5rem;
-    object-fit: cover;
+    object-fit: contain;
+    border-radius: 50%;
+    background-color: black;
+    cursor: pointer;
+`;
+
+export const ProfileLogoContainerB = styled.img`
+    width: 2rem;
+    height: 2rem;
+    object-fit: contain;
+    border-radius: 50%;
+    background-color: var(--gray-900);
     cursor: pointer;
 `;
 
@@ -298,7 +309,7 @@ export const DropdownItem = styled.li`
     align-items: center;
     padding: 0.5rem;
     cursor: pointer;
-    gap: 0.5rem;
+    gap: 0.8rem;
     transition: background 0.3s;
     color: white;
     font-size: 14px;
