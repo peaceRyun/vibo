@@ -1,8 +1,9 @@
-// 에피소드 정보
-import { EpItemContImg, Flex, H4, P, Span } from './style';
+import { useState } from 'react';
+import { EpItemContImg, Flex, H4, P, PlayButtonB, PlayImgB, Span, ThumbnailContainer } from './style';
 
 const EpItem = ({ episode }) => {
-    // 영상 길이 포맷팅 (API에서 분 단위로 주지 않는 경우를 위해)
+    const [isHovered, setIsHovered] = useState(false);
+
     const formatRuntime = (runtime) => {
         if (!runtime) return '정보 없음';
         return typeof runtime === 'string' ? runtime : `${runtime}분`;
@@ -14,7 +15,20 @@ const EpItem = ({ episode }) => {
                 <Span $fontWeight='800' $fontSize='28px' $padding='0 20px'>
                     {episode.episode_number}
                 </Span>
-                <EpItemContImg $width='225px' $height='137px' src={episode.stillUrl} alt={`${episode.name} 썸네일`} />
+                <ThumbnailContainer onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
+                    <EpItemContImg
+                        $width='225px'
+                        $height='137px'
+                        src={episode.stillUrl}
+                        alt={`${episode.name} 썸네일`}
+                    />
+                    <PlayButtonB style={{ opacity: isHovered ? 1 : 0 }}>
+                        <PlayImgB
+                            src='https://raw.githubusercontent.com/peaceRyun/vibostatic/refs/heads/main/public/mockup/contentdetail/ui/carousel_action_atomic.png'
+                            alt='play'
+                        />
+                    </PlayButtonB>
+                </ThumbnailContainer>
                 <Flex $flexDirection='column' $gap='20px'>
                     <H4 $fontSize='15px' $fontWeight='700'>
                         {episode.name}

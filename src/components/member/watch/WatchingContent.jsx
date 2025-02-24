@@ -111,7 +111,7 @@ const TestWatchingContent = () => {
                 <p>다양한 콘텐츠를 시청해보세요.</p>
                 <p>고객님의 취향에 맞추어 추천을 해드릴까요?</p>
                 <div>
-                    <WatchingButton onClick={() => navigate('/')}>
+                    <WatchingButton onClick={() => navigate('/mainhome')}>
                         <p>콘텐츠 추천받기</p>
                     </WatchingButton>
                 </div>

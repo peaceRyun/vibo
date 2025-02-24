@@ -825,3 +825,29 @@ export const LoadMoreButton = styled.button`
         outline: none;
     }
 `;
+
+export const ThumbnailContainer = styled.div`
+    position: relative;
+    &:hover {
+        ${PlayButton} {
+            opacity: 1;
+        }
+    }
+`;
+
+export const PlayButtonB = styled.button`
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 100;
+    width: 67.5px;
+    height: 67.5px;
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+`;
+
+export const PlayImgB = styled.img`
+    width: 67.5px !important;
+    height: 67.5px !important;
+`;

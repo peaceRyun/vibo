@@ -19,7 +19,7 @@ export const RecommendedMovies = styled.div`
     display: flex;
     gap: 15px;
     justify-content: center;
-    margin-top: 50px;
+    margin-top: -100px;
     position: relative;
 `;
 
@@ -67,12 +67,17 @@ export const WatchingButton = styled.div`
     display: flex;
     width: 150px;
     height: 45px;
-    border-radius: 10px;
+    padding: 30px 20px;
+    white-space: nowrap;
+    border-radius: 5px;
     background-color: var(--primary-base);
     justify-content: center;
     align-items: center;
     margin-top: 15px;
-
+    cursor: pointer;
+    &:hover {
+        background-color: var(--primary-600);
+    }
     p {
         display: flex;
         text-align: center;
