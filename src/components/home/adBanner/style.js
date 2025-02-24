@@ -9,6 +9,11 @@ export const BannerWrapper = styled.div`
   overflow: hidden;
   margin: 60px 0 60px 0;
   position: relative;
+  /* 드래그방지 */
+  user-select: none;
+  pointer-events: auto;
+  touch-action: pan-y;
+  user-drag: none;
 
   @media (max-width: 1024px) {
     width: 100%;

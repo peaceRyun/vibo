@@ -8,6 +8,11 @@ export const BannerWrapper = styled.div`
   position: relative;
   overflow: hidden;
   padding-left: 50px;
+  /* 드래그방지 */
+  user-select: none;
+  pointer-events: auto;
+  touch-action: pan-y;
+  user-drag: none;
 `;
 
 export const SwiperContainer = styled.div`

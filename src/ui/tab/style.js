@@ -4,6 +4,11 @@ export const TabContainer = styled.div`
   display: flex;
   justify-content: center;
   gap: 40px;
+  /* 드래그방지 */
+  user-select: none;
+  pointer-events: auto;
+  touch-action: pan-y;
+  user-drag: none;
   /* background-color: black; */
   /* padding: 20px; */
   /* margin-top: 40px;

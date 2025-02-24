@@ -36,6 +36,11 @@ export const PopularSection = styled.div`
   /* padding: 0 20px; */
   gap: 20px;
   margin-top: 100px;
+  /* 드래그방지 */
+  user-select: none;
+  pointer-events: auto;
+  touch-action: pan-y;
+  user-drag: none;
 `;
 
 export const PopularTitle = styled.div`

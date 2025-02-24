@@ -42,6 +42,11 @@ export const MainContainer = styled.div`
 
 export const MainContent = styled.div`
   padding-top: 100px;
+  /* 드래그방지 */
+  user-select: none;
+  pointer-events: auto;
+  touch-action: pan-y;
+  user-drag: none;
   /* @media (max-width: 1024px) {
     padding-top: 80px;
   }
