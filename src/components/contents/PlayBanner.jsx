@@ -6,6 +6,7 @@ import { Flex, GradientLayer, H2, PBuiWrap, PBWrap, VideoWrapper } from './style
 import LiLikeButton from '../../ui/lordicon/LiLikeButton';
 import { getTVDetail, getTVVideos, getMovieDetail, getMovieVideos } from '../../store/modules/getThunk';
 import { contPlayerActions } from '../../store/modules/contPlayerSlice';
+import { addWatchHistory } from '../../store/modules/watchSlice'; // ✅ 시청내역 추가 기능 가져오기
 
 const PlayBanner = ({ contentDetail, contentType }) => {
     const navigate = useNavigate();
@@ -14,10 +15,8 @@ const PlayBanner = ({ contentDetail, contentType }) => {
     const iframeRef = useRef(null);
     const isSeries = contentType === 'series';
 
-    // TVDetail 데이터와 player 상태 가져오기
     const { videoId } = useSelector((state) => state.playerR);
 
-    // TV 시리즈 또는 영화 정보와 비디오 정보 가져오기
     useEffect(() => {
         if (id) {
             if (isSeries) {
@@ -31,17 +30,26 @@ const PlayBanner = ({ contentDetail, contentType }) => {
     }, [dispatch, id, isSeries]);
 
     const handlePlayClick = () => {
-        // Set the current videoId to the ContentPlayer
+        if (contentDetail) {
+            const watchData = {
+                id: contentDetail.id,
+                title: contentDetail.name || contentDetail.title || '제목 없음',
+                poster: contentDetail.poster_path
+                    ? `https://image.tmdb.org/t/p/w500/${contentDetail.poster_path}`
+                    : 'https://raw.githubusercontent.com/peaceRyun/vibostatic/refs/heads/main/public/mockup/mainhome/sample/commonSample.png',
+                watchedAt: new Date().toISOString(),
+                type: contentType,
+            };
+
+            console.log('📌 시청 기록 추가됨:', watchData);
+            dispatch(addWatchHistory(watchData));
+        }
+
         dispatch(contPlayerActions.setVideoId(videoId));
-
-        // Set the player to start playing when navigated
         dispatch(contPlayerActions.setPlaying(true));
-
-        // Navigate to the player page
         navigate('/player');
     };
 
-    // 제목 표시 (TV 시리즈는 name, 영화는 title 속성 사용)
     const title = contentDetail?.name || contentDetail?.title || '제목 로딩 중...';
 
     return (
