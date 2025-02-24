@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Swiper } from 'swiper/react';
 
 export const ModalContainer = styled.div`
     position: absolute;
@@ -118,6 +119,10 @@ export const ButtonDark = styled.button`
     padding: ${(props) => props.$padding};
     color: ${(props) => props.$color};
     width: ${(props) => props.$width};
+    &:hover {
+        border: 1px solid var(--gray-100);
+        color: var(--gray-100);
+    }
 `;
 
 export const ButtonLight = styled.button`
@@ -128,10 +133,19 @@ export const ButtonLight = styled.button`
     color: ${(props) => props.$color};
     width: ${(props) => props.$width};
     font-weight: 800;
+    &:hover {
+        background-color: var(--gray-100);
+    }
 `;
 
 export const NickNameInput = styled.input`
     background-color: var(--gray-500);
+    &:hover {
+        background-color: var(--gray-100);
+    }
+    &:focus {
+        background-color: var(--gray-100);
+    }
     border: none;
     border-radius: 5px;
     outline: none;
@@ -150,6 +164,7 @@ export const ModalBackdrop = styled.div`
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
     z-index: 1;
 `;
 
@@ -159,7 +174,7 @@ export const HeaderContainer = styled.div`
     left: 0;
     right: 0;
     background-color: black;
-    padding: 75px 75px 0px 75px;
+    padding: 75px 75px 40px 75px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -176,4 +191,15 @@ export const CloseButton = styled.div`
 
 export const ModalCotent = styled.div`
     padding-top: 5rem;
+`;
+
+export const StyledSwiper = styled(Swiper)`
+    .swiper-button-next,
+    .swiper-button-prev {
+        color: var(--primary-base); // 원하는 색상으로 변경
+
+        &:hover {
+            color: var(--primary-600); // hover 시 색상
+        }
+    }
 `;

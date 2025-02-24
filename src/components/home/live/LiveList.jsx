@@ -1,9 +1,12 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import styled from 'styled-components';
+import { useEffect, useState } from 'react';
 import LiveItem from './LiveItem';
 
 const LiveList = ({ title }) => {
+  const [isLoading, setIsLoading] = useState(true);
+
   const videoData = [
     {
       id: 1,
@@ -37,42 +40,47 @@ const LiveList = ({ title }) => {
     },
   ];
 
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 2000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <LiveContainer>
       <StyledTitle>{title}</StyledTitle>
-      <StyledSwiper
-        breakpoints={{
-          1024: {
-            slidesPerView: 4.2,
-            spaceBetween: 16,
-          },
-          600: {
-            slidesPerView: 2.2,
-            spaceBetween: 14,
-          },
-          0: {
-            slidesPerView: 1.2,
-            spaceBetween: 8,
-          },
-        }}
-      >
-        {videoData.map((item) => (
-          <SwiperSlide key={item.id}>
-            <LiveItem videoData={item} />
-          </SwiperSlide>
-        ))}
-      </StyledSwiper>
+      <SwiperContainer>
+        <StyledSwiper
+          breakpoints={{
+            1024: {
+              slidesPerView: 4.2,
+              spaceBetween: 16,
+            },
+            600: {
+              slidesPerView: 2.2,
+              spaceBetween: 14,
+            },
+            0: {
+              slidesPerView: 1.2,
+              spaceBetween: 8,
+            },
+          }}
+        >
+          {videoData.map((item) => (
+            <SwiperSlide key={item.id}>
+              <LiveItem videoData={item} isVisible={!isLoading} />
+            </SwiperSlide>
+          ))}
+        </StyledSwiper>
+        {isLoading && (
+          <LoadingOverlay>
+            <LoadingSpinner />
+          </LoadingOverlay>
+        )}
+      </SwiperContainer>
     </LiveContainer>
-    // <LiveContainer>
-    //   <StyledTitle>{title}</StyledTitle>
-    //   <StyledSwiper slidesPerView={4.2} spaceBetween={16}>
-    //     {videoData.map((item) => (
-    //       <SwiperSlide key={item.id}>
-    //         <LiveItem videoData={item} />
-    //       </SwiperSlide>
-    //     ))}
-    //   </StyledSwiper>
-    // </LiveContainer>
   );
 };
 
@@ -82,6 +90,11 @@ const LiveContainer = styled.section`
   width: 100%;
   margin: 0 auto;
   padding: 60px 0 60px 0;
+  /* 드래그방지 */
+  user-select: none;
+  pointer-events: auto;
+  touch-action: pan-y;
+  user-drag: none;
   @media (max-width: 1024px) {
     padding: 40px 0 40px 0;
   }
@@ -92,17 +105,21 @@ const LiveContainer = styled.section`
 
 const StyledTitle = styled.h3`
   color: white;
-  font-size: var(--title-xlarge-size); //32
-  font-weight: var(--title-xlarge-weight); //800
+  font-size: var(--title-xlarge-size);
+  font-weight: var(--title-xlarge-weight);
   margin-bottom: 10px;
   @media (max-width: 1024px) {
-    font-size: var(--title-large-mobile); //24
-    font-weight: var(--title-large-weigh); //700
+    font-size: var(--title-large-mobile);
+    font-weight: var(--title-large-weigh);
   }
   @media (max-width: 600px) {
-    font-size: var(--title-small-mobile); //17
-    font-weight: var(--title-xsmall-weight); //700
+    font-size: var(--title-small-mobile);
+    font-weight: var(--title-xsmall-weight);
   }
+`;
+
+const SwiperContainer = styled.div`
+  position: relative;
 `;
 
 const StyledSwiper = styled(Swiper)`
@@ -112,5 +129,35 @@ const StyledSwiper = styled(Swiper)`
     border-radius: 8px;
     width: auto;
     flex-shrink: 0;
+  }
+`;
+
+const LoadingOverlay = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+const LoadingSpinner = styled.div`
+  width: 48px;
+  height: 48px;
+  border: 4px solid #fff;
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+
+  @keyframes spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
   }
 `;

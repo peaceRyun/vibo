@@ -68,11 +68,11 @@ export const NavContainer = styled.nav`
   }
 `;
 
-export const NavItem = styled.span`
+export const NavItem = styled.div`
   font-size: 1.0625rem;
   font-weight: 800;
   font-family: 'Pretendard', sans-serif;
-  color: #fff;
+  color: ${(props) => (props.$isActive ? '#07ffe6' : '#fff')};
   cursor: pointer;
   transition: color 0.3s ease;
 
@@ -98,7 +98,18 @@ export const SearchContainer = styled.div`
 export const ProfileLogoContainer = styled.img`
   width: 2.5rem;
   height: 2.5rem;
-  object-fit: cover;
+  object-fit: contain;
+  border-radius: 50%;
+  background-color: black;
+  cursor: pointer;
+`;
+
+export const ProfileLogoContainerB = styled.img`
+  width: 2rem;
+  height: 2rem;
+  object-fit: contain;
+  border-radius: 50%;
+  background-color: var(--gray-900);
   cursor: pointer;
 `;
 
@@ -276,7 +287,7 @@ export const ActionText = styled.span`
 export const ProfileDropdownContainer = styled.div`
   position: absolute;
   top: 5rem;
-  right: 2rem;
+  right: 3.125rem;
   background-color: #191919;
   color: white;
   padding: 1rem;
@@ -298,13 +309,14 @@ export const DropdownItem = styled.li`
   align-items: center;
   padding: 0.5rem;
   cursor: pointer;
-  gap: 0.5rem;
+  gap: 0.8rem;
   transition: background 0.3s;
   color: white;
   font-size: 14px;
   &:hover {
     background-color: #07ffe6;
     color: #191919;
+    border-radius: 10px;
   }
   &.noHover:hover {
     background-color: transparent;
@@ -345,7 +357,7 @@ export const LogOut = styled.div`
   padding: 0.5rem;
   cursor: pointer;
   &:hover {
-    background-color: #07ffe6;
+    background-color: var(--gray-200);
     color: #191919;
   }
 `;

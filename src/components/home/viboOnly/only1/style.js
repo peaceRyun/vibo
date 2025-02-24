@@ -45,7 +45,7 @@ export const Tag = styled.span`
   height: 1.6875rem; /* 27px */
   background-color: transparent;
   color: #fff;
-  border: 1px solid #fff;
+  border: 0.6px solid #fff;
   border-radius: 0.25rem;
   display: flex;
   align-items: center;
@@ -94,7 +94,7 @@ export const Label = styled.span`
   font-style: italic;
   text-align: left;
 
-  @media (max-width: 600px) {
-    font-size: 48px;
+  @media (max-width: 1024px) {
+    font-size: 40px;
   }
 `;

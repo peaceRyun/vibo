@@ -12,9 +12,15 @@ export const ViboContainer = styled.div`
 
 export const ViboAllContainer = styled.div`
   display: flex;
-  align-items: center;
+  align-items: left;
   flex-direction: column;
-  /* padding: 60px 50px 60px 50px; */
+  margin: 0 90px;
+  /* 드래그방지 */
+  user-select: none;
+  pointer-events: auto;
+  touch-action: pan-y;
+  user-drag: none;
+
   @media (max-width: 1024px) {
     padding: 40px 0 40px 0;
   }
@@ -32,7 +38,6 @@ export const Title = styled.div`
   flex-direction: column;
   font-size: var(--title-xlarge-size);
   font-weight: var(--title-xlarge-weight); //800
-  /*text-overflow: ellipsis; 왜 안먹음.. */
 
   @media (max-width: 1024px) {
     white-space: nowrap;
@@ -49,20 +54,10 @@ export const Title = styled.div`
   }
 `;
 
-// export const Title = styled.div`
-//   display: flex;
-//   color: white;
-//   font-size: 40px;
-//   font-weight: 800;
-//   margin-top: 40px;
-//   text-align: center;
-//   flex-direction: column;
-// `;
-
 export const Underline2 = styled.div`
-  width: 600px; /* 밑줄 길이 */
-  height: 3px; /* 밑줄 두께 */
-  background: white; /* 밑줄 색상 */
+  width: 600px;
+  height: 1.5px;
+  background: white;
   margin-top: 30px;
   align-self: center;
 
@@ -77,15 +72,15 @@ export const Underline2 = styled.div`
 // 모바일 슬라이드 스타일링
 
 export const MobileSlider = styled.div`
-  width: 100%;
-  padding: 20px 0;
+  width: 700px;
+  padding: 40px 0;
+
   display: flex;
   justify-content: center;
   align-items: center;
   overflow: hidden;
-  @media (max-width: 1024px) {
-    width: 100%;
-    height: 100vh;
+  @media (max-width: 600px) {
+    width: 400px;
   }
 `;
 
@@ -93,21 +88,14 @@ export const MobileCard = styled.div`
   background: black;
   border-radius: 16px;
   padding: 16px;
-  /* display: flex
-; */
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  /* max-height: 800px; */
+
   margin: 0 auto;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
   transition: transform 0.3s ease-in-out;
-  &:hover {
-    transform: scale(1.05);
-  }
+
   @media (max-width: 1024px) {
     width: 100%;
-    /* max-height: 100%; */
+    max-height: 100%;
   }
 `;
 
@@ -119,7 +107,7 @@ export const CardContainer = styled.div`
 
   @media (max-width: 1024px) {
     width: 100%;
-    max-height: 100%;
+    /* max-height: 100%; */
   }
 `;
 
@@ -140,14 +128,6 @@ export const MobilePoster = styled.img`
 
 export const InfoSection = styled.div`
   color: #fff;
-  @media (max-width: 1024px) {
-    width: 300px;
-    max-height: 400px;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-  }
 
   @media (max-width: 1024px) {
     width: 266px;
@@ -205,9 +185,10 @@ export const Tag = styled.span`
 
 export const Description = styled.p`
   font-size: 14px;
-  color: #bbb;
+  color: #939598;
   max-width: 400px;
   height: auto;
+  text-align: left;
   @media (max-width: 1024px) {
     font-size: 12px;
     display: -webkit-box;
@@ -217,9 +198,3 @@ export const Description = styled.p`
     text-overflow: ellipsis;
   }
 `;
-
-// export const MobileTitle = styled.div`
-//   font-size: 12px;
-//   font-weight: 600;
-//   text-align: center;
-// `;

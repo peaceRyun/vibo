@@ -36,7 +36,8 @@ export const AboutBanner = styled.div`
       left: 0;
       width: 100%;
       height: 100%;
-      background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 20%, rgba(0, 0, 0, 0.5) 50%, rgba(0, 0, 0, 0) 100%);
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 60%, rgba(0, 0, 0, 0.5) 80%, rgba(0, 0, 0, 0) 100%);
+      /*       background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 20%, rgba(0, 0, 0, 0.5) 50%, rgba(0, 0, 0, 0) 100%); */
       z-index: 0;
     }
   }
@@ -64,10 +65,6 @@ export const AboutBanner = styled.div`
         color: #fff;
         font-weight: 700;
       }
-
-      // .special {
-      //   color: #07ffe6;
-      // }
     }
 
     h2 {
@@ -119,7 +116,8 @@ export const AboutBanner = styled.div`
       transition: background 0.3s ease;
 
       &:hover {
-        background-color: #05c6bb;
+        background-color: #06dbbf;
+        color: white;
       }
     }
   }
@@ -171,7 +169,7 @@ export const OriginalContainer = styled.div`
 
   h2 {
     font-family: NanumSquare Neo;
-    font-size: 60px;
+    font-size: 50px;
     font-weight: 800;
     line-height: 100px;
     text-align: center;
@@ -180,8 +178,8 @@ export const OriginalContainer = styled.div`
 
   p {
     font-family: NanumSquare Neo;
-    font-weight: 800;
-    font-size: 30px;
+    font-weight: 500;
+    font-size: 24px;
     color: var(--gray-500);
   }
 `;
@@ -332,7 +330,7 @@ export const ContentContainer = styled.div`
     top: 70px;
     h2 {
       font-family: NanumSquare Neo;
-      font-size: 60px;
+      font-size: 50px;
       font-weight: 800;
       line-height: 100px;
       text-align: center;
@@ -340,8 +338,8 @@ export const ContentContainer = styled.div`
     }
     p {
       font-family: NanumSquare Neo;
-      font-weight: 700;
-      font-size: 30px;
+      font-weight: 500;
+      font-size: 24px;
       color: var(--gray-500);
     }
   }
@@ -350,89 +348,115 @@ export const ContentContainer = styled.div`
     position: absolute;
     bottom: 0;
     background-color: var(--primary-base);
-    width: 239px;
-    height: 51px;
+    width: 313px;
+    height: 57px;
     font-weight: 800;
     font-size: 24px;
     border-radius: 50px;
+    padding: 17px 85px;
+    &:hover {
+      background-color: #06dbbf;
+      color: white;
+    }
   }
 `;
 
 export const FAQContainer = styled.div`
-  width: 100%;
-  max-width: 2800px;
-  // height: 107px;
-  margin: 100px auto;
-  padding: 50px calc((100vw - 1360px) / 2);
+  max-width: 900px;
+  margin: 50px auto;
+  padding: 40px;
   background-color: #191919;
-  color: white;
   border-radius: 10px;
-  text-align: center;
-  background: #000;
 
   .faq-title {
-    font-size: 60px;
-    font-weight: 800;
-    color: white;
-    margin-bottom: 64px;
-    display: flex;
-    flex-direction: row;
-    text-align: center;
-    justify-content: flex-start;
+    color: #fff;
+    font-size: 24px;
+    margin-bottom: 20px;
   }
 `;
 
+/* 질문 컨테이너 */
 export const FAQItem = styled.div`
-  background-color: ${({ active }) => (active ? '#2a2a2a' : '#3e3e3f')};
-  color: ${({ active }) => (active ? '#07ffe6' : '#D1D2D4')};
-  padding: 30px 40px;
-  margin-bottom: ${({ active }) => (active ? '10px' : '35px')};
+  background: ${({ $active }) => ($active ? '#3a3a3a' : '#2a2a2a')};
+  color: ${({ $active }) => ($active ? '#fff' : '#d1d2d4')};
   border-radius: 6px;
-  cursor: pointer;
+  margin-bottom: 10px;
+  overflow: hidden;
+  transition: background 0.3s ease, max-height 0.3s ease-in-out;
+  max-height: ${({ $active }) => ($active ? '200px' : '60px')}; /* 확장될 높이 조절 */
+`;
+
+/* 상단 질문 + X 버튼 */
+export const QuestionBox = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-weight: 800;
-  font-size: 34px;
-  transition: background 0.3s ease-in-out, margin-bottom 0.3s ease-in-out;
-  width: 100%;
-  max-width: 1500px;
-  height: 95px;
-
+  font-size: 18px;
+  font-weight: bold;
+  padding: 15px;
+  cursor: pointer;
   &:hover {
-    color: #07ffe6;
+    color: var(--primary-base);
   }
 `;
 
+/* 질문 텍스트 */
 export const Question = styled.div`
-  flex-grow: 1;
-  text-align: left;
-  font-weight: 700;
+  flex: 1;
+  /* &:hover {
+    color: var(--primary-base);
+  } */
+`;
+
+/* 닫기 버튼 (X) */
+export const CloseButton = styled.button`
+  background: none;
+  border: none;
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+`;
+
+/* 답변 컨테이너 */
+export const AnswerWrapper = styled.div`
+  padding: ${({ $active }) => ($active ? '15px' : '0px')};
+  opacity: ${({ $active }) => ($active ? '1' : '0')};
+  max-height: ${({ $active }) => ($active ? '150px' : '0px')};
+  overflow: hidden;
+  /* transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out; */
+`;
+
+/* 답변 텍스트 */
+export const AnswerContent = styled.p`
+  font-size: 12px;
+  color: #a8a9ad;
+  line-height: 1.4;
+`;
+
+export const Divider = styled.div`
+  height: 1px;
+  background: #555;
+  width: 100%;
+  opacity: ${({ $active }) => ($active ? '1' : '0')};
+  transition: opacity 0.3s ease-in-out;
+`;
+
+export const IconButton = styled.button`
+  background: none;
+  border: none;
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
+  transition: transform 0.3s ease-in-out;
+
+  /* &:hover {
+    color: var(--primary-base);
+  } */
 `;
 
 export const Icon = styled.span`
   transition: transform 0.3s ease;
-  transform: ${({ active }) => (active ? 'rotate(180deg)' : 'rotate(0)')};
-`;
-
-export const Answer = styled.div`
-  font-size: 20px;
-  text-align: left;
-  padding: 10px 30px;
-  color: #d1d2d4;
-`;
-
-export const AnswerWrapper = styled.div`
-  max-width: 1470px;
-  max-height: ${({ active }) => (active ? '100px' : '0')};
-  overflow: hidden;
-  transition: max-height 0.3s ease-in-out;
-  background-color: #2a2a2a;
-  border-radius: 6px;
-  margin: ${({ active }) => (active ? '0 0 30px 30px;' : '0')};
-
-  padding: ${({ active }) => (active ? '15px' : '0')};
-  opacity: ${({ active }) => (active ? '1' : '0')};
+  transform: ${({ $active }) => ($active ? 'rotate(180deg)' : 'rotate(0)')};
 `;
 
 export const LastSectionWrapper = styled.div`
@@ -446,7 +470,7 @@ export const LastSectionWrapper = styled.div`
   color: white;
   text-align: center;
   gap: 100px;
-  margin: 100px auto;
+  margin: 100px 0 100px 0;
 
   .logo {
     width: 160px;
@@ -474,10 +498,7 @@ export const LastSectionWrapper = styled.div`
 
     &:hover {
       background-color: #06dbbf;
-    }
-
-    &:active {
-      background-color: #04998a;
+      color: white;
     }
   }
 `;
@@ -521,8 +542,9 @@ export const AboutSwiperWrapper = styled.div`
     border-radius: 10px;
   }
   .swiper-slide {
-    opacity: 1; 
-    transition: opacity 1s ease-in-out; 
+    opacity: 1;
+    transition: opacity 1s ease-in-out;
+  }
 `;
 
 export const SlideContainer = styled.div`
@@ -552,7 +574,7 @@ export const SlideContainer = styled.div`
     background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, black 10%);
 
     z-index: 1;
-    
+  }
 `;
 
 export const SlideTitle = styled.h2`
@@ -572,16 +594,6 @@ export const SlideTitle = styled.h2`
     left: 50%;
     transform: translateX(-50%);
 
-    // .bold {
-    //   position: absolute;
-    //   left: 50%;
-    //   transform: translateX(-50%);
-    //   top: -250px;
-    //   font-family: metrobarat;
-    //   font-size: 100px;
-    //   letter-spacing: 3px;
-    //   font-weight: 700;
-    // }
     .light {
       position: absolute;
       bottom: 50px;
@@ -625,13 +637,22 @@ export const ButtonWrapper = styled.div`
     width: 346px;
     height: 52px;
     font-weight: bold;
-    border-radius: 8px;
+    border-radius: 5px;
     cursor: pointer;
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
     z-index: 10;
+    background-color: #07ffe6;
+    color: black;
+    font-weight: 700;
 
+    &:hover {
+      background-color: #06dbbf;
+      color: black;
+      font-weight: 700;
+      border-color: #06dbbf;
+    }
     @media (max-width: 600px) {
       width: 346px;
       height: 52px;

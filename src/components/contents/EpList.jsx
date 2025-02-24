@@ -1,23 +1,31 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import ToggleSwitch from '../../ui/toggle/Toggle';
 import SeasonDropdown from './dropdown/SeasonDropDown';
 import EpItem from './EpItem';
-import { CloseButton, CRatingImg, EpItemsWrap, EpListBgi, Flex, FlexUl, H3, P20, P28 } from './style';
+import { CloseButton, CRatingImg, EpItemsWrap, EpListBgi, Flex, FlexUl, H3, P20, P28, LoadMoreButton } from './style';
 import { useEpisodeAnimation } from '../../hooks/useGsap';
 import { IoClose } from 'react-icons/io5';
+import { paginationUtil } from '../../utils/paginationUtil';
 
-const EpList = ({
-    seasons,
-    episodes,
-    contentRating,
-    seasonsLoading,
-    episodesLoading,
-    onSeasonSelect,
-    posterPath, // contentDetail에서 전달받은 poster_path
-}) => {
+const EpList = ({ seasons, episodes, contentRating, seasonsLoading, episodesLoading, onSeasonSelect, posterPath }) => {
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const [selectedSeason, setSelectedSeason] = useState('');
+    const [currentPage, setCurrentPage] = useState(1);
     const episodeListRef = useEpisodeAnimation(!!selectedSeason);
+
+    useEffect(() => {
+        if (!seasonsLoading && seasons.length > 0) {
+            const season1 = seasons.find((season) => season.season_number === 1);
+            if (season1) {
+                handleSeasonSelect(`시즌 ${season1.season_number}`);
+            }
+        }
+    }, [seasons, seasonsLoading]);
+
+    // 시즌 변경 시 페이지 리셋
+    useEffect(() => {
+        setCurrentPage(1);
+    }, [selectedSeason]);
 
     const handleToggle = () => {
         setIsDropdownOpen(!isDropdownOpen);
@@ -26,27 +34,33 @@ const EpList = ({
     const handleSeasonSelect = (season) => {
         setSelectedSeason(season);
         setIsDropdownOpen(false);
-        // 시즌 번호 추출 (예: '시즌 1' -> 1)
         const seasonNumber = season.split(' ')[1];
-        // 부모 컴포넌트의 핸들러 호출
         onSeasonSelect(seasonNumber);
     };
 
     const handleClose = () => {
         setSelectedSeason('');
         setIsDropdownOpen(false);
+        setCurrentPage(1);
     };
 
-    // 시즌 목록 형식 변환
+    const handleLoadMore = () => {
+        setCurrentPage((prev) => prev + 1);
+    };
+
     const seasonOptions = seasons.map((season) => ({
         id: season.id,
         name: `시즌 ${season.season_number}`,
     }));
 
-    // 배경 이미지 URL 생성
     const backgroundImage = posterPath
         ? `https://image.tmdb.org/t/p/original${posterPath}`
         : 'https://raw.githubusercontent.com/peaceRyun/vibostatic/refs/heads/main/public/mockup/contentdetail/sample/EpListBackgroudImg.png';
+
+    const showSeasonSelectionPrompt = !seasonsLoading && (!seasons || seasons.length === 0);
+
+    // 페이지네이션 적용
+    const { items: paginatedEpisodes, hasMore } = paginationUtil(episodes, currentPage);
 
     return (
         <section id='episode-list'>
@@ -59,6 +73,7 @@ const EpList = ({
                 >
                     <Flex $flexDirection='column' $position='relative'>
                         <H3>에피소드</H3>
+                        {showSeasonSelectionPrompt && <P20>시즌을 선택해주세요</P20>}
                         {selectedSeason && !episodesLoading && (
                             <Flex $justifyContent='space-between' $alignItems='center' $gap='20px'>
                                 <Flex $gap='10px' $justifyContent='space-between' $alignItems='center'>
@@ -106,14 +121,17 @@ const EpList = ({
                         {episodesLoading ? (
                             <div>에피소드 로딩 중...</div>
                         ) : (
-                            <FlexUl $flexDirection='column'>
-                                {episodes.map((episode) => (
-                                    <EpItem key={episode.id} episode={episode} />
-                                ))}
-                            </FlexUl>
+                            <>
+                                <FlexUl $flexDirection='column'>
+                                    {paginatedEpisodes.map((episode) => (
+                                        <EpItem key={episode.id} episode={episode} />
+                                    ))}
+                                </FlexUl>
+                                {hasMore && <LoadMoreButton onClick={handleLoadMore}>더보기 ...</LoadMoreButton>}
+                            </>
                         )}
                         <EpListBgi
-                            src={backgroundImage} // 동적 배경 이미지 사용
+                            src={backgroundImage}
                             alt='에피배경이미지'
                             $position='absolute'
                             $top='0'

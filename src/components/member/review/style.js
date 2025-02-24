@@ -98,12 +98,15 @@ export const ReviewIcon = styled.div`
     align-items: center;
     margin-bottom: 45px;
     gap: 8px;
+    cursor: pointer;
 `;
 
 // 별점 컨테이너
 export const RatingStars = styled.div`
     display: flex;
     gap: 3px;
+    margin-top: 10px;
+    margin-left: 10px;
 `;
 
 export const Star = styled.span`

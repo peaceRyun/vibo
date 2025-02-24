@@ -18,8 +18,9 @@ const StyledLordIcon = styled('lord-icon')`
 const LiLike = ({
     src = 'https://cdn.lordicon.com/ulnswmkk.json',
     colors = 'primary:#e8308c',
+    stroke = 'light',
     isLiked,
-    onClick,
+    onClick = () => {},
     width,
     height,
     ...props
@@ -48,22 +49,33 @@ const LiLike = ({
         }
     }, [isLiked]);
 
-    const handleClick = useCallback(() => {
-        if (isLiked) {
-            setTrigger('morph');
-            setTimeout(() => {
-                onClick();
-            }, 500);
-        } else {
-            onClick();
-        }
-    }, [isLiked, onClick]);
+    const handleClick = useCallback(
+        (event) => {
+            if (event) {
+                event.preventDefault();
+                event.stopPropagation();
+            }
+
+            if (onClick && typeof onClick === 'function') {
+                if (isLiked) {
+                    setTrigger('morph');
+                    setTimeout(() => {
+                        onClick(event);
+                    }, 500);
+                } else {
+                    onClick(event);
+                }
+            }
+        },
+        [isLiked, onClick]
+    );
 
     return (
         <IconWrapper width={width} height={height} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
             <StyledLordIcon
                 src={src}
                 colors={colors}
+                stroke={stroke}
                 trigger={isLiked ? 'in' : trigger}
                 state={isLiked ? 'in-heart' : 'morph-heart'}
                 onClick={handleClick}

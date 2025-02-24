@@ -63,11 +63,11 @@ const MainHome = () => {
           fetchFunction={getDarkTheaterReleases}
           stateSelector={(state) => state.filterR.darkTheaterReleases}
         />
-        {/* <CommonList fetchFunction={getDramaTvs} stateSelector={(state) => state.filterR.DramaTvs} /> */}
-        {/* 헐 대소문자.. */}
         <MainCommonList fetchFunction={getDramaTvs} stateSelector={(state) => state.filterR.dramaTvs} />
         <ViboOnly />
+        {/* <CommonList fetchFunction={getDramaTvs} stateSelector={(state) => state.filterR.DramaTvs} /> */}
       </MainContainer>
+
       <MenuSection />
     </MainContent>
   );

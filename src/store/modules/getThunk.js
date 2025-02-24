@@ -91,18 +91,29 @@ export const getMovie = createAsyncThunk('movie/getMovie', async (_, thunkAPI) =
 //영화 - 상세정보 가져오기 thunk
 export const getMovieDetail = createAsyncThunk('movieDetail/getMovieDetail', async (movieId, { rejectWithValue }) => {
     try {
-        const response = await axios.get(`https://api.themoviedb.org/3/movie/${movieId}`, {
-            params: {
-                language: 'ko-KR',
-            },
-            headers: {
-                accept: 'application/json',
-                Authorization:
-                    'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJkZGY2NTIxYzQzYzJlMDNmNTlkMjc2N2YxMDlhYWFhNCIsIm5iZiI6MTczNzUxMDE4NS4yNjIsInN1YiI6IjY3OTA0ZDI5MmQ2MWMzM2U2M2RmZTVlNiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ._QJjWVEDYEcIfVZtQRYG0JSRb22Dit3HopPsNm8AILE',
-            },
-        });
+        const [detailResponse, creditResponse] = await Promise.all([
+            axios.get(`https://api.themoviedb.org/3/movie/${movieId}`, {
+                params: { language: 'ko-KR' },
+                headers: {
+                    accept: 'application/json',
+                    Authorization:
+                        'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJkZGY2NTIxYzQzYzJlMDNmNTlkMjc2N2YxMDlhYWFhNCIsIm5iZiI6MTczNzUxMDE4NS4yNjIsInN1YiI6IjY3OTA0ZDI5MmQ2MWMzM2U2M2RmZTVlNiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ._QJjWVEDYEcIfVZtQRYG0JSRb22Dit3HopPsNm8AILE',
+                },
+            }),
+            axios.get(`https://api.themoviedb.org/3/movie/${movieId}/credits`, {
+                params: { language: 'ko-KR' },
+                headers: {
+                    accept: 'application/json',
+                    Authorization:
+                        'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJkZGY2NTIxYzQzYzJlMDNmNTlkMjc2N2YxMDlhYWFhNCIsIm5iZiI6MTczNzUxMDE4NS4yNjIsInN1YiI6IjY3OTA0ZDI5MmQ2MWMzM2U2M2RmZTVlNiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ._QJjWVEDYEcIfVZtQRYG0JSRb22Dit3HopPsNm8AILE',
+                },
+            }),
+        ]);
 
-        return response.data;
+        return {
+            ...detailResponse.data,
+            credits: creditResponse.data,
+        };
     } catch (error) {
         return rejectWithValue(error.message);
     }
@@ -272,18 +283,29 @@ export const getTVseries = createAsyncThunk('TVseries/getTVseries', async (_, th
 //TV 시리즈 - 상세정보 가져오기 thunk
 export const getTVDetail = createAsyncThunk('TVDetail/getTVDetail', async (tvId, { rejectWithValue }) => {
     try {
-        const response = await axios.get(`https://api.themoviedb.org/3/tv/${tvId}`, {
-            params: {
-                language: 'ko-KR',
-            },
-            headers: {
-                accept: 'application/json',
-                Authorization:
-                    'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJkZGY2NTIxYzQzYzJlMDNmNTlkMjc2N2YxMDlhYWFhNCIsIm5iZiI6MTczNzUxMDE4NS4yNjIsInN1YiI6IjY3OTA0ZDI5MmQ2MWMzM2U2M2RmZTVlNiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ._QJjWVEDYEcIfVZtQRYG0JSRb22Dit3HopPsNm8AILE',
-            },
-        });
+        const [detailResponse, creditResponse] = await Promise.all([
+            axios.get(`https://api.themoviedb.org/3/tv/${tvId}`, {
+                params: { language: 'ko-KR' },
+                headers: {
+                    accept: 'application/json',
+                    Authorization:
+                        'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJkZGY2NTIxYzQzYzJlMDNmNTlkMjc2N2YxMDlhYWFhNCIsIm5iZiI6MTczNzUxMDE4NS4yNjIsInN1YiI6IjY3OTA0ZDI5MmQ2MWMzM2U2M2RmZTVlNiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ._QJjWVEDYEcIfVZtQRYG0JSRb22Dit3HopPsNm8AILE',
+                },
+            }),
+            axios.get(`https://api.themoviedb.org/3/tv/${tvId}/credits`, {
+                params: { language: 'ko-KR' },
+                headers: {
+                    accept: 'application/json',
+                    Authorization:
+                        'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJkZGY2NTIxYzQzYzJlMDNmNTlkMjc2N2YxMDlhYWFhNCIsIm5iZiI6MTczNzUxMDE4NS4yNjIsInN1YiI6IjY3OTA0ZDI5MmQ2MWMzM2U2M2RmZTVlNiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ._QJjWVEDYEcIfVZtQRYG0JSRb22Dit3HopPsNm8AILE',
+                },
+            }),
+        ]);
 
-        return response.data;
+        return {
+            ...detailResponse.data,
+            credits: creditResponse.data,
+        };
     } catch (error) {
         return rejectWithValue(error.message);
     }
@@ -434,6 +456,8 @@ export const getAiringToday = createAsyncThunk('content/getAiringToday', async (
                 ...show,
                 airDate: show.next_air_date,
                 dayOfWeek: koreanDay,
+                // 고유한 key 추가
+                uniqueKey: `${show.id}_${koreanDay}_${show.next_air_date}`,
             });
 
             return acc;
@@ -783,14 +807,35 @@ export const getTVContentRating = createAsyncThunk('TVDetail/getTVContentRating'
 
         // 한국 관람등급 찾기
         const krRating = response.data.results.find((rating) => rating.iso_3166_1 === 'KR');
-
         // 한국 관람등급이 없으면 미국 관람등급 사용
         const usRating = response.data.results.find((rating) => rating.iso_3166_1 === 'US');
 
-        return {
-            rating: krRating?.rating || usRating?.rating || '정보 없음',
-            iso_3166_1: krRating ? 'KR' : usRating ? 'US' : null,
-        };
+        let rating = '정보 없음';
+        const country = krRating ? 'KR' : usRating ? 'US' : null;
+
+        if (krRating) {
+            // 한국 관람등급 매핑
+            const krRatingMap = {
+                전체관람가: 'ALL',
+                12: '12',
+                15: '15',
+                19: '19',
+            };
+            rating = krRatingMap[krRating.rating] || krRating.rating;
+        } else if (usRating) {
+            // 미국 관람등급 매핑
+            const usRatingMap = {
+                'TV-Y': 'ALL',
+                'TV-Y7': 'ALL',
+                'TV-G': 'ALL',
+                'TV-PG': '12',
+                'TV-14': '15',
+                'TV-MA': '19',
+            };
+            rating = usRatingMap[usRating.rating] || usRating.rating;
+        }
+
+        return { rating, iso_3166_1: country };
     } catch (error) {
         return rejectWithValue(error.message);
     }
@@ -809,26 +854,42 @@ export const getMovieContentRating = createAsyncThunk(
                 },
             });
 
-            // 한국 관람등급 찾기
             const krRelease = response.data.results.find((release) => release.iso_3166_1 === 'KR');
-
-            // 한국 관람등급이 없으면 미국 관람등급 사용
             const usRelease = response.data.results.find((release) => release.iso_3166_1 === 'US');
 
-            // certification 찾기
-            const krCertification = krRelease?.release_dates[0]?.certification;
-            const usCertification = usRelease?.release_dates[0]?.certification;
+            let rating = '정보 없음';
+            const country = krRelease ? 'KR' : usRelease ? 'US' : null;
 
-            return {
-                rating: krCertification || usCertification || '정보 없음',
-                iso_3166_1: krRelease ? 'KR' : usRelease ? 'US' : null,
-            };
+            if (krRelease && krRelease.release_dates[0]) {
+                // 한국 관람등급 매핑
+                const krRatingMap = {
+                    All: 'ALL',
+                    12: '12',
+                    15: '15',
+                    18: '19',
+                    청소년관람불가: '19',
+                };
+                rating =
+                    krRatingMap[krRelease.release_dates[0].certification] || krRelease.release_dates[0].certification;
+            } else if (usRelease && usRelease.release_dates[0]) {
+                // 미국 관람등급 매핑
+                const usRatingMap = {
+                    G: 'ALL',
+                    PG: 'ALL',
+                    'PG-13': '12',
+                    R: '15',
+                    'NC-17': '19',
+                };
+                rating =
+                    usRatingMap[usRelease.release_dates[0].certification] || usRelease.release_dates[0].certification;
+            }
+
+            return { rating, iso_3166_1: country };
         } catch (error) {
             return rejectWithValue(error.message);
         }
     }
 );
-
 // TV 시리즈 시즌별 에피소드 가져오기 thunk
 export const getTVSeasonEpisodes = createAsyncThunk(
     'TVEpisodes/getTVSeasonEpisodes',

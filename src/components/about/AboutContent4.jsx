@@ -1,5 +1,14 @@
 import { useState } from 'react';
-import { FAQContainer, FAQItem, Question, Answer, AnswerWrapper, Icon } from './style';
+import {
+  FAQContainer,
+  FAQItem,
+  Question,
+  AnswerWrapper,
+  QuestionBox,
+  AnswerContent,
+  Divider,
+  IconButton,
+} from './style';
 import AboutContent5 from './AboutContent5';
 
 const faqs = [
@@ -22,17 +31,21 @@ const AboutContent4 = () => {
       <FAQContainer>
         <h2 className="faq-title">자주 묻는 질문</h2>
         {faqs.map((faq, index) => (
-          <div key={index}>
-            <FAQItem onClick={() => toggleFAQ(index)} active={openIndex === index}>
-              <Question active={openIndex === index}>{faq.question}</Question>
-              <Icon active={openIndex === index}>▼</Icon>
-            </FAQItem>
-            <AnswerWrapper active={openIndex === index}>
-              <Answer>{faq.answer}</Answer>
+          <FAQItem key={index} $active={openIndex === index}>
+            <QuestionBox onClick={() => toggleFAQ(index)} $active={openIndex === index}>
+              <Question>{faq.question}</Question>
+              <IconButton onClick={() => toggleFAQ(index)}>{openIndex === index ? '✕' : '▼'}</IconButton>
+
+              {/* {openIndex === index && <CloseButton onClick={() => setOpenIndex(null)}>✕</CloseButton>} */}
+            </QuestionBox>
+            <Divider $active={openIndex === index} />
+            <AnswerWrapper $active={openIndex === index}>
+              <AnswerContent>{faq.answer}</AnswerContent>
             </AnswerWrapper>
-          </div>
+          </FAQItem>
         ))}
       </FAQContainer>
+
       <AboutContent5 />
     </>
   );

@@ -33,15 +33,14 @@ export const CommonList = ({ type = 'series' }) => {
         <CommonInfo>
           <CommonTitle>
             {`
-  XX님이
-  좋아할만 한
+  정주행 추천
   ${type === 'series' ? '예능' : '액션'}`}
             <VerticalText>{contentTitle}</VerticalText>
           </CommonTitle>
           <MoreBtn onClick={onGo}>더보기</MoreBtn>
         </CommonInfo>
         <CommonSwiper
-          spaceBetween={30} /* 기본 간격 */
+          spaceBetween={40} /* 기본 간격 */
           slidesPerView={5.5} /* 기본값 (데스크탑) */
           breakpoints={{
             // 1280: { slidesPerView: 5.5, spaceBetween: 30 },
@@ -71,7 +70,11 @@ const Section = styled.section`
   position: relative;
   // gap: 5px;
   padding: 60px 0 60px 0;
-
+  /* 드래그방지 */
+  user-select: none;
+  pointer-events: auto;
+  touch-action: pan-y;
+  user-drag: none;
   @media (max-width: 1024px) {
     flex-direction: column;
     padding: 40px 0 40px 0;
@@ -85,7 +88,7 @@ const Section = styled.section`
 const VerticalText = styled.div`
   position: absolute;
   left: 19.8%;
-  top: 21%;
+  top: 25%;
   transform: translateY(-50%) rotate(-270deg);
   font-size: clamp(50px, 6vw, 80px);
   font-weight: bold;
@@ -123,7 +126,7 @@ const CommonTitle = styled.h3`
 
   line-height: 1.5;
   margin: 0;
-  white-space: pre-line;
+  /* white-space: pre-line; */
   font-size: var(--title-xlarge-size); //32
   font-weight: var(--title-xlarge-weight); //800
   @media (max-width: 1024px) {
@@ -139,7 +142,7 @@ const CommonTitle = styled.h3`
 `;
 
 const MoreBtn = styled.button`
-  background-color: var(--primary-600);
+  background-color: #07ffe6;
   color: black;
   font-size: clamp(14px, 1.2vw, 17px);
   padding: 15px;
@@ -151,7 +154,8 @@ const MoreBtn = styled.button`
   font-weight: bold;
 
   &:hover {
-    background-color: var(--primary-base);
+    background-color: #06dbbf;
+    color: white;
   }
 `;
 
