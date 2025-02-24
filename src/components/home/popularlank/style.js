@@ -36,16 +36,21 @@ export const PopularSection = styled.div`
   /* padding: 0 20px; */
   gap: 20px;
   margin-top: 100px;
+  /* 드래그방지 */
+  user-select: none;
+  pointer-events: auto;
+  touch-action: pan-y;
+  user-drag: none;
 `;
 
 export const PopularTitle = styled.div`
   color: white;
-  /* width: 23rem; */
+  margin-top: 32px;
 
   width: 465px;
 
   line-height: 1.5;
-  margin: 0;
+
   text-align: left;
   font-size: var(--title-xlarge-size); //32
   font-weight: var(--title-xlarge-weight); //800
@@ -77,8 +82,8 @@ export const ItemWrapper = styled.div`
 `;
 export const RankingNumber = styled.span`
   position: absolute;
-  bottom: -18px;
-  left: 16%;
+  bottom: -3px;
+  left: 15%;
   transform: translate(-67%, 15%);
   font-size: 130px;
   font-weight: 900;
@@ -103,7 +108,7 @@ export const RankingNumber = styled.span`
 `;
 export const ImageContainer = styled.div`
   border: 2px solid transparent;
-
+  margin-right: 40px;
   img {
     width: 100%;
     height: auto;

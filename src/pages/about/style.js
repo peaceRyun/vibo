@@ -6,7 +6,7 @@ export const AboutWrapper = styled.div`
 `;
 
 export const Inner = styled.div`
-  margin: 100px auto;
+  margin: 80px auto;
   //   @media (max-width: 599px) {
   //     max-width: calc(390px - var(--spacing-8));
   //   }
