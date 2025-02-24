@@ -1,30 +1,31 @@
+import { useEffect, useState } from 'react';
 import { Container } from '../../common/style';
 import ProfileEdit from './ProfileEdit';
 import ProfileSwitch from './ProfileSwitch';
 import ProfileInfoEdit from './ProfileInfoEdit';
 import { FaPen } from 'react-icons/fa';
+import { useSelector } from 'react-redux';
+import WatchingContent from '../../components/member/watch/WatchingContent';
+import BuyingZzimContent from '../../components/member/buyzzim/BuyingZzimContent';
+import ReviewItems from '../../components/member/review/ReviewItems';
+import { Link, useNavigate } from 'react-router-dom';
+import { MainContainer, MainContent } from '../home/main/style';
+
 const Mypage = () => {
     const [activeTab, setActiveTab] = useState('시청내역');
     const { nickname, srcNow } = useSelector((state) => state.profileR);
+    const navigate = useNavigate();
 
     const selectedPlan = localStorage.getItem('selectedPlan') || '베이직';
 
-    const movies = [
-        {
-            src: 'https://raw.githubusercontent.com/peaceRyun/vibostatic/refs/heads/main/public/mockup/member/mypage_01.webp',
-        },
-        {
-            src: 'https://raw.githubusercontent.com/peaceRyun/vibostatic/refs/heads/main/public/mockup/member/mypage_02.webp',
-        },
-        {
-            src: 'https://raw.githubusercontent.com/peaceRyun/vibostatic/refs/heads/main/public/mockup/member/mypage_03.webp',
-        },
-        {
-            src: 'https://raw.githubusercontent.com/peaceRyun/vibostatic/refs/heads/main/public/mockup/member/mypage_04.webp',
-        },
-    ];
+    useEffect(() => {
+        const hasRefreshed = sessionStorage.getItem('mypageRefreshed');
 
-    const navigate = useNavigate();
+        if (!hasRefreshed) {
+            sessionStorage.setItem('mypageRefreshed', 'true');
+            window.location.reload();
+        }
+    }, []);
 
     const onGo = () => {
         navigate('/profileselect');
@@ -44,7 +45,7 @@ const Mypage = () => {
                         <UserInfo>
                             <UserName>
                                 <strong>{nickname}</strong>
-                                <p>님</p>{' '}
+                                <p>님</p>
                                 <Link to="/profileforedit">
                                     <FaPen size="21px" color="white" />
                                 </Link>
@@ -96,13 +97,6 @@ const Mypage = () => {
 export default Mypage;
 
 import styled from 'styled-components';
-import WatchingContent from '../../components/member/watch/WatchingContent';
-import BuyingZzimContent from '../../components/member/buyzzim/BuyingZzimContent';
-import { useState } from 'react';
-import ReviewItems from '../../components/member/review/ReviewItems';
-import { Link, useNavigate } from 'react-router-dom';
-import { MainContainer, MainContent } from '../home/main/style';
-import { useSelector } from 'react-redux';
 
 // 전체 컨테이너
 export const ProfileContainer = styled.div`
@@ -169,7 +163,6 @@ export const PassCard = styled.div`
     padding: 15px;
     border-radius: 8px;
     margin-bottom: 20px;
-    gap: 2.875rem;
     height: 6.875rem;
     .PassTitle {
         width: 26.625rem;
