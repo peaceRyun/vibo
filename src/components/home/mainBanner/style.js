@@ -8,20 +8,34 @@ export const BannerWrapper = styled.div`
   position: relative;
   overflow: hidden;
   padding-left: 50px;
+  /* 드래그방지 */
+  user-select: none;
+  pointer-events: auto;
+  touch-action: pan-y;
+  user-drag: none;
+  @media (max-width: 600px) {
+    padding-left: 20px;
+  }
 `;
 
 export const SwiperContainer = styled.div`
   width: 100%;
   height: auto;
-  min-height: 600px;
+  /* min-height: 600px; */
   overflow: visible;
+
   //페이지 네비 스타일링 추가
   .swiper-pagination-bullet {
     background-color: white !important;
+
+    bottom: var(--swiper-pagination-bottom, 30px);
+    @media (max-width: 600px) {
+      display: none;
+    }
   }
   .swiper-pagination-bullet-active {
     background-color: var(--primary-base) !important;
-    bottom: var(--swiper-pagination-bottom, 50px);
+    /* bottom: var(--swiper-pagination-bottom, 50px); */
   }
 
   .swiper-button-prev,
@@ -30,8 +44,12 @@ export const SwiperContainer = styled.div`
     font-size: 30px !important;
     z-index: 11;
     top: var(--swiper-navigation-top-offset, 45%);
-    padding: 0 35px;
+    padding: 0 60px 0 40px;
+
     /* margin: 50px; */
+    @media (max-width: 600px) {
+      display: none;
+    }
   }
 `;
 
@@ -42,6 +60,11 @@ export const SlideImage = styled.img`
   border-radius: 12px;
   min-height: 600px;
   max-height: 600px;
+  @media (max-width: 600px) {
+    min-height: 400px;
+    max-height: 400px;
+    align-items: center;
+  }
 `;
 
 export const SlideItem = styled.div`
@@ -67,11 +90,16 @@ export const SlideContent = styled.div`
   left: 50px; /* 왼쪽 여백 */
   color: white;
   text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.8); /* 텍스트 가독성 개선 */
-
   max-width: 50%;
   padding: 20px;
   margin-bottom: 40px;
   z-index: 1000;
+  @media (max-width: 600px) {
+    max-width: 60%;
+    padding: 10px;
+    bottom: 15px;
+    left: 20px;
+  }
 `;
 
 export const Title = styled.div`
@@ -113,9 +141,8 @@ export const FloatingContainer = styled.div`
     /* top: calc(-100px + ((1450px - 100vw) * 0.1)); */
   }
 
-  @media (max-width: 1450px) {
-    /* top: -60px;
-    height: 79%; */
+  @media (max-width: 600px) {
+    display: none;
   }
 `;
 
@@ -132,7 +159,7 @@ export const OverlayFilter = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
-  min-width: 600px;
+  /* min-width: 600px; */
   border-radius: 12px;
   background: linear-gradient(to top, rgba(0, 0, 0.3, 0.8), rgba(0, 0, 0, 0.1));
   z-index: 2;

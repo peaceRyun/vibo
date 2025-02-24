@@ -5,7 +5,7 @@ import { ProfileLogoContainer } from './style';
 const ProfileLogo = ({ onClick }) => {
     return (
         <ProfileLogoContainer
-            src='https://raw.githubusercontent.com/peaceRyun/vibostatic/refs/heads/main/public/mockup/common/header/profileLogo.png'
+            src='https://raw.githubusercontent.com/peaceRyun/vibostatic/refs/heads/main/public/profileIconV.png'
             alt='프로필'
             onClick={onClick}
         />

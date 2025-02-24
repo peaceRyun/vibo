@@ -7,7 +7,11 @@ export const GenreContainer = styled.div`
   /* gap: 1.5rem 10px; // gap 크기 줄이기 */
   /* pad ding: 60px 50px 60px 0;*/
   gap: clamp(1rem, 3vw, 0rem) 10px;
-
+  /* 드래그방지 */
+  user-select: none;
+  pointer-events: auto;
+  touch-action: pan-y;
+  user-drag: none;
   /* display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: clamp(1rem, 3vw, 3rem) 10px; */

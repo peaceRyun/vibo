@@ -16,8 +16,9 @@ import {
 } from './style';
 import { contPlayerActions } from '../../store/modules/contPlayerSlice';
 import { FaPause, FaVolumeHigh, FaVolumeXmark } from 'react-icons/fa6';
-import { IoPlayOutline } from 'react-icons/io5';
+import { IoClose, IoPlayOutline } from 'react-icons/io5';
 import { FiMaximize, FiMinimize } from 'react-icons/fi';
+import { useNavigate } from 'react-router';
 
 const ContentPlayer = () => {
     const dispatch = useDispatch();
@@ -27,7 +28,7 @@ const ContentPlayer = () => {
     const progress = useSelector((state) => state.contPlayerR.progress);
     const isError = useSelector((state) => state.contPlayerR.isError);
     const videoId = useSelector((state) => state.contPlayerR.videoId);
-
+    const navigate = useNavigate();
     const containerRef = useRef(null);
     const iframeRef = useRef(null);
     const [isDragging, setIsDragging] = useState(false);
@@ -214,51 +215,63 @@ const ContentPlayer = () => {
         document.removeEventListener('mouseup', handleDragEnd);
     }, [handleDragMove]);
 
+    const onBack = () => {
+        navigate(-1);
+    };
+
     return (
-        <PlayerContainer ref={containerRef}>
-            <VideoWrapper>
-                {isError ? (
-                    <ErrorMessage>동영상을 불러올 수 없습니다.</ErrorMessage>
-                ) : (
-                    <IframeContainer>
-                        <VideoIframe
-                            ref={iframeRef}
-                            src={`https://www.youtube.com/embed/${videoId}?enablejsapi=1&controls=0&disablekb=1&fs=0&modestbranding=1&rel=0&showinfo=0&iv_load_policy=3&origin=${window.location.origin}&playerapiid=ytplayer&autoplay=1&mute=0&loop=0&playlist=${videoId}`}
-                            title='YouTube video player'
-                            allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
-                            allowFullScreen
-                            style={{
-                                pointerEvents: 'none', // 유튜브 UI와의 상호작용 차단
-                            }}
-                        />
-                    </IframeContainer>
-                )}
+        <>
+            <button
+                onClick={onBack}
+                style={{ position: 'absolute', top: 0, right: 0, padding: '70px 100px', zIndex: '1' }}
+            >
+                <IoClose size={50} color='white' />
+            </button>
+            <PlayerContainer ref={containerRef}>
+                <VideoWrapper>
+                    {isError ? (
+                        <ErrorMessage>동영상을 불러올 수 없습니다.</ErrorMessage>
+                    ) : (
+                        <IframeContainer>
+                            <VideoIframe
+                                ref={iframeRef}
+                                src={`https://www.youtube.com/embed/${videoId}?enablejsapi=1&controls=0&disablekb=1&fs=0&modestbranding=1&rel=0&showinfo=0&iv_load_policy=3&origin=${window.location.origin}&playerapiid=ytplayer&autoplay=1&mute=0&loop=0&playlist=${videoId}`}
+                                title='YouTube video player'
+                                allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
+                                allowFullScreen
+                                style={{
+                                    pointerEvents: 'none', // 유튜브 UI와의 상호작용 차단
+                                }}
+                            />
+                        </IframeContainer>
+                    )}
 
-                <ControlsOverlay>
-                    <ProgressBarContainer className='progress-bar-container' onClick={handleProgressBarClick}>
-                        <ProgressBar $progress={progress}>
-                            <ProgressHandle onMouseDown={handleDragStart} />
-                        </ProgressBar>
-                    </ProgressBarContainer>
+                    <ControlsOverlay>
+                        <ProgressBarContainer className='progress-bar-container' onClick={handleProgressBarClick}>
+                            <ProgressBar $progress={progress}>
+                                <ProgressHandle onMouseDown={handleDragStart} />
+                            </ProgressBar>
+                        </ProgressBarContainer>
 
-                    <ControlsWrapper>
-                        <ControlsGroup>
-                            <ControlButton onClick={handlePlayToggle}>
-                                {isPlaying ? <FaPause /> : <IoPlayOutline />}
+                        <ControlsWrapper>
+                            <ControlsGroup>
+                                <ControlButton onClick={handlePlayToggle}>
+                                    {isPlaying ? <FaPause /> : <IoPlayOutline />}
+                                </ControlButton>
+
+                                <ControlButton onClick={handleMuteToggle}>
+                                    {isMuted ? <FaVolumeXmark /> : <FaVolumeHigh />}
+                                </ControlButton>
+                            </ControlsGroup>
+
+                            <ControlButton onClick={handleFullscreenToggle}>
+                                {isFullscreen ? <FiMinimize /> : <FiMaximize />}
                             </ControlButton>
-
-                            <ControlButton onClick={handleMuteToggle}>
-                                {isMuted ? <FaVolumeXmark /> : <FaVolumeHigh />}
-                            </ControlButton>
-                        </ControlsGroup>
-
-                        <ControlButton onClick={handleFullscreenToggle}>
-                            {isFullscreen ? <FiMinimize /> : <FiMaximize />}
-                        </ControlButton>
-                    </ControlsWrapper>
-                </ControlsOverlay>
-            </VideoWrapper>
-        </PlayerContainer>
+                        </ControlsWrapper>
+                    </ControlsOverlay>
+                </VideoWrapper>
+            </PlayerContainer>
+        </>
     );
 };
 

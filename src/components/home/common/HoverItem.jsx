@@ -70,7 +70,7 @@ const HoverItem = ({ content, videoType = 'drama' }) => {
 
     return (
         <ItemWrap onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
-            <Flex $justifyCenter='center' $alignItems='center' $position='relative'>
+            <Flex $justifyContent="space-between" $alignItems="center" $position="relative">
                 <ItemImg
                     src={
                         backdrop_path
@@ -81,8 +81,8 @@ const HoverItem = ({ content, videoType = 'drama' }) => {
                 />
 
                 {!isLoading && (
-                    <Video ref={videoRef} muted loop playsInline preload='metadata' $isHovered={isHovered}>
-                        <source src={videoSrc} type='video/mp4' />
+                    <Video ref={videoRef} muted loop playsInline preload="metadata" $isHovered={isHovered}>
+                        <source src={videoSrc} type="video/mp4" />
                         Your browser does not support the video tag.
                     </Video>
                 )}
@@ -95,31 +95,31 @@ const HoverItem = ({ content, videoType = 'drama' }) => {
 
                 <button>
                     <PlayImg
-                        src='https://raw.githubusercontent.com/peaceRyun/vibostatic/refs/heads/main/public/mockup/contentdetail/ui/carousel_action_atomic.png'
-                        alt='play'
+                        src="https://raw.githubusercontent.com/peaceRyun/vibostatic/refs/heads/main/public/mockup/contentdetail/ui/carousel_action_atomic.png"
+                        alt="play"
                     />
                 </button>
             </Flex>
-            <Flex $flexDirection='column' $padding='35px 20px 6px' $gap='8px'>
-                <Flex $justifyContent='space-between' $alignItems='center'>
-                    <Flex $justifyContent='space-between' $alignItems='center' $gap='10px'>
+            <Flex $flexDirection="column" $padding="35px 20px 6px" $gap="8px">
+                <Flex $justifyContent="space-between" $alignItems="center">
+                    <Flex $justifyContent="space-between" $alignItems="center" $gap="10px">
                         <img
-                            src='https://raw.githubusercontent.com/peaceRyun/vibostatic/refs/heads/main/public/mockup/contentdetail/contentrate/전체관람가 관람등급 1.png'
-                            alt='rateAll'
+                            src="https://raw.githubusercontent.com/peaceRyun/vibostatic/refs/heads/main/public/mockup/contentdetail/contentrate/전체관람가 관람등급 1.png"
+                            alt="rateAll"
                         />
-                        <Badge $br='4px' $padding='3.5px 5px' fontSize='12px'>
+                        <Badge $br="4px" $padding="3.5px 5px" fontSize="12px">
                             HD
                         </Badge>
-                        <Span $fontSize='12px'>2024</Span>
+                        <Span $fontSize="12px">2024</Span>
                     </Flex>
-                    <LiLikeButton width='30px' height='30px' />
+                    <LiLikeButton content={content} width="30px" height="30px" />
                 </Flex>
-                <H4 $textAlign='left' $fontSize='20px'>
+                <H4 $textAlign="left" $fontSize="20px">
                     {title || name}
                 </H4>
                 <Contour />
             </Flex>
-            <P $lineClamp='3'>{overview}</P>
+            <P $lineClamp="3">{overview}</P>
         </ItemWrap>
     );
 };
@@ -195,7 +195,7 @@ const Flex = styled.div`
     display: flex;
     flex-direction: ${(props) => props.$flexDirection};
     align-items: ${(props) => props.$alignItems};
-    justify-content: ${(props) => props.$justifyCenter};
+    justify-content: ${(props) => props.$justifyContent};
     gap: ${(props) => props.$gap};
     padding: ${(props) => props.$padding || '0'};
     position: ${(props) => props.$position};

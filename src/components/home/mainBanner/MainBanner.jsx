@@ -31,7 +31,7 @@ const MainBanner = () => {
     const totalItems = 36;
     const floatingElements = [];
     //가로 아이템 영역을 잡아줌
-    const maxItemSize = 5;
+    const maxItemSize = -5;
     const slideWidth = Math.min(1500, window.innerWidth);
 
     const balloonImages = [
@@ -169,6 +169,7 @@ const MainBanner = () => {
       image:
         'https://raw.githubusercontent.com/peaceRyun/vibostatic/refs/heads/main/public/mainbanner/banner_img05.webp',
       logo: 'https://raw.githubusercontent.com/peaceRyun/vibostatic/refs/heads/main/public/mainbanner/banner_img_logo05.webp',
+      subtitle: '괜찮아, 다 잘될거야! 우리가 행복하게 만들어줄게',
       alt: '배너 5',
     },
     {
@@ -176,6 +177,7 @@ const MainBanner = () => {
       image:
         'https://raw.githubusercontent.com/peaceRyun/vibostatic/refs/heads/main/public/mainbanner/banner_img06.webp',
       logo: 'https://raw.githubusercontent.com/peaceRyun/vibostatic/refs/heads/main/public/mainbanner/banner_img_logo06.webp',
+
       alt: '배너 6',
     },
   ];
@@ -218,7 +220,7 @@ const MainBanner = () => {
                 <SlideContent>
                   <LogoImage className={`logo-${index}`} src={banner.logo} alt="배너 로고" />
                   {/* <LogoImage src={banner.logo} alt="배너 로고" /> */}
-                  <Subtitle>{banner.subtitle}</Subtitle>
+                  {/* <Subtitle>{banner.subtitle}</Subtitle> */}
                 </SlideContent>
               </SlideItem>
             </SwiperSlide>
