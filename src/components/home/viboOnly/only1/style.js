@@ -94,7 +94,7 @@ export const Label = styled.span`
   font-style: italic;
   text-align: left;
 
-  @media (max-width: 600px) {
-    font-size: 48px;
+  @media (max-width: 1024px) {
+    font-size: 40px;
   }
 `;
