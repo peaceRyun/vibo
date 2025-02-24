@@ -7,7 +7,9 @@ export const CommonItemContainer = styled.div`
   height: 375px;
   border-radius: 0.5rem;
   overflow: hidden;
+  margin-left: 8px;
   margin-right: 40px;
+
   @media (max-width: 1024px) {
     width: 80%;
   }
@@ -18,7 +20,8 @@ export const CommonItemContainer = styled.div`
 
 export const CardInner = styled.div`
   position: relative;
-  width: 100%;
+
+  /* width: 100%; */
   height: 100%;
   transition: transform 0.6s;
   transform-style: preserve-3d;

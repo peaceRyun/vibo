@@ -33,8 +33,7 @@ export const CommonList = ({ type = 'series' }) => {
         <CommonInfo>
           <CommonTitle>
             {`
-  XX님이
-  좋아할만 한
+  정주행 추천
   ${type === 'series' ? '예능' : '액션'}`}
             <VerticalText>{contentTitle}</VerticalText>
           </CommonTitle>
@@ -89,7 +88,7 @@ const Section = styled.section`
 const VerticalText = styled.div`
   position: absolute;
   left: 19.8%;
-  top: 21%;
+  top: 25%;
   transform: translateY(-50%) rotate(-270deg);
   font-size: clamp(50px, 6vw, 80px);
   font-weight: bold;
@@ -127,7 +126,7 @@ const CommonTitle = styled.h3`
 
   line-height: 1.5;
   margin: 0;
-  white-space: pre-line;
+  /* white-space: pre-line; */
   font-size: var(--title-xlarge-size); //32
   font-weight: var(--title-xlarge-weight); //800
   @media (max-width: 1024px) {
