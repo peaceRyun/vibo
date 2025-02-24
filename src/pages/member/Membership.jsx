@@ -71,10 +71,7 @@ const Membership = () => {
                         ))}
                     </SubscriptionContainer>
 
-                    {/* 결제하기 버튼 */}
                     <PaymentButton onClick={() => setIsModalOpen(true)}>결제하기</PaymentButton>
-
-                    {/* 결제 모달 */}
                     {isModalOpen && <Modal selectedPlan={selectedPlan} onClose={() => setIsModalOpen(false)} />}
                 </section>
             </MainContent>

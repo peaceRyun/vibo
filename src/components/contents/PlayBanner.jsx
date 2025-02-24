@@ -51,7 +51,7 @@ const PlayBanner = ({ contentDetail, contentType }) => {
                     <iframe
                         ref={iframeRef}
                         src={`https://www.youtube.com/embed/${videoId}?enablejsapi=1&controls=0&disablekb=1&fs=0&modestbranding=1&rel=0&showinfo=0&iv_load_policy=3&origin=${window.location.origin}&autoplay=1&mute=1&loop=1&playlist=${videoId}`}
-                        title='YouTube video player'
+                        title="YouTube video player"
                         style={{
                             position: 'absolute',
                             top: 0,
@@ -61,19 +61,23 @@ const PlayBanner = ({ contentDetail, contentType }) => {
                             pointerEvents: 'none',
                             border: 'none',
                         }}
-                        allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                     />
                     <GradientLayer />
                 </VideoWrapper>
                 <PBuiWrap>
-                    <Flex $gap='30px' $flexDirection='column' $position='relative'>
+                    <Flex $gap="30px" $flexDirection="column" $position="relative">
                         <H2>{title}</H2>
-                        <Flex $gap='26px' $alignItems='center'>
-                            <Button play onClick={handlePlayClick} color='var(--secondary-400)' fontSize='20px'>
+                        <Flex $gap="26px" $alignItems="center">
+                            <Button play onClick={handlePlayClick} color="var(--secondary-400)" fontSize="20px">
                                 재생
                             </Button>
                             <button>
-                                <LiLikeButton width='50px' height='50px' />
+                                {contentDetail ? (
+                                    <LiLikeButton content={contentDetail} width="50px" height="50px" />
+                                ) : (
+                                    <p>❌ 콘텐츠 정보 없음</p>
+                                )}
                             </button>
                         </Flex>
                     </Flex>
