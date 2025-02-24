@@ -11,7 +11,7 @@ const EpItem = ({ episode }) => {
 
     return (
         <li>
-            <Flex $alignItems='center' $gap='60px' $padding='30px' $width='75%'>
+            <Flex $alignItems='center' $gap='30px' $padding='30px' $width='90%'>
                 <Span $fontWeight='800' $fontSize='28px' $padding='0 20px'>
                     {episode.episode_number}
                 </Span>
@@ -29,7 +29,7 @@ const EpItem = ({ episode }) => {
                         />
                     </PlayButtonB>
                 </ThumbnailContainer>
-                <Flex $flexDirection='column' $gap='20px'>
+                <Flex $flexDirection='column' $gap='20px' style={{ flex: 1 }}>
                     <H4 $fontSize='15px' $fontWeight='700'>
                         {episode.name}
                     </H4>
