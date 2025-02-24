@@ -1,4 +1,3 @@
-// 마이페이지
 import { Container } from '../../common/style';
 import ProfileEdit from './ProfileEdit';
 import ProfileSwitch from './ProfileSwitch';
@@ -7,6 +6,8 @@ import { FaPen } from 'react-icons/fa';
 const Mypage = () => {
     const [activeTab, setActiveTab] = useState('시청내역');
     const { nickname, srcNow } = useSelector((state) => state.profileR);
+
+    const selectedPlan = localStorage.getItem('selectedPlan') || '베이직';
 
     const movies = [
         {
@@ -23,9 +24,6 @@ const Mypage = () => {
         },
     ];
 
-    const userProfileImage =
-        'https://raw.githubusercontent.com/peaceRyun/vibostatic/refs/heads/main/public/mockup/contentdetail/sample/SampleProfile.png';
-
     const navigate = useNavigate();
 
     const onGo = () => {
@@ -35,6 +33,7 @@ const Mypage = () => {
     const onGo2 = () => {
         navigate('/membership');
     };
+
     return (
         <div>
             <MainContent>
@@ -45,21 +44,25 @@ const Mypage = () => {
                         <UserInfo>
                             <UserName>
                                 <strong>{nickname}</strong>
-                                <p>님</p> <Link to='/profileforedit'><FaPen size='21px' color='white' /></Link>
+                                <p>님</p>{' '}
+                                <Link to="/profileforedit">
+                                    <FaPen size="21px" color="white" />
+                                </Link>
                             </UserName>
                             <button onClick={onGo}>계정 전환</button>
                         </UserInfo>
                     </ProfileHeader>
+
                     <PassContainer>
                         <PassCard>
-                            <div className='PassTitle'>
+                            <div className="PassTitle">
                                 <strong>ViBo</strong>
-                                <span> 패스</span>
-                                <p>사용 중인 패스가 없습니다.</p>
+                                <span> {selectedPlan} </span>
+                                <p>현재 {selectedPlan} 이용권을 사용 중입니다.</p>
                             </div>
                         </PassCard>
                         <PassButton onClick={onGo2}>
-                            <div className='PassTitle2'>
+                            <div className="PassTitle2">
                                 <strong>패스 구매하기 ▶ </strong>
                             </div>
                         </PassButton>
@@ -71,7 +74,6 @@ const Mypage = () => {
                             <strong>실시간 인기콘텐츠와 다양한 영화를</strong> 시청하실 수 있어요!
                         </h3>
                     </PassCard2>
-                    {/* 탭 메뉴 */}
                     <TabMenu>
                         {['시청내역', '구매내역', '찜', '나의 리뷰'].map((tab) => (
                             <TabItem key={tab} $active={activeTab === tab} onClick={() => setActiveTab(tab)}>
@@ -98,9 +100,10 @@ import WatchingContent from '../../components/member/watch/WatchingContent';
 import BuyingZzimContent from '../../components/member/buyzzim/BuyingZzimContent';
 import { useState } from 'react';
 import ReviewItems from '../../components/member/review/ReviewItems';
-import { Link, useNavigate } from 'react-router';
+import { Link, useNavigate } from 'react-router-dom';
 import { MainContainer, MainContent } from '../home/main/style';
 import { useSelector } from 'react-redux';
+
 // 전체 컨테이너
 export const ProfileContainer = styled.div`
     padding: 50px;
@@ -148,11 +151,11 @@ export const UserName = styled.h2`
     }
     p {
         font-size: 28px;
-        margin-top:14px;
+        margin-top: 14px;
     }
-        a {
-         margin-top:20px;
-        }
+    a {
+        margin-top: 20px;
+    }
 `;
 
 export const PassContainer = styled.div`
@@ -167,7 +170,6 @@ export const PassCard = styled.div`
     border-radius: 8px;
     margin-bottom: 20px;
     gap: 2.875rem;
-    /* width: 48.25rem; */
     height: 6.875rem;
     .PassTitle {
         width: 26.625rem;
@@ -186,20 +188,13 @@ export const PassCard = styled.div`
             font-weight: 300;
         }
     }
-    .PassTitle2 {
-        font-size: var(--title-medium-size);
-        width: 18.75rem;
-        text-align: center;
-        padding: 25px;
-    }
 `;
+
 export const PassButton = styled.div`
     background: var(--gray-800);
     padding: 15px;
     border-radius: 8px;
     margin-bottom: 20px;
-    gap: 2.875rem;
-    /* width: 48.25rem; */
     height: 6.875rem;
     cursor: pointer;
     .PassTitle2 {
@@ -209,6 +204,7 @@ export const PassButton = styled.div`
         padding: 25px;
     }
 `;
+
 export const PassCard2 = styled.div`
     font-size: var(--title-medium-size);
     background: var(--gray-800);
@@ -228,7 +224,7 @@ const TabMenu = styled.div`
     gap: 60px;
     margin-top: 90px;
     border-bottom: 4px solid #444;
-    position: relative; 
+    position: relative;
 `;
 
 const TabItem = styled.div`
@@ -238,61 +234,19 @@ const TabItem = styled.div`
     padding-bottom: 5px;
     color: ${(props) => (props.$active ? '#68F5EB' : 'white')};
     position: relative;
-
     &::after {
         content: '';
         position: absolute;
-        bottom: -4px; 
+        bottom: -4px;
         left: 0;
-        width: ${(props) => (props.$active ? '100%' : '0')}; 
+        width: ${(props) => (props.$active ? '100%' : '0')};
         height: 3px;
         background-color: #68f5eb;
         transition: width 0.3s ease;
     }
-
     &:hover::after {
         width: 100%;
     }
 `;
 
-// 콘텐츠 영역 스타일
-const ContentWrapper = styled.div`
-    /* padding: 20px;
-  background: #111;
-  border-radius: 10px;
-  margin-top: 20px; */
-`;
-// // 탭 메뉴
-// export const TabMenu = styled.div`
-//   display: flex;
-//   gap: 60px;
-//   margin-top: 100px;
-
-//   border-bottom: 2px solid #444;
-//   padding-bottom: 10px;
-// `;
-
-// export const TabItem = styled.div`
-//   font-size: 16px;
-//   font-weight: bold;
-//   cursor: pointer;
-//   padding-bottom: 5px;
-//   color: ${(props) => (props.active ? '#68F5EB' : 'white')};
-//   position: relative;
-//   margin-bottom: 20px;
-
-//   &::after {
-//     content: '';
-//     position: absolute;
-//     bottom: -3px;
-//     left: 0;
-//     width: ${(props) => (props.active ? '100%' : '0')}; /* 활성화된 탭만 100% */
-//     height: 3px;
-//     background-color: #68f5eb;
-//     transition: width 0.3s ease;
-//   }
-
-//   &:hover::after {
-//     width: 100%;
-//   }
-// `;
+const ContentWrapper = styled.div``;
