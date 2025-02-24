@@ -131,10 +131,6 @@ export const FloatingContainer = styled.div`
   z-index: 3;
   overflow: visible;
 
-  @media (min-width: 600px) {
-    display: none;
-  }
-
   /* @media (min-width: 1700px) {
     top: 80px;
     height: 100%;
@@ -145,9 +141,8 @@ export const FloatingContainer = styled.div`
     /* top: calc(-100px + ((1450px - 100vw) * 0.1)); */
   }
 
-  @media (max-width: 1450px) {
-    /* top: -60px;
-    height: 79%; */
+  @media (max-width: 600px) {
+    display: none;
   }
 `;
 
