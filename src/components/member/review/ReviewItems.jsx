@@ -49,18 +49,22 @@ const ReviewItems = () => {
                                     <UserInfo>
                                         <UserName>{review.author}</UserName>
                                         <ReviewDate>{review.created_at.split('T')[0]}</ReviewDate>
-                                        <RatingStars style={{ marginLeft: '230px', marginTop: '10px' }}>
-                                            {[...Array(5)].map((_, index) => (
-                                                <Star
-                                                    key={index}
-                                                    $filled={index < parseFloat(review.author_details?.rating || 0)}
-                                                >
-                                                    <img
-                                                        src="https://raw.githubusercontent.com/peaceRyun/vibostatic/refs/heads/main/public/mockup/contentdetail/ui/StarActive.png"
-                                                        alt="별"
-                                                    />
-                                                </Star>
-                                            ))}
+                                        <RatingStars>
+                                            {[...Array(5)].map((_, index) => {
+                                                const rating = parseFloat(review.author_details?.rating || 0); // ✅ 숫자로 변환
+                                                return (
+                                                    <Star key={index} $filled={index < rating}>
+                                                        <img
+                                                            src={
+                                                                index < rating
+                                                                    ? 'https://raw.githubusercontent.com/peaceRyun/vibostatic/refs/heads/main/public/mockup/contentdetail/ui/StarActive.png'
+                                                                    : 'https://raw.githubusercontent.com/peaceRyun/vibostatic/refs/heads/main/public/mockup/contentdetail/ui/StarInactive.png'
+                                                            }
+                                                            alt=""
+                                                        />
+                                                    </Star>
+                                                );
+                                            })}
                                         </RatingStars>
                                     </UserInfo>
                                 </div>
