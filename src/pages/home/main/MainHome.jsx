@@ -66,7 +66,6 @@ const MainHome = () => {
         <MainCommonList fetchFunction={getDramaTvs} stateSelector={(state) => state.filterR.dramaTvs} />
         <ViboOnly />
         {/* <CommonList fetchFunction={getDramaTvs} stateSelector={(state) => state.filterR.DramaTvs} /> */}
-        {/* 헐 대소문자.. */}
       </MainContainer>
 
       <MenuSection />

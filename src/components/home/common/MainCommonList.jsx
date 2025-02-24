@@ -76,6 +76,11 @@ const Section = styled.section`
   display: flex;
   position: relative;
   padding: 60px 0;
+  /* 드래그방지 */
+  user-select: none;
+  pointer-events: auto;
+  touch-action: pan-y;
+  user-drag: none;
 
   @media (max-width: 1024px) {
     flex-direction: column;

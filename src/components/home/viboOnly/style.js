@@ -15,6 +15,11 @@ export const ViboAllContainer = styled.div`
   align-items: left;
   flex-direction: column;
   margin: 0 90px;
+  /* 드래그방지 */
+  user-select: none;
+  pointer-events: auto;
+  touch-action: pan-y;
+  user-drag: none;
   /* padding: 60px 50px 60px 50px; */
   @media (max-width: 1024px) {
     padding: 40px 0 40px 0;

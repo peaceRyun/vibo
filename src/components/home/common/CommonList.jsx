@@ -41,7 +41,7 @@ export const CommonList = ({ type = 'series' }) => {
           <MoreBtn onClick={onGo}>더보기</MoreBtn>
         </CommonInfo>
         <CommonSwiper
-          spaceBetween={30} /* 기본 간격 */
+          spaceBetween={40} /* 기본 간격 */
           slidesPerView={5.5} /* 기본값 (데스크탑) */
           breakpoints={{
             // 1280: { slidesPerView: 5.5, spaceBetween: 30 },
@@ -71,7 +71,11 @@ const Section = styled.section`
   position: relative;
   // gap: 5px;
   padding: 60px 0 60px 0;
-
+  /* 드래그방지 */
+  user-select: none;
+  pointer-events: auto;
+  touch-action: pan-y;
+  user-drag: none;
   @media (max-width: 1024px) {
     flex-direction: column;
     padding: 40px 0 40px 0;
@@ -139,7 +143,7 @@ const CommonTitle = styled.h3`
 `;
 
 const MoreBtn = styled.button`
-  background-color: var(--primary-600);
+  background-color: #07ffe6;
   color: black;
   font-size: clamp(14px, 1.2vw, 17px);
   padding: 15px;
@@ -151,7 +155,8 @@ const MoreBtn = styled.button`
   font-weight: bold;
 
   &:hover {
-    background-color: var(--primary-base);
+    background-color: #06dbbf;
+    color: white;
   }
 `;
 
