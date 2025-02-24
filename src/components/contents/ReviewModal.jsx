@@ -2,32 +2,49 @@ import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Button from '../../ui/button/Button';
 import ReviewForm from './ReviewForm';
-import { addReview } from '../../store/modules/reviewSlice';
+import { addReview, updateReview, deleteReview } from '../../store/modules/reviewSlice';
 import { Flex, H3, ModalContent, ModalOverlay, P, EpItemContImg } from './style';
 import { IoClose } from 'react-icons/io5';
 
-const ReviewModal = ({ isOpen, onClose, contentDetail }) => {
+const ReviewModal = ({ isOpen, onClose, contentDetail, existingReview }) => {
     const dispatch = useDispatch();
     const {
         nickname = '익명',
         srcNow = 'https://raw.githubusercontent.com/peaceRyun/vibostatic/refs/heads/main/public/mockup/contentdetail/sample/SampleProfile.png',
     } = useSelector((state) => state.profileR);
 
-    const [reviewText, setReviewText] = useState('');
-    const [rating, setRating] = useState(5);
+    const [reviewText, setReviewText] = useState(existingReview?.content || '');
+    const [rating, setRating] = useState(existingReview?.author_details?.rating || 5);
+    const [moviePoster, setMoviePoster] = useState(
+        existingReview?.moviePoster ||
+            (contentDetail?.poster_path
+                ? `https://image.tmdb.org/t/p/w500${contentDetail.poster_path}`
+                : contentDetail?.backdrop_path
+                ? `https://image.tmdb.org/t/p/w500${contentDetail.backdrop_path}`
+                : '/default-movie-poster.jpg')
+    );
 
     useEffect(() => {
         if (isOpen) {
             document.body.style.overflow = 'hidden';
+            if (existingReview) {
+                setReviewText(existingReview.content);
+                setRating(existingReview.author_details?.rating || 5);
+                setMoviePoster(existingReview.moviePoster);
+            }
         } else {
             document.body.style.overflow = 'unset';
             setReviewText('');
+            setRating(5);
+            setMoviePoster(
+                contentDetail?.poster_path
+                    ? `https://image.tmdb.org/t/p/w500${contentDetail.poster_path}`
+                    : contentDetail?.backdrop_path
+                    ? `https://image.tmdb.org/t/p/w500${contentDetail.backdrop_path}`
+                    : '/default-movie-poster.jpg'
+            );
         }
-    }, [isOpen]);
-
-    const handleContentClick = (e) => {
-        e.stopPropagation();
-    };
+    }, [isOpen, existingReview, contentDetail]);
 
     const handleReviewSubmit = () => {
         if (!reviewText.trim()) {
@@ -35,64 +52,63 @@ const ReviewModal = ({ isOpen, onClose, contentDetail }) => {
             return;
         }
 
-        const newReview = {
-            id: Date.now(),
-            author: nickname,
-            content: reviewText,
-            created_at: new Date().toISOString(),
-            author_details: {
-                rating: rating,
-                avatar_path: srcNow,
-            },
-            moviePoster: contentDetail?.poster_path
-                ? `https://image.tmdb.org/t/p/w500${contentDetail.poster_path}`
-                : contentDetail?.backdrop_path
-                ? `https://image.tmdb.org/t/p/w500${contentDetail.backdrop_path}`
-                : '/default-movie-poster.jpg',
-            movieTitle: contentDetail?.title || '',
-        };
-
-        dispatch(addReview(newReview));
-        setReviewText('');
+        if (existingReview) {
+            const updatedReview = {
+                ...existingReview,
+                content: reviewText,
+                author_details: { ...existingReview?.author_details, rating },
+                moviePoster,
+            };
+            dispatch(updateReview(updatedReview));
+        } else {
+            const newReview = {
+                id: Date.now(),
+                author: nickname,
+                content: reviewText,
+                created_at: new Date().toISOString(),
+                author_details: { rating, avatar_path: srcNow },
+                moviePoster,
+                movieTitle: contentDetail?.title || '',
+            };
+            dispatch(addReview(newReview));
+        }
         onClose();
+    };
+
+    const handleReviewDelete = () => {
+        if (existingReview && window.confirm('정말로 리뷰를 삭제하시겠습니까?')) {
+            dispatch(deleteReview(existingReview.id));
+            onClose();
+        }
     };
 
     if (!isOpen) return null;
 
     return (
         <ModalOverlay onClick={onClose}>
-            <ModalContent onClick={handleContentClick}>
-                <Flex $flexDirection='column' $position='relative' $gap='20px' $padding='24px 0 0'>
+            <ModalContent onClick={(e) => e.stopPropagation()}>
+                <Flex $flexDirection="column" $position="relative" $gap="20px" $padding="24px 0 0">
                     <button style={{ position: 'absolute', top: '0', right: '0' }} onClick={onClose}>
-                        <IoClose size='30' color='white' />
+                        <IoClose size="30" color="white" />
                     </button>
-                    <H3 fontSize='25px' fontWeight='700' $alignSelf='center'>
-                        리뷰 작성하기
+                    <H3 fontSize="25px" fontWeight="700" $alignSelf="center">
+                        {existingReview ? '리뷰 수정하기' : '리뷰 작성하기'}
                     </H3>
-                    <P $fontSize='17px' $padding='0px' $alignSelf='center' $color='var(--gray-500)'>
+                    <P $fontSize="17px" $padding="0px" $alignSelf="center" $color="var(--gray-500)">
                         이 콘텐츠에 대해서 얼마나 만족하셨나요?
                     </P>
 
-                    <Flex $gap='20px' $padding='0 20px'>
-                        <EpItemContImg
-                            src={
-                                contentDetail?.backdrop_path
-                                    ? `https://image.tmdb.org/t/p/w500${contentDetail.backdrop_path}`
-                                    : '/placeholder.jpg'
-                            }
-                            alt={contentDetail?.title}
-                            $width='200px'
-                            $height='120px'
-                        />
-                        <Flex $flexDirection='column' $gap='10px'>
-                            <P $fontSize='20px' $padding='0' $fontWeight='600'>
+                    <Flex $gap="20px" $padding="0 20px">
+                        <EpItemContImg src={moviePoster} alt={contentDetail?.title} $width="200px" $height="120px" />
+                        <Flex $flexDirection="column" $gap="10px">
+                            <P $fontSize="20px" $padding="0" $fontWeight="600">
                                 {contentDetail?.name ||
                                     contentDetail?.original_name ||
                                     contentDetail?.title ||
                                     contentDetail?.original_title ||
                                     '제목 없음'}
                             </P>
-                            <Flex $gap='5px'>
+                            <Flex $gap="5px">
                                 {[1, 2, 3, 4, 5].map((star) => (
                                     <button
                                         key={star}
@@ -115,25 +131,36 @@ const ReviewModal = ({ isOpen, onClose, contentDetail }) => {
                     <ReviewForm value={reviewText} onChange={(e) => setReviewText(e.target.value)} />
 
                     <Flex
-                        $justifyContent='center'
-                        $alignItems='center'
-                        $position='relative'
-                        $gap='8px'
-                        $padding='10px 0 0'
+                        $justifyContent="center"
+                        $alignItems="center"
+                        $position="relative"
+                        $gap="8px"
+                        $padding="10px 0 0"
                     >
                         <Button
-                            width='100%'
-                            height='34px'
-                            fontSize='12px'
-                            fontWeight='400'
+                            width="100%"
+                            height="34px"
+                            fontSize="12px"
+                            fontWeight="400"
                             onClick={onClose}
-                            type='disabled'
+                            type="disabled"
                         >
                             취소
                         </Button>
-                        <Button width='100%' height='34px' fontSize='12px' onClick={handleReviewSubmit}>
+                        <Button width="100%" height="34px" fontSize="12px" onClick={handleReviewSubmit}>
                             확인
                         </Button>
+                        {existingReview && (
+                            <Button
+                                width="100%"
+                                height="34px"
+                                fontSize="12px"
+                                type="danger"
+                                onClick={handleReviewDelete}
+                            >
+                                삭제
+                            </Button>
+                        )}
                     </Flex>
                 </Flex>
             </ModalContent>
