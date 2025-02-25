@@ -13,6 +13,19 @@ const EpList = ({ seasons, episodes, contentRating, seasonsLoading, episodesLoad
     const [currentPage, setCurrentPage] = useState(1);
     const episodeListRef = useEpisodeAnimation(!!selectedSeason);
 
+    // ContDetail 컴포넌트와 동일한 매핑 사용
+    const ratingImageMap = {
+        19: 'https://raw.githubusercontent.com/peaceRyun/vibostatic/refs/heads/main/public/mockup/contentdetail/contentrate/19.svg',
+        15: 'https://raw.githubusercontent.com/peaceRyun/vibostatic/refs/heads/main/public/mockup/contentdetail/contentrate/15.svg',
+        12: 'https://raw.githubusercontent.com/peaceRyun/vibostatic/refs/heads/main/public/mockup/contentdetail/contentrate/12.svg',
+        ALL: 'https://raw.githubusercontent.com/peaceRyun/vibostatic/refs/heads/main/public/mockup/contentdetail/contentrate/전체관람가 관람등급 1.png',
+    };
+
+    const getRatingImagePath = (contentRating) => {
+        const ratingValue = contentRating?.rating || contentRating;
+        return ratingImageMap[ratingValue] || ratingImageMap['ALL'];
+    };
+
     useEffect(() => {
         if (!seasonsLoading && seasons.length > 0) {
             const season1 = seasons.find((season) => season.season_number === 1);
@@ -80,10 +93,9 @@ const EpList = ({ seasons, episodes, contentRating, seasonsLoading, episodesLoad
                                     <P28>{selectedSeason}:</P28>
                                     {contentRating && (
                                         <CRatingImg
-                                            src={`https://raw.githubusercontent.com/peaceRyun/vibostatic/refs/heads/main/public/mockup/contentdetail/contentrate/${
-                                                contentRating.rating || '전체관람가'
-                                            } 관람등급 1.png`}
-                                            alt={`${contentRating.rating || '전체관람가'} 관람등급`}
+                                            src={getRatingImagePath(contentRating)}
+                                            alt={`${contentRating?.rating || '전체관람가'} 관람등급`}
+                                            style={{ width: '24px' }}
                                         />
                                     )}
                                     <CRatingImg
