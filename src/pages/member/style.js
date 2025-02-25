@@ -558,7 +558,7 @@ export const CheckBox = styled.div`
 export const CeheckContainer = styled.div`
     width: 100%;
     padding: 20px;
-    background: black;
+    background-color: var(--gray-900);
     color: white;
 `;
 
