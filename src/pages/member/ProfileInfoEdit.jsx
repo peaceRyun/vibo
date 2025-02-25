@@ -190,7 +190,7 @@ const ProfileInfoEdit = () => {
 
                         <ButtonGroup>
                             <Button type="submit">확인</Button>
-                            <Button type="button" $cancel>
+                            <Button type="button" $cancel onClick={() => navigate(-1)}>
                                 취소
                             </Button>
                         </ButtonGroup>
