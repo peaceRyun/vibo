@@ -1,9 +1,11 @@
 # 📋 OTT 홈페이지 VIBO
 
-![프로젝트 로고나 대표 이미지](https://github.com/peaceRyun/vibostatic/blob/main/public/profileIconV.png?raw=true)
-![프로젝트 로고나 대표 이미지](https://github.com/peaceRyun/vibostatic/blob/main/public/profileIconI.png?raw=true)
-![프로젝트 로고나 대표 이미지](https://github.com/peaceRyun/vibostatic/blob/main/public/profileIconB.png?raw=true)
-![프로젝트 로고나 대표 이미지](https://github.com/peaceRyun/vibostatic/blob/main/public/profileIcon0.png?raw=true)
+<div align="center">
+  <img src="https://github.com/peaceRyun/vibostatic/blob/main/public/profileIconV.png?raw=true" alt="V" width="100" />
+  <img src="https://github.com/peaceRyun/vibostatic/blob/main/public/profileIconI.png?raw=true" alt="I" width="100" />
+  <img src="https://github.com/peaceRyun/vibostatic/blob/main/public/profileIconB.png?raw=true" alt="B" width="100" />
+  <img src="https://github.com/peaceRyun/vibostatic/blob/main/public/profileIconO.png?raw=true" alt="O" width="100" />
+</div>
 
 ## 📝 프로젝트 소개
 
