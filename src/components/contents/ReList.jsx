@@ -21,7 +21,7 @@ const ReList = ({ recommendData, loading, contentType, contentRating }) => {
                     breakpoints={{
                         599: { slidesPerView: 2, spaceBetween: 10 },
                         600: { slidesPerView: 3, spaceBetween: 20 },
-                        1025: { slidesPerView: 6, spaceBetween: 30 },
+                        1025: { slidesPerView: 5.5, spaceBetween: 30 },
                     }}
                     pagination={{ clickable: true }}
                     className='mySwiper'
